@@ -1,0 +1,53 @@
+# ===== 비밀·자격증명 (절대 commit 금지) =====
+.env
+.env.*
+*.key
+*.pem
+*.p12
+.mcp.json
+**/secrets*
+**/*password*
+**/*credential*
+**/*api*key*
+
+# ===== 대용량·바이너리 (원본 보관, git 제외) =====
+*.pdf
+*.docx
+*.xlsx
+*.pptx
+*.hwp
+*.hwpx
+*.zip
+*.7z
+*.mp3
+*.mp4
+*.wav
+*.m4a
+*.png
+*.jpg
+*.jpeg
+
+# ===== 구글 워크스페이스 포인터 파일 =====
+*.gdoc
+*.gsheet
+*.gslides
+*.gscript
+
+# ===== 백업·휴지통·캐시 =====
+_trash/
+**/_trash/
+_백업/
+**/_백업/
+_원본보관/
+**/_원본보관/
+_원본보관/
+meal-menu-cache/
+outputs/
+**/__pycache__/
+*.pyc
+
+# ===== OS·시스템 =====
+desktop.ini
+**/desktop.ini
+Thumbs.db
+.DS_Store
