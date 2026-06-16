@@ -1,0 +1,4 @@
+interface:
+  display_name: "Legal Compliance"
+  short_description: "플레이북 기준 법무 컴플라이언스 점검 스킬"
+  default_prompt: "계약서나 정책 문서를 플레이북 기준의 컴플라이언스 체크리스트와 필수 조치로 정리해줘."

@@ -1,0 +1,28 @@
+# 10. v37 카드 → apkg 빌드 파이프라인 (2026-06-15)
+
+> readable 카드(02_cards_v37) → genanki 과목별 .apkg. 카드룰은 02-card(사례형)·04(암기장 강약)·09(NLP 빈칸경계) 참조.
+
+## 의존성 (pip)
+- `genanki` (.apkg 생성), `hanja` (한자→한글 hanja.translate). 둘 다 설치 필요(2026-06-15 설치 완료).
+
+## 파이프라인
+1. **카드 생성** (워크플로우): OCR(`outputs/01_ocr_llamaparse/`) → v3.7 룰로 readable md → `outputs/02_cards_v37/`. 사례형(A쟁점도출/B포섭cloze/C함정/D기재례) / 암기장(일반론·포섭·예외·요건·OX, 빈칸=cloze) / 기본서(논점민법재산법·논점민소·김기용형총). 교수저(김준호) 제외, 김기용=강사저 포함.
+2. **빌드**: `.agent/scripts/build_v37_apkg.py` → `outputs/anki/v37/apkg/{과목}_v37.apkg` (7과목).
+
+## 빌더 핵심 (build_v37_apkg.py)
+- **포맷 통합 파서**: 블록 구분 = `^#{2,6} ` 헤더 OR `카드 N`(볼드 유무 무관). 필드 = 앞/앞면·뒤/뒷면·빈칸·Text (볼드라벨·콜론선택·내용다음줄 허용). 필드없는 cloze는 블록본문 폴백.
+- **카드 모델 2종**: Basic(Front/Back/출처) + Cloze(Text/Extra/출처). 암기장 빈칸→cloze(번호부여)+완성문 Basic 동시(DOUBLE=True). 사례형/기본서 뒤:{{cN::}}→Cloze.
+- **정규화**: `hanja.translate`(한자0) · `**볼드**`→`<b>` · `html.escape`(법률 <>) · bare `{{}}`→`{{cN::}}` · 경계트림(연결어미·조사·관형 종결) · 사건번호 anchor 보존.
+- **dedup/skip**: junk(H·*.py·*_TEMP) · empty(<30줄) · 논점민소 구OX(cloze신본 대체) · GUID(출처+헤더+본문 해시)로 _llamaparse 중복 수렴·재임포트 회독보존.
+- **덱**: `{회독그룹}::{과목}` (기본서/암기장-객관식/암기장-사례형/찌라시 × 민법·민사소송법·형법·헌법·상법·행정법·형사소송법). 태그: 과목::/속성::/출처::/회독그룹::. → **apkg 파일 = 과목×책종류 분할**(`{과목}/{회독그룹}_v37.apkg`, 16개) + 덱 회독그룹::과목 + 태그 양축.
+
+## 검증 (빌드 후)
+- 한자 잔존 0 / cloze 무효(번호없는 {{}}) 0(제외) / 실제손실 <0.2% / 덱별 분포 매트릭스(`_apkg_report.md`).
+
+## 현 산출 (2026-06-15)
+- 19,629장 (Basic 8,172 / Cloze 11,457). apkg = **과목×책종류 16개** (`outputs/anki/v37/apkg/{과목}/{회독그룹}_v37.apkg`).
+
+## 후속(파이프라인 외)
+- anchor 검증(korean-law-mcp)로 사건번호·조문 not_found 교정.
+- 현행 기준은 v37이다. 레거시 v4/v4.2는 참고용으로만 보고 새 산출·검증은 `outputs/02_cards_v37/`와 `outputs/anki/v37/apkg/` 기준으로 한다.
+- 신규 책 카드화 시 02-card v3.7 룰 적용 → 같은 빌더 재실행.

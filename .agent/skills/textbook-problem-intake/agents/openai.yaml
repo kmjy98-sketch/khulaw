@@ -1,0 +1,4 @@
+interface:
+  display_name: "Textbook Problem Intake"
+  short_description: "교재 내 문제 후보를 스캔하고 DB 등록 준비를 돕는 로컬 스킬"
+  default_prompt: "교재 추출본에서 사례형·객관식 문제 후보를 찾아 manifest와 진행로그를 만들고, 필요하면 problem_index 등록 준비까지 진행해줘."

@@ -1,0 +1,135 @@
+{
+  "sync/_교재원문/민법/강혜림_민법1/신의성실원칙_사정변경_김준호_민법강의.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "OCR이 PDF 페이지 세로선/구분선을 `|`로 오인식하여 단일 평문 단락이 `| ... |` 로 감싸진 케이스 4건. 표가 아니므로 표 복구 불가. 본문 변경 없이 [표복구필요] 라벨 유지가 안전.",
+    "A_option_note": "wrapper `|` 제거 시 평문으로 정상 렌더링되나 본문 변경에 해당 → safety 메모리(feedback_textbook_md_correction_safety) 차단."
+  },
+  "sync/_교재원문/민법/강혜림_민법1/의사능력_행위능력_이중효_김준호_민법강의.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "OCR이 단락 양끝에 `|`를 삽입한 노이즈 3건. 표 아님. 본문 변경 없이 라벨 유지.",
+    "A_option_note": "동상."
+  },
+  "sync/_교재원문/민법/강혜림_민법1/조건과기한_해제조건_김준호_민법강의.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "OCR 평문 wrapper 노이즈 3건. 표 아님. 라벨 유지.",
+    "A_option_note": "동상."
+  },
+  "sync/_교재원문/민법/민법의해석/사비니세번째보조수단_내적가치_민법의해석.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "multicol_index",
+    "rationale": "사항색인(letter별 ㄱ~ㅎ) 14개 멀티컬럼 행. 각 행의 컬럼 수가 가변(5~15+)이고 자모(`### ㄱ` 등) 헤더 아래 단일 행만 존재. 1행 단일 셀 표는 의미 적고 컬럼 일관성도 없음. 라벨 유지.",
+    "A_option_note": "각 자모 아래 `| 항목 | 페이지 |` 2열 표로 재구조화 가능하나 항목 분리(콤마/공백 구분) 자동 추론 위험 → 보류."
+  },
+  "sync/_교재원문/민법/박승수_민법기본사례/임차인_지상물매수청구권과_적극적_석명의무_박승수_민법기본사례.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "broken_5col_table",
+    "rationale": "원본 5열 표(요건검토|항변|재항변|재재항변|결론)가 L378-381에는 존재하나 L382-426 구간에서 4열 separator(`|---|---|---|---|`) 6개와 빈 `|` 행이 산재. 원본 PDF 없이 셀 매핑 복구 불가. 라벨 유지.",
+    "A_option_note": "L382-426 정리 시 본문(쟁점 메모) 손실 위험 → 박승수 PDF 원본 확보 후 수동 복구 필요."
+  },
+  "sync/_교재원문/민법/송영곤_객관식/송영곤_객관식_p791-799.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "후견(친족) 부분 조문 인용 단락에 OCR `|` 노이즈 3건. 표 아님. 라벨 유지.",
+    "A_option_note": "동상."
+  },
+  "sync/_교재원문/민법/송영곤_논점민법_보충/민법_사례연습_종합_13부_p0361-0390_송영곤_논점민법보충.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "broken_marker_with_data",
+    "rationale": "`(표 1)` 마커 직후 부품공급 채무 5행 데이터 + `(표 2)` 마커가 평문으로 풀어진 상태. 3열(공급분|금액|변제기) 추정 가능하나 헤더 추론은 의미 변경에 해당. 라벨 유지.",
+    "A_option_note": "헤더 추정 기반 표 재조립 가능(추정: 공급분|금액|변제기). 사용자 검토 후 적용 권고."
+  },
+  "sync/_교재원문/민법/송영곤_논점민법_보충/민법_사례연습_채권_07부_p0181-0210_송영곤_논점민법보충.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "broken_marker_with_data",
+    "rationale": "위와 동일 패턴(`(표 1)` + 평문 채무내역 + `(표 2)`). 송영곤 보충 동일 사례문 사용. 라벨 유지.",
+    "A_option_note": "동상."
+  },
+  "sync/_교재원문/민법/송영곤_논점민법_본책/명예훼손_불법행위_표현의자유_송영곤_논점민법.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "판례 인용 단락 OCR `|` wrapper 노이즈 4건. 표 아님. 라벨 유지.",
+    "A_option_note": "동상. 판례 본문은 #34 판례문구 원칙상 변경 매우 신중해야."
+  },
+  "sync/_교재원문/민법/송영곤_논점민법_본책/민법법원_관습법_신의칙_송영곤_논점민법.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "조문/판례 인용 단락 OCR `|` 노이즈 3건. 라벨 유지.",
+    "A_option_note": "동상."
+  },
+  "sync/_교재원문/민법/송영곤_논점민법_본책/재산법_민법법원_신의칙_자연인능력_태아_송영곤_논점민법.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "위 파일과 동일 사례 인용. OCR `|` 노이즈 3건. 라벨 유지. (참고: 두 파일 sha 다름. 동일 본문 다른 챕터.)",
+    "A_option_note": "동상."
+  },
+  "sync/_교재원문/민법/송영곤_사례_채권/송영곤_사례연습_채권_26_p121-150.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "사례 본문/판례 인용 OCR `|` 노이즈 4건. 라벨 유지.",
+    "A_option_note": "동상."
+  },
+  "sync/_교재원문/민법/송영곤_사례_채권/송영곤_사례연습_채권_26_p151-180.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "사례 본문/페이지 마커 OCR `|` 노이즈 3건. 라벨 유지.",
+    "A_option_note": "동상."
+  },
+  "sync/_교재원문/민법/송영곤_사례연습2/부록_출제경향분석_송영곤_사례연습2.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "broken_multicol_table",
+    "rationale": "회차별(2012~) 변시 쟁점 정리 표. 5+열(회차|문제번호|배점|쟁점|...) 원본이 OCR 후 다양한 컬럼수의 행과 평문이 혼재. 자동 복구는 쟁점 매핑 손실 위험. 라벨 유지.",
+    "A_option_note": "회차별 쟁점표는 시험 대비 핵심 자료라 원본 PDF 우선 확보 후 수동 복구 권고."
+  },
+  "sync/_교재원문/민법/송영곤_사례연습2/일부대위변제_우선변제순위_송영곤_사례연습2.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "broken_marker_with_data",
+    "rationale": "`<표1>`/`<표2>` 마커 사이에 부품공급 채무내역과 변제내역이 평문으로 산재(L131-141). 3열(공급분/금액/변제기) 표였으나 OCR로 컬럼이 흐트러져 행/열 매핑 추론 위험. 라벨 유지.",
+    "A_option_note": "사례연습 보충(케이스 7,8)과 동일 사례. 헤더 추정 후 수동 검토 후 일괄 적용 권고."
+  },
+  "sync/_교재원문/민법/송영곤_사례연습2/제3자변제_법정대위_송영곤_사례연습2.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "broken_marker_with_data",
+    "rationale": "`<표1>` 마커 + 평문 데이터(보증/변제 채무관계 도식). 라벨 유지.",
+    "A_option_note": "동상."
+  },
+  "sync/_교재원문/민법/송영곤_선택형연습1_2026/part7_07_후견_송영곤_선택형연습1.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "ocr_noise_pipe",
+    "rationale": "송영곤 객관식 p791-799와 동일 SHA(98d5cd8da2a8) → 두 파일이 같은 본문(후견 부분). OCR `|` 노이즈 3건. 라벨 유지. **중복 파일 정리 별도 task 필요.**",
+    "A_option_note": "동상. 추가로 객관식/선택형연습1 두 파일 중 하나 정리 권고."
+  },
+  "sync/_교재원문/헌법/이진_헌법원리1/기초이론_도표추가본_이진_헌법원리1.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "citation_row_with_inner_pipe",
+    "rationale": "출처 인용 행 `| - 근거 위치: [《file》 slide60 | \"인용\"] [...] |` 26건. 인용 마크업(파일|발췌)의 내부 `|`를 마크다운이 표 칼럼 구분자로 오인. 표 아니라 출처 인용 셀로 의도된 형식.",
+    "A_option_note": "wrapper `| ... |` 제거 시 평문으로 정상 렌더되나 '단권화 노트의 출처 인용 행' 형식 일관성에 영향 → 노트 표준 정의 후 일괄 적용 필요."
+  },
+  "sync/_교재원문/헌법/이진_헌법원리1/기초이론_주차별_통합노트_이진_헌법원리1.md": {
+    "option": "B",
+    "auto_apply": false,
+    "category": "citation_row_with_inner_pipe",
+    "rationale": "위 파일과 동일 패턴(출처 인용 행) 42건. 라벨 유지.",
+    "A_option_note": "동상. 두 파일은 이진 헌법원리1 단권화 노트의 도표추가본/주차별 통합본으로 같은 출처 인용 형식 사용 → 일괄 정책 결정 필요."
+  }
+}

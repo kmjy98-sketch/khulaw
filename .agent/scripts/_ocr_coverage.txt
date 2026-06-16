@@ -1,0 +1,62 @@
+책별 OCR/카드 산출물 청크 수
+============================================================
+_사례형비교_사례1	02_cards:1
+compact형총OX	01_ocr_llamaparse:9
+compact형총_정리	02_cards:9
+강성민1_정리	02_cards:10
+강성민2_정리	02_cards:3
+강성민3_정리	02_cards:8
+강성민OX1	01_ocr_llamaparse:10
+강성민OX2	01_ocr_llamaparse:3
+강성민OX3	01_ocr_llamaparse:20
+김기용_형총교안	01_ocr_llamaparse:17
+김준호물권	01_ocr_llamaparse:27
+김준호물권_정리	02_cards:12
+김준호민총	01_ocr_llamaparse:17
+김준호민총_정리	02_cards:13
+김준호채각	01_ocr_llamaparse:3
+김준호채총	01_ocr_llamaparse:11
+김준호채총_정리	02_cards:2
+김형총_정리	02_cards:17
+논민소_정리	02_cards:19
+논점민법재산법	01_ocr:6, 01_ocr_llamaparse:6, 01_ocr_교정:3, 02_cards:8
+논점민소	01_ocr_llamaparse:20
+민사례1_사례형	02_cards:34
+민사사례연습1	01_ocr_llamaparse:34
+반반형법	01_ocr_llamaparse:19
+반반형법_정리	02_cards:18
+사례가족_사례형	02_cards:3
+사례담보_사례형	02_cards:5
+사례물권_사례형	02_cards:6
+사례민총_사례형	02_cards:6
+사례연습_가족	01_ocr_llamaparse:3
+사례연습_담보	01_ocr_llamaparse:5
+사례연습_물권	01_ocr_llamaparse:6
+사례연습_민총	01_ocr_llamaparse:6
+사례연습_채권	01_ocr_llamaparse:13
+사례채권_사례형	02_cards:13
+신민사가족_정리	02_cards:5
+신민사물권_정리	02_cards:5
+신민사물담_정리	02_cards:3
+신민사민총_정리	02_cards:6
+신민사법선택형_가족법	01_ocr_llamaparse:5
+신민사법선택형_물권	01_ocr:2, 01_ocr_llamaparse:5
+신민사법선택형_물적담보	01_ocr_llamaparse:3
+신민사법선택형_민총	01_ocr:6, 01_ocr_llamaparse:6
+신민사법선택형_인적담보	01_ocr_llamaparse:2
+신민사법선택형_채권1	01_ocr_llamaparse:6
+신민사법선택형_채권2	01_ocr_llamaparse:6
+신민사선택2_정리	02_cards:1
+신민사선택_정리	02_cards:5
+신민사인담_정리	02_cards:2
+신민사채권1_정리	02_cards:6
+신민사채권2_정리	02_cards:6
+유니온헌_정리	02_cards:19
+유니온헌법기출	01_ocr_llamaparse:19
+작은변사기	01_ocr_llamaparse:14
+작은변사기_사례형	02_cards:14
+쟁점노트_재산법	01_ocr_llamaparse:13, 02_cards:13
+해커스헌_사례형	02_cards:12
+해커스헌법사례	01_ocr_llamaparse:13
+헌법300_정리	02_cards:13
+헌법핵심정리300	01_ocr_llamaparse:13

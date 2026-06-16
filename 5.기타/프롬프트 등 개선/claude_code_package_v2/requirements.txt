@@ -1,0 +1,13 @@
+# Anthropic API (02-card·06a·06b 카드화 — Claude Opus 4.8)
+# v3.6 Phase 2 (2026-06): 안티그래비티(Gemini 3.5 Flash)=01 OCR+02-wiki / Opus 4.8=카드화 2모델 분담
+# (01 OCR·02-wiki는 안티그래비티 측 처리 — Anthropic SDK는 카드화 단계 및 legacy 경로용)
+anthropic>=0.40.0
+
+# PDF 처리
+pypdf>=4.0.0
+
+# 환경변수
+python-dotenv>=1.0.0
+
+# 진행 상황 표시
+tqdm>=4.66.0

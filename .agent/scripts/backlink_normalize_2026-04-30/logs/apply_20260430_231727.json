@@ -1,0 +1,47 @@
+{
+  "mode": "APPLY",
+  "timestamp": "20260430_231727",
+  "zone_filter": "L3_wiki",
+  "zone_stats": {
+    "L3_wiki": {
+      "files_changed": 1,
+      "phase_a": 0,
+      "phase_b": 37,
+      "phase_c": 0
+    }
+  },
+  "results": [
+    {
+      "file": "wiki\\_index.md",
+      "phase_a": 0,
+      "phase_b": 37,
+      "phase_c": 0,
+      "phase_a_examples": [],
+      "phase_b_examples": [
+        [
+          "§366",
+          "[[§366]]"
+        ],
+        [
+          "§741",
+          "[[§741]]"
+        ],
+        [
+          "§125",
+          "[[§125]]"
+        ],
+        [
+          "§126",
+          "[[§126]]"
+        ],
+        [
+          "§129",
+          "[[§129]]"
+        ]
+      ],
+      "phase_c_positions": [],
+      "changed": true,
+      "zone": "L3_wiki"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+=== 루트 최상위 폴더 ===
+  [D] .agent/  (~7726 files)
+  [D] .auto-memory/  (~91 files)
+  [D] .claude/  (~32 files)
+  [D] 0.공유드라이브/  (~254 files)
+  [D] 1.민사/  (~2543 files)
+  [D] 2.형사/  (~516 files)
+  [D] 3.공법/  (~453 files)
+  [D] 4.선택법/  (~598 files)
+  [D] 5.기타/  (~52445 files)
+  [D] 9.스터디 답안지/  (~1 files)
+  [D] _trash/  (~978 files)
+  [D] _원본보관/  (~1017 files)
+  [D] _종합본/  (~9 files)
+  [D] Colab Notebooks/  (~1 files)
+  [D] Gemini Gems/  (~1 files)
+  [D] meal-menu-cache/  (~22 files)
+  [D] outputs/  (~734 files)
+  [D] sync/  (~6992 files)
+  [D] 고동성/  (~30 files)
+  [D] 기타서류/  (~9 files)
+  [D] 대회/  (~72 files)
+  [D] 로스쿨 입시/  (~659 files)
+  [D] 리퀴드텍스트 백업/  (~2 files)
+  [D] 리퀴드텍스트 참조/  (~20 files)
+  [D] 변준/  (~0 files)
+  [D] 작업용/  (~182 files)
+  [D] 카톡/  (~39 files)
+  [D] 프롬프트 등 개선/  (~1 files)
+
+=== 루트 최상위 느슨한 파일 ===
+  [F] .env  (noext, 0.0MB)
+  [F] .mcp.json  (.json, 0.0MB)
+  [F] 15회 변시 수기 텍스트화.gdoc  (.gdoc, 0.0MB)
+  [F] __exp_slides_1777284347224.gslides  (.gslides, 0.0MB)
+  [F] __menu_temp_hufs_inmun_1777280095487.gsheet  (.gsheet, 0.0MB)
+  [F] AGENTS.md  (.md, 0.0MB)
+  [F] Backup20260324094421496.zip  (.zip, 5226.9MB)
+  [F] CLAUDE.md  (.md, 0.0MB)
+  [F] desktop.ini  (.ini, 0.0MB)
+  [F] GEMINI.md  (.md, 0.0MB)
+  [F] LEET LSAT 글 전개 방식 분석.gdoc  (.gdoc, 0.0MB)
+  [F] NLP 기반 키워드 카드화 시스템 구축.gdoc  (.gdoc, 0.0MB)
+  [F] Weekly Meal Menu.gscript  (.gscript, 0.0MB)
+  [F] 제목 없는 프로젝트.gscript  (.gscript, 0.0MB)
+  [F] 카드에 대해서 한 얘기야.gdoc  (.gdoc, 0.0MB)
+  [F] 클로드 작업 파일 검토 및 카드 설계 (1).gdoc  (.gdoc, 0.0MB)
+  [F] 클로드 작업 파일 검토 및 카드 설계.gdoc  (.gdoc, 0.0MB)
+  [F] 클로드 작업시킬 거.gdoc  (.gdoc, 0.0MB)
+
+루트 파일 확장자 분포: {'': 1, '.json': 1, '.gdoc': 7, '.gslides': 1, '.gsheet': 1, '.md': 3, '.zip': 1, '.ini': 1, '.gscript': 2}
+
+=== "변준" 폴더 탐색 (루트~2depth) ===
+  변준
+
+=== 작업용/ 비-PDF 파일 ===
+  (작업용 비-PDF 총 0개)
