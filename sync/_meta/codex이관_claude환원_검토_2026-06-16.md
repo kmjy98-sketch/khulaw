@@ -1,6 +1,6 @@
 # Codex 이관 역할 → Claude 환원 검토 (2026-06-16)
 
-> 근거 문서: `sync/CODEX_BOOTSTRAP_REPORT.md.md` (로스쿨 학습 자동화 설계서)
+> 근거 문서: `sync/_meta/CODEX_BOOTSTRAP_REPORT.md` (로스쿨 학습 자동화 설계서)
 > 운영 환경: 사용자는 GPT Pro/Codex를 사용하지 않고 **Claude Web** 기준으로 운영한다(2026-06-16 사용자 지정). 이 문서에서 'Claude'는 Claude Web을 가리킨다.
 > 결론: **이관 무방. 단, 보고서를 글자 그대로 구축하지 않고 핵심 개념만 기존 시스템에 이식한다.**
 
@@ -48,7 +48,7 @@
 | `.agent/skills/spaced-repetition/SKILL.md` | 오류유형별 복습간격 연동표 신설 |
 | `AGENTS.md` | #19 워크플로우 목록에 card-wiki-pipeline 추가 |
 
-## 5. 후속(별도 작업, 미실행)
+## 5. 후속
 
-- `build_v37_apkg.py`의 guid를 **안정 note_key**(`{issue_id 또는 출처+소제목}::{card_type}::{seq}`)에서 파생하도록 전환 → 카드 수정 시 복습이력 보존. 19,629장 재임포트 영향이 있어 테스트 후 적용(#31).
-- 채택 개념 #2·#3을 render_case_answer_review.py / srs_scheduler.py에 코드 반영(현재는 규칙·스펙만 문서화).
+- [완료 2026-06-16] `build_v37_apkg.py`의 guid를 **안정 note_key**(`{파일stem}::{basic|cloze}::{seq:04d}`)에서 파생하도록 전환 → 카드 수정 시 guid 유지·복습이력 보존. key=출처(파일 고유 stem), card_type=빌더 실제 모델(basic/cloze), seq=(파일,종류)별 등장순 누적번호. 내용기반 dedup은 별도 유지해 총장수 보존(19,629 동일). 검증: `_apkg_report.md` 한자0·번호없는cloze0·덱별분포 동일, 일회성 테스트로 "내용 수정해도 guid 동일" 확인. **사용자 고지·승인('전환만 진행', 마이그레이션 맵 미생성)** — 이 전환 직후 첫 임포트 1회는 v37 전량이 새 노트로 인식되어 복습이력이 초기화됨(구 노트는 남아 중복). 향후 카드 텍스트 수정은 동일 노트 업데이트로 이력 보존.
+- 채택 개념 #2·#3을 render_case_answer_review.py / srs_scheduler.py에 코드 반영(현재는 규칙·스펙만 문서화). — 미실행

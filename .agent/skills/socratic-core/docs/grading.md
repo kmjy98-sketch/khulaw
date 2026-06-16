@@ -26,9 +26,9 @@
 
 ---
 
-## SRS 자동 등록 (채점 후)
+## SRS 복습 등록 제안 (채점 후, 사용자 확정 시 실행)
 
-**오답/미흡/누락 발생 시 자동 실행:**
+**오답/미흡/누락 발생 시 다음을 제안한다(자동 실행하지 않음 — silent write 금지). 사용자가 복습 등록을 지시할 때만 아래 명령을 실행한다:**
 
 ```bash
 python .agent/skills/spaced-repetition/scripts/srs_scheduler.py --add "[미흡 쟁점/누락 요건]" --topic "[과목]"
@@ -77,5 +77,5 @@ python .agent/skills/spaced-repetition/scripts/srs_scheduler.py --review <item_i
 ### 약점 저장/재출제
 
 - 저장: `.agent/state/learning.json` → `weak_points`
-- SRS 연동: `.agent/state/srs_log.json`
+- SRS 연동: `.agent/state/srs_log.json` — 자동 기록 금지(silent write 금지). 사용자가 복습 등록/채점 확정을 지시할 때만 spaced-repetition 스킬로 기록(2026-06-16 정책, spaced-repetition·case-answer-review와 동일).
 - Spaced Repetition: 간격 조정 (SM-2 알고리즘)

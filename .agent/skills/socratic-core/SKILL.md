@@ -97,9 +97,9 @@ AI: 정확합니다(견련성).
 
 ## 자동 상태 커밋
 
-매 문답/문제 풀이 종료 시 `.agent/state/` 파일 자동 업데이트:
+매 문답/문제 풀이 종료 시 `.agent/state/` 파일을 다음 정책으로 갱신한다:
 
-- `learning.json` - 취약점, 토픽 상태
-- `progress.json` - 교재/전사문 진도
-- `srs_log.json` - 복습 간격
+- `learning.json` — 취약점·토픽 상태 (자동 갱신)
+- `progress.json` — 교재/전사문 진도 (자동 갱신)
+- `srs_log.json` — 복습 간격. 자동 기록(silent write) 금지. 채점 결과는 복습 항목 '제안'까지만 하고, 사용자가 채점 확정/복습 등록을 지시할 때만 spaced-repetition 스킬을 통해 기록한다(spaced-repetition/SKILL.md·case-answer-review/SKILL.md 동일 정책).
 

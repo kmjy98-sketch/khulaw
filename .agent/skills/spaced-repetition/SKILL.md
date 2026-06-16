@@ -65,15 +65,17 @@ python scripts/srs_scheduler.py --status
 
 ## 답안 채점 연동 간격 (2026-06-16 신설)
 
-case-answer-review 채점 결과를 복습 항목으로 등록할 때, 오류 유형별 초기 간격을 다음으로 둔다(출처: `CODEX_BOOTSTRAP_REPORT.md.md` §19 채택분). 이후 간격은 SM-2가 관리한다.
+case-answer-review 채점 결과를 복습 항목으로 등록할 때, 오류 유형별 초기 간격을 다음으로 둔다(출처: `sync/_meta/CODEX_BOOTSTRAP_REPORT.md` §19 채택분). 채점 척도는 case-answer-review 루브릭의 0.0~1.0 분수 척도를 기준으로 하며, 본 표의 0~100/% 표기는 0~1로 환산해 적용한다. 이후 간격은 SM-2가 관리한다.
+
+> ※ 현재 스펙 문서화 단계 — srs_scheduler.py에 review_type·오류유형별 초기 due 매핑이 아직 코드 반영되지 않았다(초기 interval=1 고정, 순수 SM-2). 본 표는 복습 등록 시 수동 초기 due 지정용 운영 가이드(후속 과제, codex이관_claude환원_검토_2026-06-16.md §5).
 
 | 채점 결과 | 초기 due | review_type |
 |---|---|---|
 | 쟁점 자체를 못 찾음 | D+1 | issue_spotting / outline_recall |
 | 결론 반대 | D+1 | conclusion_drill |
-| 키워드 50% 미만 | D+2 | keyword_recall |
+| 키워드 0.5 미만(루브릭 0~1 척도) | D+2 | keyword_recall |
 | 목차 구조 누락 | D+3 | outline_recall |
-| 포섭 60점 미만 | D+2 | mini_application |
+| 포섭 0.6 미만(루브릭 0~1 척도) | D+2 | mini_application |
 | 안정적 통과 | D+7 | (정상 SM-2) |
 | 2회 연속 양호 | completed 후보 | — |
 

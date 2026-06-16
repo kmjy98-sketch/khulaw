@@ -93,7 +93,8 @@ python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --s
 
 ## 채점 루브릭·약점 연동 (2026-06-16 신설)
 
-출처: `CODEX_BOOTSTRAP_REPORT.md.md` §17~19의 채택분. 기존 "초벌 평가"를 고정 루브릭으로 구체화한다.
+출처: `sync/_meta/CODEX_BOOTSTRAP_REPORT.md` §17~19의 채택분. 기존 "초벌 평가"를 고정 루브릭으로 구체화한다.
+> ※ 현재 스펙 문서화 단계 — render_case_answer_review.py(provisional_grade는 coverage 기반)에 본 가중치 루브릭·약점 연동이 아직 코드 반영되지 않았다(후속 과제, codex이관_claude환원_검토_2026-06-16.md §5). 채점 시 문서 루브릭은 수동 적용하고 자동 점수는 초벌로 해석한다.
 
 ### 채점 루브릭 (가중치)
 
@@ -124,5 +125,5 @@ python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --s
 | 포섭 약점 | application_checkpoint 단기복습 제안 (소스 체크포인트 있을 때만) |
 | 자료 부족 | 카드 생성 금지, "자료 부족—보류" |
 
-- 복습간격은 spaced-repetition 스킬의 "답안 채점 연동 간격" 표를 따른다.
+- 복습간격은 spaced-repetition 스킬의 "답안 채점 연동 간격" 표를 따른다(채점 점수는 본 루브릭의 0.0~1.0 척도이며 그 표의 임계값도 동일 척도로 읽는다).
 - 카드 후보는 card-wiki-pipeline §8(note_key·중복방지)을 준수한다 — 같은 note_key 있으면 갱신, 중복 생성 금지.

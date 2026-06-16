@@ -1,6 +1,6 @@
 ---
 name: anki-card-generation
-description: 법학 위키, 쟁점 문서, 검증된 카드 소스를 Anki Basic/Cloze 카드로 변환하는 Codex Web/Pro 기준 스킬. 트리거: "안키 카드", "카드화", "Cloze", "Basic 카드", "쟁점 카드", "apkg", "v37 카드"
+description: 법학 위키, 쟁점 문서, 검증된 카드 소스를 Anki Basic/Cloze 카드로 변환하는 스킬(실행 주체 무관 — 현 운영주체 Claude Web, 2026-06-16 환원, GPT Pro/Codex 미사용). 트리거: "안키 카드", "카드화", "Cloze", "Basic 카드", "쟁점 카드", "apkg", "v37 카드"
 ---
 
 # SKILL: Anki Card Generation for Law Study
@@ -8,7 +8,7 @@ description: 법학 위키, 쟁점 문서, 검증된 카드 소스를 Anki Basic
 ## 0. 목적
 
 이 스킬은 법학 학습 자료를 Anki 카드로 변환하기 위한 규칙이다.
-Codex Web/Pro 환경에서 실행 가능해야 하므로 Claude, Gemini, Antigravity 등 특정 모델 전용 명령에 의존하지 않는다.
+실행 주체에 무관하게 적용하므로(현 운영주체 Claude Web) 특정 모델 전용 명령에 의존하지 않는다.
 
 ## 1. 우선순위
 
@@ -21,7 +21,7 @@ Codex Web/Pro 환경에서 실행 가능해야 하므로 Claude, Gemini, Antigra
 5. `docs/anki/*.md`
 6. `docs/legacy/*.md`는 참고만 한다.
 
-충돌 시 최신 Codex 운영 문서와 `AGENTS.md`를 우선한다.
+충돌 시 `AGENTS.md`와 `.agent/workflows/card-wiki-pipeline.md`를 우선한다.
 
 ## 2. 입력
 
@@ -36,7 +36,7 @@ Codex Web/Pro 환경에서 실행 가능해야 하므로 Claude, Gemini, Antigra
 주의:
 
 - `outputs/02_cards_v37/*.md`는 대량 산출물이므로 Git에 기본 포함하지 않는다.
-- Web/Pro 환경에서 해당 파일이 없으면 Drive 자료 요청으로 처리한다.
+- 워크스페이스에서 해당 파일을 읽지 못하면 Drive 자료 요청으로 처리한다.
 - 원문 또는 근거가 없는 법리 단정은 만들지 않는다.
 
 ## 3. 출력
@@ -165,6 +165,13 @@ Extra:
 검증::보류
 ```
 
+## note_key·카드 생명주기·중복방지 (card-wiki-pipeline.md §8 준수)
+세부 규칙의 단일 출처는 `.agent/workflows/card-wiki-pipeline.md` §8이며 여기서 재정의하지 않는다.
+- note_key: 형식 `{key}::{card_type}::{seq}`. 내용이 바뀌어도 note_key를 변경하지 않고 같은 키로 갱신한다(§8.1).
+- 빌더(build_v37_apkg.py)는 genanki guid를 안정 note_key 기반(`{파일stem}::{basic|cloze}::{seq:04d}`)으로 생성하므로(2026-06-16 전환·검증 완료) 카드 텍스트 수정 시 재임포트하면 복습이력을 보존한 채 동일 노트가 업데이트된다.
+- 생명주기: draft→pending→approved→batched→exported→updated, 분기 suspended/rejected. rejected는 사용자 명시 허가 없이 재생성 금지(§8.2).
+- 중복방지(생성 전 순서): ①같은 note_key 존재 시 신규 생성 금지·갱신 ②같은 key+card_type+정규화 앞면 존재 시 병합 ③이미 exported면 기존을 updated로 ④rejected였던 것은 재생성 금지(§8.3).
+
 ## 8. 금지
 
 - 교재 원문 없는 법리 창작
@@ -191,6 +198,7 @@ apkg 빌드는 사용자가 명시 요청하거나 카드 파일을 변경한 �
 - 한자 잔존 여부
 - 번호 없는 cloze 여부
 - 과목별 분리 여부
+- note_key 부여·중복 여부(card-wiki-pipeline §8.3)
 ```
 
 빌드 후 확인:

@@ -1,7 +1,7 @@
 ﻿# AGENTS.md
 
 ## 적용 범위
-- 이 문서는 `H:\내 드라이브` 워크스페이스의 Codex 작업 기준입니다.
+- 이 문서는 `H:\내 드라이브` 워크스페이스의 운영 기준입니다(운영 주체: Claude Web — 2026-06-16 환원, GPT Pro/Codex 미사용). 본 문서는 Codex 등 외부 AI 호환 미러이며, 충돌 시 권위본 `CLAUDE.md`를 우선합니다. 실행 주체를 특정 모델로 고정하지 않되 기본 운영주체는 Claude Web으로 한다.
 - 하위 `.agent/workflows`, `.agent/skills`, `.agent/state`에 동일하게 적용합니다.
 - 사용자-facing 답변은 한국어를 기본으로 합니다. 코드·명령·원문 인용·전문용어는 필요한 경우 원어를 병기할 수 있습니다.
 - 과목별 하위 폴더에 `AGENTS.md`가 있으면 루트 규칙과 함께 적용하고, 과목별 자료 위치·우선순위는 해당 하위 문서를 우선합니다.
@@ -20,7 +20,7 @@
 6. Integrity: 조문번호/판례명/선고일 정확성 우선. 불명확 시 `[불명확: 후보1/후보2]`.
 7. COT Non-Disclosure: 내부 추론은 사용자에게 직접 노출 금지. 요청 시 1~2문장 요약 + 근거만.
 8. Output Minimalism: 요청 형식 우선, 불필요 장문 금지.
-9. PDF Handling: Codex 기본 PDF 읽기/추출 우선. 로컬 pypdf 전처리는 RAG 청킹/인덱싱 용도로만 사용.
+9. PDF Handling: Read 도구(작은 PDF, 1MB 미만) → Claude 네이티브 PDF 지원을 우선한다(필요 시 #46 폴백 체인). 로컬 pypdf 전처리는 RAG 청킹/인덱싱 용도로만 사용.
 
 ## 성능 최적화 (#10-12)
 1. Structured Thinking: 내부 단계 추론은 수행하되 출력은 결과 중심.
@@ -71,7 +71,7 @@
 - 메모리 컴파일: `.agent/scripts/flush.py`, `.agent/scripts/compile.py`
 - OCR 교정: `.agent/notebooks/ocr_extract_v2.ipynb`, `.agent/notebooks/ocr_compare_v2.ipynb`, `.agent/scripts/haiku_ocr_correct.py`, `.agent/scripts/sonnet_review.py`, `.agent/scripts/apply_corrections.py`
 - 파일 이동·이름변경·복사 로그: `.agent/skills/file_ops_log/SKILL.md`, `.agent/scripts/log_file_op.py`
-- `CLAUDE.md`의 `claude_code_package_v2` 자동 카드화 경로는 현재 파일 존재가 확인되지 않아 미지원/보류로 취급한다. 존재 확인 전 실행 경로로 문서화하지 않는다.
+- `claude_code_package_v2`(`5.기타/프롬프트 등 개선/claude_code_package_v2/`)는 **파일 존재 확인됨**(2026-06-16). 카드·위키 운영 기준은 `card-wiki-pipeline.md`를 우선하고, 패키지 prompts는 그 보조로만 사용한다. 실행 주체를 특정 모델로 고정하지 않는다.
 
 ## 진도 추적 (#21-22)
 1. TOC-Based Progress: `{편}>{장}>{절}>{항목}` 형식 사용.
@@ -126,11 +126,11 @@
 
 ## 도구 가용성·충돌 방지 (#46-49)
 1. PDF 텍스트가 필요하면 새 추출 전에 기존 마크다운 추출본을 먼저 찾는다. 우선 확인 위치는 `outputs/01_ocr_llamaparse/`, `outputs/02_cards/`, `sync/wiki/쟁점/`, `5.기타/_백업/`, `.agent/temp_toc/`, `.agent/temp_pdf_extract/`이다.
-2. 기존 추출본이 없을 때만 PDF 추출을 시도한다. 권장 순서는 Codex 기본 PDF 읽기 → `pdfplumber` → `pdftotext`/`pdftotext -raw` → `pypdf` → 사용자 수동 변환 요청이다.
-3. 다른 도구와 같은 파일을 동시에 편집할 가능성이 있으면, 편집 전 파일 크기·첫 줄·최근 수정시간을 확인한다. 충돌 위험이 있으면 별도 파일명(`_v2`, `_codex`, `_정리`)을 사용한다.
+2. 기존 추출본이 없을 때만 PDF 추출을 시도한다. 권장 순서는 Read 도구(작은 PDF) → Claude 네이티브 PDF → `pdfplumber` → `pdftotext`/`pdftotext -raw` → `pypdf` → 사용자 수동 변환 요청이다.
+3. 다른 도구와 같은 파일을 동시에 편집할 가능성이 있으면, 편집 전 파일 크기·첫 줄·최근 수정시간을 확인한다. 충돌 위험이 있으면 별도 파일명(`_v2`, `_claude`, `_정리`)을 사용한다.
 4. 주요 산출 노트 작성 후 관련 wiki 진입점이 존재하면 링크 추가를 검토하고, 세션 기록은 Wiki 메모리 시스템 규칙과 통합한다.
 
-## Codex 이식 메모
-- 기존 문서의 `AGENTS.md`와 `GEMINI.md` 참조는 병행 사용을 허용합니다.
+## 문서 이관 메모
+- 운영주체는 Claude(Web)로 통일한다. 루트 `GEMINI.md`는 Gemini 탐색(검색·열람) 용도로만 참조하며, 분할·병합·생성·이동·삭제 등 변경 작업은 Gemini에 위임하지 않는다(feedback_gemini_explore_only 준수).
 - `_archive` 문서는 참고용 보관본이며, 운영 기준은 본 문서와 `.agent/workflows`의 현행 파일을 우선합니다.
-- 루트 및 과목별 `CLAUDE.md`의 유효한 운영 규칙은 `AGENTS.md`로 이관합니다. stale 경로·미존재 명령은 실행 경로로 취급하지 않습니다.
+- 운영 규칙의 단일 권위본(single source of truth)은 루트·과목별 `CLAUDE.md`이며, 본 `AGENTS.md`는 Codex 등 외부 AI 호환을 위한 미러 사본이다(2026-06-16 Claude Web 기준 운영 확정). 두 문서가 충돌하면 `CLAUDE.md`를 우선한다. stale 경로·미존재 명령은 실행 경로로 취급하지 않는다.

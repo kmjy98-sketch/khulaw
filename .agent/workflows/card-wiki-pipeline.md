@@ -18,7 +18,7 @@
 
 - 카드 최신: v37, 19,629장.
 - 카드 소스: `outputs/02_cards_v37/*.md` 276개.
-- apkg: `outputs/anki/v37/apkg/` 과목별 7개.
+- apkg: `outputs/anki/v37/apkg/` 과목×책종류 16개 (민법4·민사소송법2·형법4·헌법3·상법1·행정법1·형사소송법1).
 - 빌드 리포트: `outputs/anki/v37/apkg/_apkg_report.md` 기준 Basic 8,172 / Cloze 11,457.
 - 위키 쟁점 아티클: `sync/wiki/쟁점/` 36개.
 - 미완 쟁점: 약 53개. 중단 사유는 코드 오류가 아니라 Claude Code 구독 접근 비활성화로 인한 서브에이전트 인증 실패.
@@ -95,7 +95,7 @@ python .agent/scripts/build_v37_apkg.py
 
 - 총 카드 수
 - Basic/Cloze 수
-- 과목별 apkg 7개 존재
+- 과목×책종류 apkg 16개 존재
 - 한자 잔존 0
 - 번호 없는 cloze 0
 
@@ -109,14 +109,14 @@ python .agent/scripts/build_v37_apkg.py
 
 ## 8. 카드 생명주기·note_key·중복방지 (2026-06-16 신설)
 
-출처: `CODEX_BOOTSTRAP_REPORT.md.md` §11~13·20·23의 채택분. SQLite·CSV batch 설계는 기각(기존 JSON 상태·v37 apkg 유지).
+출처: `sync/_meta/CODEX_BOOTSTRAP_REPORT.md` §11~13·20·23의 채택분. SQLite·CSV batch 설계는 기각(기존 JSON 상태·v37 apkg 유지).
 
 ### 8.1 note_key (안정 키)
 
 - 형식: `{key}::{card_type}::{seq}` — `key`는 issue_id(있을 때) 또는 `{출처약어}_{소제목}`. 예: `민법_채권자대위권::requirement::001`.
 - note_key는 **카드 내용이 바뀌어도 변경하지 않는다.** 내용 개선 시 같은 note_key로 갱신한다.
 - 금지: 기존 note_key 변경, 같은 내용에 새 note_key 부여, 날짜를 note_key에 포함.
-- 현 빌더(`build_v37_apkg.py`)는 genanki guid를 **내용 기반**(`guid_for(src, blk[:30], 정규화텍스트)`)으로 만든다 → 카드 텍스트 수정 시 guid가 바뀌어 Anki **복습이력이 분실**된다. 목표 = guid를 안정 note_key에서 파생. (코드 전환은 재임포트 영향이 있어 테스트 후 별도 적용 — `sync/_meta/codex이관_claude환원_검토_2026-06-16.md` §5)
+- 빌더(`build_v37_apkg.py`)는 genanki guid를 **안정 note_key 기반**(`guid_for("{파일stem}::{basic|cloze}::{seq:04d}")`)으로 만든다 → 카드 텍스트를 수정해도 guid가 유지되어 재임포트 시 동일 노트 업데이트(복습이력 보존). 내용기반 dedup은 별도 유지해 총장수 보존. (2026-06-16 전환 적용·검증 완료. 기존 내용기반 guid에서 1회 전환되었으므로 그 직후 임포트 1회는 전량 새 노트 인식 — 사용자 고지·승인됨. 경위 — `sync/_meta/codex이관_claude환원_검토_2026-06-16.md` §5)
 
 ### 8.2 카드 생명주기
 

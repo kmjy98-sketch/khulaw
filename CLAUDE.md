@@ -40,7 +40,7 @@
 
 #12 소스 검색: Grep/Read로 소스 파일을 검색한다. 의미 검색이 빈약하면 키워드로 보완한다. 복잡 질의 시 하위 질의로 분해하여 순차 탐색한다.
 
-#13 생성 후 검증: 생성 완료 후 법리/사실 단정을 소스와 대조한다. 소스 확인 안 되면 해당 단정을 삭제한다 (#2 적용). "~인 것 같다" 등 추측 표현도 사용하지 않는다. OCR 교정 결과도 검증 대상. 조문번호·사건번호는 korean-law-mcp로 자동 검증한다. OCR 파이프라인은 3단계 (노트북 2종은 워크스페이스 루트에 위치 — Colab 연동 경로이므로 이동 금지): ①Colab `ocr_extract_v2.ipynb`(marker-pdf 추출 → `sync/_ocr_extracted/`) → ②Colab `ocr_compare_v2.ipynb`(기존 md vs 새 추출 비교 → `corrections.jsonl` + `verification_targets.json`) → ③Claude Code(`haiku_ocr_correct.py` + `sonnet_review.py` + `apply_corrections.py` + korean-law-mcp 검증). Colab은 무료, Claude Code는 Max 구독 포함.
+#13 생성 후 검증: 생성 완료 후 법리/사실 단정을 소스와 대조한다. 소스 확인 안 되면 해당 단정을 삭제한다 (#2 적용). "~인 것 같다" 등 추측 표현도 사용하지 않는다. OCR 교정 결과도 검증 대상. 조문번호·사건번호는 korean-law-mcp로 자동 검증한다. OCR 파이프라인은 3단계 (노트북 2종은 `.agent/notebooks/`에 위치 — Colab 연동 경로이므로 이동·이름변경 금지): ①Colab `.agent/notebooks/ocr_extract_v2.ipynb`(marker-pdf 추출 → `sync/_ocr_extracted/`) → ②Colab `.agent/notebooks/ocr_compare_v2.ipynb`(기존 md vs 새 추출 비교 → `corrections.jsonl` + `verification_targets.json`) → ③Claude Code(`haiku_ocr_correct.py` + `sonnet_review.py` + `apply_corrections.py` + korean-law-mcp 검증). Colab은 무료, Claude Code는 Max 구독 포함.
 
 ## 4. 인용 (#14)
 
@@ -111,9 +111,11 @@
 | 쟁점 위키 아티클 생성, "쟁점 아티클" | claude_code_package_v2 (prompts/03-wiki-rollup_쟁점아티클_v1.md 적용 — 카드 roll-up) |
 | 파일 이동·이름변경·복사·trash 이동, "이동", "이름변경", "move", "rename" | file_ops_log (Skill) — log_file_op.py 로 master.{csv,jsonl,md} 자동 기록 (#16-C) |
 
+패키지 루트(2026-06-16 확인): `5.기타/프롬프트 등 개선/claude_code_package_v2/` — 표 내 `claude_code_package_v2/...`·`prompts/...` 참조는 모두 이 루트 기준 상대경로다.
+
 주의: "학습 질문"과 "노트 편집/보강/검토 작업"을 구분한다. 노트 편집 요청에 소크라틱 모드를 적용하지 않는다.
 주의: 신규 패키지(claude_code_package_v2)는 책 → 카드 자동화 프롬프트 묶음이고, 소크라틱(socratic.md)은 학습 모드. 별개 시스템으로 병행 운영.
-주의: 신규 패키지 v3.6 Phase 2 (2026-06-01) — 2모델 역할분담 운영 모드. 안티그래비티 앱(데스크톱 프로그램 — 탑재 모델은 교체 가능하므로 모델명을 룰에 고정하지 않는다) = 01 OCR + 02-wiki 위키화(대용량 원문 저비용 압축) / Claude Opus 4.8 = 02-card·06a·06b 카드화(위키 입력받아 빌드). 위키 10:1 압축으로 Opus 입력 토큰 최소화. (이전 Phase 1.2: Claude Code 직접 처리 모드 — legacy 스크립트·.env 보존). 원본 백업: 5.기타/패키지백업/2026-05-21/. 산출물 저장 위치(2026-06-11): 02-wiki 위키화 → sync/위키/ (구 outputs/02_wiki에서 이관), 07 찌라시 → sync/찌라시/, 02-card·01_ocr → outputs/ 유지.
+주의: 신규 패키지 v3.6 Phase 2 (2026-06-01) — 2모델 역할분담 운영 모드. 안티그래비티 앱(데스크톱 프로그램 — 탑재 모델은 교체 가능하므로 모델명을 룰에 고정하지 않는다) = 01 OCR + 02-wiki 위키화(대용량 원문 저비용 압축) / Claude Opus 4.8 = 02-card·06a·06b 카드화(위키 입력받아 빌드). 위키 10:1 압축으로 Opus 입력 토큰 최소화. (이전 Phase 1.2: Claude Code 직접 처리 모드 — legacy 스크립트·.env 보존). 원본 백업: 5.기타/패키지백업/2026-05-21/. 산출물 저장 위치(2026-06-11): 02-wiki 위키화 → sync/wiki/원문/ (구 sync/위키/원문, 구 outputs/02_wiki에서 이관), 07 찌라시 → sync/찌라시/, 02-card·01_ocr → outputs/ 유지.
 주의: 카드 대량 생성·룰 변경 시 운영 원칙(2026-06-12) — ①신규/변경 룰은 **1청크 파일럿**으로 검증(앞/뒤/빈칸 직접 확인) → ②통과 시에만 **전체 병렬 재작성**(워크플로우, 파일럿 통과한 작업은 사례형·암기장 등 병렬 동시 가동). 파일럿 없이 전량 실행 금지.
 
 #18 Auto-Load Behavior: 맥락 감지 → 워크플로우/스킬 파일을 읽은 후 적용한다. 슬래시 명령 → 즉시 해당 파일을 읽고 적용한다.
@@ -123,8 +125,8 @@
 - [x] .agent/workflows/lecture-notes.md
 - [x] .agent/workflows/leet-solve.md
 - [x] .agent/skills/file-classification/SKILL.md
-- [x] 프롬프트 등 개선/claude_code_package_v2/SKILL.md (v3.6 Phase 1.2 — Claude Code 운영 모드)
-- [x] 프롬프트 등 개선/claude_code_package_v2/prompts/ — 총 14개 (claude 5종: 01·02-wiki·02-card·06a·06b / gemini 5종 / 공용 4종: 03-wiki-rollup·04-notebooklm·05-anki·07-찌라시) (2026-06-11 확인)
+- [x] 5.기타/프롬프트 등 개선/claude_code_package_v2/SKILL.md (운영 주체 Claude Web 환원, 2026-06-16)
+- [x] 5.기타/프롬프트 등 개선/claude_code_package_v2/prompts/ — 총 16개 (claude 5종: 01·02-card·02-wiki·06a·06b / gemini 5종: 01·02-card·02-wiki·06a·06b / 공용 6종: 03-wiki-rollup·04-notebooklm·05-anki·07-찌라시·08-빈칸키워드·10-v37_apkg_빌드_파이프라인) (2026-06-16 재확인)
 - [x] 5.기타/패키지백업/2026-05-21/claude_code_package_v2/ (원본 백업)
 
 ## 7. 진도 추적 (#19~#20)

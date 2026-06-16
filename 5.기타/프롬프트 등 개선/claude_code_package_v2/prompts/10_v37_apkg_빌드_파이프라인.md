@@ -1,6 +1,6 @@
 # 10. v37 카드 → apkg 빌드 파이프라인 (2026-06-15)
 
-> readable 카드(02_cards_v37) → genanki 과목별 .apkg. 카드룰은 02-card(사례형)·04(암기장 강약)·09(NLP 빈칸경계) 참조.
+> readable 카드(02_cards_v37) → genanki 과목별 .apkg. 카드룰은 02-card(사례형)·05(암기장 덱구조·태그)·08(빈칸 키워드 경계) 참조.
 
 ## 의존성 (pip)
 - `genanki` (.apkg 생성), `hanja` (한자→한글 hanja.translate). 둘 다 설치 필요(2026-06-15 설치 완료).
