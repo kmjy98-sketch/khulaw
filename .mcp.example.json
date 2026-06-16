@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "korean-law-mcp": {
+      "command": "replace-with-local-command",
+      "args": [],
+      "env": {
+        "LAW_API_KEY": "${LAW_API_KEY}"
+      }
+    }
+  }
+}

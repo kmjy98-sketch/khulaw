@@ -1,10 +1,17 @@
 # ===== 비밀·자격증명 (절대 commit 금지) =====
 .env
 .env.*
+!.env.example
 *.key
 *.pem
 *.p12
 .mcp.json
+mcp.json
+credentials*.json
+token*.json
+secrets/
+.codex/config.toml
+.codex/hooks.json
 **/secrets*
 **/*password*
 **/*credential*
@@ -19,6 +26,8 @@
 *.hwpx
 *.zip
 *.7z
+*.rar
+*.epub
 *.mp3
 *.mp4
 *.wav
@@ -26,6 +35,9 @@
 *.png
 *.jpg
 *.jpeg
+*.webp
+*.gif
+*.mov
 
 # ===== 구글 워크스페이스 포인터 파일 =====
 *.gdoc
@@ -43,8 +55,46 @@ _원본보관/
 _원본보관/
 meal-menu-cache/
 outputs/
+_output/
+tmp/
+temp/
+scratch/
+cache/
 **/__pycache__/
 *.pyc
+
+# ===== Anki 산출물 =====
+*.apkg
+*.anki2
+*.colpkg
+outputs/anki/
+outputs/01_ocr*/
+outputs/01_ocr_llamaparse/
+outputs/02_cards*/
+outputs/02_cards_v37/
+
+# ===== RAG/index stores =====
+_RAG_데이터/
+*.sqlite
+*.db
+*.lancedb/
+*.faiss/
+*.pkl
+
+# ===== 개인 학습 상태 =====
+.agent/state/*.json
+.agent/state/*.jsonl
+.agent/state/*.sqlite
+.agent/state/*.db
+.agent/state/*private*
+.agent/state/*cache*
+!.agent/state/*.schema.json
+!.agent/state/*template*.json
+!.agent/state/README.md
+!.agent/state/schemas/
+!.agent/state/schemas/**
+!.agent/state/templates/
+!.agent/state/templates/**
 
 # ===== OS·시스템 =====
 desktop.ini

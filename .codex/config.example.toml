@@ -1,0 +1,20 @@
+# Example only. Copy to a local config file if needed.
+
+[project]
+name = "khulaw-codex-rules"
+description = "Codex Web/Pro rules, skills, workflows, and templates for Korean law study workflows."
+
+[workflow]
+first_read = [
+  "AGENTS.md",
+  ".agent/workflows/card-wiki-pipeline.md",
+  ".agent/skills/anki-card-generation/SKILL.md",
+  "docs/drive-sync/DRIVE_SYNC_POLICY.md",
+  "docs/git/GIT_POLICY.md",
+  "docs/codex/CODEX_WEB_PRO_RUNBOOK.md"
+]
+
+[safety]
+commit_large_sources = false
+commit_secrets = false
+commit_private_learning_state = false
