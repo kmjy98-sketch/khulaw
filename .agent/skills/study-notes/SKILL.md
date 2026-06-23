@@ -27,7 +27,7 @@ description: "교재·기출문제 기반으로 주요 내용 노트(핵심정�
    사용자가 현재 보고 있는 파일이나 언급한 문서를 대상으로 Python 스크립트를 실행합니다.
 
    ```bash
-   python "h:\내 드라이브\.agent\skills\study-notes\scripts\collect.py" --target "{목표 파일 경로}" --mode "{모드}"
+   python .agent/skills/study-notes/scripts/collect.py --target "{목표 파일 경로}" --mode "{모드}"
    ```
 
    *이 스크립트는 필요시 qmd law-notes 검색(`.agent/lib/qmd_search.py`)을 활용하여, 전사문의 경우 연관 교재 내용을, 교재의 경우 연관 전사문/기출문제를 교차 수집합니다.* 수집된 컨텍스트는 `.agent/state/study-notes-context.json`에 저장됩니다.
@@ -36,7 +36,7 @@ description: "교재·기출문제 기반으로 주요 내용 노트(핵심정�
    수집된 컨텍스트를 바탕으로 템플릿 양식에 맞는 최종 마크다운 노트를 생성합니다.
 
    ```bash
-   python "h:\내 드라이브\.agent\skills\study-notes\scripts\generate.py" --mode "{모드}" --out "{저장할 폴더의 경로/파일명.md}"
+   python .agent/skills/study-notes/scripts/generate.py --mode "{모드}" --out "{저장할 폴더의 경로/파일명.md}"
    ```
 
 4. **사용자 검토 요청 (notify_user)**

@@ -14,14 +14,14 @@ description: 법학 위키, 쟁점 문서, 검증된 카드 소스를 Anki Basic
 
 카드 작업 시 다음 순서로 읽는다.
 
-1. 루트 `AGENTS.md`
+1. 루트 `CLAUDE.md` (권위본 — 루트 AGENTS.md는 #49 은퇴)
 2. 과목별 `AGENTS.md`
 3. `.agent/workflows/card-wiki-pipeline.md`
 4. 이 파일
 5. `docs/anki/*.md`
 6. `docs/legacy/*.md`는 참고만 한다.
 
-충돌 시 `AGENTS.md`와 `.agent/workflows/card-wiki-pipeline.md`를 우선한다.
+충돌 시 `CLAUDE.md`와 `.agent/workflows/card-wiki-pipeline.md`를 우선한다.
 
 ## 1-B. 카드 설계 — 최신연구 반영 (2026-06-21, 보고서 sync/_meta/개선종합_카드SRS_룰감사_2026-06-21.md)
 
