@@ -3,13 +3,16 @@ import pypdf
 import sys
 import re
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 sys.stdout.reconfigure(encoding='utf-8')
 
 pdf_paths = [
-    "H:/내 드라이브/3.공법/_분할/유니온헌법기출편_03_통치구조_국회_대통령.pdf",
-    "H:/내 드라이브/3.공법/_분할/유니온헌법기출편_04_법원_헌법재판소.pdf",
-    "H:/내 드라이브/3.공법/_분할/2027해커스헌법사례형_01_헌법재판.pdf",
-    "H:/내 드라이브/3.공법/_분할/2027해커스헌법사례형_03_헌법총론_통치구조.pdf"
+    vp("3.공법", "_분할", "유니온헌법기출편_03_통치구조_국회_대통령.pdf"),
+    vp("3.공법", "_분할", "유니온헌법기출편_04_법원_헌법재판소.pdf"),
+    vp("3.공법", "_분할", "2027해커스헌법사례형_01_헌법재판.pdf"),
+    vp("3.공법", "_분할", "2027해커스헌법사례형_03_헌법총론_통치구조.pdf")
 ]
 
 target_keywords = [

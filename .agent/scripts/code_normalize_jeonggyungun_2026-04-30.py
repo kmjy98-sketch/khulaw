@@ -15,7 +15,10 @@ from datetime import datetime
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from code_pdf_extract_2026_04_30 import add_case_backlinks  # 동일 폴더 import
 
-ROOT = Path('H:/내 드라이브')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+ROOT = Path(VAULT_ROOT)
 RAW_DIR = ROOT / 'sync/_ocr_extracted/1민사__20전경운_민법3__교재__민법의_기초이론_3_전경운_교재'
 TGT_DIR = ROOT / 'sync/_교재원문/민법/전경운_민법3'
 TRASH = ROOT / '_trash/2026-04-30/전경운_placeholder_치환'

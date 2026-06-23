@@ -1,6 +1,6 @@
 ---
 name: legal-review
-description: 계약, NDA, 법무 검토 요청을 플레이북 기준으로 구조화해 검토할 때 사용한다. PDF/DOCX/TXT/MD 문서를 읽고 조항별 상태를 GREEN/YELLOW/RED로 정리하며, redline 제안, fallback 포지션, business impact를 함께 제시한다.
+description: [직무전용·미사용 — #48 자동발동 제외, 명시 요청 시에만] 계약, NDA, 법무 검토 요청을 플레이북 기준으로 구조화해 검토할 때 사용한다. PDF/DOCX/TXT/MD 문서를 읽고 조항별 상태를 GREEN/YELLOW/RED로 정리하며, redline 제안, fallback 포지션, business impact를 함께 제시한다.
 ---
 
 # Legal Review Skill
@@ -17,25 +17,25 @@ description: 계약, NDA, 법무 검토 요청을 플레이북 기준으로 구�
 
 ## 기본 경로
 
-- 플레이북: `H:\내 드라이브\.agent\state\legal_playbook.md`
-- 스크립트: `H:\내 드라이브\.agent\skills\legal-review\scripts\render_review.py`
-- 계약 검토 템플릿: `H:\내 드라이브\.agent\skills\legal-review\templates\contract_review.md`
-- NDA triage 템플릿: `H:\내 드라이브\.agent\skills\legal-review\templates\nda_triage.md`
+- 플레이북: `E:\법학볼트\.agent\state\legal_playbook.md`
+- 스크립트: `E:\법학볼트\.agent\skills\legal-review\scripts\render_review.py`
+- 계약 검토 템플릿: `E:\법학볼트\.agent\skills\legal-review\templates\contract_review.md`
+- NDA triage 템플릿: `E:\법학볼트\.agent\skills\legal-review\templates\nda_triage.md`
 
 ## 빠른 실행
 
 ```powershell
-python .agent/skills/legal-review/scripts/render_review.py "C:\path\contract.pdf" --mode contract-review --output "H:\내 드라이브\tmp\contract_review.md"
+python .agent/skills/legal-review/scripts/render_review.py "C:\path\contract.pdf" --mode contract-review --output "E:\법학볼트\tmp\contract_review.md"
 ```
 
 ```powershell
-python .agent/skills/legal-review/scripts/render_review.py "C:\path\nda.docx" --mode nda-triage --output "H:\내 드라이브\tmp\nda_triage.md"
+python .agent/skills/legal-review/scripts/render_review.py "C:\path\nda.docx" --mode nda-triage --output "E:\법학볼트\tmp\nda_triage.md"
 ```
 
 직접 텍스트로도 실행 가능하다.
 
 ```powershell
-python .agent/skills/legal-review/scripts/render_review.py --mode contract-review --text "The parties agree..." --output "H:\내 드라이브\tmp\quick_review.md"
+python .agent/skills/legal-review/scripts/render_review.py --mode contract-review --text "The parties agree..." --output "E:\법학볼트\tmp\quick_review.md"
 ```
 
 ## Dry Run Runner
@@ -46,8 +46,8 @@ python .agent/skills/legal-review/scripts/render_review.py --mode contract-revie
 python .agent/skills/legal-review/scripts/run_legal_suite.py --preset vendor-saas --text "Vendor may transfer personal data without safeguards. All disputes shall be resolved by mandatory arbitration in California. Confidential obligations apply only to Customer and last for 10 years with no carve-outs."
 ```
 
-Artifacts are written under `H:\내 드라이브\tmp\legal_suite_dry_run\{timestamp}\`.
-The latest pipeline log is written to `H:\내 드라이브\.agent\state\legal_suite_dry_run_log.json`.
+Artifacts are written under `E:\법학볼트\tmp\legal_suite_dry_run\{timestamp}\`.
+The latest pipeline log is written to `E:\법학볼트\.agent\state\legal_suite_dry_run_log.json`.
 
 ## 실행 순서
 

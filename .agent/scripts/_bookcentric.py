@@ -1,11 +1,13 @@
 """안 A 책 중심 재편 (1.민사). 강의 교재의 책→과목 직속 책이름폴더, 강의 부속→_강의/.
 기본 DRY-RUN, --apply.
 """
-import sys, shutil
+import sys, shutil, os
 from pathlib import Path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
-R = Path(r"H:\내 드라이브")
+R = Path(VAULT_ROOT)
 M = R / "1.민사"
 APPLY = "--apply" in sys.argv
 log = []

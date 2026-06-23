@@ -15,7 +15,10 @@ from datetime import datetime
 import fitz
 import easyocr
 
-ROOT = Path('H:/내 드라이브')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+ROOT = Path(VAULT_ROOT)
 PDF_PATH = ROOT / '2.형사/96.기타/2026_레인보우_형법_OX_26.pdf'
 OUT_DIR = ROOT / 'sync/_교재원문/형법/김기용_레인보우OX'
 PROGRESS_FILE = ROOT / '.agent/data/rainbow_ocr_progress.json'

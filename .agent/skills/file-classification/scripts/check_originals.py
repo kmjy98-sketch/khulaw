@@ -2,10 +2,17 @@
 Trash 폴더 내 사본 파일들의 원본 존재 여부 확인 스크립트
 """
 import os
+import sys
 from pathlib import Path
 
-TRASH_DIR = Path(r"H:\내 드라이브\5.기타\_trash\중복")
-SEARCH_ROOT = Path(r"H:\내 드라이브")
+_p = os.path.abspath(__file__)  # noqa: E402
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:  # noqa: E402
+    _p = os.path.dirname(_p)  # noqa: E402
+sys.path.insert(0, os.path.join(_p, 'scripts'))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+TRASH_DIR = Path(vp("5.기타", "_trash", "중복"))
+SEARCH_ROOT = Path(VAULT_ROOT)
 
 def get_original_name(copy_name: str) -> str:
     """사본 파일명에서 원본 파일명 추출"""

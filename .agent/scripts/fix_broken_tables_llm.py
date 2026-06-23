@@ -1,8 +1,12 @@
 import os
+import sys
 import json
 import time
 import argparse
 from pathlib import Path
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 try:
     import google.generativeai as genai
@@ -17,8 +21,8 @@ model = genai.GenerativeModel(
     system_instruction="당신은 최고 수준의 법학 전공 텍스트 에디터입니다."
 )
 
-BASE_DIR = r"H:\내 드라이브\sync"
-PROMPT_PATH = r"H:\내 드라이브\.agent\lib\_reflow_prompt_standard.md"
+BASE_DIR = vp("sync")
+PROMPT_PATH = vp(".agent", "lib", "_reflow_prompt_standard.md")
 TARGET_LIST_PATH = r"C:\Users\111\.gemini\antigravity\brain\add3c14b-36a5-488b-be51-fb847d79f19e\scratch\broken_tables_files.txt"
 STATE_FILE = r"C:\Users\111\.gemini\antigravity\brain\add3c14b-36a5-488b-be51-fb847d79f19e\scratch\fix_tables_state.json"
 

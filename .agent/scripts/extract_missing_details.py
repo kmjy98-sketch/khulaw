@@ -1,9 +1,12 @@
 import fitz
 import sys
 import io
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-pdf_03 = r"H:\내 드라이브\3.공법\_분할\유니온헌법기출편_03_통치구조_국회_대통령.pdf"
-pdf_04 = r"H:\내 드라이브\3.공법\_분할\유니온헌법기출편_04_법원_헌법재판소.pdf"
+pdf_03 = vp("3.공법", "_분할", "유니온헌법기출편_03_통치구조_국회_대통령.pdf")
+pdf_04 = vp("3.공법", "_분할", "유니온헌법기출편_04_법원_헌법재판소.pdf")
 
 out_path = r"C:\Users\111\.gemini\antigravity\scratch\missing_dump.txt"
 

@@ -1,7 +1,10 @@
 import os
 import re
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-filepath = r'H:\내 드라이브\sync\_교재원문\민법\송영곤_논점민법_본책\임대차_임차권_대항력_상가건물임대차_송영곤_논점민법.md'
+filepath = vp('sync', '_교재원문', '민법', '송영곤_논점민법_본책', '임대차_임차권_대항력_상가건물임대차_송영곤_논점민법.md')
 
 with open(filepath, 'r', encoding='utf-8') as f:
     text = f.read()

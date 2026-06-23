@@ -18,7 +18,15 @@ if sys.platform == "win32":
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 
-ROOT = Path(r"H:\내 드라이브")
+import os  # noqa: E402
+_p = os.path.abspath(__file__)  # noqa: E402
+while os.path.basename(_p) != ".agent" and os.path.dirname(_p) != _p:  # noqa: E402
+    _p = os.path.dirname(_p)
+sys.path.insert(0, os.path.join(_p, "scripts"))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+
+ROOT = Path(VAULT_ROOT)
 STATE_DIR = ROOT / ".agent" / "state"
 DEFAULT_INDEX = STATE_DIR / "case_material_index.json"
 DEFAULT_LOG = STATE_DIR / "case_material_index_log.json"

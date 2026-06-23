@@ -36,10 +36,16 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import shutil
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
+
+# VAULT_ROOT 디커플 (#45-B · E:이주 대비): 직접 실행 시 자기 dir이 sys.path에 있어 import 가능
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _vault import VAULT_ROOT  # noqa: E402
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -49,11 +55,12 @@ except Exception:
 # ---------------------------------------------------------------------------
 # 경로 상수
 # ---------------------------------------------------------------------------
-WS_ROOT = Path(r"H:\내 드라이브")
+WS_ROOT = Path(VAULT_ROOT)
 LOG_DIR = WS_ROOT / ".agent" / "file_ops_log"
 CSV_PATH = LOG_DIR / "master.csv"
 JSONL_PATH = LOG_DIR / "master.jsonl"
 MD_PATH = LOG_DIR / "master.md"
+LOCK_PATH = LOG_DIR / ".master.lock"
 
 FIELDS = [
     "timestamp", "operation", "source_path", "dest_path",
@@ -132,11 +139,49 @@ MD_HEADER = """# 파일 이동·이름변경 마스터 로그 (사람 가독본)
 """
 
 
+def _acquire_lock(timeout: float = 10.0, stale: float = 60.0) -> None:
+    """이식성 있는 파일 잠금 (stdlib O_EXCL 스핀락 + 스테일 회수).
+
+    병렬 파이프라인이 master.{csv,jsonl,md} 3개에 동시 append 할 때
+    행 손상·유실을 막는다. msvcrt/fcntl 불필요(크로스플랫폼). #16-C.
+    """
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+    start = time.time()
+    while True:
+        try:
+            fd = os.open(str(LOCK_PATH), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.close(fd)
+            return
+        except FileExistsError:
+            # 죽은 프로세스가 남긴 스테일 락 회수
+            try:
+                if time.time() - LOCK_PATH.stat().st_mtime > stale:
+                    LOCK_PATH.unlink(missing_ok=True)
+                    continue
+            except FileNotFoundError:
+                continue
+            if time.time() - start > timeout:
+                print("[경고] master 락 타임아웃 — 잠금 없이 기록 진행", file=sys.stderr)
+                return
+            time.sleep(0.05)
+
+
+def _release_lock() -> None:
+    try:
+        LOCK_PATH.unlink(missing_ok=True)
+    except Exception:
+        pass
+
+
 def write_log(rec: dict) -> None:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
-    append_csv(rec)
-    append_jsonl(rec)
-    append_md(rec)
+    _acquire_lock()
+    try:
+        append_csv(rec)
+        append_jsonl(rec)
+        append_md(rec)
+    finally:
+        _release_lock()
 
 
 # ---------------------------------------------------------------------------

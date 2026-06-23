@@ -1,6 +1,6 @@
 ---
 name: legal-briefing
-description: 계약 검토 결과나 원문 문서를 회의용 법무 브리핑 메모로 재구성할 때 사용하는 스킬. `legal-review` 보고서 또는 원문을 받아 executive summary, decision points, 질문 목록을 만든다. "법무 브리핑", "회의 메모", "legal briefing" 요청 시 사용.
+description: [직무전용·미사용 — #48 자동발동 제외, 명시 요청 시에만] 계약 검토 결과나 원문 문서를 회의용 법무 브리핑 메모로 재구성할 때 사용하는 스킬. `legal-review` 보고서 또는 원문을 받아 executive summary, decision points, 질문 목록을 만든다. "법무 브리핑", "회의 메모", "legal briefing" 요청 시 사용.
 ---
 
 # Legal Briefing
@@ -12,13 +12,13 @@ description: 계약 검토 결과나 원문 문서를 회의용 법무 브리핑
 기존 검토 보고서에서 브리핑 메모를 만들 때:
 
 ```powershell
-python .agent/skills/legal-briefing/scripts/render_legal_briefing.py --review-path "H:\내 드라이브\tmp\contract_review.md" --meeting "내부 협상 회의" --output "H:\내 드라이브\tmp\legal_briefing.md"
+python .agent/skills/legal-briefing/scripts/render_legal_briefing.py --review-path "E:\법학볼트\tmp\contract_review.md" --meeting "내부 협상 회의" --output "E:\법학볼트\tmp\legal_briefing.md"
 ```
 
 원문 문서를 바로 브리핑할 때:
 
 ```powershell
-python .agent/skills/legal-briefing/scripts/render_legal_briefing.py "C:\path\contract.pdf" --audience "사업팀" --objective "협상 포인트 정리" --output "H:\내 드라이브\tmp\legal_briefing.md"
+python .agent/skills/legal-briefing/scripts/render_legal_briefing.py "C:\path\contract.pdf" --audience "사업팀" --objective "협상 포인트 정리" --output "E:\법학볼트\tmp\legal_briefing.md"
 ```
 
 ## Inputs

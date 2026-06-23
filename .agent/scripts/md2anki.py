@@ -5,10 +5,12 @@
 태그 5축(과목::/속성::/주제::/난이도::/출처::)은 공백구분 그대로 Anki Tags로.
 사건번호는 출처열에만(앞면 누설 0 유지).
 """
-import glob, os, re
+import glob, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-CARDS = r"H:\내 드라이브\outputs\02_cards"
-OUT = r"H:\내 드라이브\outputs\anki"
+CARDS = vp("outputs", "02_cards")
+OUT = vp("outputs", "anki")
 os.makedirs(OUT, exist_ok=True)
 
 basic, cloze = [], []   # basic:(front,back,src,tags)  cloze:(text,src,tags)

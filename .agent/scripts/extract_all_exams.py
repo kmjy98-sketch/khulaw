@@ -1,6 +1,9 @@
 import os
 import glob
 import pypdf
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 def extract_pdf_to_txt(pdf_path, txt_path):
     print(f"Extracting {pdf_path} -> {txt_path}")
@@ -17,7 +20,7 @@ def extract_pdf_to_txt(pdf_path, txt_path):
         print(f"Failed to extract {pdf_path}: {e}")
 
 def main():
-    pdf_dir = "H:/내 드라이브/4.선택법/10.법조윤리/기출"
+    pdf_dir = vp("4.선택법", "10.법조윤리", "기출")
     out_dir = "C:/Users/111/.gemini/antigravity/scratch"
     os.makedirs(out_dir, exist_ok=True)
     

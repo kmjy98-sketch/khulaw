@@ -236,14 +236,14 @@ title: [개념명]
 - 교재 참조 우선순위: [classification-rules.md](../skills/file-classification/resources/classification-rules.md)
 - 학습 원칙: [AGENTS.md](../../AGENTS.md#학습-행동-원칙)
 - 기존 노트 보완: [law-note-supplement SKILL](../skills/law-note-supplement/SKILL.md) — augment/review/restructure 모드
-- 조문 원문 조회: `korean-law-mcp` MCP 도구 — qmd law-notes 컬렉션에 원문 없을 때 자동 호출
+- 조문 원문 조회: `law_api.py`(법제처 직접 API) — qmd law-notes 컬렉션에 원문 없을 때 자동 호출
 
 ## 노트 생성 → 보완 흐름
 
 ```
 [전사문/교재/기출] → study-notes (신규 생성) → law-note-supplement (보완/검토)
                                                     ↓
-                                            korean-law-mcp (조문/판례 원문 자동 조회)
+                                            law_api.py (조문/판례 원문 자동 조회)
                                                     ↓
                                             qmd law-notes (정리노트 + sync/_교재원문/ 교차 검색)
 ```
@@ -268,7 +268,7 @@ title: [개념명]
 
 **파일명 형식**: `session_{YYYY-MM-DD}_{HHMM}.md`
 
-**저장 경로**: `H:\내 드라이브\.auto-memory\session_logs\`
+**저장 경로**: `E:\법학볼트\.auto-memory\session_logs\`
 
 > 소크라틱 학습 세션과 달리, 노트 작업 세션에서는 세션 종료 시 1회만 기록한다.
 

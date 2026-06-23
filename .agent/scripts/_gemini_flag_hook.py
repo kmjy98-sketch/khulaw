@@ -6,8 +6,12 @@ stdout 내용을 첫 메시지 context에 prepend함.
 red/yellow가 있을 때만 출력 (green-only면 출력 없음 → 토큰 소비 0).
 """
 import json
+import os
 import sys
 from pathlib import Path
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 # Windows에서도 한글 출력 안정화
 try:
@@ -15,7 +19,7 @@ try:
 except Exception:
     pass
 
-FLAG_PATH = Path('H:/내 드라이브/.auto-memory/gemini_ops/flag.json')
+FLAG_PATH = Path(vp('.auto-memory', 'gemini_ops', 'flag.json'))
 
 
 def main() -> int:

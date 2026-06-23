@@ -1,7 +1,10 @@
 import fitz
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-folder_path = r"H:\내 드라이브\리퀴드텍스트 참조"
+folder_path = vp("리퀴드텍스트 참조")
 pdf_files = [f for f in os.listdir(folder_path) if f.lower().endswith(".pdf")]
 
 for pdf_file in pdf_files:

@@ -11,7 +11,7 @@ description: 가인 본선·변시 기록형(사건기록→법률서면) 풀이
 
 1. **먼저 읽기**: `sync/_meta/START_HERE_가인본선.md` — 상황 분기(예선/본선/무반입/무검색)·자산 인덱스·시간배분 카드.
 2. **분기 적용**:
-   - **예선(Claude Code, 도구 자유)**: `sync/_meta/기록형풀이_스킬_2026-05-05/SKILL.md` Phase 0~3 실행. 제출본은 `sync/_meta/참고서면작성_룰프롬프트_2026-06-12.md`(pdfplumber 일괄추출→docx→HWP·장수 실측). 조문·판례는 korean-law-mcp 검증.
+   - **예선(Claude Code, 도구 자유)**: `sync/_meta/기록형풀이_스킬_2026-05-05/SKILL.md` Phase 0~3 실행. 제출본은 `sync/_meta/참고서면작성_룰프롬프트_2026-06-12.md`(pdfplumber 일괄추출→docx→HWP·장수 실측). 조문·판례는 `law_api.py verify-text` 검증.
    - **본선 모의(웹앱 시뮬레이션)**: `sync/_meta/본선_복붙마스터_v2.md` 적용.
    - **무반입·무검색 점검**: `sync/_meta/본선_암기1장본_v2.md`.
 3. **공통 원칙**: `sync/_meta/기록형풀이_룰_2026-05-05.md`(R1~R10 + 서면형식: HWP/HWPX·A4·여백20mm·12pt·160%·20매) 준수.

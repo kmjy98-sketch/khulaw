@@ -3,13 +3,17 @@
 """OCR 교정 batch2 그룹 9 처리 스크립트"""
 
 import os
+import sys
 import json
 import re
 
-BASE = r"H:\내 드라이브"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+BASE = VAULT_ROOT
 SRC_PREFIX = r".agent\data\ocr_chunks"
-DST_BASE = os.path.join(BASE, r".agent\data\ocr_chunks_reviewed")
-BATCH_FILE = os.path.join(BASE, r".agent\state\batch2_g9.json")
+DST_BASE = vp(".agent", "data", "ocr_chunks_reviewed")
+BATCH_FILE = vp(".agent", "state", "batch2_g9.json")
 
 def get_dst_path(chunk_path):
     """chunk_path에서 ocr_chunks 이후 부분을 추출하여 dst 경로 반환"""

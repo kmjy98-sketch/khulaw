@@ -58,9 +58,9 @@ python .agent/skills/socratic-loader/scripts/socratic_loader.py <전사문> --te
 2. 교재 PDF → 해당 페이지 텍스트 추출 → `교재_추출/` 캐싱
 3. `problem_index.json` → 관련 문제 검색
 
-### Step 0-3-1: korean-law-mcp 가용 확인
+### Step 0-3-1: 법령 API 가용 확인 (law_api.py)
 
-korean-law-mcp MCP 도구가 현재 세션에서 사용 가능한지 확인한다.
+`.agent/lib/law_api.py`(법제처 직접 API)가 동작하는지 확인한다(`search-law "민법"` 1건).
 - 사용 가능 → 세션 배너에 `법령 API: 사용 가능` 표시. socratic-core가 정답 공개 시 조문 원문 자동 조회 가능.
 - 미설정/불가 → `법령 API: 미설정` 표시. qmd 검색 청크 근거만 사용.
 

@@ -3,6 +3,9 @@
 import json
 import re
 import sys
+import os  # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 def extract_keywords(answer_text):
     """
@@ -140,8 +143,8 @@ def process_file(input_path, output_path):
         return -1
 
 if __name__ == '__main__':
-    input_file = r'H:\내 드라이브\.agent\state\kw_slices_cloze\slice_c01.jsonl'
-    output_file = r'H:\내 드라이브\.agent\state\kw_out_cloze\slice_c01_out.jsonl'
+    input_file = vp('.agent', 'state', 'kw_slices_cloze', 'slice_c01.jsonl')
+    output_file = vp('.agent', 'state', 'kw_out_cloze', 'slice_c01_out.jsonl')
 
     count = process_file(input_file, output_file)
 

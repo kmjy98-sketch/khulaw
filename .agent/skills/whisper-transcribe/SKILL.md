@@ -1,6 +1,6 @@
 ---
 name: whisper-transcribe
-description: 음성 전사(STT). Colab GPU 전사(추천) 또는 로컬 실행. "전사해줘", "음성 텍스트", "강의 전사", "오디오 변환" 요청 시 사용.
+description: [RETIRED 2026-06-22 — 명시 요청 시에만] 음성 전사(STT). Colab GPU 전사(추천) 또는 로컬 실행. "전사해줘", "음성 텍스트", "강의 전사", "오디오 변환" 요청 시 사용.
 ---
 
 # Whisper 전사 Skill

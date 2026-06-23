@@ -5,13 +5,17 @@ wiki_topic_inventory.py — v4 TSV에서 주제::별 카드 인벤토리 집계
 - 출력: .agent/state/wiki_topic_inventory.json + 콘솔 상위 30
 """
 import json
+import os
 import re
 import sys
 from pathlib import Path
 from collections import defaultdict
 
-V4 = Path("H:/내 드라이브/outputs/anki/v4")
-OUT = Path("H:/내 드라이브/.agent/state/wiki_topic_inventory.json")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+V4 = Path(vp("outputs", "anki", "v4"))
+OUT = Path(vp(".agent", "state", "wiki_topic_inventory.json"))
 
 ATTRS = ["조문", "요건", "정의", "판례", "학설", "사례형", "사례"]
 

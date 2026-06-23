@@ -2,9 +2,11 @@
 드라이런: 실제 파일 수정 없이 콜아웃 적용 결과 미리보기
 """
 import os, sys, re
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = r'H:\내 드라이브\sync\_교재원문\민법\윤동환_민법의맥'
+BASE = vp('sync', '_교재원문', '민법', '윤동환_민법의맥')
 files = sorted([f for f in os.listdir(BASE) if not f.startswith('_') and f.endswith('.md')])
 TARGET = files[:164]
 

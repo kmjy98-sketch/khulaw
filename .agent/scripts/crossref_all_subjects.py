@@ -7,9 +7,11 @@
 """
 import sys, os, re
 from collections import Counter
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 sys.stdout.reconfigure(encoding='utf-8')
 
-ROOT = r"H:\내 드라이브\sync\_교재원문"
+ROOT = vp("sync", "_교재원문")
 CASE_RE = re.compile(r'\b(\d{2,4}(?:다|도|헌가|헌마|헌바|헌라|형상|다카|마)\d+)\b')
 
 def load_textbook_files(subject_dir):

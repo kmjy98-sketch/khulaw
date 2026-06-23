@@ -11,18 +11,34 @@
 규칙(CLAUDE.md):
 - #1/#13 원문 그대로(요약·교정 금지), #35 백링크(판례/조문, 표·각주 안 제외), #16 삭제금지(쓰기만).
 """
-import os, re, glob, sys, io
+import os, re, glob, sys, io, json
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-OCR_DIR  = r"H:\내 드라이브\outputs\01_ocr_llamaparse"
-OUT_BASE = r"H:\내 드라이브\sync\위키\원문"
+OCR_DIR  = vp("outputs", "01_ocr_llamaparse")
+OUT_BASE = vp("sync", "위키", "원문")
 
 # 책 → 과목 (쟁점노트류 정리서)
 SUBJ = {
     '쟁점노트_재산법': '민법', '논점민소': '민사소송법', '헌법핵심정리300': '헌법',
     '반반형법': '형법', '김기용_형총교안': '형법', 'compact형총OX': '형법',
 }
+
+# 책별 추가 제외 패턴(세부 항목을 H1로 승격한 OCR 노이즈 → 상위 논점 본문에 포함시킴)
+# 주의: '02 주제'(쟁점노트=논점, 유지) vs '017 항목'(헌법=세부, 제외)처럼 같은 패턴이 책마다 반대라 책별로 둠
+BOOK_RULES = {
+    '헌법핵심정리300': [r'^\**\s*Theme\b', r'^[▶►]', r'^쟁점\s*\d', r'^\d{2,4}\s+\S'],
+}
+# 책별 'keep_only': 이 정규식에 맞는 H1만 논점으로 인정(나머지는 상위 논점 본문에 포함)
+BOOK_KEEP = {
+    '헌법핵심정리300': r'^제\s*\d+\s*장',   # 본문은 제N장 단위(영문 Chapter/PART 목차·표준판례는 제외)
+    '반반형법': r'^제\s*\d+\s*장',
+    '김기용_형총교안': r'^제\s*\d+\s*장',
+    'compact형총OX': r'^제\s*\d+\s*장',
+}
+STUB_MIN = 120   # 본문 글자수 이 미만이면 목차 stub으로 보고 파일 생성 안 함
 
 # ---- 1. 책 로드(페이지 순 결합, frontmatter 제거) ----
 def load_book(book):
@@ -41,14 +57,17 @@ def load_book(book):
     return files, "\n".join(body)
 
 # ---- 2. 논점 경계 검출(H1 헤더 중 논점성만) ----
-def jaeom_title(raw):
+def jaeom_title(raw, book='', keep_ov=None, drop_ov=None):
     t = re.sub(r'^(Il|II)?\s*(logo|icon)\s*', '', raw.strip(), flags=re.I).strip()
     t = re.sub(r'\s*<sup>.*?</sup>\s*', '', t).strip()
     if len(t) < 2: return None
     # 제외: 청크 반복 헤더·표지·목차(CONTENTS·말미 페이지번호 라인)
     if 'llamaparse' in t or '미교정' in t: return None
-    if t in ('CONTENTS', 'PreFace', 'Preface', '논점', '민사', '소송법', '본서의 차례', '차례', '목차'): return None
+    if t in ('CONTENTS', 'Contents', 'PreFace', 'Preface', '논점', '민사', '소송법',
+             '본서의 차례', '차례', '목차'): return None
     if re.match(r'^제.*\s\d{1,4}\s*$', t): return None
+    if re.match(r'^PART\s*\d*\s*$', t, re.I): return None            # 영문 편 표제(주제 없는 것)
+    if '핵심정리' in t and '300' in t: return None                    # 책표지 제목
     # 제외: OCR 라틴 노이즈 접두(w/m/in/DI/IU/vn) · (N) 소절 · [TIP/[유형별 박스
     if re.match(r'^[a-zA-Z]{1,3}\s+\S', t): return None
     if re.match(r'^\(\d+\)', t): return None
@@ -61,12 +80,17 @@ def jaeom_title(raw):
     if re.match(r'^[가-힣]\.\s', t): return None
     if re.match(r'^\d+\)\s', t): return None
     if re.match(r'^[\d\s.]+$', t): return None
+    for pat in (drop_ov if drop_ov is not None else BOOK_RULES.get(book, [])):
+        if re.match(pat, t): return None
+    keep = keep_ov if keep_ov is not None else BOOK_KEEP.get(book)
+    if keep and not re.match(keep, t): return None
     return t
 
-def split_book(book):
+def split_book(book, keep_ov=None, drop_ov=None, h2=False, marker=None):
     files, text = load_book(book)
     lines = text.split('\n')
     cur_page, in_table = None, False
+    mk = re.compile(marker) if marker else None
     segs = []
     for i, ln in enumerate(lines):
         s = ln.strip()
@@ -76,17 +100,26 @@ def split_book(book):
         if '<table' in s: in_table = True
         if '</table>' in s: in_table = False
         if in_table: continue
-        hm = re.match(r'^#\s+(.+)$', ln)
+        if mk:                       # 마커 모드: 본문 텍스트 라인을 경계로(헤더 레벨 무관, OCR이 평문화한 '[사례 N]' 등)
+            if mk.match(s):
+                t = re.sub(r'\s+', ' ', re.sub(r'\*+', '', s)).strip()[:80]
+                if t:
+                    segs.append({'title': t, 'page': cur_page, 'idx': i})
+            continue
+        hm = re.match(r'^#{1,2}\s+(.+)$' if h2 else r'^#\s+(.+)$', ln)
         if hm:
-            t = jaeom_title(hm.group(1))
+            t = jaeom_title(hm.group(1), book, keep_ov, drop_ov)
             if t:
                 segs.append({'title': t, 'page': cur_page, 'idx': i})
     return files, lines, segs
 
 # ---- 3. 백링크(#35): 표/각주 밖에서만 판례·조문 ----
-CASE = re.compile(r'(?<!\[\[)(대판|대결|대법원|헌재|헌법재판소|대판\(全合\)|대판\(전합\))\s*'
-                  r'(\(全合\)|\(전합\))?\s*(\d{2,4})\.\s*(\d{1,2})\.\s*(\d{1,2})\.?\s*,?\s*'
-                  r'(\d{2,4}[가-힣]{1,3}\d+)')
+# 사건번호 본체(민사 다/형사 도/행정 두/… + 헌법 YYYY헌X)
+NUMP = (r'\d{2,4}(?:다|도|두|마|모|므|르|허|카|초|그|재|추|수)\d+'
+        r'|\d{4}헌(?:마|바|가|라|나|아|사)\d+')
+CASE = re.compile(r'(대판|대결|대법원|헌재|헌법재판소)\s*(?:\(全合\)|\(전합\))?\s*'
+                  r'(\d{2,4})\.\s*(\d{1,2})\.\s*(\d{1,2})\.?\s*,?\s*(' + NUMP + r')')
+BARE = re.compile(r'(?<!\[)(?<!, )(?<![\d.])(' + NUMP + r')(?!\])')   # 무날짜 사건번호(이중 wrap 방지)
 STAT = re.compile(r'(?<!\[\[)제\s*(\d{2,4})\s*조(?:의\s*\d+)?(?:\s*제\s*\d+\s*항)?')
 
 def add_links(block):
@@ -98,7 +131,8 @@ def add_links(block):
             out.append(ln)
             if '</table>' in s: in_table = False
             continue
-        ln = CASE.sub(lambda m: f"[[{m.group(1)} {m.group(3)}.{m.group(4)}.{m.group(5)}, {m.group(6)}]]", ln)
+        ln = CASE.sub(lambda m: f"[[{m.group(1)} {m.group(2)}.{m.group(3)}.{m.group(4)}, {m.group(5)}]]", ln)
+        ln = BARE.sub(lambda m: f"[[{m.group(1)}]]", ln)
         ln = STAT.sub(lambda m: f"[[§{m.group(1)}]]" if int(m.group(1)) >= 10 else m.group(0), ln)
         out.append(ln)
     return '\n'.join(out)
@@ -111,8 +145,8 @@ def slug(t):
     t = re.sub(r'\s+', '_', t)
     return t[:50] or 'untitled'
 
-def run(book, write, only):
-    files, lines, segs = split_book(book)
+def run(book, write, only, subj_ov=None, keep_ov=None, drop_ov=None, h2=False, marker=None):
+    files, lines, segs = split_book(book, keep_ov, drop_ov, h2, marker)
     print(f"# {book} | OCR {len(files)}청크 | 검출 논점 {len(segs)}개")
     for k, sg in enumerate(segs):
         end = segs[k+1]['idx'] if k+1 < len(segs) else len(lines)
@@ -124,13 +158,16 @@ def run(book, write, only):
         return
     outdir = os.path.join(OUT_BASE, book)
     os.makedirs(outdir, exist_ok=True)
-    n = 0
+    n = skipped = 0
     for k, sg in enumerate(segs):
         if only and only not in sg['title']: continue
         body = '\n'.join(lines[sg['idx']:sg['end']]).strip()
+        content = re.sub(r'(?m)^#.*$|<!--.*?-->|\s+', '', body)
+        if len(content) < STUB_MIN:
+            skipped += 1; continue
         body = add_links(body)
         endpg = segs[k+1]['page'] if k+1 < len(segs) and segs[k+1]['page'] else sg['page']
-        fm = (f"---\ntype: 원문\n과목: {SUBJ.get(book,'민법')}\n주제: {sg['title']}\n"
+        fm = (f"---\ntype: 원문\n과목: {subj_ov or SUBJ.get(book,'민법')}\n주제: {sg['title']}\n"
               f"출처책: {book}\n포함_페이지: {sg['page']}-{endpg}\n"
               f"원천: {book}_llamaparse OCR (논점분할 {k+1}/{len(segs)})\n"
               f"가공: 원문 그대로 + 백링크만 (요약·교정 없음, 2026-06-16)\n---\n\n")
@@ -138,7 +175,7 @@ def run(book, write, only):
         open(path, 'w', encoding='utf-8').write(fm + body + '\n')
         n += 1
         print(f"  쓰기: {os.path.basename(path)}  (p.{sg['page']}-{endpg})")
-    print(f"# 생성 {n}개 → {outdir}")
+    print(f"# 생성 {n}개 (stub 제외 {skipped}) → {outdir}")
 
 def make_index(book):
     d = os.path.join(OUT_BASE, book)
@@ -158,12 +195,29 @@ def make_index(book):
     print(f"색인: {len(rows)}논점 → {d}\\_index.md")
 
 if __name__ == '__main__':
-    a = sys.argv[1:]
-    write = '--write' in a
-    index = '--index' in a
-    only = a[a.index('--only')+1] if '--only' in a else None
-    book = [x for x in a if not x.startswith('--') and x != only][-1]
-    if index:
-        make_index(book)
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument('book', nargs='?')
+    p.add_argument('--write', action='store_true')
+    p.add_argument('--index', action='store_true')
+    p.add_argument('--dry', action='store_true')
+    p.add_argument('--only')
+    p.add_argument('--subj')
+    p.add_argument('--keep')                 # keep_only 정규식(이 패턴 H1만 논점)
+    p.add_argument('--drop')                 # 제외 정규식, '||' 구분 다중
+    p.add_argument('--config')               # JSON {book,subj,keep,drop,write,index,only,h2} (한글 CLI 인자 회피용)
+    p.add_argument('--h2', action='store_true')   # H2(##)도 분할 경계로
+    p.add_argument('--marker')                    # 본문 텍스트 라인 경계 정규식(평문 '[사례 N]' 등)
+    args = p.parse_args()
+    if args.config:                          # JSON 설정(ASCII 경로)에서 모든 옵션 로드
+        c = json.load(open(args.config, encoding='utf-8-sig'))
+        bk = c['book']
+        if c.get('index'):
+            make_index(bk)
+        else:
+            run(bk, c.get('write', True), c.get('only'), c.get('subj'), c.get('keep'), c.get('drop'), c.get('h2', False), c.get('marker'))
+    elif args.index:
+        make_index(args.book)
     else:
-        run(book, write, only)
+        drop_ov = args.drop.split('||') if args.drop else None
+        run(args.book, args.write, args.only, args.subj, args.keep, drop_ov, args.h2, args.marker)

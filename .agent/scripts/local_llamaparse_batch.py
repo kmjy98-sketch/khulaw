@@ -9,15 +9,18 @@
 산출: outputs/01_ocr_llamaparse/{prefix}_p{NNN}-{NNN}.md  (+ {prefix}_ocrlog.json)
 후속: korean-law-mcp 사건번호 전수검증(#34) → 02-wiki → 02-card.
 """
+import os
 import subprocess
 import sys
 import time
 from pathlib import Path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 PY = sys.executable
-SCRIPT = "H:/내 드라이브/.agent/scripts/ocr_extract_v3.py"
-WORK = Path("H:/내 드라이브/작업용")
-OUT = "H:/내 드라이브/outputs/01_ocr_llamaparse"
+SCRIPT = vp(".agent", "scripts", "ocr_extract_v3.py")
+WORK = Path(vp("작업용"))
+OUT = vp("outputs", "01_ocr_llamaparse")
 TIER = "agentic"
 
 # (pdf 파일명, prefix, 책명, 저자, 과목) — 우선순위 순(현재 작업/작은 책부터)

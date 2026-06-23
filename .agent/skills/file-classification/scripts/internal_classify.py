@@ -11,6 +11,10 @@ import sys
 import re
 from pathlib import Path
 from typing import Optional, Tuple
+_p=os.path.abspath(__file__)
+while os.path.basename(_p)!='.agent' and os.path.dirname(_p)!=_p: _p=os.path.dirname(_p)
+sys.path.insert(0, os.path.join(_p,'scripts'))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 # Fix Windows console encoding
 if sys.platform == 'win32':
@@ -25,7 +29,7 @@ except ImportError:
     HAS_PYMUPDF = False
     print("[경고] PyMuPDF 없음 - PDF 내용 분석 불가. pip install pymupdf")
 
-BASE_DIR = Path(r"H:\내 드라이브")
+BASE_DIR = Path(VAULT_ROOT)
 
 # 강사명 키워드
 INSTRUCTORS = {

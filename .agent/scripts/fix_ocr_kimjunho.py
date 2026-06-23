@@ -6,12 +6,16 @@
 2. 오탈자 수정: '민법종칙' → '민법총칙'
 """
 import sys
+import os
 import re
 from pathlib import Path
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = Path('H:/내 드라이브/sync/_교재원문/민법/강혜림_민법1')
+BASE = Path(vp('sync', '_교재원문', '민법', '강혜림_민법1'))
 
 # 법령 약어 OCR 패턴 목록 — 앞에 한국어 법령명이 있고, 괄호 안 한자 약어가 OCR 손상된 패턴
 # 공통 특성: 끝이 "법)" 또는 "법j" 이며, 중간에 비한글 OCR 잡음 포함

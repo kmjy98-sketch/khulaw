@@ -63,6 +63,15 @@ python scripts/srs_scheduler.py --status
 
 ---
 
+## 최신연구 반영 (2026-06-21, 보고서 sync/_meta/개선종합_카드SRS_룰감사_2026-06-21.md)
+
+- **SM-2 유지 + Anki FSRS 핸드오프**: 본 스킬(Claude 중단기 복습)은 SM-2 유지. 장기 파지는 Anki(FSRS-6 — SM-2 대비 99.6% 사용자 보정 우수, 단 '리뷰 X% 감소'는 근거 아님)로 핸드오프 — 이중관리 아님. 전면 FSRS 전환은 보류(확정 스코프 제외).
+- **'시험 임박 간격 축소 cap' 정정**: 학술근거 약함(Cepeda 2008과 충돌 — 잔여시간 줄면 최적간격 '비율'은 오히려 커짐; 'undershoot가 overshoot보다 해롭다'는 0-3 반증). cap 대신 **deadline-aware desired-retention**(시험일에 recall 확률을 목표치 이상 유지)으로 재정식화. 목적 = 막판 인출이 망각곡선 바닥에 떨어지지 않게.
+- **첫 인출 지연·곤란(desirable difficulty)**이 expanding 스케줄 '형태'보다 장기파지에 핵심(Karpicke&Roediger 2007: 등간격 45% vs expanding 33% @2일, d=0.50).
+- 초기 due 분산(위 표 D+1/2/3)은 코드 미반영 — 수동 운영 가이드로 유지(deadline-aware로 운용).
+
+---
+
 ## 답안 채점 연동 간격 (2026-06-16 신설)
 
 case-answer-review 채점 결과를 복습 항목으로 등록할 때, 오류 유형별 초기 간격을 다음으로 둔다(출처: `sync/_meta/CODEX_BOOTSTRAP_REPORT.md` §19 채택분). 채점 척도는 case-answer-review 루브릭의 0.0~1.0 분수 척도를 기준으로 하며, 본 표의 0~100/% 표기는 0~1로 환산해 적용한다. 이후 간격은 SM-2가 관리한다.

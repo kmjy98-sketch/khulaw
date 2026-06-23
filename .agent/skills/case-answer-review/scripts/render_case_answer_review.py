@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 import zipfile
@@ -14,13 +15,19 @@ from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree as ET
 
+_p = os.path.abspath(__file__)
+while os.path.basename(_p) != ".agent" and os.path.dirname(_p) != _p:
+    _p = os.path.dirname(_p)
+sys.path.insert(0, os.path.join(_p, "scripts"))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 
-ROOT = Path(r"H:\내 드라이브")
+ROOT = Path(VAULT_ROOT)
 STATE_DIR = ROOT / ".agent" / "state"
 SKILL_DIR = ROOT / ".agent" / "skills" / "case-answer-review"
 DEFAULT_PACKET = STATE_DIR / "case_answer_packet.json"

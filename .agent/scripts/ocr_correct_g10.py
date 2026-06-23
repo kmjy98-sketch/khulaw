@@ -7,6 +7,9 @@ OCR 교정 스크립트 — batch2 g10 형법 185개 청크
 
 import sys, os, re
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 sys.stdout.reconfigure(encoding='utf-8')
 sys.stderr.reconfigure(encoding='utf-8')
 
@@ -191,7 +194,7 @@ def correct_file(src_path: str, out_path: str) -> bool:
 
 
 def main():
-    todo_file = 'H:/내 드라이브/.agent/state/g10_todo_remaining.txt'
+    todo_file = vp('.agent', 'state', 'g10_todo_remaining.txt')
 
     with open(todo_file, 'r', encoding='utf-8') as f:
         lines = [l.strip() for l in f if l.strip()]

@@ -7,12 +7,17 @@
 """
 
 import json
+import os
 import re
+import sys
 from pathlib import Path
 from collections import defaultdict
 
-NOTES_DIR = Path(r"H:\내 드라이브\sync\_교재원문\민법\윤동환_민법의맥")
-EXTRACTS_DIR = Path(r"H:\내 드라이브\.agent\data\exam_extracts")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+NOTES_DIR = Path(vp("sync", "_교재원문", "민법", "윤동환_민법의맥"))
+EXTRACTS_DIR = Path(vp(".agent", "data", "exam_extracts"))
 
 SUBBOOK_PREFIX = {
     "교재": "1-1_민법_윤동환_민법의맥_(교재)_",
@@ -112,7 +117,7 @@ def main():
             })
 
     results.sort(key=lambda x: -x["delta"])
-    out = Path(r"H:\내 드라이브\.agent\state\mba_full_scan.json")
+    out = Path(vp(".agent", "state", "mba_full_scan.json"))
     out.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"전체 MBA 노트: {stats['has_extract'] + stats['no_extract'] + stats['no_frontmatter']}개")

@@ -16,15 +16,17 @@ import re
 import argparse
 from pathlib import Path
 from datetime import datetime
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
-BASE               = os.environ.get("MEMORY_BASE", r"H:\내 드라이브\.auto-memory")
+BASE               = os.environ.get("MEMORY_BASE", vp(".auto-memory"))
 PROGRESS_FILE      = os.path.join(BASE, "ocr_progress.json")
-DRIVE_ROOT_DEFAULT = r"H:\내 드라이브"
-SYNC_ROOT_DEFAULT  = r"H:\내 드라이브\sync\_교재원문"
+DRIVE_ROOT_DEFAULT = VAULT_ROOT
+SYNC_ROOT_DEFAULT  = vp("sync", "_교재원문")
 
 PAGE_RANGE_RE  = re.compile(r'_p(\d+)-(\d+)\.(?:md|qmd)$')
 SUBJECT_DIR_RE = re.compile(r'^\d+\.')

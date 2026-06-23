@@ -17,6 +17,9 @@
 
 import re
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 
 def process_file(input_path, base_page):
@@ -130,7 +133,7 @@ def process_file(input_path, base_page):
 
 
 if __name__ == '__main__':
-    base_dir = r"H:\내 드라이브\3.공법\10.이진_헌법원리1\유니온 마크다운"
+    base_dir = vp("3.공법", "10.이진_헌법원리1", "유니온 마크다운")
 
     print("=== 통치구조·국회·대통령 파일 처리 ===")
     process_file(

@@ -4,8 +4,11 @@ OCR 교정 스크립트 — batch2 그룹 2 (132개 청크)
 """
 import os, re, json, sys
 
-INPUT_BASE = 'H:/내 드라이브'
-OUTPUT_BASE = 'H:/내 드라이브/.agent/data/ocr_chunks_reviewed'
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+INPUT_BASE = VAULT_ROOT
+OUTPUT_BASE = vp('.agent', 'data', 'ocr_chunks_reviewed')
 
 def correct_ocr(text):
     """OCR 교정 — 판례번호·조문·마커는 절대 건드리지 않음"""
@@ -182,7 +185,7 @@ def process_file(src_path, out_path):
 
 
 def main():
-    manifest_path = 'H:/내 드라이브/.agent/state/batch2_g2.json'
+    manifest_path = vp('.agent', 'state', 'batch2_g2.json')
     with open(manifest_path, 'r', encoding='utf-8') as f:
         records = json.load(f)
 

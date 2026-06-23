@@ -10,11 +10,18 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
 
-WORKSPACE_ROOT = Path(r"H:\내 드라이브")
+_p = os.path.abspath(__file__)  # noqa: E402
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:  # noqa: E402
+    _p = os.path.dirname(_p)  # noqa: E402
+sys.path.insert(0, os.path.join(_p, 'scripts'))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+WORKSPACE_ROOT = Path(VAULT_ROOT)
 SOURCE_ROOT = WORKSPACE_ROOT / "sync" / "_교재원문"
 OUTPUT_PATH = WORKSPACE_ROOT / ".agent" / "state" / "all_files_index.json"
 

@@ -18,7 +18,7 @@ python .agent/skills/textbook-problem-intake/scripts/run_textbook_intake.py --su
 새 교재 PDF를 넣고 한 번에 처리할 때:
 
 ```powershell
-python .agent/skills/textbook-problem-intake/scripts/run_textbook_intake.py --subject 민법 --pdf-dir "H:\내 드라이브\민사\민법\교재"
+python .agent/skills/textbook-problem-intake/scripts/run_textbook_intake.py --subject 민법 --pdf-dir "E:\법학볼트\민사\민법\교재"
 ```
 
 실제 DB 반영까지 할 때:

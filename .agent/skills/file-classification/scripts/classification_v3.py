@@ -18,12 +18,19 @@ import argparse
 import datetime as dt
 import getpass
 import json
+import os
 import re
 import shutil
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Tuple
+
+_p = os.path.abspath(__file__)
+while os.path.basename(_p) != ".agent" and os.path.dirname(_p) != _p:
+    _p = os.path.dirname(_p)
+sys.path.insert(0, os.path.join(_p, "scripts"))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 
 LEGAL_ROOTS = ["1.민사", "2.형사", "3.공법", "4.선택법"]
@@ -728,7 +735,7 @@ def plan_classification(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="file-classification v3")
-    parser.add_argument("--root", default=r"H:\내 드라이브", help="workspace root")
+    parser.add_argument("--root", default=VAULT_ROOT, help="workspace root")
     parser.add_argument("--domain", choices=["legal", "admission"], default="legal")
     parser.add_argument("--execute", action="store_true", help="apply changes")
     parser.add_argument("--dry-run", action="store_true", help="explicit dry-run")

@@ -2,9 +2,13 @@
 # -*- coding: utf-8 -*-
 import json
 import re
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-input_file = "H:/내 드라이브/.agent/state/kw_slices_cloze/slice_c32.jsonl"
-output_file = "H:/내 드라이브/.agent/state/kw_out_cloze/slice_c32_out.jsonl"
+input_file = vp(".agent", "state", "kw_slices_cloze", "slice_c32.jsonl")
+output_file = vp(".agent", "state", "kw_out_cloze", "slice_c32_out.jsonl")
 
 def extract_keywords(text):
     """

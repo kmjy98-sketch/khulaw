@@ -2,6 +2,9 @@
 """
 flush.py — 세션 로그에서 핵심 내용을 추출하여 일별 요약(daily log)으로 정리.
 
+[FROZEN 2026-04-24] 동결 — 1회 가동 후 미사용. 위키 정본은 wiki_원문분할.py→sync/위키/원문
+계통으로 대체됨. 부활은 CLAUDE.md #41 결정 후. 진입점은 memory-maintenance 스킬.
+
 Karpathy LLM Wiki 패턴의 "ingest" 단계.
 세션 종료 hook에서 호출되거나 수동 실행.
 
@@ -19,12 +22,15 @@ import glob
 import argparse
 from datetime import datetime, date
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
 # === 경로 설정 ===
-BASE = os.environ.get("MEMORY_BASE", r"H:\내 드라이브\.auto-memory")
+BASE = os.environ.get("MEMORY_BASE", vp(".auto-memory"))
 SESSION_LOGS = os.path.join(BASE, "session_logs")
 DAILY_DIR = os.path.join(BASE, "daily")
 

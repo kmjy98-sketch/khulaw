@@ -22,11 +22,14 @@ import glob
 import argparse
 from pathlib import Path
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
-BASE            = os.environ.get("MEMORY_BASE", r"H:\내 드라이브\.auto-memory")
+BASE            = os.environ.get("MEMORY_BASE", vp(".auto-memory"))
 CORRECTIONS_DIR = os.path.join(BASE, "ocr_state", "corrections")
 LEGACY_DIR      = os.path.join(BASE, "corrections")
 

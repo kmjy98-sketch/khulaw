@@ -1,8 +1,15 @@
 """g7 bucket 실제 처리 상태 확인 (src/reviewed 파일명 비교)."""
 import json
+import os
+import sys
 from pathlib import Path
+_p = os.path.abspath(__file__)  # noqa: E402
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:  # noqa: E402
+    _p = os.path.dirname(_p)  # noqa: E402
+sys.path.insert(0, os.path.join(_p, 'scripts'))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-WORKSPACE = Path(r"H:\내 드라이브")
+WORKSPACE = Path(VAULT_ROOT)
 rev_root = WORKSPACE / ".agent/data/ocr_chunks_reviewed"
 
 g7 = json.loads((WORKSPACE / ".agent/state/batch2_g7.json").read_text(encoding="utf-8"))

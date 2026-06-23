@@ -7,9 +7,11 @@ build_v37_tsv.py — outputs/02_cards_v37/*.md(검토용 readable) → Anki 임�
 """
 import os, re, sys
 from collections import defaultdict
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-SRC = "H:/내 드라이브/outputs/02_cards_v37"
-OUT = "H:/내 드라이브/outputs/anki/v37"
+SRC = vp("outputs", "02_cards_v37")
+OUT = vp("outputs", "anki", "v37")
 
 # 책 prefix → (회독그룹, 과목). 교수저 제외. 논점민소는 cloze본만 사용.
 BOOK = [

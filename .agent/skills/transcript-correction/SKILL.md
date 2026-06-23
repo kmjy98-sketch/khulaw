@@ -1,6 +1,6 @@
 ---
 name: transcript-correction
-description: 전사문 교정 독립 스킬. 기존 전사문이나 part 파일을 교재 근거로 교정하고, "전사문 교정", "전사 교정", "/transcribe", "partXX 교정 완료" 요청 시 사용.
+description: [RETIRED 2026-06-22 — 명시 요청 시에만] 전사문 교정 독립 스킬. 기존 전사문이나 part 파일을 교재 근거로 교정하고, "전사문 교정", "전사 교정", "/transcribe", "partXX 교정 완료" 요청 시 사용.
 ---
 
 # Transcript Correction Skill
@@ -23,7 +23,7 @@ python .agent/skills/transcript-correction/scripts/mark_corrected.py <corrected_
 예시:
 
 ```powershell
-python .agent/skills/transcript-correction/scripts/mark_corrected.py "H:\내 드라이브\1.민사\강혜림_민법1\전사문\civ_kang_m1_3-1\civ_kang_m1_3-1_part01_corr.md"
+python .agent/skills/transcript-correction/scripts/mark_corrected.py "E:\법학볼트\1.민사\강혜림_민법1\전사문\civ_kang_m1_3-1\civ_kang_m1_3-1_part01_corr.md"
 ```
 
 미교정 목록 확인:

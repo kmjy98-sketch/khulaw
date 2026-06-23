@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import os, json, sys
 
-base = 'H:/내 드라이브'
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+base = VAULT_ROOT
 with open(base + '/.agent/state/batch3_g4.json', encoding='utf-8') as f:
     chunks = json.load(f)
 

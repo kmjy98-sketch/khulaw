@@ -2,12 +2,16 @@ import os
 import sys
 import json
 import argparse
+_p=os.path.abspath(__file__)
+while os.path.basename(_p)!='.agent' and os.path.dirname(_p)!=_p: _p=os.path.dirname(_p)
+sys.path.insert(0, os.path.join(_p,'scripts'))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 # study-notes/scripts/collect.py
 # 지정된 타겟 파일을 읽어와 컨텍스트(study-notes-context.json)로 저장함.
 # qmd law-notes 검색은 .agent/lib/qmd_search.py 연동으로 확장 가능.
 
-STATE_DIR = r"H:\내 드라이브\.agent\state"
+STATE_DIR = vp(".agent", "state")
 CONTEXT_FILE = os.path.join(STATE_DIR, "study-notes-context.json")
 ISSUE_FREQ_FILE = os.path.join(STATE_DIR, "issue_frequency.json")
 

@@ -4,14 +4,18 @@ anki_keyword_slice_cloze.py — cloze 카드 고유 평문(빈칸 벗긴 Text)�
 에이전트 출력은 .agent/state/kw_out_cloze/, 병합 결과는 anki_cloze_kw_cache.jsonl (build가 빈칸 보강에 사용).
 """
 import json
+import os
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from anki_deck_build_v4 import collect, cz_plain, cz_key  # noqa: E402
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 SLICE = 300
-OUT_DIR = Path("H:/내 드라이브/.agent/state/kw_slices_cloze")
+OUT_DIR = Path(vp(".agent", "state", "kw_slices_cloze"))
 
 
 def main():

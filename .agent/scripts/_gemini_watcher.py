@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import time
 import traceback
@@ -21,8 +22,10 @@ from pathlib import Path
 # 표준 라이브러리만 사용 (watchdog 미사용)
 sys.path.insert(0, str(Path(__file__).parent))
 from _verify_rules import evaluate  # noqa
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-BASE = Path('H:/내 드라이브')
+BASE = Path(VAULT_ROOT)
 LOG_DIR = BASE / '.auto-memory/gemini_ops/logs'
 FLAG_PATH = BASE / '.auto-memory/gemini_ops/flag.json'
 STATE_PATH = BASE / '.auto-memory/gemini_ops/_watcher_state.json'

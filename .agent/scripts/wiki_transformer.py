@@ -4,6 +4,9 @@ import sys
 import io
 from pathlib import Path
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
@@ -188,18 +191,18 @@ def process_all_files():
     dirs_to_process = [
         # 1. 01 OCR outputs (Constitution & Song Case Studies)
         {
-            "in": Path("H:/내 드라이브/outputs/01_ocr"),
-            "out": Path("H:/내 드라이브/outputs/02_wiki")
+            "in": Path(vp("outputs", "01_ocr")),
+            "out": Path(vp("outputs", "02_wiki"))
         },
         # 2. Existing summary notes (Civil Law Notes)
         {
-            "in": Path("H:/내 드라이브/sync/_백업/교재원문_문서_백업_2026-05-22/1.민사/33.송영곤_쟁노/교재_추출"),
-            "out": Path("H:/내 드라이브/outputs/02_wiki/민사법쟁점노트")
+            "in": Path(vp("sync", "_백업", "교재원문_문서_백업_2026-05-22", "1.민사", "33.송영곤_쟁노", "교재_추출")),
+            "out": Path(vp("outputs", "02_wiki", "민사법쟁점노트"))
         },
         # 3. Criminal Law Notes
         {
-            "in": Path("H:/내 드라이브/.agent/data/ocr_chunks_reviewed/형법/반반형법"),
-            "out": Path("H:/내 드라이브/outputs/02_wiki/반반형법")
+            "in": Path(vp(".agent", "data", "ocr_chunks_reviewed", "형법", "반반형법")),
+            "out": Path(vp("outputs", "02_wiki", "반반형법"))
         }
     ]
     

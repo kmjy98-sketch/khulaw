@@ -4,17 +4,20 @@ import io
 import re
 import os
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 pdf_paths = {
-    "03_국회_대통령": r"H:\내 드라이브\3.공법\_분할\유니온헌법기출편_03_통치구조_국회_대통령.pdf",
-    "04_법원_헌법재판소": r"H:\내 드라이브\3.공법\_분할\유니온헌법기출편_04_법원_헌법재판소.pdf"
+    "03_국회_대통령": vp("3.공법", "_분할", "유니온헌법기출편_03_통치구조_국회_대통령.pdf"),
+    "04_법원_헌법재판소": vp("3.공법", "_분할", "유니온헌법기출편_04_법원_헌법재판소.pdf")
 }
 
 md_paths = [
-    r"H:\내 드라이브\3.공법\10.이진_헌법원리1\유니온 마크다운\유니온_기출_통치구조_국회_대통령.md",
-    r"H:\내 드라이브\3.공법\10.이진_헌법원리1\유니온 마크다운\유니온_기출_법원_헌법재판소.md"
+    vp("3.공법", "10.이진_헌법원리1", "유니온 마크다운", "유니온_기출_통치구조_국회_대통령.md"),
+    vp("3.공법", "10.이진_헌법원리1", "유니온 마크다운", "유니온_기출_법원_헌법재판소.md")
 ]
 
 target_nums = [

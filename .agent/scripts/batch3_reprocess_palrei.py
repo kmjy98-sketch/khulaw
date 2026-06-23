@@ -4,11 +4,14 @@
 """
 import os, json, re, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 # batch3_ocr_correct.py 임포트
-sys.path.insert(0, 'H:/내 드라이브/.agent/scripts')
+sys.path.insert(0, vp(".agent", "scripts"))
 import batch3_ocr_correct as ocr
 
-BASE = 'H:/내 드라이브'
+BASE = VAULT_ROOT
 
 def main():
     chunks = ocr.load_chunk_list()

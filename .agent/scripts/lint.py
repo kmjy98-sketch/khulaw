@@ -25,11 +25,14 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
-BASE = os.environ.get("MEMORY_BASE", r"H:\내 드라이브\.auto-memory")
-WIKI_DIR = os.environ.get("WIKI_DIR", r"H:\내 드라이브\sync\wiki")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import vp  # noqa: E402
+
+BASE = os.environ.get("MEMORY_BASE", vp(".auto-memory"))
+WIKI_DIR = os.environ.get("WIKI_DIR", vp("sync", "wiki"))
 DAILY_DIR = os.path.join(BASE, "daily")
 MEMORY_DIR = BASE
-TRASH_BASE = r"H:\내 드라이브\_trash"
+TRASH_BASE = vp("_trash")
 
 
 def check_broken_links(wiki_dir: str) -> list:

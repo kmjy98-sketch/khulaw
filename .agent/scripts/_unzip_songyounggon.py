@@ -1,11 +1,13 @@
 """송영곤_기본민법의 zip 14개 해체 → 각 zip 위치에 {zip명}/ 폴더로 풀고, 원본 zip → _trash.
 한글 파일명(cp437→cp949) 복원. 광고성 PDF는 _격리/ 로 분리.
 """
-import sys, zipfile, shutil
+import os, sys, zipfile, shutil
 from pathlib import Path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
-R = Path(r"H:\내 드라이브")
+R = Path(VAULT_ROOT)
 BASE = R / "1.민사/30.송영곤_기본민법"
 TRASH = R / "_trash/2026-06-14/송영곤_zip원본"
 TRASH.mkdir(parents=True, exist_ok=True)

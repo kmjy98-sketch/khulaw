@@ -13,7 +13,10 @@ import shutil
 from pathlib import Path
 from datetime import datetime
 
-ROOT = Path('H:/내 드라이브')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+ROOT = Path(VAULT_ROOT)
 
 # ----- 카테고리 정의 -----
 CATEGORIES = [

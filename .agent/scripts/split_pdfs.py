@@ -8,13 +8,16 @@
 - 원본 stem이 `..._YY` 패턴이면 연도 앞에 라벨 삽입
 """
 import re
+import os
 import sys
 from pathlib import Path
 from pypdf import PdfReader, PdfWriter
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-ROOT = Path(r"H:\내 드라이브")
+ROOT = Path(VAULT_ROOT)
 
 JOBS = [
     # (source, output_dir, [(label, start_page_1based, end_page_1based_inclusive), ...])

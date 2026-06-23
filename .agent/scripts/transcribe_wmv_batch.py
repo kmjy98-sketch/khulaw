@@ -2,10 +2,13 @@
 import whisper
 import os
 import glob
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 MODEL_SIZE = "small"
-WMV_DIR = r"H:\내 드라이브\4.선택법\10.법조윤리\2024 법조윤리\2024 법조윤리"
-OUT_DIR = r"H:\내 드라이브\4.선택법\10.법조윤리\전사문\2024_wmv"
+WMV_DIR = vp("4.선택법", "10.법조윤리", "2024 법조윤리", "2024 법조윤리")
+OUT_DIR = vp("4.선택법", "10.법조윤리", "전사문", "2024_wmv")
 
 os.makedirs(OUT_DIR, exist_ok=True)
 

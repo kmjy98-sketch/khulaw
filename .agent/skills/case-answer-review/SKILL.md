@@ -25,7 +25,8 @@ description: 사례답안지 채점, 범위 기출 정리, 교재/자료 문제 
 - 모범답안이 있어도 해설지나 교재 RAG 근거가 없으면 `교재·해설 검증 보류`로 표시한다.
 - 약점은 기존 `learning.json`의 `weak_points`와 새로 발견된 누락 포인트를 함께 본다.
 - 현재 민법 학습 진도 파일과 별개로 `case_answer_packet.json`에 패킷을 저장한다.
-- `case_material_index.json`이 있으면 lecture 기준으로 질문지/해설지 묶음을 자동 매칭한다.
+- `case_material_index.json`이 있으면 lecture 기준으로 질문지/해설지 묶음을 자동 매칭한다(모의고사 세트 단위).
+- **사례형 책의 개별 문제는 `case_problem_answer_index.json`으로 문제↔모범답안을 연결한다**(daily-drill 복습 트랙이 고른 문제의 채점 기준). 같은 책 원문의 question/answer span을 인용하고, 인덱스에 없으면 그 파일 `book_markers`로 찾아 채점 후 append한다(#1·#25 교재 원문, #40 산출물 재인용 금지). 각 문제의 `진도매핑`(진도_현황.json 소단원 키)으로 **진도 주도 선택**과 연동된다(build_session가 회독≥1 복습단원 키로 조인).
 - 현재 인덱스에서는 직접 O/X 문제만 바로 드릴화할 수 있고, 숫자선지는 `choices`가 저장된 경우에만 선지별 O/X로 변환한다.
 - `problem_index.json`의 `problems.textbook`이 채워지면 그 값을 우선 사용하고, 비어 있어도 `textbook_problem_candidates.json`에서 현재 topic과 맞는 교재 문제 후보를 바로 읽어 요약에 포함한다.
 
@@ -40,20 +41,21 @@ description: 사례답안지 채점, 범위 기출 정리, 교재/자료 문제 
 - `.agent/state/untyped_files.json`
 - `.agent/state/case_material_index.json`
 - `.agent/state/textbook_problem_candidates.json`
+- `.agent/state/case_problem_answer_index.json` (사례형 책 문제↔모범답안 연결 — 책별 마커규칙 + 문제/답 span)
 - `qmd law-notes` 검색 결과
 
 ## 빠른 실행
 
 ```powershell
-python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --subject 민법 --topic 행위능력 --text "답안 본문..." --output "H:\내 드라이브\tmp\case_answer_review.md"
+python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --subject 민법 --topic 행위능력 --text "답안 본문..." --output "E:\법학볼트\tmp\case_answer_review.md"
 ```
 
 ```powershell
-python .agent/skills/case-answer-review/scripts/render_case_answer_review.py "C:\path\답안.pdf" --subject 민법 --lecture 1 --output "H:\내 드라이브\tmp\case_answer_review.md"
+python .agent/skills/case-answer-review/scripts/render_case_answer_review.py "C:\path\답안.pdf" --subject 민법 --lecture 1 --output "E:\법학볼트\tmp\case_answer_review.md"
 ```
 
 ```powershell
-python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --subject 민법 --topic 행위능력 --text "답안 본문..." --question-text "사례문..." --model-answer-text "모범답안..." --explanation-text "해설지..." --output "H:\내 드라이브\tmp\case_answer_review.md"
+python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --subject 민법 --topic 행위능력 --text "답안 본문..." --question-text "사례문..." --model-answer-text "모범답안..." --explanation-text "해설지..." --output "E:\법학볼트\tmp\case_answer_review.md"
 ```
 
 ## 출력물
@@ -78,15 +80,15 @@ python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --s
 - `qmd law-notes`: 관련 설명 청크 검색
 - `learning.json`: 기존 약점과 중첩 분석
 - `srs_log.json`: 채점이 자동 기록(silent write)하지 않는다. 아래 "약점 연동" 규칙으로 복습 항목을 **제안**하고, 사용자가 채점 확정/복습 등록을 지시할 때만 spaced-repetition 스킬로 기록한다.
-- `korean-law-mcp`: 아래 규칙에 따라 자동 호출
+- `law_api.py`: 아래 규칙에 따라 자동 호출
 
-### korean-law-mcp 자동 호출
+### 법령 자동검증 (law_api.py)
 
-채점·대비자료 생성 중 다음 상황이면 korean-law-mcp MCP 도구를 **자동 호출**한다:
+채점·대비자료 생성 중 다음 상황이면 `.agent/lib/law_api.py`(법제처 직접 API)를 **자동 호출**한다:
 
-1. **채점 근거 보강**: 답안이 인용한 조문의 정확성을 검증할 때 `get_law_detail`로 원문 대조
+1. **채점 근거 보강**: 답안이 인용한 조문의 정확성을 검증할 때 `law_api.py law-detail`로 원문 대조
 2. **모범답안 조문 첨부**: 모범답안/해설에 조문 번호만 있고 원문이 없으면 자동 조회 → 보고서에 원문 인용 삽입
-3. **관련 판례 보강**: 쟁점에 판례 근거가 필요한데 `qmd law-notes`에서 판결요지가 나오지 않으면 `search_precedent_tool`로 보충
+3. **관련 판례 보강**: 쟁점에 판례 근거가 필요한데 `qmd law-notes`에서 판결요지가 나오지 않으면 `law_api.py search-prec`로 보충
 4. **대비팩 생성**: 관련 쟁점 조문 목록을 조회해 대비팩 하단에 `참조 조문` 섹션 자동 추가
 
 `qmd law-notes` 청크에 이미 조문 원문/판결요지가 포함되어 있으면 중복 조회하지 않는다.
@@ -111,6 +113,51 @@ python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --s
 - **배점표가 소스에 있으면 그것을 우선 반영**한다(AGENTS #25-3). 배점표가 없으면 위 가중 대신 항목별 O/△/X만 표기할 수 있다.
 - **감점·누락 단정에는 반드시 source(파일·위치)를 남긴다.** source 없는 감점은 하지 않는다(AGENTS #1·#2).
 - 소스에서 확인 불가한 법리는 점수화하지 않고 "자료 부족—보류"로 둔다.
+
+### 설문별 배점 가중·결론 캡 (2026-06-20 신설, 리허설 반영)
+
+리허설에서 "설문(소문제) 비중 큰 곳에서 틀림"과 "결론 반대"가 총점에 약하게 반영되는 문제가 드러나 보완한다.
+
+- **설문 단위 적용**: 설문(소문제)이 여럿이면 위 5항목 루브릭을 **설문마다 따로** 매기고 **배점으로 가중 합산**한다. 명시 배점(예: 설문(2) 10점)이 소스에 있으면 그 비율(#23·#25 배점표 우선), 없으면 설문 균등 가중.
+- **결론 캡**: 설문/쟁점의 **결론이 모범과 반대**(틀린 죄명·반대 결론)이면 그 설문 총점에 **상한 0.3**(결론 항목 0.0). **부분 상이·불완전**이면 상한 0.6. 결론이 맞아야 그 설문 만점이 가능하다.
+- 캡 적용 시 이유와 출처(모범답안 위치)를 보고서에 남긴다(#1·#2).
+
+### 과목별 구조 기준 (2026-06-20 신설 — #32 2열은 민법 다툼형 전용)
+
+"구조 일치" 항목과 포섭 점검은 **과목·문제유형별 표준 구조**로 본다. #32 원고|피고 2열은 **민법 다툼형(청구-항변)에만** 적용하고 다른 유형에 강제하지 않는다(형법·헌법에 2열 강제 금지).
+
+| 과목·유형 | 표준 구조(구조 일치 기준) | 포섭 점검 포인트 |
+|---|---|---|
+| 민법 다툼형(청구-항변) | **#32 원고\|피고 2열** + IRAC #24(청구→항변→재항변) | 요건사실↔사실, 항변사실 누락 |
+| 민법 검토형(유효성·효과) | 설문별 IRAC(쟁점→요건→포섭→결론) | 사실→요건충족 판단 |
+| 형법 죄책형 | 범죄별 **구성요건해당성→위법성→책임**, **학설 대립→결론**, 끝에 **죄수·경합** | 구성요건요소별 사실 적용, 학설 포섭 |
+| 헌법 | **적법요건(청구인적격·대상적격·청구기간·재판전제성)→본안: ①제한되는 기본권 특정 ②심사구조·기준 선택(영장주의·적법절차 / 과잉금지 등) ③포섭→결론** | 기본권 특정·심사기준 선택의 적부, 사실→심사기준 적용 |
+
+- 형법은 **학설 대립 검토**와 **죄수·경합**을 "쟁점/구조"에 포함해 점검한다(누락 시 감점, 출처 표기).
+- 헌법은 적법요건/본안 단계 누락, **제한 기본권 오특정·심사기준 선택 오류**(영장주의·적법절차 vs 과잉금지)를 구조·포섭 감점으로 본다.
+
+### 포섭(사실↔법리) 검토 — 명시 단계 (2026-06-20 부각)
+
+사례형 채점의 핵심은 포섭(0.20)이다. 루브릭 점수와 별개로 **다음을 한 단계로 명시 점검**하고, 보고서에 "포섭 검토" 블록으로 남긴다. (daily-drill 복습·심화 트랙 Phase 2-A와 연동)
+
+| 점검 항목 | 기준 | 감점 상한 |
+|---|---|---|
+| 사실 부착 | 각 법리 진술에 사건의 **구체적 사실**이 붙어 있는가 | 사실 없는 법리 나열만이면 포섭 최대 **0.5** |
+| 핵심사실 누락 | 쟁점을 가르는 **핵심사실**을 빠뜨리지 않았는가 | 누락 시 최대 **0.6** |
+| 연결고리 | 사실 → 요건 충족/불충족 판단 → 결론의 고리가 끊기지 않았는가 | 끊긴 단계마다 부분감점 |
+| 양면 포섭 | 유리·불리 사실을 함께 포섭했는가(일방 사실만이면 부분점) | 부분감점 |
+
+- 구조 점검은 위 "과목별 구조 기준" 표를 따른다(민법 다툼형만 #32 2열, 형법은 구성요건·죄수, 헌법은 적법요건·본안). 포섭은 그 표의 과목별 포인트로 본다.
+- **포섭 약점은 application_checkpoint 단기복습으로 제안**한다(아래 연동 규칙, 소스 체크포인트 있을 때만).
+- 감점·누락 단정에는 반드시 source(파일·위치)를 남긴다(#1·#2). 사실관계가 소스에 없으면 포섭 점수화 보류.
+
+### 포섭 작법·진단·드릴 (2026-06-21 보완연구 — `sync/_meta/포섭_보완_2026-06-21.md`)
+
+- **실패 코드(채점 시 태깅):** **E1** 무관/뭉갬("정당한 사유가 있다") · **E2** 결론직행(사실 0개 부착) · **E3** 연결고리 단절(사실은 있으나 because 없음) · **양면**(일면포섭). 포섭 실점의 대부분은 답안 '중간부'(요건→왜→사실→판단) 누락이고, 배점 최대 구간은 '요건별 사실대입'.
+- **4슬롯 작법(쟁점마다):** [요건 적시]→[**사안의 경우**+구체 사실]→[법적 평가:충족/불충족]→[소결]. because 연결어 필수, 구체 사실 먼저. 빠진 슬롯 수만큼 감점하고 누락 슬롯명 명시. **사실 0개 부착=포섭 0점 캡.** 핵심사실 매칭률=부착사실수/모범답안 핵심사실수.
+- **향상 드릴(포섭만 페이딩):** Lv1 완성 정독+'왜 충족?' 자기설명(읽기만은 무효) → Lv2 포섭 슬롯만 백지 → Lv3 요건만→포섭 백지 → Lv4 전면 백지(TAP). 직전 채점으로 **쟁점별 적응 승급**(잘하면 백지, 약하면 완성형 — 균일난이도 금지). 부분과제: '요건+사실→포섭문 1개' 다회+즉시 3체크. 자기설명은 1문항 1~2개로 비용 제한.
+- **진단 먼저:** 실패 데이터 없을 땐 활성 단원에서 백지 포섭 5~10건을 E1/E2/E3+양면으로 라벨링→최빈 코드만 SRS 승격(표본 작아 '방향 단서'). 설문에 의도적 불리사실 1개 심어 양면 누락 진단.
+- **주의(미구현):** 위 토글·매칭률·페이딩 자동화는 코드 미반영(현 render_case_answer_review.py=coverage 초벌) → **수동/LLM 적용**. 'application_checkpoint'는 실제 `mini_application` 계열, review_type 초기 due는 srs_scheduler 손질 선행. 근거: 학습원리는 강하나 법학 포섭(원거리전이) 직접 실증 없음, 수험 가이드는 통념.
 
 ### 약점 → 복습 → 카드 연동 규칙
 

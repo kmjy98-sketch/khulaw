@@ -32,10 +32,13 @@ import fitz  # PyMuPDF — 렌더/이미지/페이지분리 전용 (텍스트레
 from PIL import Image
 import numpy as np
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 try:  # .env 의 LLAMA_CLOUD_API_KEY 등 자동 로드
     from dotenv import load_dotenv
     load_dotenv()
-    load_dotenv(r"H:\내 드라이브\.env")
+    load_dotenv(vp(".env"))
 except Exception:
     pass
 

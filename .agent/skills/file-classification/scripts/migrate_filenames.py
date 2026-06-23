@@ -8,7 +8,7 @@ Usage:
     
 Options:
     --dry-run   실제 변경 없이 미리보기만
-    --dir       대상 디렉토리 (기본: H:\내 드라이브)
+    --dir       대상 디렉토리 (기본: VAULT_ROOT)
 """
 
 import os
@@ -18,6 +18,12 @@ import json
 import argparse
 from pathlib import Path
 from datetime import datetime
+
+_p = os.path.abspath(__file__)  # noqa: E402
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:  # noqa: E402
+    _p = os.path.dirname(_p)  # noqa: E402
+sys.path.insert(0, os.path.join(_p, 'scripts'))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 # Windows 인코딩 문제 해결
 sys.stdout.reconfigure(encoding='utf-8')
@@ -124,7 +130,7 @@ def migrate_files(files: list, dry_run: bool = True) -> dict:
 def main():
     parser = argparse.ArgumentParser(description='파일명 마이그레이션 (괄호 제거)')
     parser.add_argument('--dry-run', action='store_true', help='미리보기만 (실제 변경 없음)')
-    parser.add_argument('--dir', type=str, default=r'H:\내 드라이브', help='대상 디렉토리')
+    parser.add_argument('--dir', type=str, default=VAULT_ROOT, help='대상 디렉토리')
     parser.add_argument('--output', type=str, help='결과 JSON 저장 경로')
     parser.add_argument('--batch', type=int, default=0, help='배치 크기 (0=전체, N=N개씩 처리)')
     parser.add_argument('--resume', type=str, help='이전 결과 JSON에서 이어서 진행')
@@ -159,7 +165,7 @@ def main():
             return
         
         # 파일 리스트 저장
-        list_path = Path(args.output or r'H:\내 드라이브\.agent\temp\migrate_list.json')
+        list_path = Path(args.output or vp('.agent', 'temp', 'migrate_list.json'))
         with open(list_path, 'w', encoding='utf-8') as f:
             json.dump({
                 'timestamp': datetime.now().isoformat(),
@@ -195,7 +201,7 @@ def main():
     
     # 상태 업데이트
     if not args.dry_run:
-        list_path = Path(args.resume or args.output or r'H:\내 드라이브\.agent\temp\migrate_list.json')
+        list_path = Path(args.resume or args.output or vp('.agent', 'temp', 'migrate_list.json'))
         
         # 현재 상태 로드
         if list_path.exists():

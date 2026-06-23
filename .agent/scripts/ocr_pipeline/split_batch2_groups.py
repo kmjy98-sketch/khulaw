@@ -1,9 +1,14 @@
 """batch2_chunks.json을 에이전트 그룹별 서브인덱스로 분할 (중복 없음)."""
 import json
+import os
+import sys
 from pathlib import Path
 from collections import defaultdict
 
-WS = Path(r"H:\내 드라이브")
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+WS = Path(VAULT_ROOT)
 state = WS / ".agent" / "state"
 chunks = json.loads((state / "batch2_chunks.json").read_text(encoding="utf-8"))
 

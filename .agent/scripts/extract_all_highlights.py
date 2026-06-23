@@ -2,12 +2,15 @@ import fitz
 import os
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 try:
     sys.stdout.reconfigure(encoding='utf-8')
 except AttributeError:
     pass
 
-pdf_dir = r"H:\내 드라이브\리퀴드텍스트 참조"
+pdf_dir = vp("리퀴드텍스트 참조")
 output_dir = r"C:\Users\111\.gemini\antigravity\scratch\extracted_highlights"
 
 os.makedirs(output_dir, exist_ok=True)

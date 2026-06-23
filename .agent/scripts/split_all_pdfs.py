@@ -3,8 +3,11 @@ import sys
 import io
 from pathlib import Path
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 # Add the parent directory of script to sys.path so we can import pdf_split_100p
-sys.path.append(str(Path("H:/내 드라이브")))
+sys.path.append(str(Path(VAULT_ROOT)))
 try:
     import pdf_split_100p
 except ImportError:
@@ -14,7 +17,7 @@ except ImportError:
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
-dir_path = Path("H:/내 드라이브/작업용")
+dir_path = Path(vp("작업용"))
 
 target_files = [
     "2026 표준판례 반영 헌법 핵심정리 300 - 각종 국가고시 대비, 제3전정4판,_3c_r6_d2.pdf",

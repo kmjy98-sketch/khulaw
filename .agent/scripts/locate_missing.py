@@ -2,12 +2,15 @@ import fitz
 import sys
 import io
 import re
+import os  # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
-pdf_03 = r"H:\내 드라이브\3.공법\_분할\유니온헌법기출편_03_통치구조_국회_대통령.pdf"
-pdf_04 = r"H:\내 드라이브\3.공법\_분할\유니온헌법기출편_04_법원_헌법재판소.pdf"
+pdf_03 = vp("3.공법", "_분할", "유니온헌법기출편_03_통치구조_국회_대통령.pdf")
+pdf_04 = vp("3.공법", "_분할", "유니온헌법기출편_04_법원_헌법재판소.pdf")
 
 print("--- Scanning pdf_03 for 문5, 문6, 문7, 문8 (Page 2 to 23) ---")
 doc3 = fitz.open(pdf_03)

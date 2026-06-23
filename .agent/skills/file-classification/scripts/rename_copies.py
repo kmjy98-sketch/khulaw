@@ -6,11 +6,18 @@
 """
 import os
 import re
+import sys
 import json
 import shutil
 from datetime import datetime
 
-root_path = r"H:\내 드라이브"
+_p = os.path.abspath(__file__)  # noqa: E402
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:  # noqa: E402
+    _p = os.path.dirname(_p)  # noqa: E402
+sys.path.insert(0, os.path.join(_p, 'scripts'))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+root_path = VAULT_ROOT
 trash_folder = os.path.join(root_path, "5.기타", "_trash", "중복")
 log_file = os.path.join(root_path, ".agent", "rename_log.json")
 

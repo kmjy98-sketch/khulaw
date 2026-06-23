@@ -1,7 +1,10 @@
 import re, os, json, ntpath
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-out_base = 'H:/내 드라이브/.agent/data/ocr_chunks_reviewed/민법/윤동환_민법의맥'
-manifest = 'H:/내 드라이브/.agent/state/batch2_g2.json'
+out_base = vp('.agent', 'data', 'ocr_chunks_reviewed', '민법', '윤동환_민법의맥')
+manifest = vp('.agent', 'state', 'batch2_g2.json')
 
 with open(manifest, 'r', encoding='utf-8') as f:
     records = json.load(f)

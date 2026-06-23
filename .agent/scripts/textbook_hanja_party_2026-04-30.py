@@ -13,12 +13,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import sys
 from pathlib import Path
 
-WORKSPACE_ROOT = Path(r"H:\내 드라이브")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+WORKSPACE_ROOT = Path(VAULT_ROOT)
 DEFAULT_ROOT = WORKSPACE_ROOT / "sync" / "_교재원문"
 BACKUP_ROOT = WORKSPACE_ROOT / "_백업" / "2026-04-30"
 

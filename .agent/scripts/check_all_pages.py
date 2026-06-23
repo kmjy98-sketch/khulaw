@@ -2,11 +2,13 @@ import os
 import pypdf
 import sys
 import io
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
-dir_path = "H:/내 드라이브/작업용"
+dir_path = vp("작업용")
 
 if not os.path.exists(dir_path):
     print(f"Directory not found: {dir_path}")

@@ -3,19 +3,21 @@ import sys
 import io
 from pathlib import Path
 from datetime import datetime
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 # Add H:\내 드라이브\.agent\scripts to sys.path so we can import code_pdf_extract_2026-04-30
-sys.path.append(str(Path("H:/내 드라이브/.agent/scripts")))
+sys.path.append(str(Path(vp(".agent", "scripts"))))
 try:
     import code_pdf_extract_2026_04_30 as extractor
 except ImportError:
     # Handle filename differences
-    sys.path.append(str(Path("H:/내 드라이브/.agent/scripts")))
+    sys.path.append(str(Path(vp(".agent", "scripts"))))
     # Import as module if file has different name format
     import importlib.util
     spec = importlib.util.spec_from_file_location(
-        "extractor", 
-        "H:/내 드라이브/.agent/scripts/code_pdf_extract_2026-04-30.py"
+        "extractor",
+        vp(".agent", "scripts", "code_pdf_extract_2026-04-30.py")
     )
     extractor = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(extractor)
@@ -23,8 +25,8 @@ except ImportError:
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
-dir_path = Path("H:/내 드라이브/작업용")
-out_dir = Path("H:/내 드라이브/outputs/01_ocr")
+dir_path = Path(vp("작업용"))
+out_dir = Path(vp("outputs", "01_ocr"))
 os.makedirs(out_dir, exist_ok=True)
 
 targets = [

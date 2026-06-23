@@ -5,10 +5,13 @@ import shutil
 from datetime import date
 from pathlib import Path
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 sys.stdout.reconfigure(encoding='utf-8')
 
-base_dir = r'H:\내 드라이브\sync\_교재원문'
-WORKSPACE_ROOT = Path(r"H:\내 드라이브")
+base_dir = vp('sync', '_교재원문')
+WORKSPACE_ROOT = Path(VAULT_ROOT)
 
 replacements = {
     '仰판': '대판',

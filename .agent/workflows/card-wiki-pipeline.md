@@ -2,7 +2,7 @@
 
 > 갱신: 2026-06-16
 > 목적: 카드/리서치/위키화 운영 기준. 실행 주체에 무관하게 적용한다.
-> 운영 주체(2026-06-16 환원): Claude Web으로 복귀. (GPT Pro/Codex 미사용 — 사용자 지정) 구독 활성·워크스페이스 접근·korean-law-mcp 직접 호출 가능 → anchor 검증을 외부 API 대신 korean-law-mcp로 우선 수행한다. 본 문서·핸드오프는 Codex/외부 AI 인계 시에도 그대로 유효하다. (검토: `sync/_meta/codex이관_claude환원_검토_2026-06-16.md`)
+> 운영 주체(2026-06-16 환원): Claude Web으로 복귀. (GPT Pro/Codex 미사용 — 사용자 지정) 구독 활성·워크스페이스 접근·law_api.py 직접 호출 가능 → anchor 검증을 외부 API 대신 law_api.py로 우선 수행한다. 본 문서·핸드오프는 Codex/외부 AI 인계 시에도 그대로 유효하다. (검토: `sync/_meta/codex이관_claude환원_검토_2026-06-16.md`)
 
 ## 0. 우선순위
 
@@ -16,10 +16,11 @@
 
 ## 1. 현재 상태
 
-- 카드 최신: v37, 19,629장.
+- 카드 최신: v37, 20,077장 (기존 19,629 + 법조윤리 신규덱 448).
 - 카드 소스: `outputs/02_cards_v37/*.md` 276개.
-- apkg: `outputs/anki/v37/apkg/` 과목×책종류 16개 (민법4·민사소송법2·형법4·헌법3·상법1·행정법1·형사소송법1).
-- 빌드 리포트: `outputs/anki/v37/apkg/_apkg_report.md` 기준 Basic 8,172 / Cloze 11,457.
+- apkg: `outputs/anki/v37/apkg/` 과목×책종류 17개 (민법4·민사소송법2·형법4·헌법3·법조윤리1·상법1·행정법1·형사소송법1).
+- 빌드 리포트: `outputs/anki/v37/apkg/_apkg_report.md` 기준 Basic 8,573 / Cloze 11,504.
+- 빌더 서식(2026-06-17~18): 표→<table>·색상강조(사건번호/조문/결론/열거)·**답면 노랑형광**(per-card LLM 캐시 `.agent/state/anki_v37_hl_cache.jsonl` 6,882장 우선 + 개념어 사전 `anki_concept_vocab.txt` 925종 폴백, 답면 84%)·열거마커 <br>·不 활음조보정 + 태그 확장(난이도·주제·기출·검증필요). 형광 캐시 재생성: `_hl_inventory.py` → 키워드 추출 워크플로우 → md5(_base(답면)) 캐시.
 - 위키 쟁점 아티클: `sync/wiki/쟁점/` 36개.
 - 미완 쟁점: 약 53개. 중단 사유는 코드 오류가 아니라 Claude Code 구독 접근 비활성화로 인한 서브에이전트 인증 실패.
 
@@ -35,14 +36,14 @@
 | 주제 인벤토리 | `.agent/state/wiki_topic_inventory.json` |
 | anchor 검증 | `.agent/scripts/anchor_verify_batch.py`, `.agent/state/anchor_verify_summary.md` |
 
-외부 법령·판례 확인은 korean-law-mcp 또는 국가법령정보센터 API 반환값만 공적 원문 예외 소스로 취급한다.
+외부 법령·판례 확인은 law_api.py 또는 국가법령정보센터 API 반환값만 공적 원문 예외 소스로 취급한다.
 
 ## 3. 리서치 절차
 
 1. 기존 위키 확인: `sync/wiki/쟁점/{쟁점명}.md`.
 2. 카드 검색: `outputs/02_cards_v37/`에서 쟁점명, 동의어, 사건번호, 조문번호를 검색한다.
 3. 카드 근거가 부족하거나 충돌하면 OCR 원문(`outputs/01_ocr_llamaparse/`)으로 역확인한다.
-4. 판례·조문 anchor는 필요할 때만 korean-law-mcp로 확인한다.
+4. 판례·조문 anchor는 필요할 때만 law_api.py로 확인한다.
 5. 카드나 원문에서 확인되지 않는 단정은 쓰지 않는다. 출력은 "자료 부족"으로 남긴다.
 
 ## 4. 위키 roll-up 규칙
@@ -95,9 +96,10 @@ python .agent/scripts/build_v37_apkg.py
 
 - 총 카드 수
 - Basic/Cloze 수
-- 과목×책종류 apkg 16개 존재
+- 과목×책종류 apkg 17개 존재(법조윤리 포함)
 - 한자 잔존 0
 - 번호 없는 cloze 0
+- 전역 guid 고유(중복 0)
 
 ## 7. 병렬 작업 기준
 
