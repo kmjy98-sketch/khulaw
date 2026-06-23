@@ -12,6 +12,7 @@ import os, re, sys, hashlib, html
 from collections import defaultdict
 import genanki
 from hanja import translate as h2k
+from _guid_stable import guid_seed, extract_uid  # 안정 note_key guid (card-wiki-pipeline §8.1)
 
 SRC = "H:/내 드라이브/outputs/02_cards_v37"
 OUT = "H:/내 드라이브/outputs/anki/v37/apkg"
@@ -169,6 +170,8 @@ def main():
         bookkey = re.split(r"_p\d|_llamaparse", fn)[0]
         pages = (re.search(r"_p[\d-]+", fn) or [""])[0]
         src = f"{bookkey}{pages}".replace("_llamaparse", "")
+        stem = fn[:-3] if fn.endswith(".md") else fn   # note_key용 파일 stem (§8.1)
+        seq = 0                                          # 파일내 카드 순번(내용 비의존)
 
         for attr, blk in blocks_of(txt):
             ap, dwi, bk, tx = field(blk, ["앞", "앞면"]), field(blk, ["뒤", "뒷면"]), field(blk, ["빈칸"]), field(blk, ["Text"])
@@ -181,11 +184,13 @@ def main():
             if cloze_src:
                 ctext = trim_blank(number_cloze(conv(cloze_src)))
                 if "{{c" in ctext and not re.search(r"\{\{(?!c\d+::)", ctext):
-                    g = genanki.guid_for(src, blk[:30], re.sub(r"\s+", "", ctext))
+                    g = genanki.guid_for(guid_seed(stem, "cloze", seq, explicit_uid=extract_uid(blk)))
+                    seq += 1
+                    dkey = ("C", src, re.sub(r"\s+", "", ctext))  # 내용 dedup은 guid와 분리(§8.1)
                     extra = "" if (cloze_src == ap or (ap and "{{" in ap)) else conv(ap)
                     nt = genanki.Note(model=CLOZE, fields=[ctext, extra, src], guid=g, tags=tags)
-                    if g not in seen:
-                        seen.add(g); get_deck(deckname).add_note(nt)
+                    if dkey not in seen:
+                        seen.add(dkey); get_deck(deckname).add_note(nt)
                         subj_decks[subj].add(deckname); cnt[deckname][1] += 1; n_cloze += 1
                     made = True
             # Basic: 앞+뒤 / [OX-N] 선지=헤더+뒤만 / double(빈칸 cloze+완성문)
@@ -196,10 +201,12 @@ def main():
                 front = conv(ap) or conv(head_front) or attr
                 back = conv(dwi)
                 if front and back:
-                    g = genanki.guid_for(src, blk[:30], re.sub(r"\s+", "", front + back))
+                    g = genanki.guid_for(guid_seed(stem, "basic", seq, explicit_uid=extract_uid(blk)))
+                    seq += 1
+                    dkey = ("B", src, re.sub(r"\s+", "", front + back))  # 내용 dedup은 guid와 분리(§8.1)
                     nt = genanki.Note(model=BASIC, fields=[front, back, src], guid=g, tags=tags)
-                    if g not in seen:
-                        seen.add(g); get_deck(deckname).add_note(nt)
+                    if dkey not in seen:
+                        seen.add(dkey); get_deck(deckname).add_note(nt)
                         subj_decks[subj].add(deckname); cnt[deckname][0] += 1; n_basic += 1
                     made = True
 

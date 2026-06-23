@@ -49,7 +49,8 @@ def guid_seed(file_stem, card_type, seq, key=None, explicit_uid=None):
     호출부 예: g = genanki.guid_for(guid_seed(stem, "cloze", seq, explicit_uid=extract_uid(blk)))
     """
     if explicit_uid:
-        return str(explicit_uid).strip()
+        # uid에 card_type를 붙여 같은 블록의 basic/cloze 더블이 guid 충돌하지 않게 한다
+        return f"{str(explicit_uid).strip()}::{str(card_type).strip().lower()}"
     return note_key(file_stem, card_type, seq, key=key)
 
 

@@ -51,6 +51,11 @@ class GuidStability(unittest.TestCase):
             guid_seed(STEM, "cloze", 5, explicit_uid="민총-0042"),
             guid_seed(STEM, "cloze", 5, explicit_uid="민총-0043"),
         )
+        # 같은 uid라도 basic/cloze 더블은 분리돼야 한다(블록당 2노트 충돌 방지)
+        self.assertNotEqual(
+            guid_seed(STEM, "cloze", 5, explicit_uid="민총-0042"),
+            guid_seed(STEM, "basic", 5, explicit_uid="민총-0042"),
+        )
 
     def test_explicit_key는_issue_id로_묶는다(self):
         # key 지정 시 file_stem 대신 issue_id로 note_key 구성(§8.1 key=issue_id)
