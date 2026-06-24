@@ -16,12 +16,13 @@ import os, re, sys, hashlib, html
 from collections import defaultdict
 import genanki
 from hanja import translate as h2k
+from _guid_stable import guid_seed, extract_uid  # 안정 note_key guid (card-wiki-pipeline §8.1)
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _vault import VAULT_ROOT, vp  # noqa: E402
 
-SRC = vp("outputs", "02_cards_v37")
-OUT = vp("outputs", "anki", "v37", "apkg")
+SRC = os.environ.get("V37_SRC", vp("outputs", "02_cards_v37"))        # 테스트 env 오버라이드, 기본 VAULT_ROOT(E:)
+OUT = os.environ.get("V37_OUT", vp("outputs", "anki", "v37", "apkg"))
 DOUBLE = True  # 암기장: 완성문 Basic + cloze 둘 다 (사용자 선택)
 
 BOOK = [  # prefix → (회독그룹, 과목)
@@ -284,8 +285,7 @@ def main():
                          if f.startswith("논점민소") and "_cloze" in f and re.search(r"_p[\d-]+", f)}
     decks = {}            # deckname -> Deck
     subj_decks = defaultdict(set)  # 과목 -> {deckname}
-    seen = set()          # 내용 시그니처 dedup(총장수 보존) — guid와 분리
-    nkseq = defaultdict(int)  # (파일stem, card_type) -> 안정 note_key seq 카운터
+    seen = set()          # 내용 dedup(dkey, 총장수 보존) — guid와 분리(§8.1)
     cnt = defaultdict(lambda: [0, 0])  # deckname -> [basic, cloze]
     skipped = defaultdict(int)
     n_basic = n_cloze = 0
@@ -314,7 +314,8 @@ def main():
         bookkey = re.split(r"_p\d|_llamaparse", fn)[0]
         pages = (re.search(r"_p[\d-]+", fn) or [""])[0]
         src = f"{bookkey}{pages}".replace("_llamaparse", "")
-        filestem = fn[:-3] if fn.endswith(".md") else fn  # 안정 note_key의 key(파일 고유)
+        stem = fn[:-3] if fn.endswith(".md") else fn   # note_key용 파일 stem (§8.1)
+        seq = 0                                          # 파일내 카드 순번(내용 비의존)
         head_verify = re.findall(r"검증필요::\S+", txt[:400])  # 파일머리 태그(찌라시 law-mcp 등)
 
         for attr, topic, blk in blocks_of(txt):
@@ -338,16 +339,13 @@ def main():
             if cloze_src:
                 ctext = _fmt(trim_blank(number_cloze(_base(cloze_src))))  # 서식은 cloze 번호부여·트림 뒤
                 if "{{c" in ctext and not re.search(r"\{\{(?!c\d+::)", ctext):
-                    sig = (src, blk[:30], re.sub(r"\s+", "", ctext))  # 내용 dedup(총장수 보존)
-                    if sig not in seen:
-                        seen.add(sig)
-                        _hk = re.sub(r"\s+", "", re.sub(r"^#+\s*", "", blk.split("\n", 1)[0]))[:40]
-                        nkseq[(filestem, "cloze", _hk)] += 1
-                        nk = f"{filestem}::cloze::{_hk}::{nkseq[(filestem, 'cloze', _hk)]:02d}"
-                        g = genanki.guid_for(nk)  # 안정 note_key 파생 guid
-                        extra = "" if (cloze_src == ap or (ap and "{{" in ap)) else conv(ap)
-                        nt = genanki.Note(model=CLOZE, fields=[ctext, extra, src], guid=g, tags=tags)
-                        get_deck(deckname).add_note(nt)
+                    g = genanki.guid_for(guid_seed(stem, "cloze", seq, explicit_uid=extract_uid(blk)))
+                    seq += 1
+                    dkey = ("C", src, re.sub(r"\s+", "", ctext))  # 내용 dedup은 guid와 분리(§8.1)
+                    extra = "" if (cloze_src == ap or (ap and "{{" in ap)) else conv(ap)
+                    nt = genanki.Note(model=CLOZE, fields=[ctext, extra, src], guid=g, tags=tags)
+                    if dkey not in seen:
+                        seen.add(dkey); get_deck(deckname).add_note(nt)
                         subj_decks[subj].add(deckname); cnt[deckname][1] += 1; n_cloze += 1
                         if CJK.search(ctext) or CJK.search(extra):
                             hanja_cards += 1
@@ -362,15 +360,12 @@ def main():
                 front = conv(ap) or conv(head_front) or attr
                 back = conv(dwi, hl=True)   # 답면만 노랑형광
                 if front and back:
-                    sig = (src, blk[:30], re.sub(r"\s+", "", front + back))  # 내용 dedup(총장수 보존)
-                    if sig not in seen:
-                        seen.add(sig)
-                        _hk = re.sub(r"\s+", "", re.sub(r"^#+\s*", "", blk.split("\n", 1)[0]))[:40]
-                        nkseq[(filestem, "basic", _hk)] += 1
-                        nk = f"{filestem}::basic::{_hk}::{nkseq[(filestem, 'basic', _hk)]:02d}"
-                        g = genanki.guid_for(nk)  # 안정 note_key 파생 guid
-                        nt = genanki.Note(model=BASIC, fields=[front, back, src], guid=g, tags=tags)
-                        get_deck(deckname).add_note(nt)
+                    g = genanki.guid_for(guid_seed(stem, "basic", seq, explicit_uid=extract_uid(blk)))
+                    seq += 1
+                    dkey = ("B", src, re.sub(r"\s+", "", front + back))  # 내용 dedup은 guid와 분리(§8.1)
+                    nt = genanki.Note(model=BASIC, fields=[front, back, src], guid=g, tags=tags)
+                    if dkey not in seen:
+                        seen.add(dkey); get_deck(deckname).add_note(nt)
                         subj_decks[subj].add(deckname); cnt[deckname][0] += 1; n_basic += 1
                         if CJK.search(front) or CJK.search(back):
                             hanja_cards += 1
