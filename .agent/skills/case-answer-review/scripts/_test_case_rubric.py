@@ -5,7 +5,7 @@ import sys
 import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from _case_rubric import score_rubric, WEIGHTS  # noqa: E402
+from _case_rubric import score_rubric, score_rubric_units, score_unit, WEIGHTS  # noqa: E402
 
 
 class CaseRubric(unittest.TestCase):
@@ -71,6 +71,61 @@ class CaseRubric(unittest.TestCase):
         self.assertEqual(r["grade"], "O")
         self.assertEqual(r["review_suggestions"], ["stable"])
         self.assertTrue(all(v["status"] == "채점" for v in r["items"].values()))
+
+
+class CaseRubricUnits(unittest.TestCase):
+    # 민사 청구 단위 (민사사례연습1 구조: 청구→요건→쟁점→포섭→결론)
+    MINSA_UNIT = {
+        "label": "甲의 丙에 대한 말소등기청구",
+        "근거": "§214",
+        "요건": ["소유권 존재", "丙명의 등기"],
+        "쟁점": ["대리권남용"],
+        "포섭_사실": ["丙 악의", "저가매각"],
+        "결론": "기각",
+        "keywords": ["민법 제107조"],
+    }
+
+    def test_민사_우수답안_O(self):
+        ans = ("甲의 丙에 대한 말소등기청구. 소유권 존재와 丙명의 등기를 요건으로 한다. "
+               "쟁점은 대리권남용. 민법 제107조 단서 유추. 丙 악의로 저가매각 포섭. 따라서 기각")
+        r = score_rubric_units(ans, [self.MINSA_UNIT], unit_type="청구")
+        self.assertEqual(r["unit_type"], "청구")
+        self.assertEqual(r["grade"], "O")
+        self.assertEqual(r["review_suggestions"], ["stable"])
+
+    def test_민사_결론반대_드릴(self):
+        ans = ("甲의 丙에 대한 말소등기청구. 소유권 존재와 丙명의 등기. 대리권남용 쟁점. "
+               "丙 악의 저가매각. 따라서 인용한다")  # 결론 반대(기각인데 인용)
+        r = score_rubric_units(ans, [self.MINSA_UNIT], unit_type="청구")
+        self.assertEqual(r["units"][0]["items"]["conclusion"]["score"], 0.0)
+        self.assertIn("conclusion_drill", r["review_suggestions"])
+
+    def test_형사_죄책_단위(self):
+        unit = {
+            "label": "사기죄",
+            "근거": "§347",
+            "요건": ["기망행위", "처분행위", "재산상 손해"],
+            "쟁점": ["불법영득의사"],
+            "포섭_사실": ["허위 고지", "송금"],
+            "결론": "유죄",
+        }
+        ans = "사기죄. 기망행위 처분행위 재산상 손해. 불법영득의사 쟁점. 허위 고지로 송금 포섭. 유죄"
+        r = score_rubric_units(ans, [unit], unit_type="죄책")
+        self.assertEqual(r["unit_type"], "죄책")
+        self.assertEqual(r["grade"], "O")
+
+    def test_요건누락은_outline_제안(self):
+        ans = "甲의 丙에 대한 말소등기청구. 대리권남용. 기각"  # 요건사실 열거 없음
+        r = score_rubric_units(ans, [self.MINSA_UNIT], unit_type="청구")
+        self.assertLess(r["units"][0]["items"]["structure"]["score"], 0.5)
+        self.assertIn("outline_recall", r["review_suggestions"])
+
+    def test_다단위_평균(self):
+        u2 = dict(self.MINSA_UNIT, label="甲의 戊에 대한 부당이득청구", 결론="인용")
+        ans = "甲의 丙에 대한 말소등기청구 기각, 甲의 戊에 대한 부당이득청구 인용"
+        r = score_rubric_units(ans, [self.MINSA_UNIT, u2], unit_type="청구")
+        self.assertEqual(len(r["units"]), 2)
+        self.assertIsNotNone(r["score"])
 
 
 if __name__ == "__main__":

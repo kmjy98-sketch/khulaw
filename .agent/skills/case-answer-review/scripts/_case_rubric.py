@@ -124,3 +124,79 @@ def score_rubric(*, answer_norm, expected_issues=None, required_keywords=None,
 
     return {"score": round(score, 3), "grade": grade, "items": items,
             "review_suggestions": suggestions}
+
+
+# ---------------------------------------------------------------------------
+# 단위(청구/죄책) 구조 채점 — 요건사실론 정렬 (note-structures.md 정본)
+# ---------------------------------------------------------------------------
+# 사례집 모범답안에서 추출하는 expected 단위 스키마:
+#   unit = {
+#     "label": "甲의 丙에 대한 말소등기청구" | "甲의 사기죄",   # 청구권기초 | 죄명
+#     "근거": "§214",                          # 근거조문/청구권규범
+#     "요건": ["소유권 존재", "丙명의 등기", ...],  # 요건사실 elements = 구조
+#     "쟁점": ["대리권남용", ...],               # 다툼 있는 요건 = expected_issues
+#     "포섭_사실": ["乙 저가매각", "丙 악의", ...],  # 사안 사실 → 요건 대입 대상
+#     "결론": "기각" | "인용" | "유죄" | "무죄",
+#     "keywords": ["학설·판례 키워드", ...],      # 선택
+#   }
+# 민·헌·국 = 청구 단위 / 형 = 죄책 단위. note-structures.md 청구권기초·범죄체계론형과 1:1.
+
+_OPPOSITE = {"인용": "기각", "기각": "인용", "유죄": "무죄", "무죄": "유죄",
+             "성립": "불성립", "불성립": "성립", "위헌": "합헌", "합헌": "위헌"}
+
+
+def score_unit(answer_norm, unit):
+    """청구/죄책 단위 1개 채점 → 가중 루브릭(보류 재정규화) + review 제안."""
+    a = (answer_norm or "").lower()
+    label = unit.get("label", "")
+    issues = [label] + list(unit.get("쟁점", [])) if label else list(unit.get("쟁점", []))
+    concl = unit.get("결론")
+    opp = [_OPPOSITE[concl]] if concl in _OPPOSITE else None
+    has_legal = bool(unit.get("요건") and _ratio_score(a, unit["요건"]))
+
+    raw = {
+        "issue": _issue_score(a, issues),
+        "keyword": _ratio_score(a, unit.get("keywords")),
+        "structure": _ratio_score(a, unit.get("요건")),   # 요건사실 열거 여부
+        "conclusion": _conclusion_score(a, [concl] if concl else None, opp),
+        "application": _application_score(a, unit.get("포섭_사실"), has_legal),  # 포섭(요건별 사실대입)
+    }
+
+    items, active_w, weighted = {}, 0.0, 0.0
+    for name, w in WEIGHTS.items():
+        s = raw[name]
+        if s is None:
+            items[name] = {"score": None, "weight": w, "status": "보류"}
+            continue
+        items[name] = {"score": round(s, 2), "weight": w, "status": "채점"}
+        active_w += w
+        weighted += s * w
+
+    suggestions = [rtype for name, trig, rtype in _REVIEW_RULES
+                   if raw[name] is not None and trig(raw[name])]
+    unit_score = None if active_w == 0 else round(weighted / active_w, 3)
+    return {"label": label, "score": unit_score, "items": items,
+            "review_suggestions": suggestions}
+
+
+def score_rubric_units(answer_norm, units, unit_type="청구"):
+    """청구/죄책 단위 리스트를 단위별 채점 → 평균 집계. note-structures.md 구조 정렬."""
+    if not (answer_norm or "").strip() or not units:
+        return {"score": None, "grade": "보류", "unit_type": unit_type, "units": [],
+                "review_suggestions": []}
+
+    scored = [score_unit(answer_norm, u) for u in units]
+    valid = [u["score"] for u in scored if u["score"] is not None]
+    overall = round(sum(valid) / len(valid), 3) if valid else None
+    grade = "보류" if overall is None else "O" if overall >= 0.8 else "△" if overall >= 0.5 else "X"
+
+    sug = []
+    for u in scored:
+        for r in u["review_suggestions"]:
+            if r not in sug:
+                sug.append(r)
+    if not sug and overall is not None:
+        sug = ["stable"]
+
+    return {"score": overall, "grade": grade, "unit_type": unit_type,
+            "units": scored, "review_suggestions": sug}
