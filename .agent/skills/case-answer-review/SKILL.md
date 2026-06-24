@@ -112,6 +112,8 @@ python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --s
 
 **실증(사례1, 강한 grounding):** 명백 결함 답안 3/3 △ 합의, 경계 답안 3/3 O(법리 △) 합의 — grounded 채점관은 등급에서 잘 안 갈린다. 따라서 패널 주가치는 '불일치 표출'이 아니라 ①합의=신뢰 ②약점 합집합 완전성 ③노이즈 필터. **비용 절감 옵션: 2명 + 불일치 시에만 3번째.** 실사용 시 Workflow(패널 N + 집계).
 
+**Workflow 저장:** `.claude/workflows/case-answer-panel-grade.js` (2026-06-23 검증). 호출 `Workflow({name:"case-answer-panel-grade", args:{과목,문제,해설,답안,배점표}})` — args 미지정 시 사례1 데모. 파이프라인: 채점관 3명 병렬 → JS 집계(등급 다수결·항목별 다수결·불일치 표출) → 집계자 1명(약점 dedup+review_type) → due 매핑(`_srs_review_type` 표) → 복습 등록안. 검증 실행에서 같은 답안이 등급 2:1(O/△)로 갈려 `검토필요=[법리,포섭,등급]` 자동 표출 — 단일 채점관이 놓칠 감점을 패널이 포착.
+
 ## 채점 루브릭·약점 연동 (2026-06-16 신설)
 
 출처: `sync/_meta/CODEX_BOOTSTRAP_REPORT.md` §17~19의 채택분. 기존 "초벌 평가"를 고정 루브릭으로 구체화한다.
