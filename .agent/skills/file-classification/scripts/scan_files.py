@@ -7,12 +7,10 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 TARGET_DIRS = [
-    r"h:\내 드라이브\민사",
-    r"h:\내 드라이브\형사",
-    r"h:\내 드라이브\로스쿨",
-    r"h:\내 드라이브\공법",
-    r"h:\내 드라이브\기타",
-    r"h:\내 드라이브\선택"
+    r"E:\법학볼트\1.민사",
+    r"E:\법학볼트\2.형사",
+    r"E:\법학볼트\3.공법",
+    r"E:\법학볼트\5.기타",
 ]
 
 EXCLUDE_EXT = {'.ini', '.json', '.py', '.ps1', '.bat', '.xml', '.db'}
@@ -48,7 +46,7 @@ for root_dir in TARGET_DIRS:
                 })
 
 # 파일로 저장
-with open(r'h:\내 드라이브\.agent\violation_report.json', 'w', encoding='utf-8') as f:
+with open(r'E:\법학볼트\.agent\violation_report.json', 'w', encoding='utf-8') as f:
     json.dump(violation_files, f, ensure_ascii=False, indent=2)
 
 print(f"Scan complete. Found {len(violation_files)} violations.")
