@@ -3,9 +3,7 @@ name: socratic-loader
 description: 소크라틱 세션 자동 로더. 전사문 분석, 교재 페이지 추출, 문제 검색. "소크라틱", "문답해줘", "공부하자" 요청 시 자동 실행.
 ---
 
-<!-- @rule: AGENTS.md#17 Verify-Before-Act -->
-<!-- @rule: AGENTS.md#17 Verify-Before-Act -->
-<!-- @rule: GEMINI.md#17 Verify-Before-Act -->
+<!-- @rule: CLAUDE.md#15 Verify-Before-Act -->
 
 # 소크라틱 세션 로더 Skill
 

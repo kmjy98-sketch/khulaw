@@ -3,12 +3,8 @@ name: socratic-core
 description: 소크라틱 학습 로직. 대화/생성/채점 모드, 스캐폴딩, 힌트 시스템. socratic-loader와 함께 사용.
 ---
 
-<!-- @rule: AGENTS.md#2 Not-in-Source -->
-<!-- @rule: AGENTS.md#2 Not-in-Source -->
-<!-- @rule: GEMINI.md#2 Not-in-Source -->
-<!-- @rule: AGENTS.md#3 Evidence Mandatory -->
-<!-- @rule: GEMINI.md#3 Evidence Mandatory -->
-<!-- @rule: AGENTS.md#3 Evidence Mandatory -->
+<!-- @rule: CLAUDE.md#2 Not-in-Source -->
+<!-- @rule: CLAUDE.md#3 Evidence Mandatory -->
 
 # 소크라틱 학습 코어 Skill
 

@@ -5,9 +5,7 @@ description: [RETIRED 2026-06-22 — 명시 요청 시에만] 전사문 분할 �
 
 # 전사문 도구 Skill
 
-<!-- @rule: AGENTS.md#17 Verify-Before-Act -->
-<!-- @rule: AGENTS.md#17 Verify-Before-Act -->
-<!-- @rule: GEMINI.md#17 Verify-Before-Act -->
+<!-- @rule: CLAUDE.md#15 Verify-Before-Act -->
 
 ## Quick Start
 

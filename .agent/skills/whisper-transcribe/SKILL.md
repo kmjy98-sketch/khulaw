@@ -5,9 +5,7 @@ description: [RETIRED 2026-06-22 — 명시 요청 시에만] 음성 전사(STT)
 
 # Whisper 전사 Skill
 
-<!-- @rule: AGENTS.md#30 Only-on-Request -->
-<!-- @rule: AGENTS.md#30 Only-on-Request -->
-<!-- @rule: GEMINI.md#30 Only-on-Request -->
+<!-- @rule: CLAUDE.md#28 Only-on-Request -->
 
 ## Quick Start
 
@@ -20,8 +18,6 @@ description: [RETIRED 2026-06-22 — 명시 요청 시에만] 음성 전사(STT)
 ```powershell
 python .agent/skills/whisper-transcribe/scripts/post_transcribe.py
 ```
-
-> 상세 워크플로우: `/colab-pipeline`
 
 ### 로컬 전사 (CPU, 느림)
 
@@ -84,5 +80,5 @@ scripts\transcribe_batch.bat <folder_path>
 - Colab 노트북: `colab_transcribe.ipynb`
 - 후처리 스크립트: `scripts/post_transcribe.py`
 - Whisper 바이너리 (로컬): `bin/` 폴더
-- 자세한 사용법: README.md, `/colab-pipeline` 참조
+- 자세한 사용법: README.md 참조
 

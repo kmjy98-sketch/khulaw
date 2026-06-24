@@ -22,7 +22,7 @@ from pathlib import Path
 from datetime import datetime
 
 # === 경로 설정 ===
-DRIVE_ROOT = Path(r"h:\내 드라이브")
+DRIVE_ROOT = Path(r"E:\법학볼트")
 AGENT_DIR = DRIVE_ROOT / ".agent"
 SKILLS_DIR = AGENT_DIR / "skills"
 LIB_DIR = AGENT_DIR / "lib"

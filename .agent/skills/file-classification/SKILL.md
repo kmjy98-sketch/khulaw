@@ -5,8 +5,7 @@ description: 파일 분류 및 정리(백스톱·레거시 inbox 청소용). 미
 
 # 파일 분류 Skill
 
-<!-- @rule: AGENTS.md#17 Verify-Before-Act -->
-<!-- @rule: GEMINI.md#17 Verify-Before-Act -->
+<!-- @rule: CLAUDE.md#15 Verify-Before-Act -->
 
 ## Quick Start
 

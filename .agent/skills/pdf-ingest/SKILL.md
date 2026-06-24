@@ -5,8 +5,7 @@ description: PDF → 마크다운 청크 추출. 네이티브(pypdf/pdfplumber)�
 
 # PDF Ingest Skill
 
-<!-- @rule: AGENTS.md#9 PDF Handling -->
-<!-- @rule: GEMINI.md#9 PDF Handling -->
+<!-- @rule: CLAUDE.md#9 PDF Handling -->
 
 PDF → 마크다운 청크 추출 전용. 인덱싱은 `sync/_교재원문/` 하위에 파일 배치 후 `qmd update && qmd embed`가 자동 처리한다.
 

@@ -5,7 +5,7 @@ description: 정리노트 마크다운(.md) → PDF 배치 변환. playwright+Ch
 
 # PDF Export Skill
 
-<!-- @rule: AGENTS.md#8 Output Minimalism -->
+<!-- @rule: CLAUDE.md#8 Output Minimalism -->
 <!-- @rule: CLAUDE.md §1-5 PDF 산출물 경로 -->
 
 마크다운 정리노트를 시험용 A4 PDF로 배치 변환한다. 추출(PDF → md)은 `pdf-ingest`, 이 스킬은 **출력(md → PDF)** 전용.
@@ -105,7 +105,7 @@ pdf-export  (← 본 스킬, 시험 직전 출력)
 
 - 시험 직전 `.md` → PDF 일괄 출력
 - 오프라인 열람·인쇄용 배포본 생성
-- 중간·기말 대비 pack 빌드 (`book-to-notes.md` 워크플로우 연계)
+- 중간·기말 대비 pack 빌드 (`card-wiki-pipeline.md` 워크플로우 연계)
 
 ---
 

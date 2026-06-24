@@ -20,7 +20,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-DRIVE_ROOT = Path(r"h:\내 드라이브")
+DRIVE_ROOT = Path(r"E:\법학볼트")
 DEFAULT_OUTPUT_DIR = DRIVE_ROOT / "5.기타" / "_inbox" / "녹음" / "output"
 
 # 최소 글자수 — 이보다 짧은 텍스트 블록은 전사문이 아님

@@ -2,7 +2,7 @@
 
 ## 설치 완료
 
-- 위치: `h:\내 드라이브\.agent\whisper\`
+- 위치: `E:\법학볼트\.agent\whisper\`
 - 버전: v1.8.2
 - 실행 파일: `bin\Release\whisper-cli.exe`
 
@@ -11,7 +11,7 @@
 모델이 없으면 아래 명령 실행:
 
 ```powershell
-curl -L -o "h:\내 드라이브\.agent\whisper\models\ggml-small.bin" "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin"
+curl -L -o "E:\법학볼트\.agent\whisper\models\ggml-small.bin" "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin"
 ```
 
 - small 모델: ~466MB, 한국어 정확도 좋음
@@ -20,7 +20,7 @@ curl -L -o "h:\내 드라이브\.agent\whisper\models\ggml-small.bin" "https://h
 ## 사용법
 
 ```cmd
-h:\내 드라이브\.agent\whisper\transcribe.bat "C:\강의\민법입문.wav"
+E:\법학볼트\.agent\whisper\transcribe.bat "C:\강의\민법입문.wav"
 ```
 
 ## 출력

@@ -45,8 +45,8 @@ description: 수업노트 정리 워크플로우 - 노트 정리/수업정리/�
 요청을 받으면 백그라운드에서 다음 명령을 실행하여 컨텍스트를 수집하고 빈 템플릿을 생성하여 에이전트(LLM)가 채워 넣도록 합니다:
 
 ```bash
-python "h:\내 드라이브\.agent\skills\study-notes\scripts\collect.py" --target "{지정파일}" --mode "{concept/case/exam}"
-python "h:\내 드라이브\.agent\skills\study-notes\scripts\generate.py" --mode "{concept/case/exam}" --out "{저장경로/파일명.md}"
+python "E:\법학볼트\.agent\skills\study-notes\scripts\collect.py" --target "{지정파일}" --mode "{concept/case/exam}"
+python "E:\법학볼트\.agent\skills\study-notes\scripts\generate.py" --mode "{concept/case/exam}" --out "{저장경로/파일명.md}"
 ```
 
 ---
@@ -234,7 +234,7 @@ title: [개념명]
 ## 관련 파일 참조
 
 - 교재 참조 우선순위: [classification-rules.md](../skills/file-classification/resources/classification-rules.md)
-- 학습 원칙: [AGENTS.md](../../AGENTS.md#학습-행동-원칙)
+- 학습 원칙: [CLAUDE.md](../../CLAUDE.md) (#21~#25 학습 행동 원칙)
 - 기존 노트 보완: [law-note-supplement SKILL](../skills/law-note-supplement/SKILL.md) — augment/review/restructure 모드
 - 조문 원문 조회: `law_api.py`(법제처 직접 API) — qmd law-notes 컬렉션에 원문 없을 때 자동 호출
 

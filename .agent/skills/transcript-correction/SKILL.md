@@ -5,9 +5,9 @@ description: [RETIRED 2026-06-22 — 명시 요청 시에만] 전사문 교정 �
 
 # Transcript Correction Skill
 
-<!-- @rule: AGENTS.md#1 Source Grounding -->
-<!-- @rule: AGENTS.md#3 Evidence Mandatory -->
-<!-- @rule: AGENTS.md#17 Verify-Before-Act -->
+<!-- @rule: CLAUDE.md#1 Source Grounding -->
+<!-- @rule: CLAUDE.md#3 Evidence Mandatory -->
+<!-- @rule: CLAUDE.md#15 Verify-Before-Act -->
 
 ## Quick Start
 

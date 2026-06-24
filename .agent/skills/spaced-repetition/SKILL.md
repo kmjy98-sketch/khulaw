@@ -5,9 +5,7 @@ description: 간격 반복(SM-2) 복습 스케줄러. "복습 주기 계산", "�
 
 # Spaced Repetition Skill
 
-<!-- @rule: AGENTS.md#21 진도 추적 -->
-<!-- @rule: AGENTS.md#21 진도 추적 -->
-<!-- @rule: GEMINI.md#21 진도 추적 -->
+<!-- @rule: CLAUDE.md#19 진도 추적 -->
 
 ## Quick Start
 

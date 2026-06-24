@@ -6,7 +6,7 @@
 
 ## 0. 우선순위
 
-1. 루트 `AGENTS.md`와 과목별 `AGENTS.md`
+1. 루트 `CLAUDE.md`와 과목별 `AGENTS.md`
 2. 본 문서
 3. `sync/_meta/이식용_핸드오프_프롬프트_2026-06-15.md`
 4. `5.기타/프롬프트 등 개선/claude_code_package_v2/prompts/03-wiki-rollup_쟁점아티클_v1.md`
