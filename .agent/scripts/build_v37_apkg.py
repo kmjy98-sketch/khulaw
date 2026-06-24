@@ -14,8 +14,8 @@ import genanki
 from hanja import translate as h2k
 from _guid_stable import guid_seed, extract_uid  # 안정 note_key guid (card-wiki-pipeline §8.1)
 
-SRC = "H:/내 드라이브/outputs/02_cards_v37"
-OUT = "H:/내 드라이브/outputs/anki/v37/apkg"
+SRC = os.environ.get("V37_SRC", "H:/내 드라이브/outputs/02_cards_v37")
+OUT = os.environ.get("V37_OUT", "H:/내 드라이브/outputs/anki/v37/apkg")
 DOUBLE = True  # 암기장: 완성문 Basic + cloze 둘 다 (사용자 선택)
 
 BOOK = [  # prefix → (회독그룹, 과목)
