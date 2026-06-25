@@ -7,6 +7,9 @@ OX/Cloze=정확매칭, 사례=패널(데모는 mock). 틀리면 약한 연관쟁
 import os
 import sys
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # 윈도우 cp949 콘솔 유니코드 출력 크래시 방지
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _study_engine import StudyEngine, grade_objective  # noqa: E402
 

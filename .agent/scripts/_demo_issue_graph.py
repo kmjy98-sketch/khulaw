@@ -3,6 +3,9 @@
 import os
 import sys
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # 윈도우 cp949 콘솔 유니코드 출력 크래시 방지
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _issue_graph_build import build_graph, to_engine_edges, to_engine_sources  # noqa: E402
 from _study_engine import StudyEngine  # noqa: E402
