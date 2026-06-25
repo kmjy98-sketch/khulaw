@@ -116,6 +116,8 @@ python .agent/skills/case-answer-review/scripts/render_case_answer_review.py --s
 
 ## 채점 루브릭·약점 연동 (2026-06-16 신설)
 
+> ⚠️ **디프리케이트(2026-06-23)**: 아래 가중 루브릭(쟁점0.25/키워드0.20/…)과 `render_case_answer_review.py`의 `provisional_grade`(coverage)는 **채점 본체가 아니다.** 채점은 위 "해설 원문 기준 LLM 비교"(패널)가 한다. 가중치 표는 **LLM이 참고하는 관점**일 뿐 스크립트 점수가 아니다. `provisional_grade`는 패킷의 coverage 신호로만 잔존(채점 점수로 쓰지 말 것).
+
 출처: `sync/_meta/CODEX_BOOTSTRAP_REPORT.md` §17~19의 채택분. 기존 "초벌 평가"를 고정 루브릭으로 구체화한다.
 > ※ 현재 스펙 문서화 단계 — render_case_answer_review.py(provisional_grade는 coverage 기반)에 본 가중치 루브릭·약점 연동이 아직 코드 반영되지 않았다(후속 과제, codex이관_claude환원_검토_2026-06-16.md §5). 채점 시 문서 루브릭은 수동 적용하고 자동 점수는 초벌로 해석한다.
 
