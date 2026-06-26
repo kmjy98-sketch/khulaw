@@ -219,6 +219,22 @@ def priority_label(item):
     return priority_from_score(item.get('last_score'))
 
 
+def retention_factor(subject, learning=None):
+    """S4(신경망연구 ⑤): 과목별 desired-retention 차등 — interval 승수.
+    learning.json['retention_factors'] = {과목: 승수, '_default': 1.0}. 낮을수록 자주
+    복습(고보존). 핵심 판례·조문 과목 0.85, 주변 1.0 식. 기본 1.0 = 무변화(미설정 시 순수 SM-2)."""
+    if learning is None:
+        try:
+            learning = load_data()
+        except Exception:
+            return 1.0
+    rf = (learning or {}).get('retention_factors', {}) or {}
+    try:
+        return float(rf.get(subject, rf.get('_default', 1.0)))
+    except (TypeError, ValueError):
+        return 1.0
+
+
 def calculate_next_review(item, score, exam_date=None):
     """SM-2 알고리즘으로 다음 복습일 계산.
 
@@ -270,6 +286,15 @@ def calculate_next_review(item, score, exam_date=None):
             compressed = max(1, round(days_to_exam * frac))
             # 시험 당일/이후 예약 금지 + 마감 인식 압축
             interval = min(interval, compressed, days_to_exam)
+
+    # --- S4: 과목별 desired-retention 차등 (기본 1.0 = 무변화, 신경망연구 ⑤) ---
+    rf = retention_factor(item_subject(item))
+    if rf != 1.0:
+        interval = max(1, round(interval * rf))
+        if exam_date is not None:  # 마감 캡 재적용(시험일 이후 예약 금지 보존)
+            d2e = (exam_date - datetime.now().date()).days
+            if d2e > 0:
+                interval = min(interval, d2e)
 
     next_date = (datetime.now() + timedelta(days=interval)).strftime('%Y-%m-%d')
 
