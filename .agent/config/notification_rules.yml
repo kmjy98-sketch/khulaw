@@ -1,0 +1,13 @@
+version: 1
+source: sync/_meta/CODEX_BOOTSTRAP_REPORT.md
+anki_update_needed:
+  pending_cards_min: 50
+  days_since_last_export_min: 7
+  repeated_error_cards_min: 10
+  category_milestone_enabled: true
+daily_outputs:
+  today_plan: .agent/state/law_study_today_plan.md
+  dashboard: .agent/state/law_study_progress_dashboard.md
+  review_queue: .agent/state/law_study_review_queue.md
+  weak_points: .agent/state/law_study_weak_points.md
+  anki_notice: .agent/state/law_study_anki_update_notice.md

@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(r"H:\내 드라이브")
 LABEL = "<!-- [표복구필요] 표 손상 흔적 검출 (2026-05-05). 원본 PDF 또는 백업 확인 필요. -->"
 
-manifest = json.loads((ROOT / "sync/_meta/표_복구_2026-05-05.json").read_text(encoding="utf-8"))
+manifest = json.loads((ROOT / "9.작업중/클로드/표_복구_2026-05-05.json").read_text(encoding="utf-8"))
 
 errors = 0
 verified = 0

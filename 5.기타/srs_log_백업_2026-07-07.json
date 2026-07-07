@@ -1,0 +1,91 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "권리남용 요건 (주관+객관)",
+      "topic": "권리주체_행위능력",
+      "ef": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "next_review": "2026-04-04",
+      "created": "2026-03-17",
+      "priority": "high",
+      "source": "weak_points"
+    },
+    {
+      "id": 2,
+      "content": "강행법규 위반 무효 주장",
+      "topic": "권리주체_행위능력",
+      "ef": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "next_review": "2026-04-04",
+      "created": "2026-03-17",
+      "priority": "high",
+      "source": "weak_points"
+    },
+    {
+      "id": 3,
+      "content": "성년후견인 당연 법정대리인",
+      "topic": "권리주체_행위능력",
+      "ef": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "next_review": "2026-04-04",
+      "created": "2026-03-17",
+      "priority": "high",
+      "source": "weak_points"
+    },
+    {
+      "id": 4,
+      "content": "특정후견 행위능력 무영향",
+      "topic": "권리주체_행위능력",
+      "ef": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "next_review": "2026-04-04",
+      "created": "2026-03-17",
+      "priority": "high",
+      "source": "weak_points"
+    },
+    {
+      "id": 5,
+      "content": "강박-불공정행위 성부",
+      "topic": "민법",
+      "ef": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "next_review": "2026-07-05",
+      "created": "2026-07-05",
+      "priority": "normal",
+      "source": "manual",
+      "subject": "민법"
+    },
+    {
+      "id": 6,
+      "content": "경개 성립요건",
+      "topic": "민법",
+      "ef": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "next_review": "2026-07-05",
+      "created": "2026-07-05",
+      "priority": "normal",
+      "source": "manual",
+      "subject": "민법"
+    },
+    {
+      "id": 7,
+      "content": "가담법 청산절차 위반 본등기 효력",
+      "topic": "민법",
+      "ef": 2.5,
+      "interval": 1,
+      "repetitions": 0,
+      "next_review": "2026-07-05",
+      "created": "2026-07-05",
+      "priority": "normal",
+      "source": "manual",
+      "subject": "민법"
+    }
+  ]
+}

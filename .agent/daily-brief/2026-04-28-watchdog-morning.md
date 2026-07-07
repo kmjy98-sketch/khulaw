@@ -1,0 +1,1 @@
+[Watchdog ALERT] 2026-04-28 10:00 — main morning 미생성/불완전. 자동 재발화 도구 sandbox 미지원. 사용자 수동 재발화 필요: claude.ai/code/routines/trig_01NSqSzMazfoL8KAweSPodFG 에서 [지금 실행]

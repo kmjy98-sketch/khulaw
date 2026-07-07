@@ -25,15 +25,20 @@ STATE = Path(vp(".agent", "state"))
 TARGETS = STATE / "anchor_verify_targets.json"
 RESULTS = STATE / "anchor_verify_results.jsonl"
 SUMMARY = STATE / "anchor_verify_summary.md"
-ENV = Path(vp(".agent", "skills", "korean-law-mcp", ".env"))
+ENV_PATHS = [Path(vp(".agent", "lib", ".env")),
+             Path(vp(".agent", "skills", "korean-law-mcp", ".env"))]  # #49 lib 우선·구 클론 폴백
 BASE = "https://www.law.go.kr/DRF/lawSearch.do"
 HUN = re.compile(r"헌[가나다라마바사아]")
 
 
 def api_key():
-    for line in ENV.read_text(encoding="utf-8").splitlines():
-        if line.startswith("LAW_API_KEY="):
-            return line.split("=", 1)[1].strip()
+    for _ep in ENV_PATHS:
+        try:
+            for line in _ep.read_text(encoding="utf-8").splitlines():
+                if line.startswith("LAW_API_KEY="):
+                    return line.split("=", 1)[1].strip()
+        except OSError:
+            continue
     raise SystemExit("LAW_API_KEY 없음")
 
 

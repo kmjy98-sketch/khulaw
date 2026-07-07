@@ -1,6 +1,6 @@
 ---
 name: textbook-reflow
-description: "OCR 후처리·PDF 추출 마크다운(법학 교재)을 Obsidian 최적화 레이아웃으로 일관화(Reflow). pdf-ingest(pypdf/easyocr) 산출물을 sync/_교재원문/ 배치 전 구조화. 트리거: \"교재 리플로우\", \"OCR 후처리\", \"일관화\", \"구조화해줘\", \"reflow\", \"PDF 마크다운 정리\"."
+description: "OCR 후처리·PDF 추출 마크다운(법학 교재)을 Obsidian 최적화 레이아웃으로 일관화(Reflow). pdf-ingest(pypdf/easyocr) 산출물을 outputs/01_ocr_llamaparse/ 배치 전 구조화(#46 정본, 구 경로 sync/_교재원문/는 이관됨). 트리거: \"교재 리플로우\", \"OCR 후처리\", \"일관화\", \"구조화해줘\", \"reflow\", \"PDF 마크다운 정리\"."
 ---
 
 # textbook-reflow

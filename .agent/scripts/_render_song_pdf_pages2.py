@@ -30,8 +30,8 @@ with open(manifest, encoding="utf-8") as f:
         render(fn, tag, pages=(0,1), zoom=2.0)
 
 # re-render high-zoom for the text-only small ones
-render(r"H:/내 드라이브/1.민사/30.송영곤_기본민법/교재/(1-1)[송영곤_변호사]_2026_논점민강(12판)_보충자료(1)-26.1.11.pdf","bochung1_1",(0,),2.2)
-render(r"H:/내 드라이브/1.민사/30.송영곤_기본민법/교재/논점민법강의_12판_보충자료1_26.pdf","bochung_root",(0,),2.2)
-render(r"H:/내 드라이브/1.민사/30.송영곤_기본민법/교재/민법_목차_송영곤_기본강의_26_2.pdf","mokcha_song",(0,),2.2)
-render(r"H:/내 드라이브/1.민사/30.송영곤_기본민법/교재/논점민법강의_채권관계1_p001-050_26.pdf","chaegwan1_split",(0,),1.6)
+render(r"H:/내 드라이브/1.민사/송영곤_기본민법/교재/(1-1)[송영곤_변호사]_2026_논점민강(12판)_보충자료(1)-26.1.11.pdf","bochung1_1",(0,),2.2)
+render(r"H:/내 드라이브/1.민사/송영곤_기본민법/교재/논점민법강의_12판_보충자료1_26.pdf","bochung_root",(0,),2.2)
+render(r"H:/내 드라이브/1.민사/송영곤_기본민법/교재/민법_목차_송영곤_기본강의_26_2.pdf","mokcha_song",(0,),2.2)
+render(r"H:/내 드라이브/1.민사/송영곤_기본민법/교재/논점민법강의_채권관계1_p001-050_26.pdf","chaegwan1_split",(0,),1.6)
 print("DONE")

@@ -1,0 +1,39 @@
+version: 1
+source: sync/_meta/CODEX_BOOTSTRAP_REPORT.md
+source_policy:
+  allowed:
+    - 사용자 제공 교재
+    - 사용자 제공 전사문
+    - 사용자 제공 정리노트
+    - korean-law-mcp 또는 국가법령정보센터 API 반환 원문
+  not_found_text: 자료 부족—보류
+  require_source_for_deduction: true
+evaluation_units:
+  - issue_spotting
+  - keyword_match
+  - structure_match
+  - conclusion_match
+  - application
+review_outputs:
+  markdown: true
+  json: true
+  sqlite_tables:
+    - attempts
+    - issue_results
+    - keyword_results
+    - conclusion_results
+    - review_queue
+    - weak_points
+    - anki_candidates
+card_creation_allowed_for:
+  - 핵심 키워드 반복 누락
+  - 결론 패턴 오류
+  - 포섭 체크포인트 반복 누락
+  - 판례 문구 암기 가치 있음
+  - 조문 구조 암기 가치 있음
+card_creation_forbidden_for:
+  - 자료 부족—보류
+  - source 없음
+  - 너무 긴 모범답안 전체
+  - 단순 표현 차이
+  - 1회성 사소한 실수

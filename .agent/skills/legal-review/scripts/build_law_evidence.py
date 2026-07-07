@@ -20,24 +20,10 @@ if sys.platform == "win32":
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parents[3]
-KLMCP_DIR = ROOT / ".agent" / "skills" / "korean-law-mcp"
-
-# korean-law-mcp .env 로드 (dotenv 없이 직접 파싱)
-def _load_env(env_path: Path) -> None:
-    if not env_path.exists():
-        return
-    for line in env_path.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        key, _, value = line.partition("=")
-        os.environ.setdefault(key.strip(), value.strip())
-
-_load_env(KLMCP_DIR / ".env")
-
-# korean-law-mcp src 경로 추가
-if str(KLMCP_DIR) not in sys.path:
-    sys.path.insert(0, str(KLMCP_DIR))
+# #49 korean-law-mcp 은퇴 → law_api.py(법제처 직접 API) 재배선. law_api가 자체 API 키(_load_key)를 로드한다.
+LIB_DIR = ROOT / ".agent" / "lib"
+if str(LIB_DIR) not in sys.path:
+    sys.path.insert(0, str(LIB_DIR))
 
 # 한국 법령명 패턴 (e.g. 민법, 형법, 근로기준법)
 _LAW_CITE_RE = re.compile(r"([가-힣]{2,}법(?:률)?)\s*제\s*(\d+)\s*조", re.UNICODE)
@@ -83,11 +69,11 @@ def extract_references(text: str) -> dict:
 
 
 def _import_tools():
-    """korean-law-mcp tools 모듈 임포트. 실패 시 None 반환."""
+    """law_api(법제처 직접 API) 임포트. 실패 시 None 반환. (#49 korean-law-mcp 대체)"""
     try:
-        from src.tools import search_law, get_law_detail, search_precedent  # type: ignore
+        from law_api import search_law, get_law_detail, search_precedent  # type: ignore
         return search_law, get_law_detail, search_precedent
-    except Exception as e:
+    except Exception:
         return None, None, None
 
 

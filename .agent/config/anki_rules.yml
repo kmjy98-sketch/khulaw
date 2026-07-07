@@ -1,0 +1,40 @@
+version: 1
+source: sync/_meta/CODEX_BOOTSTRAP_REPORT.md
+paths:
+  batches: outputs/anki/law_study_batches
+  exported: outputs/anki/law_study_exported
+csv:
+  separator: Comma
+  html: true
+  notetype: LawBasic
+  deck_column: 2
+  tags_column: 7
+  columns:
+    - note_key
+    - deck
+    - front
+    - back
+    - extra
+    - source
+    - tags
+status_flow:
+  - draft
+  - pending
+  - batched
+  - exported
+  - updated
+  - suspended
+  - rejected
+export_guard:
+  require_source_file: true
+  require_source_location: true
+  skip_if_contains:
+    - 자료 부족—보류
+    - source 없음
+limits:
+  default_batch_limit: 50
+  default_new_card_limit: 40
+  repeated_error_limit: 10
+duplicate_policy:
+  note_key_unique: true
+  merge_same_issue_card_type_front: true

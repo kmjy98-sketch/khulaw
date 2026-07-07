@@ -6,7 +6,7 @@ description: 정리노트 마크다운(.md) → PDF 배치 변환. playwright+Ch
 # PDF Export Skill
 
 <!-- @rule: CLAUDE.md#8 Output Minimalism -->
-<!-- @rule: CLAUDE.md §1-5 PDF 산출물 경로 -->
+<!-- @rule: CLAUDE.md #42 파일 생성 위치(비노트 산출 문서) -->
 
 마크다운 정리노트를 시험용 A4 PDF로 배치 변환한다. 추출(PDF → md)은 `pdf-ingest`, 이 스킬은 **출력(md → PDF)** 전용.
 
@@ -29,7 +29,7 @@ python .agent/skills/pdf-export/generate_notes_pdf.py --src "파일1.md" "파일
 
 ### 출력 경로 규정
 
-CLAUDE.md §1-5에 따라 모든 PDF 산출물은 다음 경로에 둔다:
+CLAUDE.md #42(파일 생성 위치)에 따라 모든 PDF 산출물은 다음 경로에 둔다:
 
 ```
 5.기타/정리노트PDF/{YYYY-MM-DD}/
@@ -111,6 +111,6 @@ pdf-export  (← 본 스킬, 시험 직전 출력)
 
 ## 제약 사항
 
-- `sync/` 볼트에 PDF를 **저장하면 안 됨** (CLAUDE.md §1-5).
+- `sync/` 볼트에 PDF를 **저장하면 안 됨** (CLAUDE.md #42).
 - Mermaid·KaTeX 등 고급 렌더링은 현재 미지원(필요 시 CSS·확장 추가 후 확장).
 - 한자 렌더링은 시스템 서체 의존. CLAUDE.md 피드백(feedback_no_hanja)에 따라 노트 원본 단계에서 한자 제거 권장.

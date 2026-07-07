@@ -1,0 +1,60 @@
+[1] PDF: H:\³» µå¶óÀÌºê\sync\_±³Àç¿ø¹®\Çå¹ý\º¯»ç±â_Çå¹ý\2025_Çå¹ý_º¯»ç±â.pdf  exists=True
+[2] rasterize page 1 at dpi=120 BEFORE pipeline load ...
+    image shape: (1214, 860, 3)  (3.0 MB)
+[3] paddlex import + create_pipeline (mobile config) ...
+    paddlex 3.5.1
+[32mCreating model: ('PP-LCNet_x1_0_doc_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_doc_ori`.[0m
+Á¤º¸: Á¦°øµÈ ÆÐÅÏ¿¡ ÇØ´çµÇ´Â ÆÄÀÏÀ» Ã£Áö ¸øÇß½À´Ï´Ù.
+C:\pdocr\Lib\site-packages\paddle\utils\cpp_extension\extension_utils.py:711: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+[32mCreating model: ('UVDoc', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\UVDoc`.[0m
+[32mCreating model: ('PP-DocLayout-S', None, None)[0m
+[33mChecking connectivity to the model hosters, this may take a while. To bypass this check, set `PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK` to `True`.[0m
+[32mUsing official model (PP-DocLayout-S), the model files will be automatically downloaded and saved in `C:\Users\111\.paddlex\official_models\PP-DocLayout-S`.[0m
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  17%|#6        | 1/6 [00:00<00:02,  2.29it/s]Fetching 6 files:  83%|########3 | 5/6 [00:02<00:00,  2.01it/s]Fetching 6 files: 100%|##########| 6/6 [00:02<00:00,  2.43it/s]
+[32mCreating model: ('PP-DocLayout-S', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-DocLayout-S`.[0m
+[32mCreating model: ('PP-LCNet_x1_0_textline_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_textline_ori`.[0m
+[32mCreating model: ('PP-OCRv5_mobile_det', None, None)[0m
+[32mUsing official model (PP-OCRv5_mobile_det), the model files will be automatically downloaded and saved in `C:\Users\111\.paddlex\official_models\PP-OCRv5_mobile_det`.[0m
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  17%|#6        | 1/6 [00:00<00:01,  3.73it/s]Fetching 6 files:  33%|###3      | 2/6 [00:00<00:00,  4.22it/s]Fetching 6 files:  83%|########3 | 5/6 [00:01<00:00,  4.35it/s]Fetching 6 files: 100%|##########| 6/6 [00:01<00:00,  5.15it/s]
+[32mCreating model: ('PP-OCRv5_mobile_rec', None, None)[0m
+[32mUsing official model (PP-OCRv5_mobile_rec), the model files will be automatically downloaded and saved in `C:\Users\111\.paddlex\official_models\PP-OCRv5_mobile_rec`.[0m
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  17%|#6        | 1/6 [00:00<00:01,  2.55it/s]Fetching 6 files:  83%|########3 | 5/6 [00:01<00:00,  3.22it/s]Fetching 6 files: 100%|##########| 6/6 [00:01<00:00,  3.80it/s]
+[32mCreating model: ('PP-LCNet_x1_0_table_cls', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_table_cls`.[0m
+[32mCreating model: ('SLANeXt_wired', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\SLANeXt_wired`.[0m
+[32mCreating model: ('SLANet_plus', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\SLANet_plus`.[0m
+[32mCreating model: ('RT-DETR-L_wired_table_cell_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\RT-DETR-L_wired_table_cell_det`.[0m
+[32mCreating model: ('RT-DETR-L_wireless_table_cell_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\RT-DETR-L_wireless_table_cell_det`.[0m
+[32mCreating model: ('PP-FormulaNet_plus-S', None, None)[0m
+[32mUsing official model (PP-FormulaNet_plus-S), the model files will be automatically downloaded and saved in `C:\Users\111\.paddlex\official_models\PP-FormulaNet_plus-S`.[0m
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  17%|#6        | 1/6 [00:00<00:03,  1.59it/s]Fetching 6 files:  50%|#####     | 3/6 [00:00<00:00,  4.69it/s]Fetching 6 files:  83%|########3 | 5/6 [00:12<00:03,  3.13s/it]Fetching 6 files: 100%|##########| 6/6 [00:12<00:00,  2.09s/it]
+    pipeline OK
+[4] predict (seal/formula/chart OFF for CPU memory) ...
+[32mCreating model: ('PP-LCNet_x1_0_doc_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_doc_ori`.[0m
+[32mCreating model: ('PP-LCNet_x1_0_textline_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_textline_ori`.[0m
+[32mCreating model: ('PP-OCRv5_mobile_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-OCRv5_mobile_det`.[0m
+[32mCreating model: ('PP-OCRv5_mobile_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-OCRv5_mobile_rec`.[0m
+    got 1 result objects
+    --- result 0 ---
+    type: LayoutParsingResultV2
+    attrs (29): ['MARKDOWN_SAVE_KEYS', 'clear', 'copy', 'fromkeys', 'get', 'html', 'img', 'items', 'json', 'keys', 'latex', 'markdown', 'pop', 'popitem', 'print', 'save_all', 'save_to_html', 'save_to_img', 'save_to_json', 'save_to_latex', 'save_to_markdown', 'save_to_word', 'save_to_xlsx', 'setdefault', 'str', 'update', 'values', 'word', 'xlsx']
+    json keys: ['res']
+    saved -> H:\³» µå¶óÀÌºê\.agent\notebooks\_dryrun_result.json
+    markdown attr type: dict
+    markdown keys: ['markdown_texts', 'markdown_images', 'page_continuation_flags', 'page_index', 'input_path']
+    save_to_markdown -> H:\³» µå¶óÀÌºê\.agent\notebooks\_dryrun_save
+      1777129886_3101.md  (0)
+[5] DONE

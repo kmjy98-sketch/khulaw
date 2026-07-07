@@ -1,0 +1,324 @@
+# Claude Legal 플러그인의 Codex 이식 시도 조사 보고서
+
+이 조사는 entity["company","Anthropic","ai company"]의 Knowledge Work Plugins 중 **Legal 플러그인**을 “Claude Legal(클로드 리걸)”의 공개 원형으로 보고, 이를 entity["company","OpenAI","ai company"] **Codex(코덱스)**의 Agent Skills 아키텍처로 이식(포팅)하는 관점에서 코드·문서·이슈/PR·라이선스 및 이식 난점을 분석했다. citeturn8view0turn22view2turn14view3turn15view0  
+결론적으로, 원본 Legal 플러그인 자체가 “파일 기반(마크다운/JSON)”이며 하위 기능이 `SKILL.md`로 구성되어 **Agent Skills 표준과의 구조적 공통분모가 커서** 핵심 기능은 “디렉터리 재배치 + MCP 구성 변환 + 운영 가드레일(승인/샌드박스)” 중심으로 이식 가능성이 높다. citeturn32view2turn22view2turn14view3turn15view0  
+다만 실제 운용에서는 (a) 인증/토큰의 로컬 캐시·보관, (b) 네트워크 기본 차단 및 승인 정책, (c) 민감한 계약·개인정보 문서 처리(관할권/규정 변화 포함)가 핵심 리스크이며, 이를 전제로 단계적 롤아웃과 거버넌스 설계가 필요하다. citeturn13view0turn14view1turn25view2turn29search0turn29search5  
+
+## 조사 범위와 방법
+
+본 요청은 “GitHub ‘듵’ 저장소”를 특정하지만, **저장소 URL/소유자/정확한 리포지터리 식별자**가 본문에 명시되지 않아 공개 웹 기준으로 “듵”이라는 이름의 단일 저장소를 확정할 수 없었다(따라서 해당 항목은 ‘명시되지 않음’ 처리). 대신, 공개적으로 확인 가능한 “법무(legal) 플러그인” 원본으로서 **anthropics/knowledge-work-plugins의 `legal/`** 디렉터리를 1차 원본으로 분석하고, “Codex에서 바로 설치·사용을 전면 표방”하는 **evolsb/claude-legal-skill**을 2차 비교·검증 샘플로 활용했다. citeturn8view0turn9view0turn30view0  
+
+요청에서 “코덱스(Codecx)”는 표기가 혼재되어 있으나, 본 보고서는 (1) OpenAI 공식 Codex 문서가 제공하는 **Agent Skills / MCP / Authentication / Sandboxing** 체계를 “코덱스 플러그인 아키텍처”로 정의해 정리한다(바로 이 체계가 Git 기반의 ‘스킬(=플러그인 유사) 패키지’ 확장점을 제공). citeturn14view3turn14view0turn14view2turn14view1  
+
+요청사항·제약 중 “명시되지 않음” 항목은 아래와 같다.
+
+| 항목 | 본 요청에서의 상태 |
+|---|---|
+| ‘듵’ 저장소의 정확한 URL/owner/repo | **명시되지 않음** |
+| 목표 Codex 실행 환경(CLI/IDE/앱/클라우드) | **명시되지 않음** (Codex 문서 기준 공통사항으로 분석) citeturn14view3turn14view0 |
+| 목표 관할권(예: 한국법/미국법/혼합) 및 언어 정책 | **명시되지 않음** (원본은 관할권 커스터마이징 필요성이 이슈로 제기됨) citeturn29search0turn22view2 |
+| 조직의 보안 등급/데이터 분류/보관·파기 정책 | **명시되지 않음** |
+| 외부 SaaS(예: Slack/Box/CLM/CRM) 실제 연결 대상 및 인증 방식 | **명시되지 않음** (원본은 MCP 서버 템플릿만 제공) citeturn22view0turn22view1turn14view0 |
+
+## 대상 코드·문서 식별
+
+### 원본으로 확인되는 “Claude Legal” 플러그인 자산
+
+Knowledge Work Plugins 루트 문서는 플러그인들이 **직무별(legal 포함)로 skills/commands/connectors를 묶어 제공**하며, 공통 구조로 `.claude-plugin/plugin.json`, `.mcp.json`, `commands/`, `skills/`를 명시한다. citeturn32view2turn8view0  
+그 중 `legal/`은 “계약 검토, NDA 분류, 컴플라이언스, 리스크 평가, 회의 준비, 템플릿 응답”을 수행하는 **Legal Productivity Plugin**으로 문서화되어 있고, 설치 및 플레이북(로컬 설정) 구성(`legal.local.md`)과 MCP 연계를 핵심 작동 원리로 제시한다. citeturn22view2turn9view0  
+
+아래 표는 `legal/`에서 확인되는 핵심 파일·문서·이슈·PR을 “주요 목록”으로 정리한 것이다(요청의 “링크”는 인용을 통해 제공).
+
+| 구분 | 식별 대상 | 역할/의미 | 근거 |
+|---|---|---|---|
+| 저장소(원본 후보) | `anthropics/knowledge-work-plugins` | Cowork/Claude Code용 플러그인 모음(legal 포함) | citeturn8view0turn32view2 |
+| 플러그인 루트 | `legal/` | “Legal Productivity Plugin” 본체 디렉터리 | citeturn9view0turn22view2 |
+| 매니페스트 | `legal/.claude-plugin/plugin.json` | 플러그인 이름·버전·설명·작성자(Anthropic) | citeturn17view0 |
+| 커넥터 설정(템플릿) | `legal/.mcp.json` | Slack/Box/Egnyte/Atlassian/M365/DocuSign 등 MCP 서버 엔드포인트 템플릿 | citeturn22view0 |
+| 커넥터 가이드 | `legal/CONNECTORS.md` | `~~category` 플레이스홀더 방식(도구 불가지론), 포함 서버/대안 표 | citeturn22view1 |
+| 플러그인 README | `legal/README.md` | 설치, 플레이북(`legal.local.md`), 주요 커맨드/워크플로우, 구조 설명 | citeturn22view2turn9view0 |
+| 라이선스 | `legal/LICENSE` | Apache License 2.0 | citeturn22view3turn9view0 |
+| 커맨드 디렉터리 | `legal/commands/` | 사용자 호출형 슬래시 커맨드 문서들 | citeturn23view0 |
+| 커맨드 예시 | `commands/review-contract.md` | /review-contract 절차·출력 포맷 | citeturn24view0 |
+| 커맨드 예시 | `commands/triage-nda.md` | /triage-nda 기준·분류(G/Y/R) | citeturn24view1 |
+| 스킬 디렉터리 | `legal/skills/` | 자동 발화(암시적) 기반 지식/절차 패키지(SKILL.md) | citeturn18view0 |
+| 스킬 예시 | `skills/review-contract/SKILL.md` | “협상 플레이북 기반 계약 검토/레드라인 생성” 상세 절차 | citeturn21view0 |
+| 스킬 예시 | `skills/triage-nda/SKILL.md` | NDA 스크리닝 체크리스트 및 라우팅 | citeturn28view0 |
+| 스킬 예시 | `skills/compliance-check/SKILL.md` | 컴플라이언스 체크(규정 변화 경고 포함, GDPR 등 개요) | citeturn25view2 |
+| 스킬 예시 | `skills/legal-response/SKILL.md` | 템플릿 기반 응답 + 에스컬레이션 트리거 | citeturn25view3 |
+| 이슈(국제화/관할권) | Issue #30 | README에 “미국 중심 예시” 및 관할권 커스터마이징 고지 제안 | citeturn7view0turn29search0 |
+| 이슈(거버넌스/감사추적) | Issue #65 | 규제 산업용 거버넌스/컴플라이언스 플러그인 제안(문서 분류·감사추적 등) | citeturn29search5 |
+| PR(법무 플러그인 연계 확장) | PR #53 | e-signature 플러그인 추가 및 legal 플러그인에 서명 워크플로우 통합 | citeturn31search1 |
+| PR(‘codex-cli’ 어댑터 시도 단서) | PR #48 일부 변경 | “adapter_id: codex-cli”가 포함된 AGENTS.md(매니페스트) 추가가 보임 | citeturn31search2 |
+
+### Codex 대상으로의 “이식 시도”를 뒷받침하는 보조 관측
+
+1) Codex 공식 문서는 “Agent Skills”를 Codex 확장 메커니즘으로 정의하며, 스킬이 `SKILL.md`(필수) 중심의 디렉터리라는 점을 명시한다. citeturn14view3turn11view0  
+2) 원본 Legal 플러그인도 실제로 `skills/<name>/SKILL.md` 형태를 사용한다(예: `review-contract`, `triage-nda`). citeturn18view0turn21view0turn28view0  
+3) 별도 공개 저장소인 evolsb/claude-legal-skill은 “OpenAI Codex에 `~/.codex/skills/contract-review`로 설치”를 직접 안내하며, Codex 대응 배포 형태(스킬 디렉터리 복제)를 이미 구현한 사례다. citeturn30view0  
+
+## Codex 플러그인 아키텍처
+
+image_group{"layout":"carousel","aspect_ratio":"16:9","query":["OpenAI Codex CLI screenshot","OpenAI Codex agent skills diagram","Model Context Protocol MCP diagram","Anthropic Claude Cowork plugins screenshot"],"num_per_query":1}
+
+### 플러그 인터페이스로서의 Agent Skills
+
+Codex에서 “플러그인에 준하는 확장 단위”는 **Agent Skill**이며, 기본 구성은 “디렉터리 + `SKILL.md`(필수) + 선택적 scripts/references/assets + 선택적 `agents/openai.yaml`”이다. citeturn14view3turn11view0  
+Codex는 스킬을 항상 전체 로드하지 않고, **메타데이터(name/description/path 등)만 먼저 인덱싱**한 뒤 필요할 때 `SKILL.md`를 로드하는 “progressive disclosure” 동작을 명시한다(컨텍스트 효율). citeturn14view3turn11view0  
+스킬 활성화는 (a) 사용자가 명시적으로 선택, (b) description 기반의 암시적 매칭으로 이루어지며, 암시적 매칭 품질이 `description`에 좌우된다고 설명한다. citeturn14view3turn11view0  
+
+### 스킬 저장 위치·배포·버전 관리 규칙
+
+Codex는 스킬을 여러 “스코프”에서 읽으며, **저장소 기준으로는 `.agents/skills`를 현재 작업 디렉터리부터 리포지터리 루트까지 스캔**한다고 명시한다(중복 name은 병합하지 않음). citeturn11view0turn14view3  
+공식 배포/공유 관점에서는 `openai/skills` 저장소가 “Codex에서 사용/배포되는 스킬 카탈로그”로 설명되며, `$skill-installer`로 설치하거나 GitHub 디렉터리 URL로도 설치 가능하다고 안내한다. citeturn15view1turn11view0  
+`openai/skills`는 **개별 스킬의 라이선스가 스킬 디렉터리의 `LICENSE.txt`에 있다**고 명시한다(즉, 이식·재배포 시 스킬 단위 라이선스 동봉이 사실상 규칙). citeturn15view1  
+
+### 인증·권한 모델
+
+Codex 인증은 “ChatGPT 로그인(구독 기반)”과 “API Key 로그인(사용량 기반)” 두 경로를 제공하며, 클라우드 환경에서는 ChatGPT 로그인 필요성을 명시한다. citeturn14view2  
+또한 “어떤 로그인 방식을 쓰는지에 따라 적용되는 관리자 제어 및 데이터 처리 정책이 달라진다”고 하며, ChatGPT 로그인 시 ChatGPT 워크스페이스 권한/RBAC/보존·레지던시 설정을, API Key 로그인 시 API 조직의 보존/데이터 공유 설정을 따른다고 설명한다. citeturn14view2  
+로그인 캐시와 관련해, Codex가 로그인 정보를 로컬에 캐시하며 경로로 `~/.codex/auth.json`(plaintext) 또는 OS별 자격 증명 저장소를 언급한다(보안 설계 시 중요한 사실). citeturn13view0  
+
+### 네트워크·도구 연결(MCP) 및 데이터 포맷 요구사항
+
+Codex는 **MCP(Model Context Protocol)** 로 외부 도구/컨텍스트를 연결하며, STDIO 서버(로컬 프로세스)와 Streamable HTTP 서버를 지원하고 HTTP 서버의 Bearer token 인증 및 OAuth 인증을 언급한다. citeturn14view0turn13view7  
+MCP 구성은 `config.toml`에 저장되며(기본 `~/.codex/config.toml`), “신뢰된 프로젝트”에서는 프로젝트 단위 `.codex/config.toml`도 지원한다고 밝힌다. citeturn14view0  
+구성 레퍼런스에는 MCP 서버별로 `enabled_tools/disabled_tools`, `http_headers`, `oauth_resource`, `scopes`, 토큰을 환경 변수로 주입하는 `env_http_headers` 같은 키들이 제시되어 “인증/권한/헤더 전달이 설정 파일 중심”임을 보여준다. citeturn13view11  
+
+### 샌드박스·승인·네트워크 기본 정책
+
+Codex는 안전 운용을 위해 **Sandbox mode(기술적으로 가능한 범위)** 와 **Approval policy(실행 전 사용자 승인 요구)** 를 결합한다고 설명하며, 기본적으로 네트워크 접근이 꺼져 있다고 명시한다. citeturn14view1turn13view6  
+로컬(CLI/IDE)에서는 OS 수준 샌드박스를 사용하고, `workspace-write` 기본 모드가 네트워크 접근을 꺼둔 채로 동작하며, 설정으로 `network_access = true`를 켤 수 있다는 예시를 제시한다. citeturn13view6  
+클라우드 실행의 경우 “의존성 설치가 가능한 setup 단계 후, agent 단계는 기본 오프라인”이고 “클라우드 환경의 시크릿은 setup 단계에서만 제공되고 agent 단계 전에 제거”된다고 설명한다(민감정보 처리 설계에 직결). citeturn14view1  
+
+## 기능 매핑
+
+### 원본 Claude Legal 기능 분해
+
+Legal 플러그인 README는 계약 검토, NDA 트리아지, 벤더 체크, 브리핑, 템플릿 응답, 컴플라이언스 워크플로우를 명시하며, 플레이북은 `legal.local.md`로 로컬 커스터마이징하는 구성을 제시한다. citeturn22view2  
+구체 세부 동작은 각 커맨드/스킬 문서에 포함되며, 예를 들어 계약 검토는 “클로즈 데드라인/당사자 역할/중점 영역을 먼저 수집 → 플레이북 로드 → 조항별 분석 → GREEN/YELLOW/RED 분류 → 레드라인 제시”로 절차화되어 있다. citeturn21view0turn24view0  
+
+### Codex 구현 가능성 및 변경 사항 표
+
+아래 표는 “원본 기능”을 Codex에서 구현할 때의 **가능 여부 / 필요 변경 / 난이도**를 정리한 것이다(요청사항·제약이 없었던 “목표 운영 수준(완전자동/보조도구)”은 명시되지 않음).
+
+| 기능 단위 | 원본 구현(근거) | Codex 구현 가능? | Codex용 변경사항 요약 | 예상 난이도 |
+|---|---|---|---|---|
+| 플러그인 메타/버전 | `plugin.json`에 name/version/description | **부분 가능** | Codex는 “플러그인 매니페스트” 대신 스킬 메타데이터(Front matter) 중심이므로, `plugin.json` 정보는 “스킬 description/README”로 흡수하거나 별도 문서로 유지 | 낮음 citeturn17view0turn14view3 |
+| 계약 검토(플레이북 기반) | `/review-contract` + `review-contract/SKILL.md` | **가능** | (1) 스킬을 `.agents/skills/review-contract/`로 재배치, (2) 플레이북 파일(`legal.local.md`)을 Codex가 쉽게 참조하도록 규약(경로/파일명)을 고정, (3) 산출물 형식(요약/조항별/레드라인)을 유지 | 낮음~중간 citeturn21view0turn24view0turn11view0 |
+| NDA 트리아지(G/Y/R) | `/triage-nda` + `triage-nda/SKILL.md` | **가능** | 스킬 재배치 + (선택) 조직별 NDA 기준을 로컬 플레이북에 구조화(템플릿 제공) | 낮음 citeturn28view0turn24view1turn11view0 |
+| 벤더 계약 현황 조회 | `vendor-check/SKILL.md` | **가능(도구 의존)** | CLM/CRM/메일/스토리지 등 MCP 연결이 있어야 “자동 조회” 가능. 설정은 `.mcp.json` → `config.toml` 변환 필요 | 중간 citeturn28view1turn22view0turn14view0turn13view11 |
+| 컴플라이언스 체크 | `compliance-check/SKILL.md` | **가능(정확도·최신성 이슈)** | (1) “규정 변화” 경고는 유지하되, (2) 최신 규제/가이드 반영을 원하면 웹/DB/MCP 기반 레퍼런스 소스 설계 필요. Codex 기본 네트워크 오프를 고려해 “허용 목록 기반” 접근 권장 | 중간~높음 citeturn25view2turn14view1turn13view6 |
+| 템플릿 기반 법무 응답 | `legal-response/SKILL.md` 및 `/respond` | **가능** | 템플릿 저장 위치(예: `legal.local.md` 또는 `templates/`)를 결정하고, “에스컬레이션 트리거”를 검사하는 절차를 스킬에 유지 | 낮음~중간 citeturn25view3turn24view3turn14view3 |
+| 데일리/토픽/인시던트 브리핑 | `/brief` | **가능(도구 의존)** | 이메일/캘린더/채팅/CLM 등 MCP 연결이 핵심. Codex 승인·샌드박스 정책에 따라 “조회 전 승인” UX를 설계 | 중간 citeturn24view2turn14view0turn14view1 |
+| 회의 준비(미팅 브리핑) | `meeting-briefing/SKILL.md` | **가능** | (1) 캘린더, 문서, 채팅을 MCP로 연결, (2) 산출물 형식(아젠다/리스크/질의 목록)을 스킬로 규정 | 중간 citeturn28view3turn14view0turn11view0 |
+| 서명/전자서명 워크플로우 | `/signature-request` + PR #53(e-signature 통합) | **가능(고위험)** | 전자서명은 “외부 시스템 변경(발송/취소/리마인드)”을 수반하므로 승인 정책을 강하게(기본 승인 필수, 위험 작업 자동거부 등) 설계. MCP 서버별 OAuth/토큰 스코프 관리 필요 | 높음 citeturn31search1turn14view1turn13view11 |
+| 도구 불가지론(placeholders) | `~~category` 규약 | **부분 가능** | Codex는 MCP 서버 id 기반 구성이므로, placeholders를 유지하려면 “스킬 문서에서 category→server id 매핑 규칙”을 별도 문서로 제공하거나 변환 스크립트로 구체화 | 중간 citeturn22view1turn14view0turn13view11 |
+
+## 기술적·법적·보안 이슈
+
+### 의존성·라이선스 호환성
+
+원본 Legal 플러그인은 `legal/LICENSE`에 **Apache-2.0** 전문을 포함한다. Apache-2.0은 파생물 재배포 시 라이선스 사본 포함, 변경 고지, (NOTICE가 있는 경우) 고지 유지 등의 의무가 발생할 수 있으므로, Codex용으로 재패키징할 때도 라이선스·고지 파일을 동봉하는 방식으로 설계해야 한다. citeturn22view3  
+Codex 스킬을 배포 카탈로그(예: `openai/skills` 스타일)로 운영한다면, “스킬 디렉터리 내 `LICENSE.txt`” 관행을 맞추는 것이 안전하다(원본이 LICENSE 파일을 제공하는 만큼 파일명/구조만 조정하면 됨). citeturn15view1  
+추가로, 비교 사례인 evolsb/claude-legal-skill은 Codex 설치 경로를 명시하며 별도 라이선스(MIT)를 사용한다. 만약 두 코드를 혼합(예: 원본 Anthropic 스킬 + evolsb의 redline 도구 체인)한다면 “스킬 단위로 라이선스 경계를 분리”하고 각각의 라이선스를 명확히 동봉하는 전략이 현실적이다. citeturn30view0turn15view1  
+
+### 개인정보·법률문서 취급 시 보안·컴플라이언스 고려
+
+원본 Legal 플러그인은 “법률 자문이 아니며, 변호사 검토가 필요”하다는 면책을 명시한다(품질·책임 경계 설정). citeturn22view2turn21view0  
+또한 관할권 문제에 대해 “기본 예시가 미국 중심이므로, EU/UK/기타 관할권에서는 `.claude/legal.local.md`(플레이북) 커스터마이징이 필요”하다는 이슈가 제기되어 있어, 한국어/한국법을 목표로 한다면 “플레이북 로컬라이제이션”이 이식의 기능적 핵심 요구사항이 된다. citeturn7view0turn29search0  
+컴플라이언스 체크 스킬 문서 자체도 “규제는 자주 바뀌므로, 권위 있는 소스로 검증해야 한다”고 경고하며, GDPR 등 주요 프라이버시 체계를 개략적으로 정리한다. 즉, Codex 이식 시 “정적 문서(스킬)만으로 최신성 보장 불가”라는 점을 전제로, (a) 내부 준거 문서(정책/표준) 기반, 또는 (b) MCP로 연결된 신뢰 가능한 리서치 소스 기반으로 운영 모델을 선택해야 한다. citeturn25view2  
+
+### 인증·토큰 관리와 운영 위험
+
+Codex는 로그인 정보를 로컬에 캐시하며, plaintext 파일(`~/.codex/auth.json`) 가능성을 명시한다. 따라서 민감한 법무 문서를 다루는 워크로드에서는 (1) 해당 파일의 접근권한 제한, (2) 디바이스 엔드포인트 보안, (3) 비신뢰 환경에서의 실행 금지(문서에서도 API 키 인증을 CI/CD에 권장하되 “비신뢰/공개 환경에 노출 금지”를 경고) 같은 운영 통제가 필요하다. citeturn13view0turn13view1  
+또한 “ChatGPT 로그인 vs API Key 로그인”이 데이터 처리 정책(워크스페이스 권한/RBAC/보존·레지던시 vs API 조직 설정)에 영향을 준다고 하므로, 법무/PII 데이터의 보존·거버넌스 요구가 강한 조직은 “어떤 인증 경로로 Codex를 쓸지”를 설계 단계에서 확정해야 한다. citeturn14view2  
+MCP는 HTTP/Bearer token 또는 OAuth 인증을 지원하며, 설정 레퍼런스는 서버별 OAuth 스코프/리소스 파라미터까지 포함한다. 이식 과정에서 `.mcp.json`(원본) → `config.toml`(Codex) 변환 시 **토큰의 최소권한(least privilege)** 과 스코프 관리를 설계하지 않으면, 법무 문서가 광범위한 외부 SaaS로 유출될 수 있다. citeturn14view0turn13view11turn22view0  
+
+### 외부 API 호출·네트워크 제한 및 보안 경계
+
+Codex는 기본적으로 네트워크 접근이 꺼져 있고, 샌드박스/승인 정책으로 에이전트의 실행을 통제한다고 설명한다. 법무 플러그인의 많은 기능(메일/캘린더/CLM/전자서명)은 네트워크·외부 도구 호출이 전제이므로, “네트워크를 켜는 순간” 승인지점/허용목록/자동거부 규칙을 어떻게 둘지가 이식 성공의 실질적 관문이다. citeturn14view1turn13view6turn14view0  
+특히 전자서명 워크플로우는 PR 수준에서 “legal 플러그인에 e-signature 도구 플레이스홀더를 통합”하는 시도가 관측되지만, 이는 곧 “문서 발송/취소 같은 불가역적 행위”를 의미하므로 Codex 측에서는 danger-full-access/YOLO 계열을 배제하고, 최소한 “승인 필수 + 위험 범주 자동 거부” 같은 정책을 강제할 필요가 있다. citeturn31search1turn13view5turn14view1  
+또한 규제 산업을 위한 거버넌스/감사추적 요구(문서 분류, AI 의사결정 감사) 자체가 별도 플러그인 제안 이슈로 존재하므로, 법무 이식 프로젝트는 “기능 구현”과 별개로 “감사·통제 레이어(로그/추적/승인)”를 산출물로 포함시키는 것이 합리적이다. citeturn29search5  
+
+## 이식 로드맵과 샘플 변환
+
+### 단계별 구현 로드맵
+
+원본 Legal 플러그인은 “커맨드(사용자 호출) + 스킬(암시적 전문지식) + MCP 연결 + 로컬 플레이북”이라는 구조다. citeturn32view2turn22view2turn22view0  
+Codex는 “스킬 디렉터리 + MCP(config.toml) + 샌드박스/승인 + (선택) AGENTS.md”를 제공하므로, 이식은 크게 **(A) 스킬 패키징, (B) MCP 구성 변환, (C) 운영 가드레일** 3축으로 짜는 것이 적절하다. citeturn14view3turn14view0turn14view1turn13view13  
+
+아래는 “명시되지 않은 팀/범위”를 보수적으로 가정한 표준 로드맵 예시다(기간·인력은 추정치이며, 조직 요구사항이 없으므로 일부는 ‘명시되지 않음’).
+
+| 단계 | 우선순위 | 산출물 | 추정 기간 | 인력·기술 요구사항 |
+|---|---|---|---|---|
+| 범위 확정·데이터 분류 | 최우선 | (1) 목표 관할권/언어 정책(명시되지 않음), (2) 문서 분류 기준(PII/기밀), (3) 허용 MCP 목록/권한표 | 3~5일 | 법무(도메인), 보안/거버넌스, 엔지니어링 리드 |
+| 스킬 이식 MVP | 최우선 | `.agents/skills/`에 핵심 3종(계약 검토, NDA 트리아지, 템플릿 응답) 이식 + README | 1~2주 | TS/Node(선택 스크립트), 마크다운/프롬프트 엔지니어링 |
+| MCP 구성 변환 | 상 | `.mcp.json` → `config.toml` 매핑 스크립트 + 샘플 설정(토큰은 env var) | 3~7일 | TOML/보안(토큰 최소권한), MCP 이해 citeturn14view0turn13view11turn22view0 |
+| 운영 가드레일 | 상 | Codex 샌드박스/승인 정책 템플릿(네트워크 기본 off, 위험 작업 승인 필수) | 3~7일 | Codex 운영(승인/샌드박스) citeturn14view1turn13view6 |
+| 도구 의존 기능 확장 | 중 | 벤더 체크/브리핑/회의준비를 MCP 연결 기반으로 확대 | 2~4주 | MCP 서버별 OAuth/스코프 설계, 조직 도구 스택 지식 citeturn14view0turn13view11 |
+| 전자서명/서명요청 | 하(고위험) | 전자서명 라우팅(승인 워크플로우 포함), 취소·리마인드 등은 단계적 | 3~6주 | 보안 리뷰 필수, PR #53 수준 기능 검토 citeturn31search1turn14view1 |
+| 평가·릴리즈 | 상 | 표준 계약 샘플 기반 리그레션(명시되지 않음), 릴리즈 노트/라이선스 패키징 | 1~2주 | 법무 QA, 라이선스 컴플라이언스(아파치) citeturn22view3 |
+
+### 위험요인 및 완화책
+
+관할권 리스크는 이미 “미국 중심 예시를 명확히 고지하자”는 이슈로 표면화되어 있으며, 이는 이식 시에도 동일하게 적용된다. 완화책은 “플레이북을 반드시 조직·관할권별로 커스터마이징하도록 강제(설치 체크리스트/경고/기본값 차단)”하는 접근이 합리적이다. citeturn29search0turn22view2  
+또한 Codex는 네트워크가 기본 차단이므로, 기능 확장을 위해 네트워크를 활성화할 때 “승인 정책을 느슨하게 하면 곧바로 리스크가 상승”한다. 따라서 위험 작업(외부 전송/서명 발송)은 승인 필수로 두고, 위험 플래그 자동거부 규칙도 함께 설계해야 한다. citeturn13view5turn13view6turn14view1  
+마지막으로 자격증명 캐시(plaintext 가능)는 법무 문서 워크로드에서 치명적일 수 있으므로, “실행 호스트 보안(권한, 디스크 암호화, 엔드포인트 정책)”이 전제되어야 한다. citeturn13view0turn13view1  
+
+### 샘플 변환 예시
+
+아래 예시는 “원본(Anthropic Legal 플러그인)”을 “Codex용 스킬 패키지”로 변환하는 데 필요한 핵심 모듈 3개를 Node.js/TypeScript 관점에서 스니펫으로 제시한다. (실제 파일 경로·조직 정책·MCP 서버 인증정보는 **명시되지 않음**이므로, 예시는 구조/패턴 중심이다.)
+
+#### 스킬 디렉터리 재배치 변환기
+
+원본은 `legal/skills/<skill>/SKILL.md`이고, Codex는 `.agents/skills/<skill>/SKILL.md` 스캔을 전제로 한다. citeturn18view0turn11view0  
+
+```ts
+// scripts/migrateSkills.ts
+import { promises as fs } from "fs";
+import path from "path";
+
+async function copyDir(src: string, dest: string) {
+  await fs.mkdir(dest, { recursive: true });
+  const entries = await fs.readdir(src, { withFileTypes: true });
+  for (const e of entries) {
+    const s = path.join(src, e.name);
+    const d = path.join(dest, e.name);
+    if (e.isDirectory()) await copyDir(s, d);
+    else await fs.copyFile(s, d);
+  }
+}
+
+async function main() {
+  const repoRoot = process.cwd();
+  const sourceSkills = path.join(repoRoot, "legal", "skills");
+  const targetSkills = path.join(repoRoot, ".agents", "skills");
+
+  // 1) legal/skills/* → .agents/skills/*
+  await copyDir(sourceSkills, targetSkills);
+
+  // 2) 선택: commands/*를 “references/”로 가져오거나, 별도 문서로 합치기
+  // Codex는 커스텀 slash command를 동일하게 제공하지 않을 수 있으므로,
+  // commands는 “사용법 문서”로만 유지하는 전략이 안전함.
+
+  console.log("Skill migration complete:", { sourceSkills, targetSkills });
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
+```
+
+#### MCP 설정 변환: `.mcp.json` → `config.toml`
+
+원본 `.mcp.json`은 `mcpServers` 키 아래 HTTP MCP 서버 URL 템플릿을 제공한다. citeturn22view0turn22view1  
+Codex는 MCP 서버 설정을 `config.toml`에 저장하며, HTTP 서버의 bearer token/OAuth 등을 지원한다. citeturn14view0turn13view11  
+
+```ts
+// scripts/convertMcpJsonToToml.ts
+import { promises as fs } from "fs";
+import path from "path";
+
+type McpJson = {
+  mcpServers: Record<string, { type: "http" | "stdio"; url?: string }>;
+};
+
+function tomlEscape(str: string) {
+  return str.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
+async function main() {
+  const repoRoot = process.cwd();
+  const mcpPath = path.join(repoRoot, "legal", ".mcp.json");
+  const outPath = path.join(repoRoot, ".codex", "config.toml");
+
+  const raw = await fs.readFile(mcpPath, "utf-8");
+  const parsed = JSON.parse(raw) as McpJson;
+
+  let toml = "";
+  for (const [id, cfg] of Object.entries(parsed.mcpServers)) {
+    if (cfg.type !== "http" || !cfg.url) continue;
+
+    // 최소 구성: url + enabled. (토큰/스코프는 조직별로 별도 주입)
+    toml += `[mcp_servers.${id}]\n`;
+    toml += `url = "${tomlEscape(cfg.url)}"\n`;
+    toml += `enabled = true\n\n`;
+
+    // 예: bearer_token_env_var = "MCP_${ID.toUpperCase()}_TOKEN"
+    // 예: scopes = ["..."]  // OAuth 사용 시
+  }
+
+  await fs.mkdir(path.dirname(outPath), { recursive: true });
+  await fs.writeFile(outPath, toml, "utf-8");
+  console.log("Wrote:", outPath);
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
+```
+
+#### 플레이북(`legal.local.md`) 구조화 로더
+
+원본은 “플레이북이 없으면 일반 상업 표준으로 리뷰하되, 그 사실을 명시”하도록 요구한다. citeturn21view0turn22view2  
+Codex 이식에서는 플레이북을 **정형 JSON**으로 읽어 스킬에 투입하면 품질이 안정화되는 경향이 있어(문서 기반 룰의 기계적 재사용), 아래처럼 최소한의 파서를 두는 것이 실무적으로 유용하다.
+
+```ts
+// scripts/loadLegalPlaybook.ts
+import { promises as fs } from "fs";
+
+export type PlaybookClause = {
+  clause: string;
+  standardPosition?: string;
+  acceptableRange?: string;
+  escalationTriggers?: string[];
+};
+
+export type LegalPlaybook = {
+  jurisdiction?: string; // 명시되지 않음이면 undefined
+  clauses: PlaybookClause[];
+};
+
+export async function loadPlaybook(mdPath: string): Promise<LegalPlaybook> {
+  const md = await fs.readFile(mdPath, "utf-8");
+
+  // 매우 단순화된 예시:
+  // "### Limitation of Liability" 같은 헤딩을 clause로 잡고,
+  // "- Standard position:" 등의 라인을 파싱한다.
+  const lines = md.split(/\r?\n/);
+  const playbook: LegalPlaybook = { clauses: [] };
+
+  let current: PlaybookClause | null = null;
+
+  for (const line of lines) {
+    const h3 = line.match(/^###\s+(.*)\s*$/);
+    if (h3) {
+      if (current) playbook.clauses.push(current);
+      current = { clause: h3[1].trim(), escalationTriggers: [] };
+      continue;
+    }
+    if (!current) continue;
+
+    const std = line.match(/^-+\s*Standard position:\s*(.*)$/i);
+    if (std) current.standardPosition = std[1].trim();
+
+    const range = line.match(/^-+\s*Acceptable range:\s*(.*)$/i);
+    if (range) current.acceptableRange = range[1].trim();
+
+    const esc = line.match(/^-+\s*Escalation trigger:\s*(.*)$/i);
+    if (esc) current.escalationTriggers?.push(esc[1].trim());
+  }
+
+  if (current) playbook.clauses.push(current);
+  return playbook;
+}
+```
+
+## 결론 및 권고사항
+
+이식 실현 가능성은 **높음**으로 평가된다. 가장 큰 근거는 (1) 원본 Legal 플러그인이 이미 `SKILL.md` 중심의 스킬 디렉터리 구조를 채택하고 있고, (2) Codex 역시 Agent Skills를 동일한 구성(디렉터리 + SKILL.md)으로 정의하며, (3) 양쪽 모두 MCP 기반 외부 도구 연결을 전제로 하기 때문이다. citeturn18view0turn14view3turn14view0turn15view0  
+다만 “완전한 동등 이식(같은 UX의 슬래시 커맨드, 같은 마켓플레이스 설치 방식)”을 목표로 하기보다는, Codex 특성에 맞게 **스킬 중심(명시적/암시적 호출)** 으로 재패키징하고, 커맨드 문서는 references로 흡수하는 형태가 현실적이다. 이는 Codex가 스킬을 `/skills`·`$`로 선택하거나 description 매칭으로 활성화하는 모델을 명시하고 있기 때문이다. citeturn14view3turn11view0  
+추천 여부는 “조건부 추천”이다. 핵심 조건은 (a) 관할권/플레이북 로컬라이제이션을 필수 정책으로 강제(이슈 #30에서 드러난 리스크), (b) 로그인/토큰 캐시 및 MCP 스코프를 최소권한으로 설계, (c) 네트워크·외부 전송·전자서명 등 고위험 행위는 승인 필수 및 자동거부 규칙으로 통제(혹은 단계적 롤아웃)하는 것이다. citeturn29search0turn13view0turn14view1turn31search1

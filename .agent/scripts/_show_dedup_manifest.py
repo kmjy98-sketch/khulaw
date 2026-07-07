@@ -6,7 +6,7 @@ from pathlib import Path
 # UTF-8 출력 강제
 sys.stdout.reconfigure(encoding="utf-8")
 
-p = Path(r"H:\내 드라이브\sync\_meta\_ocr_extracted_통합_매니페스트_2026-04-30.json")
+p = Path(r"H:\내 드라이브\9.작업중/클로드\_ocr_extracted_통합_매니페스트_2026-04-30.json")
 data = json.loads(p.read_text(encoding="utf-8"))
 print("counts:", data["counts"])
 print()

@@ -1,11 +1,11 @@
 ---
 name: progress-tracker
-description: 학습 진도 추적(수동입력). progress.json의 과목별 상태·진행률·회독·종료여부·로드맵 조회/갱신. "진도 확인", "진도 갱신", "방학/학기 목표" 요청 시 사용.
+description: 학습 진도 보조 조회(수동입력). progress.json(보조 snapshot)의 과목별 상태·진행률·회독·종료여부·로드맵 조회/갱신. "진도 확인", "진도 갱신", "방학/학기 목표" 요청 시 사용.
 ---
 
 # Progress Tracker Skill (수동입력판)
 
-> 학습 진도를 `.agent/state/progress.json`에서 **수동** 관리.
+> **진도 정본 = 논점 frontmatter**(`sync/위키/{과목}/{쟁점}.md`의 회독·선택·사례·약점·진도, #19-B 2026-06-30). 본 스킬이 다루는 `.agent/state/progress.json`은 **보조 snapshot(정본 아님)** — 과목 > 大단원 단위의 거친 조회·로드맵 메모용으로만 쓴다. 정밀 진도(회독·약점 등)는 논점 frontmatter를 확인한다.
 > 전사문 자동추적은 폐기됨(2026-06-18 — 토큰 과소모·미열람). 진도는 사용자가 직접 갱신하고 Claude는 조회·간단갱신만 한다.
 
 ---

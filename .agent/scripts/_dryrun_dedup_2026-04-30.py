@@ -1,7 +1,7 @@
 """중복 chunk 정본 선정 DryRun (2026-04-30)
 대상: 송영곤_논점민법_보충, 윤동환_민법의맥
 기준: C(서브책자 본책>보충>부록) → D(사이즈 큰 것) → A(ch 작은 것)
-출력: sync/_meta/중복정리_DryRun_보고_2026-04-30.md
+출력: 9.작업중/클로드/중복정리_DryRun_보고_2026-04-30.md
 """
 import os, re, hashlib, json
 from collections import defaultdict
@@ -12,7 +12,7 @@ TARGETS = [
     ROOT / "sync/_교재원문/민법/송영곤_논점민법_보충",
     ROOT / "sync/_교재원문/민법/윤동환_민법의맥",
 ]
-REPORT = ROOT / "sync/_meta/중복정리_DryRun_보고_2026-04-30.md"
+REPORT = ROOT / "9.작업중/클로드/중복정리_DryRun_보고_2026-04-30.md"
 
 
 def parse_front_matter(text: str):

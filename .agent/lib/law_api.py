@@ -39,21 +39,24 @@ def _vault_root():
 
 
 VAULT_ROOT = _vault_root()
-_ENV_PATH = os.path.join(VAULT_ROOT, ".agent", "skills", "korean-law-mcp", ".env")
+# #49 키 경로: .agent/lib/.env 우선, 구 korean-law-mcp 클론 폴백(은퇴 대비)
+_ENV_PATHS = [os.path.join(VAULT_ROOT, ".agent", "lib", ".env"),
+              os.path.join(VAULT_ROOT, ".agent", "skills", "korean-law-mcp", ".env")]
 
 
 def _load_key():
     k = os.environ.get("LAW_API_KEY")
     if k:
         return k.strip()
-    try:
-        with open(_ENV_PATH, encoding="utf-8") as fh:
-            for line in fh:
-                s = line.strip()
-                if s.startswith("LAW_API_KEY="):
-                    return s.split("=", 1)[1].strip().strip('"').strip("'")
-    except OSError:
-        pass
+    for _ep in _ENV_PATHS:
+        try:
+            with open(_ep, encoding="utf-8") as fh:
+                for line in fh:
+                    s = line.strip()
+                    if s.startswith("LAW_API_KEY="):
+                        return s.split("=", 1)[1].strip().strip('"').strip("'")
+        except OSError:
+            continue
     return None
 
 
@@ -291,8 +294,49 @@ def cite_check(case_number, scan_overrule=False, max_following=20):
     return out
 
 
+def get_law_toc(law_name, keyword=None):
+    """법령 조문 목차(조문번호·제목만) 조회 — 조문번호를 모를 때 목차로 관련 조문 탐색(#13).
+    keyword 주면 조문제목·내용에 포함된 조문만 필터(내용은 미출력, 위치 파악용)."""
+    sres = search_law(law_name)
+    if "error" in sres:
+        return sres
+    laws = sres.get("laws", [])
+    if not laws:
+        return {"error": "법령 검색 결과 없음: %s" % law_name}
+    match = next((l for l in laws if l.get("법령명") == law_name), laws[0])
+    det = get_law_detail(match["법령ID"])
+    if "error" in det:
+        return det
+    arts = [a for a in det.get("조문", []) if a.get("조문여부") == "조문"]
+    # 정의·총칙 머리: 특별법은 §1 목적·§2 정의가 용어 의미를 규정 — 키워드 매칭 전에 우선 참고(#13).
+    HEAD_PAT = re.compile(r"목적|정의|적용\s*범위|기본\s*이념|다른\s*법률과의\s*관계|해석")
+    head = []
+    for a in arts[:12]:
+        title = a.get("조문제목") or ""
+        if HEAD_PAT.search(title):
+            row = {"조문번호": a.get("조문번호"), "조문제목": title}
+            if "정의" in title:  # 정의 조문은 정의어 목록까지 노출(각 호 머리)
+                terms = re.findall(r'["“]([^"”]{1,20})["”]\s*(?:이란|란)', a.get("조문내용") or "")
+                if terms:
+                    row["정의어"] = terms[:20]
+            head.append(row)
+    toc = []
+    for a in arts:
+        row = {"조문번호": a.get("조문번호"), "조문제목": a.get("조문제목")}
+        if keyword:
+            body = (a.get("조문제목") or "") + (a.get("조문내용") or "")
+            if keyword not in body:
+                continue
+            row["일치"] = "제목" if keyword in (a.get("조문제목") or "") else "내용"
+        toc.append(row)
+    return {"법령명": det.get("법령명"), "시행일자": det.get("시행일자"),
+            "총조문": det.get("조문수"), "필터": keyword or "(없음)",
+            "정의·총칙(우선참고)": head, "목차": toc}
+
+
 _CLI = {
     "search-law": lambda a: search_law(a[0]),
+    "law-toc": lambda a: get_law_toc(a[0], a[1] if len(a) > 1 else None),
     "get-annexes": lambda a: get_annexes(a[0]),
     "cite-check": lambda a: cite_check(a[0]),
     "law-detail": lambda a: get_law_detail(a[0]),

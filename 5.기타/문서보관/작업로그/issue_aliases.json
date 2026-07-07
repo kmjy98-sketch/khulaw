@@ -1,0 +1,10 @@
+{
+  "_meta": {
+    "purpose": "교재↔노트↔카드↔위키 공통 쟁점키(issue_id) 별칭 사전",
+    "source": ".agent/state/issue_frequency.json (subjects[].issues[].name 슬러그가 1차 issue_id)",
+    "rule": "사람 1차 검수. 메타데이터만으로 동일성 판단 금지(#45-B). 불명확하면 미등록(보류, #2).",
+    "schema": "issue_id -> [별칭, 별칭...]",
+    "status": "stub (2026-06-22) — P6 파일럿에서 1책 1세트로 시드 후 확장. 위키 경로 이원화 해소 선결."
+  },
+  "aliases": {}
+}

@@ -1,0 +1,21 @@
+version: 1
+source: sync/_meta/CODEX_BOOTSTRAP_REPORT.md
+default_scale:
+  correct: O
+  partial: △
+  wrong: X
+weights:
+  issue_spotting_score: 0.25
+  keyword_score: 0.20
+  structure_score: 0.20
+  conclusion_score: 0.15
+  application_score: 0.20
+weakness_thresholds:
+  severe_below: 50
+  warning_below: 70
+  repeated_error_min: 2
+review_queue_intervals_days:
+  keyword: 1
+  issue_outline: 2
+  application_checkpoint: 3
+  full_retry: 7

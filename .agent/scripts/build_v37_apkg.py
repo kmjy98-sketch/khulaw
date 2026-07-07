@@ -38,12 +38,13 @@ BOOK = [  # prefix → (회독그룹, 과목)
     ("기초법리집행법", "기본서", "민사집행법"),
     ("강성민OX", "암기장-객관식", "헌법"), ("유니온헌법기출", "암기장-객관식", "헌법"),
     ("헌법핵심정리300", "암기장-객관식", "헌법"),
+    ("행정법강해", "기본서", "행정법"),
     ("법조윤리", "암기장-객관식", "법조윤리"),
 ]
 CHIRASHI = {"민법": "민법", "민사소송법": "민사소송법", "형법": "형법", "형사소송법": "형사소송법",
             "헌법": "헌법", "상법": "상법", "행정법": "행정법"}
 ATTR = [("쟁점도출", "사례쟁점"), ("포섭", "포섭"), ("함정", "함정"), ("기재례", "기재례"),
-        ("일반론", "일반론"), ("예외", "예외"), ("요건", "요건"), ("OX", "OX"), ("판례", "판례")]
+        ("일반론", "일반론"), ("예외", "예외"), ("요건", "요건"), ("학설", "학설"), ("OX", "OX"), ("판례", "판례")]
 ENDI = ("므로", "하여", "하면서", "한바", "으며", "이며", "거나", "면서", "는데", "는바", "어서", "지만")
 GWAN = ("관한", "대한", "위한", "따른", "인한", "관하여", "대하여", "있어서")
 CJK = re.compile(r"[一-鿿]")
@@ -227,6 +228,15 @@ def deck_of(fn):
         m = re.search(r"찌라시_([^_]+)_", fn)
         subj = m.group(1) if m and m.group(1) in CHIRASHI else "기타"
         return "찌라시", subj
+    if fn.startswith("사례풀이순서_"):   # #51 사례 풀이순서 카드 → 회독그룹 '사례'
+        m = re.search(r"사례풀이순서_(.+?)_v37", fn)
+        return "사례", (m.group(1) if m else "기타")
+    if fn.startswith("포섭트리거_"):     # #51(E) 포섭사전 파생 카드 → 회독그룹 '포섭'
+        m = re.search(r"포섭트리거_(.+?)_v37", fn)
+        return "포섭", (m.group(1) if m else "기타")
+    if fn.startswith("약점포섭_"):       # #52-B 채점 누락 파생 약점 카드 → 회독그룹 '약점'(증분 덱)
+        m = re.search(r"약점포섭_(.+?)_v37", fn)
+        return "약점", (m.group(1) if m else "기타")
     for p, g, s in BOOK:
         if fn.startswith(p):
             return g, s
@@ -296,6 +306,27 @@ def main():
             decks[name] = genanki.Deck(did(name), name)
         return decks[name]
 
+    # 고반복 프리스캔(2026-07-04): 같은 카드 내용이 서로 다른 책(bookkey) 2곳+에 등장 → '고반복' 태그
+    def _ckey(blk):
+        body = re.sub(r"(?m)^\s*(태그|난이도|출처)[ 	]*[:：].*$", "", blk)
+        return re.sub(r"\s+", "", body)[:400]
+    _freq = {}
+    for fn in sorted(files):
+        if fn in ("H", "H:") or not fn.endswith(".md") or "_TEMP" in fn:
+            continue
+        txt0 = open(os.path.join(SRC, fn), encoding="utf-8").read()
+        if txt0.count("\n") < 30 or deck_of(fn)[0] is None:
+            continue
+        bk0 = re.split(r"_p\d|_llamaparse", fn)[0]
+        for _a, _t, blk0 in blocks_of(txt0):
+            k = _ckey(blk0)
+            if len(k) >= 60:
+                _freq.setdefault(k, set()).add(bk0)
+        for cn0 in set(_RE_CASE.findall(txt0)):
+            _freq.setdefault("CASE::" + cn0, set()).add(bk0)
+    HIGHFREQ = {k for k, v in _freq.items() if len(v) >= 2}
+    HIGHCASE = {k[6:] for k in HIGHFREQ if k.startswith("CASE::")}
+
     for fn in sorted(files):
         if fn in ("H", "H:") or not fn.endswith(".md") or "_TEMP" in fn:
             skipped["junk"] += 1; continue
@@ -334,6 +365,12 @@ def main():
             for typ, num in re.findall(r"\[(변|모|입|행시|사시|법전)\s*(\d{2,4})\]", blk):
                 tags.append(f"기출::{typ}{num}")                 # 본문 [변17]·[모25] 마커(원형 보존)
             tags += head_verify                                  # 파일머리 검증필요::
+            m_tl = re.search(r"(?m)^[ \t]*태그[ \t]*[:：][ \t]*(.+)$", blk)  # 카드 '태그:' 줄에서 빌더 미도출 축만 흡수
+            if m_tl:  # 과목/속성/출처/회독그룹은 빌더가 파일명·헤더서 도출 → 중복·충돌 방지 위해 제외
+                _OK = ("단계", "증명책임", "주제", "난이도", "기출", "검증필요")
+                tags += [kv for kv in re.findall(r"\S+?::\S+", m_tl.group(1)) if kv.split("::", 1)[0] in _OK]
+            if _ckey(blk) in HIGHFREQ or any(cn in HIGHCASE for cn in set(_RE_CASE.findall(blk))):
+                tags.append("고반복")                               # 같은 내용 또는 같은 판례가 2권+ 책 출현 = 고빈출 신호(강조)
             tags = list(dict.fromkeys(tags))                     # 중복 제거(순서 보존)
             made = False
             if cloze_src:
@@ -370,6 +407,28 @@ def main():
                         if CJK.search(front) or CJK.search(back):
                             hanja_cards += 1
                     made = True
+            # 폴백: 평문 풀이순서 카드(앞/뒤/cloze 無, 제목+번호단계) → Basic(앞=제목 질문, 뒤=단계)
+            if not made and "[풀이순서]" in blk.split("\n", 1)[0]:
+                body = blk.split("\n", 1)[1] if "\n" in blk else ""
+                body = re.sub(r"(?m)^\s*\*{0,2}\s*(?:단계|증명책임|태그)[ \t]*[:：].*$", "", body)
+                body = trim_blank(body).strip()
+                front = conv(head_front).strip()
+                if front and body:
+                    for kv in re.findall(r"(?:단계|증명책임|주제)::[^\s*]+", blk):
+                        tags.append(kv)
+                    tags = list(dict.fromkeys(tags))
+                    fq = front + " — 풀이 순서?"
+                    bk2 = conv(body, hl=True)
+                    g = genanki.guid_for(guid_seed(stem, "basic", seq, explicit_uid=None))
+                    seq += 1
+                    dkey = ("B", src, re.sub(r"\s+", "", fq + bk2))
+                    nt = genanki.Note(model=BASIC, fields=[fq, bk2, src], guid=g, tags=tags)
+                    if dkey not in seen:
+                        seen.add(dkey); get_deck(deckname).add_note(nt)
+                        subj_decks[subj].add(deckname); cnt[deckname][0] += 1; n_basic += 1
+                        if CJK.search(fq) or CJK.search(bk2):
+                            hanja_cards += 1
+                    made = True
 
     # 과목 × 책종류(회독그룹) 분할: outputs/anki/v37/apkg/{과목}/{회독그룹}_v37.apkg
     n_files = 0
@@ -381,7 +440,9 @@ def main():
         n_files += 1
 
     # 검증
-    rep = ["# v37 apkg 빌드 리포트", f"- Basic {n_basic} / Cloze {n_cloze} / 합 {n_basic + n_cloze}",
+    from datetime import datetime as _dt
+    rep = ["# v37 apkg 빌드 리포트", f"- 정본 스냅샷: v37-{_dt.now():%Y-%m-%d} — 이후 신규 카드는 약점포섭_*(증분 덱 '약점')만 추가, 기존 카드파일 내용 수정 금지(안키 GUID 보존)",
+           f"- Basic {n_basic} / Cloze {n_cloze} / 합 {n_basic + n_cloze}",
            f"- apkg {n_files}개 (과목×책종류 분할): {len(subj_decks)}과목 × 책종류별 → outputs/anki/v37/apkg/{{과목}}/{{회독그룹}}_v37.apkg", "",
            "| 덱 | Basic | Cloze |", "|---|---:|---:|"]
     for d in sorted(cnt):

@@ -47,7 +47,25 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$WsRoot   = "H:\내 드라이브"
+# E드라이브 이주에 따른 동적 VAULT_ROOT 리졸버 (vault.json 및 환경변수 반영)
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$VaultJsonPath = Join-Path $ScriptDir "..\config\vault.json"
+$WsRoot = "E:\법학볼트" # 기본값
+
+if (Test-Path -LiteralPath $VaultJsonPath) {
+    try {
+        $cfg = Get-Content -Raw -LiteralPath $VaultJsonPath | ConvertFrom-Json
+        if ($cfg.vault_root) {
+            $WsRoot = $cfg.vault_root
+        }
+    } catch {
+        # ignore
+    }
+}
+if ($env:VAULT_ROOT) {
+    $WsRoot = $env:VAULT_ROOT
+}
+
 $LogDir   = Join-Path $WsRoot ".agent\file_ops_log"
 $CsvPath  = Join-Path $LogDir "master.csv"
 $JsonlPath = Join-Path $LogDir "master.jsonl"

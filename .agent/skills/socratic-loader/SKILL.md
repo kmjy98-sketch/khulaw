@@ -261,7 +261,7 @@ python scripts/socratic_loader.py "전사문_part01.md" --json
 ### 2. 교재 PDF 텍스트 추출 + 캐싱
 
 ```powershell
-python scripts/socratic_loader.py "전사문.md" --textbook "교재.pdf" --cache "30.송영곤_기본민법/교재_추출"
+python scripts/socratic_loader.py "전사문.md" --textbook "교재.pdf" --cache "송영곤_기본민법/교재_추출"
 ```
 
 - 추출된 텍스트: `교재_추출/{교재명}_p{start}-{end}.md`
@@ -309,7 +309,7 @@ python scripts/socratic_loader.py "전사문.md" --rag --json
 ### 전체 교재 청킹
 
 ```powershell
-python scripts/batch_extract.py "1.민사/30.송영곤_기본민법/교재" "1.민사/30.송영곤_기본민법/교재_추출" --chunk-size 30
+python scripts/batch_extract.py "1.민사/송영곤_기본민법/교재" "1.민사/송영곤_기본민법/교재_추출" --chunk-size 30
 ```
 
 **기능:**

@@ -1,7 +1,7 @@
 """
 헌법 교수님 PPT 텍스트 추출 + 사례형 문제 식별
 - input: 3.공법/10.이진_헌법원리1/*.pptx + 7주.pdf
-- output: sync/_meta/_헌법_PPT_추출_raw.json
+- output: 9.작업중/클로드/_헌법_PPT_추출_raw.json
 """
 import json
 import os
@@ -9,7 +9,7 @@ from pathlib import Path
 from pptx import Presentation
 
 BASE = Path(r"H:\내 드라이브\3.공법\10.이진_헌법원리1")
-OUT = Path(r"H:\내 드라이브\sync\_meta\_헌법_PPT_추출_raw.json")
+OUT = Path(r"H:\내 드라이브\9.작업중/클로드\_헌법_PPT_추출_raw.json")
 
 KEYWORDS = ["사례", "Case", "case", "CASE", "변시", "변호사시험", "기출",
             "사실관계", "검토하시오", "논하시오", "위헌", "침해", "청구",

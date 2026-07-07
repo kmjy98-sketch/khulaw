@@ -8,7 +8,7 @@ from _vault import VAULT_ROOT, vp  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
 R = Path(VAULT_ROOT)
-BASE = R / "1.민사/30.송영곤_기본민법"
+BASE = R / "1.민사/송영곤_기본민법"
 TRASH = R / "_trash/2026-06-14/송영곤_zip원본"
 TRASH.mkdir(parents=True, exist_ok=True)
 

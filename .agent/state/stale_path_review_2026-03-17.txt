@@ -1,0 +1,32 @@
+Date: 2026-03-17
+
+Summary
+- stale path alias repaired: 6
+- stale after repair: 0
+- uncorrected log entries after repair: 6
+- uncorrected backlog after split_dir dedupe: 2
+
+Recovered paths
+- H:\내 드라이브\5.기타\_inbox\녹음\processed\transcripts\2026-03-15\녹음_transcript.txt
+- H:\내 드라이브\5.기타\_inbox\녹음\processed\transcripts\2026-03-15\민_1_3-4_transcript.txt
+- H:\내 드라이브\5.기타\_inbox\녹음\processed\transcripts\2026-03-15\민1_3-1_transcript.txt
+- H:\내 드라이브\5.기타\_inbox\녹음\processed\transcripts\2026-03-15\민1_3-2_transcript.txt
+- H:\내 드라이브\5.기타\_inbox\녹음\processed\transcripts\2026-03-15\민1_3-3_transcript.txt
+- H:\내 드라이브\5.기타\_inbox\녹음\unmatched_transcripts\녹음\녹음_transcript.txt
+
+Classification
+- duplicate of classified transcript: 4
+  - 민1_3-1_transcript.txt == H:\내 드라이브\1.민사\강혜림_민법1\전사문\민1_3-1\민1_3-1_transcript.txt
+  - 민1_3-2_transcript.txt == H:\내 드라이브\1.민사\강혜림_민법1\전사문\민1_3-2\민1_3-2_transcript.txt
+  - 민1_3-3_transcript.txt == H:\내 드라이브\1.민사\강혜림_민법1\전사문\민1_3-3\민1_3-3_transcript.txt
+  - 민_1_3-4_transcript.txt == H:\내 드라이브\1.민사\강혜림_민법1\전사문\민_1_3-4\민_1_3-4_transcript.txt
+- duplicate inside inbox flow: 2
+  - H:\내 드라이브\5.기타\_inbox\녹음\processed\transcripts\2026-03-15\녹음_transcript.txt
+  - H:\내 드라이브\5.기타\_inbox\녹음\unmatched_transcripts\녹음\녹음_transcript.txt
+  - same SHA256, and unmatched_transcripts\녹음 has split parts 녹음_part01.md ... 녹음_part10.md
+
+Handling rules
+- If a stale path only differs by the top-level alias segment and the repaired path exists, repair the log key and path fields first.
+- If the repaired transcript hash matches a canonical classified transcript under subject folders, keep the subject-folder transcript as the canonical review target.
+- If the same transcript exists in both processed and unmatched inbox folders, prefer the path that already has split part files.
+- Only paths that still do not resolve after alias repair should remain stale.

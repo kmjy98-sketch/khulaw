@@ -19,6 +19,18 @@ if sys.platform == 'win32':
 STATE_DIR = Path(__file__).resolve().parents[3] / "state"
 STATE_FILE = STATE_DIR / "srs_log.json"
 LEARNING_FILE = STATE_DIR / "learning.json"
+EVENTS_FILE = STATE_DIR / "srs_events.jsonl"      # append-only 리뷰 이벤트 로그(2026-07-07 감사)
+GRAD_QUEUE = STATE_DIR / "srs_graduated_queue.jsonl"  # 졸업 → 안키 증분덱 핸드오프 대기열
+
+
+def log_event(kind, item, extra=None):
+    """리뷰·등록·졸업 이벤트를 append-only로 기록 — '연속 세션' 판정·재출제 지표의 원천."""
+    rec = {"ts": datetime.now().strftime("%Y-%m-%d %H:%M"), "kind": kind,
+           "id": item.get("id"), "content": item.get("content", "")[:80]}
+    if extra:
+        rec.update(extra)
+    with open(EVENTS_FILE, "a", encoding="utf-8") as f:
+        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
 PRIORITY_LEVELS = {
     'low': 0,
     'normal': 1,
@@ -220,12 +232,13 @@ def priority_label(item):
 
 
 def retention_factor(subject, learning=None):
-    """S4(신경망연구 ⑤): 과목별 desired-retention 차등 — interval 승수.
+    """S4(신경망연구 ⑤): 과목별 desired-retention 차등 — interval 승수 + due 정렬 가중.
     learning.json['retention_factors'] = {과목: 승수, '_default': 1.0}. 낮을수록 자주
-    복습(고보존). 핵심 판례·조문 과목 0.85, 주변 1.0 식. 기본 1.0 = 무변화(미설정 시 순수 SM-2)."""
+    복습(고보존)·오늘 목록에서 우선. 핵심 과목 0.85, 주변 1.0 식. 기본 1.0 = 무변화(미설정 시 순수 SM-2).
+    (2026-07-05 수정: 종전엔 load_data()로 srs_log.json을 읽어 기능이 죽어 있었음 — learning.json 정본으로 교정)"""
     if learning is None:
         try:
-            learning = load_data()
+            learning = load_learning_data()
         except Exception:
             return 1.0
     rf = (learning or {}).get('retention_factors', {}) or {}
@@ -310,19 +323,24 @@ def calculate_next_review(item, score, exam_date=None):
 
 
 def get_today_items(data):
-    """오늘 복습할 항목 반환"""
+    """오늘 복습할 항목 반환. 정렬: 우선순위 → 과목 가중(retention_factor 낮은 과목 먼저,
+    2026-07-05 과목별 가중) → 예정일 → 반복수 → 점수 → id."""
     today = datetime.now().strftime('%Y-%m-%d')
     due_items = []
-    
+    learning = load_learning_data()  # 루프에서 재로드 방지
+
     for item in data['items']:
+        if item.get('status') == 'graduated':  # 졸업 항목 제외(안키 FSRS 이관)
+            continue
         next_review = item.get('next_review', today)
         if next_review <= today:
             due_items.append(item)
-    
+
     return sorted(
         due_items,
         key=lambda item: (
             -PRIORITY_LEVELS[priority_label(item)],
+            retention_factor(item_subject(item), learning),
             item.get('next_review', today),
             item.get('repetitions', 0),
             item.get('last_score', 5),
@@ -332,7 +350,15 @@ def get_today_items(data):
 
 
 def add_item(data, content, topic, priority, source='manual'):
-    """새 항목 추가"""
+    """새 항목 추가. 중복(정규화 내용 일치) 시 신규 발급 대신 기존 항목 반환+우선순위 상향
+    (2026-07-07 감사: --add 무중복검사로 인한 항목 증식 차단 — sync_weak_points와 기준 통일)."""
+    normalized = normalize_content(content)
+    for it in data['items']:
+        if normalize_content(it.get('content')) == normalized:
+            if PRIORITY_LEVELS[priority_label(it)] < PRIORITY_LEVELS[normalize_priority(priority)]:
+                it['priority'] = normalize_priority(priority)
+            log_event('add_dup', it)
+            return it
     new_id = max([i.get('id', 0) for i in data['items']], default=0) + 1
     today = datetime.now().strftime('%Y-%m-%d')
     
@@ -474,11 +500,32 @@ def list_exams_str():
 
 
 def review_item(data, item_id, score):
-    """항목 복습 결과 기록"""
+    """항목 복습 결과 기록 + 세션 dedup·졸업 판정(2026-07-07, 채점복습 #20 코드화).
+    - '같은 날 반복=1세션': 같은 날 두 번째 이후 리뷰는 간격 재계산만, 세션 카운트 불변.
+    - 간격 둔 세션 3회 연속 성공(score>=3) → status='graduated' + 핸드오프 큐 기록.
+      졸업 항목은 오늘 목록에서 제외(장기 유지는 안키 FSRS 담당)."""
+    today = datetime.now().strftime('%Y-%m-%d')
     for item in data['items']:
         if item.get('id') == item_id:
+            new_session = item.get('last_session_date') != today
             updates = calculate_next_review(item, score)
             item.update(updates)
+            if new_session:
+                item['last_session_date'] = today
+                if score >= 3:
+                    item['sessions_ok'] = item.get('sessions_ok', 0) + 1
+                else:
+                    item['sessions_ok'] = 0
+            log_event('review', item, {'score': score, 'new_session': new_session,
+                                       'sessions_ok': item.get('sessions_ok', 0)})
+            if item.get('sessions_ok', 0) >= 3 and item.get('status') != 'graduated':
+                item['status'] = 'graduated'
+                item['graduated'] = today
+                with open(GRAD_QUEUE, "a", encoding="utf-8") as f:
+                    f.write(json.dumps({"졸업일": today, "content": item.get('content'),
+                                        "topic": item.get('topic'), "subject": item.get('subject'),
+                                        "id": item.get('id')}, ensure_ascii=False) + "\n")
+                log_event('graduated', item)
             return item
     return None
 

@@ -1,0 +1,36 @@
+# API Keys (절대 commit 금지)
+.env
+*.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 처리 결과물 (큰 용량, 개인 학습 자료)
+outputs/01_ocr/*
+outputs/02_cards/*
+outputs/06_cases/*
+outputs/02_wiki/*
+!outputs/02_wiki/.gitkeep
+!outputs/01_ocr/.gitkeep
+!outputs/02_cards/.gitkeep
+!outputs/06_cases/.gitkeep
+outputs/02_wiki/*
+!outputs/02_wiki/.gitkeep
+
+# 사용자 입력 PDF (저작권)
+inputs/raw_pdf/*
+inputs/cases/*
+!inputs/raw_pdf/.gitkeep
+!inputs/cases/.gitkeep
+
+# 로그
+logs/*
+!logs/.gitkeep
+
+# 임시 분할 PDF
+*_chunks/
+/tmp/

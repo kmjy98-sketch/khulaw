@@ -4,8 +4,8 @@
 import json, re
 from pathlib import Path
 
-RAW = Path(r"H:\내 드라이브\sync\_meta\_헌법_PPT_추출_raw.json")
-OUT = Path(r"H:\내 드라이브\sync\_meta\_헌법_PPT_추출_요약.md")
+RAW = Path(r"H:\내 드라이브\9.작업중/클로드\_헌법_PPT_추출_raw.json")
+OUT = Path(r"H:\내 드라이브\9.작업중/클로드\_헌법_PPT_추출_요약.md")
 
 # 강한 신호 = 사례형 가능성 높음
 STRONG = ["[사례]", "[문제]", "사례 ", "변호사시험", "변시 ", "사실관계",

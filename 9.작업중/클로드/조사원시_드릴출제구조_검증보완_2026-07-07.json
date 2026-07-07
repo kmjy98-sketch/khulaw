@@ -1,0 +1,323 @@
+{
+  "summary": "드릴 출제구조 조사보고의 미검증 주장 5건 검증 + 공백 각도 3건 보완(소수 레인)",
+  "agentCount": 8,
+  "logs": [],
+  "result": {
+    "verdicts": [
+      {
+        "target": "Brunmair & Richter (2019) \"Similarity matters: A meta-analysis of interleaved learning and its moderators\", Psychological Bulletin 145(11), 1029-1052, DOI 10.1037/bul0000209 — 주장 1: words 자료에서 인터리빙 효과 역전(블로킹 우세) g = -0.39; 주장 2: expository texts에서 비유의",
+        "verdict": "confirmed",
+        "evidence": "[주장 1: words g = -0.39, 확인] 초록(저자 accepted manuscript p.2, Semantic Scholar API 초록과 일치): \"An advantage of blocking compared to interleaving was found for studies based on words (g = -0.39).\" 본문 결과(p.25): \"we found a negative effect (i.e., an advantage of blocking over interleaving) for studies based on words as learning materials, g = -0.39 (p > .001, 95% CI [-0.64, -0.14])\" — 본문의 \"p > .001\"은 오기로 보이며 Table 2(p.54)에는 \"Words k=13, g=-0.39, p=.005, 95% CI [-0.64, -0.14]\"로 기재. 방향(블로킹 우세)과 수치 g=-0.39는 초록·본문·표 모두 일치. [주장 2: expository texts 비유의, 확인] 초록: \"results for expository texts and tastes were ambiguous with nonsignificant overall effects.\" 본문(p.25): \"no significant effect for expository texts.\" Table 2: Expository texts k=25, g=0.21, p=.119, 95% CI [-0.06, 0.47] (CI가 0을 포함, 비유의). 참고 맥락: 전체 효과 g=0.42 (95% CI [0.34, 0.50], 59개 연구, 238 효과크기, 158 표본); paintings g=0.67; mathematical tasks g=0.34 (p=.005); tastes g=0.57 (p=.24, k=3, 비유의). 결론부(p.32): \"When the learning materials are words, interleaving even seems to have negative effects compared to blocking.\" 사소한 불일치: words I² 본문 18.3% vs 표 18.1% (검증 대상 수치와 무관).",
+        "source_used": "(1) Semantic Scholar Graph API: https://api.semanticscholar.org/graph/v1/paper/DOI:10.1037/bul0000209?fields=title,abstract — 게재판 초록 확인; (2) 저자(Univ. Würzburg) 공개 accepted manuscript PDF 전문: https://www.psychologie.uni-wuerzburg.de/fileadmin/06020400/2019/Brunmair_Richter_in_press__2019_META-ANALYSIS_OF_INTERLEAVED_LEARNING.pdf (다운로드 후 전문 검색으로 초록 p.2, 결과 p.25, Table 2 p.54 직접 인용); (3) 보조: WebSearch 결과(semanticscholar.org 논문 페이지 요약, ovid.com 초록 페이지는 HTTP 402 페이월로 접근 불가)"
+      },
+      {
+        "target": "van Gog, T., Kester, L., & Paas, F. (2011). Effects of worked examples, example-problem, and problem-example pairs on novices' learning. Contemporary Educational Psychology, 36(3), 212-218. doi:10.1016/j.cedpsych.2010.10.004 (ScienceDirect PII S0361476X1000055X) — 주장 (a) WE만/WE-PS 쌍이 PS만보다 인지부하 낮고 성과 높음, (b) PS-WE(문제 먼저)는 PS만과 차이 없음",
+        "verdict": "confirmed",
+        "evidence": "저자 최종본(peer-reviewed version, CC BY-SA) 전문 확인. 서지: Contemporary Educational Psychology 36(3), 212-218, DOI 10.1016/j.cedpsych.2010.10.004 (OpenAlex/원문 표지 일치). 대상: 네덜란드 중등학생 103명(분석 96명), 전기회로 고장진단 과제 초심자, 4조건 무선배정 — PS만(n=22 분석), PS-WE(n=26), WE-PS(n=22), WE만(n=26). [주장 a — 확인] 초록 원문: \"it was hypothesized and confirmed that WE and WE-PS would lead to lower cognitive load during learning and higher learning outcomes than PS.\" 결과 수치 — 훈련 중 정신적 노력(9점 Paas 척도, 사전지식 공변량 ANCOVA): F(3,91)=7.78, MSE=3.48, p<.001, ηp²=.20; 사후검정(Bonferroni): WE<PS(p<.05), WE<PS-WE(p<.01), WE-PS<PS(p<.05), WE-PS<PS-WE(p<.01). 시험 성과: F(3,91)=9.00, MSE=4.69, p<.001, ηp²=.23; WE>PS(p<.05), WE>PS-WE(p<.01), WE-PS>PS(p<.05), WE-PS>PS-WE(p<.01). Table 1 평균(SD) — 훈련 노력: PS 6.49(1.79), PS-WE 6.76(2.09), WE-PS 4.85(1.85), WE 4.92(2.10); 시험 성과(만점 8): PS 2.66(1.58), PS-WE 2.48(2.31), WE-PS 4.70(2.78), WE 4.75(2.56). [주장 b — 확인] 초록: \"Results showed no differences between WE and WE-PS or between PS-WE and PS.\" 사후검정에서 PS vs PS-WE는 훈련 노력·시험 성과 모두 p=1. 결론 원문: \"If example study and problem solving is alternated, however, example-problem pairs should be used, because problem-example pairs did not lead to better learning than problem solving only.\" 부가 사항: WE만 vs WE-PS도 차이 없음(p=1) — 예제·문제 교대가 필수는 아니며, 교대한다면 예제가 먼저 와야 한다는 해석이 원문과 정확히 일치. 저자들은 PS-WE 무효과의 가능 기제로 초심자의 자기수행 결함 진단 불능, 실패 후 동기 저하, hindsight bias 3가지를 제시.",
+        "source_used": "https://research.ou.nl/ws/files/1026339/Van_Gog_Kester_Paas_-_CEDPSYCH_2010.pdf (저자 최종본 전문, 주 근거); https://api.openalex.org/works/doi:10.1016/j.cedpsych.2010.10.004 (서지·OA 위치 확인); https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.cedpsych.2010.10.004 (서지 확인, 초록 없음); https://www.sciencedirect.com/science/article/abs/pii/S0361476X1000055X (403 접근 불가)"
+      },
+      {
+        "target": "Kalyuga (2007) \"Expertise Reversal Effect and Its Implications for Learner-Tailored Instruction\" (Educational Psychology Review 19:509-539, DOI 10.1007/s10648-007-9054-3) — 주장 (a) 다도메인·2200+명 반복검증, 효과크기 0.45~2.99; (b) Kalyuga & Sweller 2004 실험3 지식×형식 상호작용; (c) Reisslein 2005/2006 fading 속도·예제-문제 순서",
+        "verdict": "confirmed",
+        "evidence": "(a) 확인 — 결론부(저널 p.533-534): \"The effect has been consistently replicated in many experiments with a large range of instructional materials (e.g., tasks requiring declarative and/or procedural knowledge in mathematics, science, engineering, programming, ESL, management, social psychology) and participants (from the primary school to [university])...\" / \"More than 2200 students participated in the reviewed experimental studies, without counting those in previously reviewed studies of Mayer (2001) and in ATI studies... The conservative estimates for effect size differences ranged from 0.45 to 2.99, with the overall mid-range value of 1.72.\" 단, 정확 표기 주의: 0.45~2.99는 개별 효과크기가 아니라 'effect size differences'(Mayer 2001 방식: 저지식 ES − 고지식 ES) 범위임. 논문 자체 해석: 양쪽 대칭 가정 시 각 측 약 0.86(\"a large-size effect by accepted standards\"). (b) 확인 — 본문(저널 p.522): \"Kalyuga and Sweller (2004 Experiment 3)... coordinate geometry... Posttest results indicated that less knowledgeable high-school students benefited significantly more from well guided worked examples. For more knowledgeable learners, there was a clear indication of problem solving benefits. A significant interaction between knowledge levels and instructional formats demonstrated that the most efficient instructional format depended on the level of learner expertise.\" Table 1 수치: Worked examples vs. problem-solving — 저지식 d=1.20 (n=21), 고지식 d=−0.36 (n=21), 차이 1.56. (c) 확인 — 본문(저널 p.522-523): Reisslein et al. (2006, Learning and Instruction 16:92-103, 전기회로 분석): \"novices benefited more from example–problem pairs, whereas experts benefited more from problem–example pairs and faded examples sequences.\" (Table 1: example-problem vs problem-example — 저지식 0.33/고지식 −0.37, 차이 0.70). Reisslein (2005, ASU 박사논문): backward fading 속도 조작(slow=예제 2개당 1단계 fading, fast=예제 1개당 1단계, immediate=즉시 문제풀이) — \"The results on retention posttest indicated significant interactions between levels of learner prior knowledge and the pace of transitioning. More knowledgeable learners performed significantly better in the fast and immediate transitioning groups than in the slow transitioning group... learners with low levels of prior knowledge benefited more from slow transitioning condition.\" (Table 1: slow vs fast 1.30/−0.47 차이 1.77; slow vs immediate 0.51/−0.42 차이 0.93). 종합: (a)(b)(c) 모두 원문과 일치. 유일한 보정 사항은 (a)의 '효과크기 0.45~2.99'를 '효과크기 차이(novice−expert effect size differences) 0.45~2.99'로 표기해야 정확하다는 점.",
+        "source_used": "https://www.uky.edu/~gmswan3/EDC608/Kalyuga2007_Article_ExpertiseReversalEffectAndItsI.pdf (원문 PDF 전문 직접 확인, 로컬 저장 후 텍스트 검색: C:\\Users\\111\\Downloads\\Kalyuga2007_ExpertiseReversal.pdf); 보조 확인: https://api.semanticscholar.org/graph/v1/paper/DOI:10.1007/s10648-007-9054-3?fields=title,abstract,year,authors,externalIds (서지·초록 일치 확인)"
+      },
+      {
+        "target": "2024년 Learning and Instruction 게재(PII S0959475224001725) 로망스어 문법 시제 인터리빙 4실험 연구 — (a) 1주 지연 검사에서 동사 활용 4실험 전부 인터리빙 우세, (b) 시제가 확연히 달라도 이점 발생(문제유형→절차 연합 기제), (c) 시제 식별 이점은 시제가 혼동 가능할 때만",
+        "verdict": "confirmed",
+        "evidence": "서지사항 확정: Pan, S. C., Rodríguez Flores, S., Kaku, M. E., & Lai, W. H. E. \"Interleaved practice enhances grammar skill learning for similar and dissimilar tenses in Romance languages.\" Learning and Instruction, 95, 102045. DOI 10.1016/j.learninstruc.2024.102045 (PII S0959475224001725, online 2024-11-07, 호수는 2025년 2월호 — \"2024년 연구\"는 온라인 공개 기준으로 정확). 소속: NUS 심리학과(Pan), NUS CLS/Universidad de Murcia(Rodríguez Flores), UCLA(Kaku, Lai). OSF: https://osf.io/436ya/.\n\n(a) 확인 — 전 실험 공통 설계: 주 1회 학습세션 2회 + \"one-week delayed criterial test\". 동사 활용(verb conjugation)은 4실험 모두 유의한 인터리빙 우세: Exp1 t(90)=2.36, p=.020, d=.49 / Exp2 t(107)=3.27, p=.0014, d=.63 / Exp3 t(102)=2.45, p=.016, d=.48 / Exp4 t(86)=2.18, p=.032, d=.46. 내부 메타분석 통합 d=.52, 95% CI [.32, .73]. 초록 원문: \"Interleaving improved verb conjugation skills in all experiments.\"\n\n(b) 확인 — Table 1: Exp2는 스페인어 Presente de Indicativo vs Pretérito Imperfecto로 용법·접미사 모두 \"Low similarity\"(확연히 다른 시제)인데 활용 효과가 가장 큼(d=.63). 일반논의 원문: \"An interleaving effect was observed for these skills [verb conjugation] in all experiments, irrespective of similarity in suffixes or related elements such as tense usage.\" 기제 원문: 수학 인터리빙 문헌(Rohrer et al., 2014) 원용 — \"problem type-to-procedure associations being strengthened as a result\"; 저자 결론: \"(b) strengthened associations between tense-pronoun combinations, suffixes, and procedures being crucial in the case of verb conjugation skills\"(시간적 간격이 이 연합 강화에 기여했을 수 있음). '문제유형→절차 연합' 기제 서술과 정확히 일치.\n\n(c) 확인(단서 있음) — 시제 식별: Exp1(용법 고유사·혼동 가능: Pretérito Perfecto Simple vs Imperfecto) d=.41, t(90)=1.95, p=.055(개별 t-검정은 경계선); Exp2(저유사·구별 용이) d=.045, p=.81(무효과, 천장효과 가능성 언급: 식별 점수 near ceiling, \"the impact of a ceiling effect cannot be completely dismissed\"); Exp3(프랑스어 Conditionnel Présent vs Futur Simple, 용법·접미사 고유사) d=.52, p=.0096(유의); Exp4는 언어 식별 과제로 d=.54, p=.013(유의). 내부 메타분석: \"interleaving enhanced tense/language identification ability in all but Experiment 2\"(통합 d=.36 [.12, .60]). 저자 해석 원문: \"When the tenses or languages are at least somewhat challenging to tell apart ... then interleaving is beneficial for those tasks. In Experiment 2, however, when the tenses were highly dissimilar and easily distinguishable, there was no apparent benefit of interleaving for tense identification\" — 식별 이점은 변별 대비(discriminative contrast) 기제로 혼동 가능성이 있을 때만 나타난다는 주장과 일치. 단서: 초록은 Exp1·3에서 식별 개선이라 서술하나 Exp1 개별 t-검정은 p=.055로 경계선(메타분석 기준 이점 포함), 저자 스스로 일부 효과크기가 사전 검정력 목표 d=.53에 미달함을 한계로 명시.\n\n표본: Exp1 대학생 92명(UCLA 계열 subject pool), Exp2 109명, Exp3 성인학습자 104명(Prolific 방식 보상), Exp4 88명.",
+        "source_used": "https://www.stevencpan.com/pdf/PRKL_2024.pdf (저자 홈페이지 출판본 전문 PDF, 주 근거); https://api.crossref.org/works/10.1016/j.learninstruc.2024.102045 (서지·PII 대조); https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.learninstruc.2024.102045 (저자·저널 교차확인); https://www.sciencedirect.com/science/article/pii/S0959475224001725 (403 접근불가로 우회)"
+      },
+      {
+        "target": "\"Tailoring interleaved practice: Does adaptive sequencing boost the interleaving effect?\" — Nemeth, Osterberg & Lipowsky (2025), Learning and Individual Differences, Vol. 124, Article 102804, DOI 10.1016/j.lindif.2025.102804. 검증 주장: (a) 무작위·적응형 인터리빙 모두 즉시+지연 검사에서 블록 연습보다 우세, (b) 블록 연습은 학습 단계 성적·CLJ(자신감)는 높지만 지연 성적은 낮음(학습 착각)",
+        "verdict": "confirmed",
+        "evidence": "서지 확정(Crossref): 저자 Lea Nemeth, Johannes Osterberg, Frank Lipowsky; Learning and Individual Differences Vol.124 (2025년 12월), DOI 10.1016/j.lindif.2025.102804. 초록(OpenAlex abstract_inverted_index 복원, ScienceDirect 스니펫과 일치): \"259 participants learned to classify paintings by six artists under blocked, random interleaved, or adaptive interleaved schedules.\" — 259명·회화(6명 화가) 분류 일치. (a) 확인: \"Both interleaving conditions yielded better [learning] outcomes immediately and after a delay, though not [higher] post-study CLJs. No significant differences emerged between random and adaptive interleaving.\" + 논문 하이라이트: \"Adaptive and random interleaving outperform blocked practice in category learning\", \"No learning advantage of adaptive over random interleaving.\" (b) 확인: \"Blocking produced better performance and higher category learning judgments (CLJs) during study.\" — 블록 연습이 학습 단계 성적·CLJ 모두 높았고, 즉시·지연 검사에서는 인터리빙 조건들에 뒤짐(= 지연 성적 낮음). 하이라이트 \"Interleaved study lowers category learning judgments\"도 동일 패턴. 단, '학습 착각(illusion of learning)'이라는 표현 자체는 초록에 문자 그대로 등장하지 않음 — 높은 학습기 성적·CLJ 대비 낮은 검사 성적이라는 패턴에 대한 통상적 해석으로서는 정확(메타인지 착각 패턴과 부합). 추가 사실: 적응형은 유사 화풍 간 전환을 늘렸으나 혼동 오류를 줄이지 못했고, 인터리빙 이점은 작업기억 용량과 독립적. ResearchGate/ScienceDirect 본문은 403으로 직접 접근 불가하여 초록·하이라이트 수준에서 검증함.",
+        "source_used": "https://api.crossref.org/works?query.bibliographic=Tailoring+interleaved+practice+adaptive+sequencing+interleaving+effect (DOI·서지); https://api.openalex.org/works/https://doi.org/10.1016/j.lindif.2025.102804 (초록 복원); https://www.sciencedirect.com/science/article/pii/S1041608025001803 (검색엔진 스니펫으로 초록·하이라이트 교차확인; 직접 fetch는 403); https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.lindif.2025.102804 (서지 확인, abstract null)"
+      }
+    ],
+    "supplements": [
+      {
+        "angle": "successive relearning(기준 도달 인출연습 + 세션 간 재학습) 원출처 검증: 실험실 처방(3회 정답 도달 후 3회 재학습), 교실 적용 효과 크기(d .54~1.10, 시험 +10%p), 재학습 비용 급감(5분→2분→1분) — spiral+SRS 설계에 직결되는 수치 확보",
+        "findings": [
+          {
+            "claim": "Rawson & Dunlosky (2011): 3개 실험, 대학생 533명, 10만+ 단답 응답 수작업 채점. 초기학습 기준(1~4회 정답)과 재학습(1~5세션)의 효과는 준가산적(subadditive) — 초기 기준의 효과는 재학습이 늘수록 소멸하고, 재학습은 적은 추가 연습비용으로 1~4개월 파지에 큰 효과. 처방: '초기 세션에서 3회 정답 도달 후, 넓은 간격으로 3회 재학습'. PubMed 초록 전문 확인.",
+            "source": "https://doi.org/10.1037/a0023956 — Journal of Experimental Psychology: General, 2011 (PubMed 초록 검증)",
+            "design_implication": "SRS 카드의 '졸업' 조건을 세션 수 기준으로: 쟁점당 초기 3회 정답 도달 + 이후 간격을 둔 3회 재학습 세션(각 세션 1회 정답까지)이면 충분하며 그 이상은 낭비다."
+          },
+          {
+            "claim": "Rawson, Dunlosky & Sciartelli (2013, Ed Psych Review): 실제 심리학 수업에서 successive relearning으로 학습한 개념은 자율학습(business-as-usual) 대비 실제 시험에서 10% 높음(한 학점 등급 차이), 약 1개월(24일) 후 파지 검사에서는 격차가 40%로 확대. 원문 페이월 — APS Observer 칼럼 + 저자 본인의 2022 리뷰('over 10%, full letter grade') 2개 경로로 교차 검증.",
+            "source": "https://doi.org/10.1007/s10648-013-9240-4 — Educational Psychology Review, 2013 (수치 교차확인: https://www.psychologicalscience.org/observer/teaching-current-directions-studying-psychopathology)",
+            "design_implication": "순환 복습의 진짜 배당은 즉시 시험이 아니라 지연 파지(격차 10%→40% 확대)이므로, 드릴 성과 측정도 당일 정답률이 아닌 3~4주 후 재출제 정답률로 잡아야 한다."
+          },
+          {
+            "claim": "Janes, Dunlosky, Rawson & Jasnow (2020): 어려운 생물심리학 실제 강의의 고부담 시험에서 successive relearning이 해당 콘텐츠 성적을 최소 10%p 향상, 효과크기 d = .54~1.10. Semantic Scholar API로 초록 원문 확인.",
+            "source": "https://doi.org/10.1002/acp.3699 — Applied Cognitive Psychology, 2020 (Semantic Scholar API 초록 검증)",
+            "design_implication": "어렵고 밀도 높은 과목(법학 요건·판례 정의 암기와 구조 유사)에서도 중~대 효과가 재현되므로, 고난도 쟁점일수록 재학습 세션을 우선 배정할 가치가 있다."
+          },
+          {
+            "claim": "Higham, Zengel, Bartlett & Hadwin (2021/2022, J Educational Psychology): 심리학 입문 수업에서 주당 3세션(2일 간격) 재학습(빈칸 인출+피드백, 정답 시 제거·오답 시 최대 2회 재제시) vs 노출시간 통제된 재읽기 비교 — 학기말 회상 우수 + 메타인지 향상, 숙달감 증가, 주의통제 향상, 불안 감소. 개인차 변인은 효과를 조절하지 않음. Semantic Scholar API로 초록 확인.",
+            "source": "https://doi.org/10.1037/edu0000693 — Journal of Educational Psychology, 2021/2022 (Semantic Scholar API 초록 검증)",
+            "design_implication": "세션 내 알고리즘은 '정답 시 큐에서 제거, 오답 시 재제시(상한 2회)'라는 검증된 형태를 그대로 쓸 수 있고, 부수효과(불안 감소·메타인지 향상)는 수험생 루틴 유지에 유리하다."
+          },
+          {
+            "claim": "Rawson & Dunlosky (2022, Current Directions 리뷰, 전문 확인): (a) 간격 배분이 핵심 — 3세션에 1회씩 정답 vs 단일 세션 3회 정답의 1주 후 파지 68% vs 26%(Rawson et al. 2018 재인용). (b) 비용 급감 — 초기 세션 개념당 ~5분, 1차 재학습 <2분, 5차 재학습 <1분. (c) 4~5세션은 3세션 대비 파지 이득이 미미(수확체감). 한계: 표본이 주로 학부생, 자료가 어휘·정의 중심.",
+            "source": "https://journals.sagepub.com/doi/full/10.1177/09637214221100484 — Current Directions in Psychological Science, 2022 (Sage 전문 검증)",
+            "design_implication": "같은 총 반복량이라도 세션 간 분산이 파지를 2.6배 만들므로(68 vs 26%), 스파이럴 드릴은 '하루에 몰아 N회'를 금지하고 회차를 날짜 단위로 강제 분산하되 쟁점당 재학습은 3회에서 컷하는 것이 시간 대비 최적이다."
+          }
+        ]
+      },
+      {
+        "angle": "법학·전문직 시험 도메인의 직접 실험 근거 검증: 인출연습(test-enhanced learning)은 의학교육 RCT와 면허시험 예측 연구에서, 인터리빙(혼합연습)은 진단 판별 실험에서, worked example·사례비교는 법적 추론 실험에서 각각 1차 출처 수치로 확인됨. 법학 도메인 자체의 무작위 실험은 드물고(Nievelstein이 유일한 순수 법학 실험), bar exam 쪽은 프로그램·상관 증거가 주류라는 한계도 확인.",
+        "findings": [
+          {
+            "claim": "소아과·응급의학 레지던트 RCT에서 동일 강의 후 '반복 시험+피드백' 조건이 '반복 복습(study sheet)' 조건보다 약 6개월 뒤 최종시험 점수가 평균 13%p 높았다(39% vs 26%, 통계적으로 유의, 큰 효과크기). 실제 교육 현장에서 검증된 test-enhanced learning의 대표 RCT.",
+            "source": "https://pubmed.ncbi.nlm.nih.gov/19930508/ — Larsen, Butler & Roediger, Medical Education 43:1174-1181, 2009 (DOI 10.1111/j.1365-2923.2009.03518.x)",
+            "design_implication": "드릴의 복습 트랙은 노트 재읽기가 아니라 반드시 '문제 출제→답안 작성→즉시 피드백' 형태로 설계하고, 6개월 파지를 목표로 동일 쟁점을 시험 형태로 재노출해야 한다."
+          },
+          {
+            "claim": "의대생 72명 대상 연구에서 완료한 보드형 연습문항 수가 MCAT·내신·시험불안을 통제한 다변량 회귀에서 USMLE Step 1 점수의 독립 예측변수였다(B=2.2x10^-3, p<0.001): 연습문항 445개 추가당 Step 1 약 1점 상승, 고유 Anki 카드 1700장당 1점 상승(B=5.9x10^-4, p=0.024).",
+            "source": "https://pubmed.ncbi.nlm.nih.gov/26498443/ — Deng, Gluckstein & Larsen, Perspectives on Medical Education 4(6):308-313, 2015 (DOI 10.1007/s40037-015-0220-x)",
+            "design_implication": "누적 풀이 문항 수 자체가 용량-반응 관계를 가지므로 드릴 시스템은 '오늘 몇 문항'의 누적 카운터를 1급 지표로 추적·표시할 가치가 있다."
+          },
+          {
+            "claim": "의대생 ECG 판독 실험(실험 2)에서 여러 진단 범주를 섞은 '대조적(contrastive/mixed) 연습' 집단이 단일 범주 블록 연습 집단보다 신규 ECG 진단 정확도가 유의하게 높았다(46% vs 30%, p<0.05). 실험 1에서 교수 방식(특징 중심 vs 범주 중심)은 차이가 없어, 효과는 연습 세트의 혼합 구성에서 나왔다.",
+            "source": "https://pubmed.ncbi.nlm.nih.gov/12652166/ — Hatala, Brooks & Norman, Advances in Health Sciences Education 8(1):17-26, 2003 (DOI 10.1023/A:1022687404380)",
+            "design_implication": "쟁점 판별력은 혼합에서 나오므로 일일 문제 세트는 단일 주제 블록이 아니라 여러 청구권규범·죄명이 섞인 혼합 문제은행으로 출제해 '이 사안이 어느 규범 문제인가'의 감별 훈련을 강제해야 한다."
+          },
+          {
+            "claim": "초심·상급 법대생을 4조건(과정단계 설명/worked example/worked example+단계/무지원)에 배정한 실험에서 법적 사례 추론 학습 시 worked example(모범 풀이 예시) 학습이 문제풀이보다 효과적이었고, 이 효과가 사전지식이 유의하게 많은 상급생에게도 유지되어 expertise reversal(전문성 역전)이 나타나지 않았다 — 비구조화 과제인 법적 추론에서는 예시 학습의 유효 구간이 더 길다는 직접 증거.",
+            "source": "https://research-portal.uu.nl/en/publications/the-worked-example-and-expertise-reversal-effect-in-less-structur — Nievelstein, van Gog, van Dijck & Boshuizen, Contemporary Educational Psychology 38(2):118-125, 2013 (DOI 10.1016/j.cedpsych.2012.12.004)",
+            "design_implication": "사례형 드릴에서 모범답안(worked example) 정독·구조 분석 단계는 초심자용 보조가 아니라 상급 단계까지 유지해야 하며, '풀기 전 유사 쟁점 모범답안 1건 학습'을 표준 루프에 넣을 근거가 된다."
+          },
+          {
+            "claim": "경영대학원생 협상 훈련 실험에서 두 사례를 나란히 비교하며 공통 원리를 서술한 집단이 같은 사례를 하나씩 따로 분석한 집단보다 이후 실제 대면 협상에서 훈련된 전략(조건부 계약)을 전이 적용할 확률이 약 3배 높았다(analogical encoding 효과; 후속 GLT 2003 J. Educational Psychology 연구에서 2~3배로 반복 확인).",
+            "source": "https://pubmed.ncbi.nlm.nih.gov/10682201/ — Loewenstein, Thompson & Gentner, Psychonomic Bulletin & Review 6(4):586-597, 1999 (DOI 10.3758/BF03212967); 확장: Gentner, Loewenstein & Thompson, J. Educational Psychology 95(2):393-408, 2003",
+            "design_implication": "판례·사례 학습은 단건 요약이 아니라 '유사 쟁점 사례 2건을 나란히 놓고 공통 법리 구조를 직접 서술'하게 하는 사례비교(case comparison) 과제로 설계할 때 전이가 배가된다."
+          },
+          {
+            "claim": "FIU College of Law가 인출연습(testing effect)·간격반복·메타인지 중심으로 학업지원 프로그램(AEP)을 전면 개편한 뒤 플로리다주 bar exam 합격률 1위를 최근 6회 중 5회 기록했다(예: 2018년 2월 85.0% vs 주 평균 57.9%, +27.1%p; 2016년 2월 84.6%, +26.2%p). 단, RCT가 아닌 기관 단위 전후·상대비교 증거이며, 저자도 입학자원 등 교란요인을 명시함.",
+            "source": "https://jle.aals.org/home/vol68/iss2/4/ — Schulze, \"Using Science to Build Better Learners\", Journal of Legal Education 68(2):230, 2019 (전문: https://jle.aals.org/cgi/viewcontent.cgi?article=1618&context=home)",
+            "design_implication": "인출연습+간격반복 조합이 법학 면허시험 도메인에서 기관 규모로 작동한 최상위 실무 증거이므로, 드릴 시스템의 기본 골격(자가시험→간격 재출제)을 법학에 그대로 적용하는 것의 도메인 타당성 근거로 인용할 수 있다."
+          }
+        ]
+      },
+      {
+        "angle": "반증 탐색(적대적 검증): \"세션 후반 라벨 없는 혼합 라운드\" 설계에 반하는 근거. 탐색 경로: WebSearch 5회(저성취·하이브리드·라벨·메타분석·WM 각도) + Semantic Scholar Graph API DOI 조회(10.1111/lang.12659, 10.1037/bul0000209, 10.1037/xap0000139, 10.1007/s10648-022-09692-3, 10.1016/j.jarmac.2021.09.004) + Kang(2023) APA 챕터 PDF 원문 정독 + PubMed(31900048). 종합 판정: (1) '하이브리드(블록→혼합)가 순수 인터리빙보다 못하다'는 근거 없음 — 오히려 동등 효과 확인, 설계 지지. (2) '저성취자에게 순수 인터리빙 해롭다'는 근거 있음 — 단 초기 블록 단계가 있으면 해소되며, 해당 연구는 선언적 어휘학습이라 논점분류 과제로의 일반화는 제한적. (3) '라벨 제거가 불안·인지부하만 올린다'는 직접 근거 없음 — 대신 '범주가 불투명한데 훈련 중 범주정보를 끝까지 안 주면 인터리빙 이득 소멸'(Yan & Schuetze 2022)이 발견됨 → 문항 제시 시 라벨 제거는 무방하나 피드백에서 논점명 명시가 필수. (4) 실질 경계조건 2건: 유사·혼동 논점끼리만 섞어야 효과(비유사 주제 혼합은 무익), 학습자가 혼합을 비효과적으로 지각해 이탈하는 동기 리스크. 요컨대 설계 자체에 대한 유의미한 반증 없음, 단 '피드백 라벨 명시·유사논점 혼합·초기 블록 유지' 3개 조건 준수 필요.",
+        "findings": [
+          {
+            "claim": "Yan & Schuetze(2022): 범주가 불투명(opaque)한 자료에서 훈련 중 범주 소속 정보를 제공하지 않자 범주학습 자체가 저조했고 인터리빙 이득이 사라짐; 범주 표지(라벨)와 진단 특징을 명시하자 인터리빙이 블록 대비 강한 이득 회복. Kang(2023) 챕터의 실무 권고도 '예시 제시 시 범주명을 명시적으로 말하라'(Eglington & Kang 2017 병인). 원 논문 초록은 출판사 비공개(Semantic Scholar abstract=null)로 2차 경로(APA 챕터 원문 pp.136-137 정독)로 확인함.",
+            "source": "https://doi.org/10.1016/j.jarmac.2021.09.004 (JARMAC, 2022, 11(2) 218-228); 확인 경로: Kang, In Their Own Words, APA Div.2, 2023, https://www.unh.edu/teaching-learning-resource-hub/sites/default/files/media/2023-06/itow-interleaved-training-and-category-learning-kang.pdf",
+            "design_implication": "문항 제시 단계의 라벨 제거는 유지하되, 각 문항 직후 피드백에서 논점명을 반드시 명시해야 혼합 라운드의 판별 이득이 성립한다(라벨 없는 채점만 하고 끝내면 이득 소멸 위험)."
+          },
+          {
+            "claim": "Hwang(2024, Language Learning): 한국 실업계고 저성취 청소년 107명의 L2 어휘학습에서 순수 인터리빙 단독은 'undesirable difficulty'로 작용했고, 초기 블록 연습이 선언적 지식 형성에 필요했으며, 하이브리드(블록→인터리빙)가 장기 파지에서 최상. 단 과제가 어휘(선언적 기억)로, 논점 분류(귀납적 범주학습)와 과제 유형이 다름.",
+            "source": "https://doi.org/10.1111/lang.12659 (Language Learning, 2024 online/2025 issue); Semantic Scholar API로 초록 확인",
+            "design_implication": "세션 전반 라벨 있는 블록 단계를 유지하는 현 설계가 정답이며, 저성취·초기 사용자에게는 블록 단계 정답률이 일정 기준을 넘긴 뒤에만 혼합 라운드를 열도록 게이트를 두는 것이 안전하다."
+          },
+          {
+            "claim": "Brunmair & Richter(2019, Psych Bull 메타분석, 59연구 238효과크기): 전체 인터리빙 효과 g=0.42이나 단어류는 블로킹 우세(g=-0.39), 설명문 텍스트는 유의하지 않음; 효과는 범주 간 유사성이 높고 범주 내 유사성이 낮을수록 커짐. 보조: Hausman & Kornell(2014) 상이한 주제 혼합은 학습 향상 없음; Kang(2023) 챕터도 '고도로 이질적인 내용 혼합은 무익' 명시.",
+            "source": "https://doi.org/10.1037/bul0000209 (Psychological Bulletin, 2019, 145(11) 1029-1052); 보조 https://doi.org/10.1016/j.jarmac.2014.03.003",
+            "design_implication": "혼합 라운드는 서로 혼동되는 유사 논점(예: 유사 청구권규범·요건 경합 쟁점)끼리 섞어야 하며, 무관한 과목·단원을 무작위로 섞으면 난이도만 올리고 이득이 없다."
+          },
+          {
+            "claim": "Yan, Soderstrom, Seneviratna, Bjork & Bjork(2017, JEP:Applied): 6종 스케줄 비교에서 블록→인터리빙 전환(하이브리드)이 순수 인터리빙과 동등하게 효과적이었고 블로킹보다 우수('was just as effective as an interleaved schedule' — Kang 2023 챕터 p.138 원문 인용 확인). 학습자 지지율은 하이브리드가 최고, 순수 인터리빙이 최저. '하이브리드가 순수 인터리빙보다 못하다'는 반증은 발견되지 않음.",
+            "source": "https://doi.org/10.1037/xap0000139 (JEP: Applied, 2017, 23(4) 403-416); 초록 출판사 비공개로 Kang(2023) APA 챕터 원문에서 결과 확인",
+            "design_implication": "세션 후반에만 혼합을 배치하는 하이브리드 구조는 순수 인터리빙 대비 학습 손실 없이 수용성(사용자 선호)까지 높으므로 설계 그대로 유지할 근거가 된다."
+          },
+          {
+            "claim": "Wang, Liu, Xing & Seger(2020, Memory): 이중과제(수리 Stroop)로 작업기억에 부하를 걸어도, 개인 WMC 고저와 무관하게 인터리빙 이득 유지(부하x스케줄, WMCx스케줄 상호작용 모두 부재). 동일 결론: Sana et al.(2018, JARMAC) 및 Yan & Sana(2021) — '저작업기억 학습자에게 라벨 없는 혼합이 과부하'라는 가설의 직접 반증.",
+            "source": "https://pubmed.ncbi.nlm.nih.gov/31900048/ (Memory, 2020); 보조 https://doi.org/10.1016/j.jarmac.2018.05.005",
+            "design_implication": "인지능력(작업기억) 기준으로 혼합 라운드를 차등 제공할 필요는 없다 — 차등 게이트는 사전 성취도(정답률) 기준으로만 두면 된다."
+          },
+          {
+            "claim": "Onan, Wiradhany, Biwer, Janssen & de Bruin(2022, Educ Psychol Review, N=150): 인터리빙은 더 힘들고 덜 효과적으로 지각되어 초기 선택률 13%에 불과했으나 반복 경험으로 40%까지 상승; 지각된 학습감 증가가 선택을 매개. Kirk-Johnson et al.(2019, Cognitive Psychology)의 '노력=낮은 학습' 오귀인과 일치. 라벨 제거·혼합이 불안이나 인지부하를 높여 '학습 자체를 해친다'는 직접 근거는 탐색 결과 발견되지 않음 — 리스크는 학습 손상이 아니라 전략 이탈(비순응).",
+            "source": "https://doi.org/10.1007/s10648-022-09692-3 (Educational Psychology Review, 2022); 보조 https://doi.org/10.1016/j.cogpsych.2019.101237",
+            "design_implication": "혼합 라운드에 대한 초기 거부감은 예상되는 기본값이므로, 라운드 종료 시 정답률·성장 지표를 혼합 형식과 명시적으로 연결해 보여주는 피드백(효과 체감 장치)을 넣어 이탈을 막아야 한다."
+          }
+        ]
+      }
+    ]
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Verify"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Supplement"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "verify:brunmair-words",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "a051503cf589bceda",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783412196365,
+      "queuedAt": 1783412195668,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Brunmair & Richter (2019) \"Similarity matters: A meta-analy…",
+      "promptPreview": "당신은 학습과학 조사 검증자다. WebSearch/WebFetch로 원출처를 직접 확인하라. 접근 불가(페이월)면 다른 경로(출판본 DOI, 저자 홈페이지 PDF, PMC, Semantic Scholar api.semanticscholar.org/graph/v1/paper/DOI:.../?fields=abstract, 인용 논문의 수치 재인용)를 2개 이상 시도하라. 확인 못 한 것을 확인했다고 하지 마라. 최종 텍스트는 사람용 메시지가 아니라 데이터다.\n검증 대상: Brunmair & Richter (2019) \"Similarity matters: A meta-analysis of interleaved learning and its moderators\" (Psychological Bulletin 145(1…",
+      "lastProgressAt": 1783412518342,
+      "tokens": 61619,
+      "toolCalls": 24,
+      "durationMs": 321954,
+      "resultPreview": "{\"target\":\"Brunmair & Richter (2019) \\\"Similarity matters: A meta-analysis of interleaved learning and its moderators\\\", Psychological Bulletin 145(11), 1029-1052, DOI 10.1037/bul0000209 — 주장 1: words 자료에서 인터리빙 효과 역전(블로킹 우세) g = -0.39; 주장 2: expository texts에서 비유의\",\"verdict\":\"confirmed\",\"evidence\":\"[주장 1: words g = -0.39, 확인] 초록(저자 accepted manuscript p.2, Semantic Scholar API 초록과 일치): \\\"An advant…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "verify:vangog-example-problem",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "abd157c5785deacb4",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783412196522,
+      "queuedAt": 1783412195675,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "van Gog, T., Kester, L., & Paas, F. (2011). Effects of work…",
+      "promptPreview": "당신은 학습과학 조사 검증자다. WebSearch/WebFetch로 원출처를 직접 확인하라. 접근 불가(페이월)면 다른 경로(출판본 DOI, 저자 홈페이지 PDF, PMC, Semantic Scholar api.semanticscholar.org/graph/v1/paper/DOI:.../?fields=abstract, 인용 논문의 수치 재인용)를 2개 이상 시도하라. 확인 못 한 것을 확인했다고 하지 마라. 최종 텍스트는 사람용 메시지가 아니라 데이터다.\n검증 대상: van Gog, Kester & Paas (2011, Contemporary Educational Psychology, doi:10.1016/j.cedpsych.2010.10.004 부근, ScienceDirect S0361476X1000055…",
+      "lastProgressAt": 1783412625391,
+      "tokens": 85464,
+      "toolCalls": 32,
+      "durationMs": 428863,
+      "resultPreview": "{\"target\":\"van Gog, T., Kester, L., & Paas, F. (2011). Effects of worked examples, example-problem, and problem-example pairs on novices' learning. Contemporary Educational Psychology, 36(3), 212-218. doi:10.1016/j.cedpsych.2010.10.004 (ScienceDirect PII S0361476X1000055X) — 주장 (a) WE만/WE-PS 쌍이 PS만보다 인지부하 낮고 성과 높음, (b) PS-WE(문제 먼저)는 PS만과 차이 없음\",\"verdict\":\"confirmed\",\"evidence\":\"저자 최종본(peer-reviewe…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "verify:kalyuga-expertise-reversal",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "a22a24341c888debc",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783412196532,
+      "queuedAt": 1783412195676,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Kalyuga (2007) \"Expertise Reversal Effect and Its Implicati…",
+      "promptPreview": "당신은 학습과학 조사 검증자다. WebSearch/WebFetch로 원출처를 직접 확인하라. 접근 불가(페이월)면 다른 경로(출판본 DOI, 저자 홈페이지 PDF, PMC, Semantic Scholar api.semanticscholar.org/graph/v1/paper/DOI:.../?fields=abstract, 인용 논문의 수치 재인용)를 2개 이상 시도하라. 확인 못 한 것을 확인했다고 하지 마라. 최종 텍스트는 사람용 메시지가 아니라 데이터다.\n검증 대상: Kalyuga (2007) \"Expertise Reversal Effect and Its Implications for Learner-Tailored Instruction\" (Educational Psychology Review) — (a) 전…",
+      "lastProgressAt": 1783412557253,
+      "tokens": 68185,
+      "toolCalls": 28,
+      "durationMs": 360721,
+      "resultPreview": "{\"target\":\"Kalyuga (2007) \\\"Expertise Reversal Effect and Its Implications for Learner-Tailored Instruction\\\" (Educational Psychology Review 19:509-539, DOI 10.1007/s10648-007-9054-3) — 주장 (a) 다도메인·2200+명 반복검증, 효과크기 0.45~2.99; (b) Kalyuga & Sweller 2004 실험3 지식×형식 상호작용; (c) Reisslein 2005/2006 fading 속도·예제-문제 순서\",\"verdict\":\"confirmed\",\"evidence\":\"(a) 확인 — 결론부(저널 p.533-534): \\\"The effect has been co…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "verify:grammar-interleaving",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "a41efa7fe3c6f18ec",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783412196535,
+      "queuedAt": 1783412195678,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "2024년 Learning and Instruction 게재(PII S0959475224001725)…",
+      "promptPreview": "당신은 학습과학 조사 검증자다. WebSearch/WebFetch로 원출처를 직접 확인하라. 접근 불가(페이월)면 다른 경로(출판본 DOI, 저자 홈페이지 PDF, PMC, Semantic Scholar api.semanticscholar.org/graph/v1/paper/DOI:.../?fields=abstract, 인용 논문의 수치 재인용)를 2개 이상 시도하라. 확인 못 한 것을 확인했다고 하지 마라. 최종 텍스트는 사람용 메시지가 아니라 데이터다.\n검증 대상: 2024년 Learning and Instruction 계열(ScienceDirect S0959475224001725) 로망스어 문법 시제 인터리빙 4실험 연구 — (a) 1주 지연 검사에서 동사 활용은 4실험 전부 인터리빙 우세, (b) 이 …",
+      "lastProgressAt": 1783412673748,
+      "tokens": 91018,
+      "toolCalls": 29,
+      "durationMs": 477213,
+      "resultPreview": "{\"target\":\"2024년 Learning and Instruction 게재(PII S0959475224001725) 로망스어 문법 시제 인터리빙 4실험 연구 — (a) 1주 지연 검사에서 동사 활용 4실험 전부 인터리빙 우세, (b) 시제가 확연히 달라도 이점 발생(문제유형→절차 연합 기제), (c) 시제 식별 이점은 시제가 혼동 가능할 때만\",\"verdict\":\"confirmed\",\"evidence\":\"서지사항 확정: Pan, S. C., Rodríguez Flores, S., Kaku, M. E., & Lai, W. H. E. \\\"Interleaved practice enhances grammar skill learning for similar and dissimilar tenses in Roman…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "verify:blocking-illusion",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "a5040b354818bc6e3",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783412196538,
+      "queuedAt": 1783412195678,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "\"Tailoring interleaved practice: Does adaptive sequencing b…",
+      "promptPreview": "당신은 학습과학 조사 검증자다. WebSearch/WebFetch로 원출처를 직접 확인하라. 접근 불가(페이월)면 다른 경로(출판본 DOI, 저자 홈페이지 PDF, PMC, Semantic Scholar api.semanticscholar.org/graph/v1/paper/DOI:.../?fields=abstract, 인용 논문의 수치 재인용)를 2개 이상 시도하라. 확인 못 한 것을 확인했다고 하지 마라. 최종 텍스트는 사람용 메시지가 아니라 데이터다.\n검증 대상: \"Tailoring interleaved practice: Does adaptive sequencing boost the interleaving effect?\" (2025년경, 259명 회화 분류) — (a) 무작위·적응형 인터리빙 모두 즉시+…",
+      "lastProgressAt": 1783412485093,
+      "tokens": 54465,
+      "toolCalls": 22,
+      "durationMs": 288554,
+      "resultPreview": "{\"target\":\"\\\"Tailoring interleaved practice: Does adaptive sequencing boost the interleaving effect?\\\" — Nemeth, Osterberg & Lipowsky (2025), Learning and Individual Differences, Vol. 124, Article 102804, DOI 10.1016/j.lindif.2025.102804. 검증 주장: (a) 무작위·적응형 인터리빙 모두 즉시+지연 검사에서 블록 연습보다 우세, (b) 블록 연습은 학습 단계 성적·CLJ(자신감)는 높지만 지연 성적은 낮음(학습 착각)\",\"verdict\":\"confirmed\",\"evidence\":\"서지 확정(Crossref): 저자 Lea N…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "supp:successive-relearning",
+      "phaseIndex": 2,
+      "phaseTitle": "Supplement",
+      "agentId": "a37d8b622375c347d",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783412674234,
+      "queuedAt": 1783412673812,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "successive relearning(기준 도달 인출연습 + 세션 간 재학습) …",
+      "promptPreview": "당신은 학습과학 조사 검증자다. WebSearch/WebFetch로 원출처를 직접 확인하라. 접근 불가(페이월)면 다른 경로(출판본 DOI, 저자 홈페이지 PDF, PMC, Semantic Scholar api.semanticscholar.org/graph/v1/paper/DOI:.../?fields=abstract, 인용 논문의 수치 재인용)를 2개 이상 시도하라. 확인 못 한 것을 확인했다고 하지 마라. 최종 텍스트는 사람용 메시지가 아니라 데이터다.\n보완 조사: successive relearning(Rawson & Dunlosky — 기준 도달 후 세션 간 재학습 반복)의 효과 근거. 핵심 수치(시험 성적 향상, 파지율), 교실 적용 연구, 그리고 '쟁점별 순환 복습(spiral) + SRS' 설계에…",
+      "lastProgressAt": 1783412925969,
+      "tokens": 55252,
+      "toolCalls": 17,
+      "durationMs": 251733,
+      "resultPreview": "{\"angle\":\"successive relearning(기준 도달 인출연습 + 세션 간 재학습) 원출처 검증: 실험실 처방(3회 정답 도달 후 3회 재학습), 교실 적용 효과 크기(d .54~1.10, 시험 +10%p), 재학습 비용 급감(5분→2분→1분) — spiral+SRS 설계에 직결되는 수치 확보\",\"findings\":[{\"claim\":\"Rawson & Dunlosky (2011): 3개 실험, 대학생 533명, 10만+ 단답 응답 수작업 채점. 초기학습 기준(1~4회 정답)과 재학습(1~5세션)의 효과는 준가산적(subadditive) — 초기 기준의 효과는 재학습이 늘수록 소멸하고, 재학습은 적은 추가 연습비용으로 1~4개월 파지에 큰 효과. 처방: '초기 세션에서 3회 정답 도달 후, 넓은 …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 7,
+      "label": "supp:law-domain-evidence",
+      "phaseIndex": 2,
+      "phaseTitle": "Supplement",
+      "agentId": "affb892e9cd209cc3",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783412674293,
+      "queuedAt": 1783412673814,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "법학·전문직 시험 도메인의 직접 실험 근거 검증: 인출연습(tes…",
+      "promptPreview": "당신은 학습과학 조사 검증자다. WebSearch/WebFetch로 원출처를 직접 확인하라. 접근 불가(페이월)면 다른 경로(출판본 DOI, 저자 홈페이지 PDF, PMC, Semantic Scholar api.semanticscholar.org/graph/v1/paper/DOI:.../?fields=abstract, 인용 논문의 수치 재인용)를 2개 이상 시도하라. 확인 못 한 것을 확인했다고 하지 마라. 최종 텍스트는 사람용 메시지가 아니라 데이터다.\n보완 조사: 법학·전문직 시험(로스쿨, bar exam, 의학교육 국가고시) 도메인에서 인출연습(test-enhanced learning)·인터리빙·혼합 문제은행의 직접 실험 근거. 법학 사례형 추론(legal reasoning) 훈련에 worked exa…",
+      "lastProgressAt": 1783413141931,
+      "tokens": 77522,
+      "toolCalls": 36,
+      "durationMs": 467635,
+      "resultPreview": "{\"angle\":\"법학·전문직 시험 도메인의 직접 실험 근거 검증: 인출연습(test-enhanced learning)은 의학교육 RCT와 면허시험 예측 연구에서, 인터리빙(혼합연습)은 진단 판별 실험에서, worked example·사례비교는 법적 추론 실험에서 각각 1차 출처 수치로 확인됨. 법학 도메인 자체의 무작위 실험은 드물고(Nievelstein이 유일한 순수 법학 실험), bar exam 쪽은 프로그램·상관 증거가 주류라는 한계도 확인.\",\"findings\":[{\"claim\":\"소아과·응급의학 레지던트 RCT에서 동일 강의 후 '반복 시험+피드백' 조건이 '반복 복습(study sheet)' 조건보다 약 6개월 뒤 최종시험 점수가 평균 13%p 높았다(39% vs 26%, 통계적으로 유의, 큰 …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 8,
+      "label": "supp:adversarial-mixed-round",
+      "phaseIndex": 2,
+      "phaseTitle": "Supplement",
+      "agentId": "acfa68177fc9aea77",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783412674307,
+      "queuedAt": 1783412673814,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "반증 탐색(적대적 검증): \"세션 후반 라벨 없는 혼합 라운드\" …",
+      "promptPreview": "당신은 학습과학 조사 검증자다. WebSearch/WebFetch로 원출처를 직접 확인하라. 접근 불가(페이월)면 다른 경로(출판본 DOI, 저자 홈페이지 PDF, PMC, Semantic Scholar api.semanticscholar.org/graph/v1/paper/DOI:.../?fields=abstract, 인용 논문의 수치 재인용)를 2개 이상 시도하라. 확인 못 한 것을 확인했다고 하지 마라. 최종 텍스트는 사람용 메시지가 아니라 데이터다.\n반증 탐색(적대적): \"세션 후반에 논점 라벨 없이 문항을 섞어 내는 혼합 라운드\" 설계에 반하는 근거를 찾아라 — 예: 인터리빙이 저성취·초심 학습자에게 해롭다는 연구, 하이브리드(블록→인터리빙 전환)가 순수 인터리빙보다 못하다는 연구, 라벨 제거가 불안…",
+      "lastProgressAt": 1783413027326,
+      "tokens": 95324,
+      "toolCalls": 21,
+      "durationMs": 353019,
+      "resultPreview": "{\"angle\":\"반증 탐색(적대적 검증): \\\"세션 후반 라벨 없는 혼합 라운드\\\" 설계에 반하는 근거. 탐색 경로: WebSearch 5회(저성취·하이브리드·라벨·메타분석·WM 각도) + Semantic Scholar Graph API DOI 조회(10.1111/lang.12659, 10.1037/bul0000209, 10.1037/xap0000139, 10.1007/s10648-022-09692-3, 10.1016/j.jarmac.2021.09.004) + Kang(2023) APA 챕터 PDF 원문 정독 + PubMed(31900048). 종합 판정: (1) '하이브리드(블록→혼합)가 순수 인터리빙보다 못하다'는 근거 없음 — 오히려 동등 효과 확인, 설계 지지. (2) '저성취자에게 순수 인터리빙 …"
+    }
+  ],
+  "totalTokens": 588849,
+  "totalToolCalls": 209
+}

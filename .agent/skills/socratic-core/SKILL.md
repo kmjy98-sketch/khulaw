@@ -14,7 +14,7 @@ description: 소크라틱 학습 로직. 대화/생성/채점 모드, 스캐폴�
 
 ## 핵심 원칙
 
-> **주의**: 권위본 [CLAUDE.md](../../../CLAUDE.md) 및 **Global Rules**가 최우선 적용됩니다. (AGENTS.md는 deprecated 미러)
+> **주의**: 권위본 [CLAUDE.md](../../../CLAUDE.md) 및 **Global Rules**가 최우선 적용됩니다. (AGENTS.md = 비클로드 에이전트용 운영 기준·참고. 정본은 CLAUDE.md — 충돌 시 CLAUDE.md 우선)
 
 > [!IMPORTANT]
 > **근거 제공 예외 (Global Rule 적용)**
@@ -107,6 +107,6 @@ AI: 정확합니다(견련성).
 매 문답/문제 풀이 종료 시 `.agent/state/` 파일을 다음 정책으로 갱신한다:
 
 - `learning.json` — 취약점·토픽 상태 (자동 갱신)
-- `progress.json` — 교재/전사문 진도 (자동 갱신)
+- `progress.json` — 교재/전사문 진도 **보조 snapshot**(정본 아님, 자동 갱신 허용). 진도 정본 = 논점 frontmatter(`sync/위키/{과목}/{쟁점}.md`, #19-B 2026-06-30) — 정밀 진도 갱신은 그쪽을 따른다.
 - `srs_log.json` — 복습 간격. 자동 기록(silent write) 금지. 채점 결과는 복습 항목 '제안'까지만 하고, 사용자가 채점 확정/복습 등록을 지시할 때만 spaced-repetition 스킬을 통해 기록한다(spaced-repetition/SKILL.md·case-answer-review/SKILL.md 동일 정책).
 

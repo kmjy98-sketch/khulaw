@@ -6,7 +6,7 @@ description: 적응형 학습 루프(쟁점 그래프 + 전파 활성화 + cutof
 # Adaptive Study Loop
 
 > 신규 2026-06-23. SRS·패널이 "리스트"만 주던 한계를 보완 — 쟁점 그래프 위에서 문제를 출제하고, 오답 시 약한 연관쟁점을 강화하며, 반복 실패는 "공부하라"로 escalate.
-> 우선순위: 루트/과목 `AGENTS.md` > `card-wiki-pipeline.md` > 본 SKILL.
+> 우선순위: 루트 `CLAUDE.md`(정본) > `card-wiki-pipeline.md` > 본 SKILL. AGENTS.md = 비클로드 에이전트용 운영 기준(참고) — 충돌 시 CLAUDE.md 우선.
 
 ## 0. 모델
 쟁점 그래프 위의 **전파 활성화(spreading activation)** — 가중 그래프 + 노드 강도 + 헤비안식 강화. 진짜 NN 아님.
@@ -47,5 +47,5 @@ finish(): 공부권고 + SRS제안(silent write 금지 #16) → 약점보드
 
 ## 5. 상태
 파일럿(합성 검증) 완료 — 테스트: 엔진 6 / 그래프 9 / 강화 5 / 보드 6. **데모 작동 실증**(전체 루프: 출제→채점→강화→cutoff→마스터; 윈도우 cp949 콘솔 출력가드 추가 2026-06-25).
-**① 실연동 글루 스펙**(provider/panel/state/graph 바인딩) = `sync/_meta/적응형학습_실연동_글루스펙_2026-06-25.md`. 실연동은 런타임 산출물(problem_index·learning.json·실그래프) 채워진 후.
-설계·검증 경위: `sync/_meta/옵시디언_안키_통합_검토_핸드오프_2026-06-23.md` §9.
+**① 실연동 글루 스펙**(provider/panel/state/graph 바인딩) = `9.작업중/클로드/적응형학습_실연동_글루스펙_2026-06-25.md`. 실연동은 런타임 산출물(problem_index·learning.json·실그래프) 채워진 후.
+설계·검증 경위: `9.작업중/클로드/옵시디언_안키_통합_검토_핸드오프_2026-06-23.md` §9.
