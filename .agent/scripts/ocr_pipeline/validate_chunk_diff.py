@@ -19,11 +19,15 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
 
-WORKSPACE_ROOT = Path(r"H:\내 드라이브")
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+WORKSPACE_ROOT = Path(VAULT_ROOT)
 CHUNKS_ROOT = WORKSPACE_ROOT / ".agent" / "data" / "ocr_chunks"
 REVIEWED_ROOT = WORKSPACE_ROOT / ".agent" / "data" / "ocr_chunks_reviewed"
 

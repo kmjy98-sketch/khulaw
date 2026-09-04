@@ -6,10 +6,14 @@ anki_keyword_merge.py — 에이전트 키워드 산출물(kw_out/, kw_out_cloze
 - 멱등: 슬라이스·산출물 전체를 다시 읽어 캐시를 새로 쓴다 (재실행 안전)
 """
 import json
+import os
 import sys
 from pathlib import Path
 
-STATE = Path("H:/내 드라이브/.agent/state")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+STATE = Path(vp(".agent", "state"))
 JOBS = [
     ("kw_slices", "kw_out", "anki_keyword_cache.jsonl"),
     ("kw_slices_cloze", "kw_out_cloze", "anki_cloze_kw_cache.jsonl"),

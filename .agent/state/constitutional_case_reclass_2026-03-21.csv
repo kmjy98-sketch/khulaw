@@ -1,0 +1,8 @@
+﻿"action","source","destination","note"
+"move_dir","H:\내 드라이브\3.공법\진행중\이진_헌법1\전사문","H:\내 드라이브\3.공법\진행중\이진_헌법원리1\전사문","legacy_ijinhunbeop1_subdir_to_canonical"
+"move_dir","H:\내 드라이브\3.공법\진행중\이진_헌법1\정리","H:\내 드라이브\3.공법\진행중\이진_헌법원리1\정리","legacy_ijinhunbeop1_subdir_to_canonical"
+"move_file","H:\내 드라이브\2019헌마1399.pdf","H:\내 드라이브\3.공법\진행중\이진_헌법원리1\판례\2019헌마1399.pdf","constitutional_case_to_ijinjinheongwonri1"
+"move_file","H:\내 드라이브\2023헌마820.pdf","H:\내 드라이브\3.공법\진행중\이진_헌법원리1\판례\2023헌마820.pdf","constitutional_case_to_ijinjinheongwonri1"
+"move_file","H:\내 드라이브\5.기타\2004헌나1.pdf","H:\내 드라이브\3.공법\진행중\이진_헌법원리1\판례\2004헌나1.pdf","constitutional_case_to_ijinjinheongwonri1"
+"move_file","H:\내 드라이브\5.기타\2007헌나843.pdf","H:\내 드라이브\3.공법\진행중\이진_헌법원리1\판례\2007헌마843.pdf","renamed_to_match_body_case_number"
+"move_dir","H:\내 드라이브\3.공법\진행중\이진_헌법1","H:\내 드라이브\5.기타\_trash\2026-03-21\레거시_공법_폴더\3.공법_진행중_이진_헌법1","empty_legacy_folder_to_trash"

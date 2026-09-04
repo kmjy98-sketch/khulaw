@@ -1,9 +1,12 @@
 import os
 import re
 import json
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 TARGET_LIST_PATH = r"C:\Users\111\.gemini\antigravity\brain\add3c14b-36a5-488b-be51-fb847d79f19e\scratch\broken_tables_files.txt"
-BASE_DIR = r"H:\내 드라이브\sync"
+BASE_DIR = vp("sync")
 
 def fix_table_formats(content):
     lines = content.split('\n')

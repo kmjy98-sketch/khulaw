@@ -1,7 +1,9 @@
-import json, re, sys, io
+import json, re, sys, io, os
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 from pathlib import Path
-RAW = Path(r"H:\내 드라이브\sync\_meta\_헌법_PPT_추출_raw.json")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+RAW = Path(vp("sync", "_meta", "_헌법_PPT_추출_raw.json"))
 raw = json.loads(RAW.read_text(encoding="utf-8"))
 
 def normalize(text):

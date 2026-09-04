@@ -4,8 +4,11 @@
 import os
 import re
 import json
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-BASE = r'H:\내 드라이브'
+BASE = VAULT_ROOT
 BATCH_JSON = os.path.join(BASE, r'.agent\state\batch2_g6.json')
 OCR_CHUNKS_DIR = os.path.join(BASE, r'.agent\data\ocr_chunks')
 REVIEWED_DIR = os.path.join(BASE, r'.agent\data\ocr_chunks_reviewed')

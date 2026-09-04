@@ -1,0 +1,286 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+$(function() {
+	$('[id^="date_"]').each(function(){
+		var dateValue = $(this).attr('id').split("_")[1];
+		var idValue = $(this).attr('id');
+		$("#"+idValue).html($("#"+idValue).html() + " " + getInputDayLabel(dateValue));
+	});
+});
+function getInputDayLabel(date) {
+    var week = new Array('(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)');
+    var today = new Date(date).getDay();
+    var todayLabel = week[today];
+    return todayLabel;
+}
+</script>
+
+<table>
+	<caption>메뉴 상세 - 요일/메뉴, 월,화,수,목,금,토</caption>
+	<colgroup>
+		<col style="width: 100%">
+		
+			<col style="width: 100%">
+		
+			<col style="width: 100%">
+		
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col">요일/메뉴</th>
+			
+				
+				
+				
+				
+				
+				
+				<th scope="col"><span class="date" id="date_2026-05-01">05/01</span></th>
+			
+				
+				
+				
+				
+				
+				
+				<th scope="col"><span class="date" id="date_2026-05-02">05/02</span></th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		
+			
+			<tr>
+				<th>조식<br>(08:00<br> ~ <br>10:00)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">근로자의날</strong></li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li></li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie"> </p>
+										<p class="pay">4000(학생1000)</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+						
+							<td class="no-menu">등록된 메뉴가<br>없습니다.</td>
+						
+					
+				
+			</tr>
+		
+			
+			<tr>
+				<th>중식(1)<br>(11:00<br> ~ <br>14:30)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">근로자의날</strong></li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie"> </p>
+										<p class="pay">4,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+						
+							<td class="no-menu">등록된 메뉴가<br>없습니다.</td>
+						
+					
+				
+			</tr>
+		
+			
+			<tr>
+				<th>중식(2)<br>(11:00<br> ~ <br>14:30)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">근로자의날</strong></li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li></li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie"> </p>
+										<p class="pay">3,500원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+						
+							<td class="no-menu">등록된 메뉴가<br>없습니다.</td>
+						
+					
+				
+			</tr>
+		
+			
+			<tr>
+				<th>중식(면)<br>(11:00<br> ~ <br>14:00)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">근로자의날</strong></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie"> </p>
+										<p class="pay">3,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+						
+							<td class="no-menu">등록된 메뉴가<br>없습니다.</td>
+						
+					
+				
+			</tr>
+		
+			
+			<tr>
+				<th>석식<br>(16:40<br> ~ <br>18:40)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">근로자의날</strong></li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li> </li>
+											<li></li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie"> </p>
+										<p class="pay">3,500원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+						
+							<td class="no-menu">등록된 메뉴가<br>없습니다.</td>
+						
+					
+				
+			</tr>
+		
+	</tbody>
+</table>

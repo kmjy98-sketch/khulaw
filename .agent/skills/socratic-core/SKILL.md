@@ -3,12 +3,8 @@ name: socratic-core
 description: 소크라틱 학습 로직. 대화/생성/채점 모드, 스캐폴딩, 힌트 시스템. socratic-loader와 함께 사용.
 ---
 
-<!-- @rule: AGENTS.md#2 Not-in-Source -->
-<!-- @rule: AGENTS.md#2 Not-in-Source -->
-<!-- @rule: GEMINI.md#2 Not-in-Source -->
-<!-- @rule: AGENTS.md#3 Evidence Mandatory -->
-<!-- @rule: GEMINI.md#3 Evidence Mandatory -->
-<!-- @rule: AGENTS.md#3 Evidence Mandatory -->
+<!-- @rule: CLAUDE.md#2 Not-in-Source -->
+<!-- @rule: CLAUDE.md#3 Evidence Mandatory -->
 
 # 소크라틱 학습 코어 Skill
 
@@ -18,7 +14,7 @@ description: 소크라틱 학습 로직. 대화/생성/채점 모드, 스캐폴�
 
 ## 핵심 원칙
 
-> **주의**: [AGENTS.md](../../../AGENTS.md) 및 **Global Rules**가 최우선 적용됩니다.
+> **주의**: 권위본 [CLAUDE.md](../../../CLAUDE.md) 및 **Global Rules**가 최우선 적용됩니다. (AGENTS.md = 비클로드 에이전트용 운영 기준·참고. 정본은 CLAUDE.md — 충돌 시 CLAUDE.md 우선)
 
 > [!IMPORTANT]
 > **근거 제공 예외 (Global Rule 적용)**
@@ -41,17 +37,28 @@ description: 소크라틱 학습 로직. 대화/생성/채점 모드, 스캐폴�
 1. **Reverse-RAG 채점**: 답안 Claim을 근거와 대조 → Supported / Contradicted / Not Found
 2. 미확인 시 `[근거 미발견]` 표시
 
-### korean-law-mcp 자동 호출
+### 법령 자동검증 (law_api.py)
 
-세션 중 다음 상황이면 korean-law-mcp MCP 도구를 **자동 호출**한다 (사용자 명시 요청 불요):
+세션 중 다음 상황이면 `.agent/lib/law_api.py`(법제처 직접 API)를 **자동 호출**한다 (사용자 명시 요청 불요):
 
-1. **정답 공개/해설 단계**: 조문 번호(예: 민법 제750조)가 등장하면 `search_law_tool` → `get_law_detail`로 원문 확인 후 인용
-2. **판례 근거 제시 단계**: 판례번호·사건명이 등장하면 `search_precedent_tool`로 판결요지 확인
+1. **정답 공개/해설 단계**: 조문 번호(예: 민법 제750조)가 등장하면 `law_api.py search-law` → `law-detail`로 원문 확인 후 인용
+2. **판례 근거 제시 단계**: 판례번호·사건명이 등장하면 `law_api.py search-prec`로 판결요지 확인
 3. **학습자 답변 검증**: 학습자가 조문을 인용했는데 내용이 불정확해 보이면 원문 대조 후 교정
 
 호출 **금지** 상황:
 - 질문/힌트 단계 (학습자 사고 유도 원칙 유지)
 - qmd law-notes 검색 결과에 이미 조문 원문이 포함된 경우 (중복 조회 방지)
+
+---
+
+### 답변 품질별 분기
+
+학습자 답변 품질에 따라 대응을 분기한다:
+- **정답+탄탄한 근거** → 난도 상승(심화·연결 쟁점).
+- **정답+빈약한 근거** → "결론이지 근거가 아니다" — 구체 근거(조문·요건·판례) 요구.
+- **오답** → 빈틈을 드러내는 역질문(직접 정정 X).
+- **찍기/막힘** → 요건·정의로 하향 분해 후 재질문.
+- **본인 업로드 노트와 모순** → 답 대신 그 자료를 인용해 "어느 게 맞나" 되물어 자기검증 유도.
 
 ---
 
@@ -100,6 +107,6 @@ AI: 정확합니다(견련성).
 매 문답/문제 풀이 종료 시 `.agent/state/` 파일을 다음 정책으로 갱신한다:
 
 - `learning.json` — 취약점·토픽 상태 (자동 갱신)
-- `progress.json` — 교재/전사문 진도 (자동 갱신)
+- `progress.json` — 교재/전사문 진도 **보조 snapshot**(정본 아님, 자동 갱신 허용). 진도 정본 = 논점 frontmatter(`sync/위키/{과목}/{쟁점}.md`, #19-B 2026-06-30) — 정밀 진도 갱신은 그쪽을 따른다.
 - `srs_log.json` — 복습 간격. 자동 기록(silent write) 금지. 채점 결과는 복습 항목 '제안'까지만 하고, 사용자가 채점 확정/복습 등록을 지시할 때만 spaced-repetition 스킬을 통해 기록한다(spaced-repetition/SKILL.md·case-answer-review/SKILL.md 동일 정책).
 

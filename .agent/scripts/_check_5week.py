@@ -6,7 +6,7 @@ import json, re, sys, io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 from pathlib import Path
-RAW = Path(r"H:\내 드라이브\sync\_meta\_헌법_PPT_추출_raw.json")
+RAW = Path(r"H:\내 드라이브\9.작업중/클로드\_헌법_PPT_추출_raw.json")
 
 def normalize(text):
     """모든 공백/개행을 단일 공백으로"""

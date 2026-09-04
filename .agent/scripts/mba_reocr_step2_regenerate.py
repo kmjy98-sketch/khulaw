@@ -11,22 +11,24 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import sys
 from datetime import date
 from pathlib import Path
 
-# 기존 스크립트 모듈 로드
-sys.path.insert(0, str(Path(r"H:\내 드라이브\.agent\scripts")))
+# 기존 스크립트 모듈 로드 (자기 디렉터리 = .agent/scripts)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 from fix_ocr_hanja import process_line as hanja_process  # type: ignore
 from fix_ocr_spacing import process_line as spacing_process  # type: ignore
 
-MAPPING = Path(r"H:\내 드라이브\.agent\state\mba_reocr_mapping.json")
-NOTES_DIR = Path(r"H:\내 드라이브\sync\_교재원문\민법\윤동환_민법의맥")
-EXTRACTS_DIR = Path(r"H:\내 드라이브\.agent\data\exam_extracts")
-WORKSPACE_ROOT = Path(r"H:\내 드라이브")
+MAPPING = Path(vp(".agent", "state", "mba_reocr_mapping.json"))
+NOTES_DIR = Path(vp("sync", "_교재원문", "민법", "윤동환_민법의맥"))
+EXTRACTS_DIR = Path(vp(".agent", "data", "exam_extracts"))
+WORKSPACE_ROOT = Path(VAULT_ROOT)
 TRASH_DIR = WORKSPACE_ROOT / "5.기타" / "_trash" / date.today().isoformat() / "mba_reocr"
 
 FM_RE = re.compile(r"^(---\n.*?\n---\n)(.*)", re.DOTALL)
@@ -127,7 +129,7 @@ def main():
             print(f"  [{status}] {name}  {r.get('candidate','')}")
 
     # 결과 저장
-    result_path = Path(r"H:\내 드라이브\.agent\state\mba_reocr_result.json")
+    result_path = Path(vp(".agent", "state", "mba_reocr_result.json"))
     result_path.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\n결과 상세: {result_path}")
 

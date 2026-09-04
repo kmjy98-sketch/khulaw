@@ -1,8 +1,12 @@
 """미처리 batch1 청크 목록을 missing_chunks.json으로 저장."""
 import json
+import os
+import sys
 from pathlib import Path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-WORKSPACE = Path(r"H:\내 드라이브")
+WORKSPACE = Path(VAULT_ROOT)
 batch_index = WORKSPACE / ".agent/state/batch1_chunks.json"
 rev_root = WORKSPACE / ".agent/data/ocr_chunks_reviewed"
 out_path = WORKSPACE / ".agent/state/missing_chunks.json"

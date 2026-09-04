@@ -2,13 +2,17 @@
 쟁점별 TOC 기반 마크다운 추출 — 형법 COMPACT OX + 민법 선택형연습1
 출력: sync/_교재원문/{과목}/{교재}/{쟁점명}_{교재약칭}.md
 """
+import os
 import sys
 from pathlib import Path
 from pypdf import PdfReader
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 sys.stdout.reconfigure(encoding="utf-8")
 
-ROOT = Path(r"H:\내 드라이브")
+ROOT = Path(VAULT_ROOT)
 SYNC = ROOT / "sync" / "_교재원문"
 
 

@@ -1,0 +1,316 @@
+{
+  "timestamp": "2026-02-14T20:28:55.427078",
+  "total": 44,
+  "success": 44,
+  "fail": 0,
+  "details": [
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "수업정리 → 정리/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\2-01_민법_송영곤_기본민법_수업정리_part01-10.md",
+      "new": "H:\\내 드라이브\\민사\\진행중\\정리\\2-01_민법_송영곤_기본민법_수업정리_part01-10.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "수업정리 → 정리/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\2-11_민법_송영곤_기본민법_수업정리_part11-26.md",
+      "new": "H:\\내 드라이브\\민사\\진행중\\정리\\2-11_민법_송영곤_기본민법_수업정리_part11-26.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "스크립트 → .agent/archive/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\link_notes.py",
+      "new": "H:\\내 드라이브\\.agent\\archive\\link_notes.py"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_1.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_1.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_10.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_10.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_11.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_11.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_12.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_12.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_2.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_2.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_3.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_3.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_4.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_4.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_5.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_5.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_6.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_6.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_7.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_7.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_8.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_8.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "Source_&_Context → _trash/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\Source_&_Context_9.md",
+      "new": "H:\\내 드라이브\\_trash\\통합됨\\Source_&_Context_9.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "스크립트 → .agent/archive/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\split_notes.py",
+      "new": "H:\\내 드라이브\\.agent\\archive\\split_notes.py"
+    },
+    {
+      "status": "OK",
+      "type": "file_move",
+      "category": "스크립트 → .agent/archive/",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\split_notes_v2.py",
+      "new": "H:\\내 드라이브\\.agent\\archive\\split_notes_v2.py"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\개관_(제2조).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\개관_제2조.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\격지자_간의_계약_(제531조).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\격지자_간의_계약_제531조.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\규범적_해석_(2차적_기준).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\규범적_해석_2차적_기준.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\모순금지_원칙_⭐.md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\모순금지_원칙.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\법원의_순서_(제1조).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\법원의_순서_제1조.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\변경을_가한_승낙_(제534조).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\변경을_가한_승낙_제534조.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\보관의무_위반_없는_경우_(쌍방_책임_없는_멸실).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\보관의무_위반_없는_경우_쌍방_책임_없는_멸실.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\손해배상_(전보배상).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\손해배상_전보배상.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\승낙기간_(제528조-530조).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\승낙기간_제528조-530조.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\예시_1_[상인인_친구에게_사업자금_차용].md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\예시_1_상인인_친구에게_사업자금_차용.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\요건사실_(청구자_측).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\요건사실_청구자_측.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\위약계약금의_성질_(제398조_제4항).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\위약계약금의_성질_제398조_제4항.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\이행착수의_의미_(판례).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\이행착수의_의미_판례.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\자연적_해석_(1차적_기준).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\자연적_해석_1차적_기준.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\제375조_제1항_(품질_기준).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\제375조_제1항_품질_기준.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\제375조_제2항_(특정_시기).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\제375조_제2항_특정_시기.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\제462조_(인도의무).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\제462조_인도의무.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\제537조_(채무자위험부담주의).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\제537조_채무자위험부담주의.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\제538조_제1항_(채권자위험부담주의).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\제538조_제1항_채권자위험부담주의.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\제760조_제1항_(협의의_공동불법행위).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\제760조_제1항_협의의_공동불법행위.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\제760조_제2항_(가해자_불명).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\제760조_제2항_가해자_불명.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\청약의_구속력_(제527조).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\청약의_구속력_제527조.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\청약의_효력_발생_(제111조).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\청약의_효력_발생_제111조.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\필수적_요소_(본질적_요소).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\필수적_요소_본질적_요소.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\항변_(상대방_측).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\항변_상대방_측.md"
+    },
+    {
+      "status": "OK",
+      "type": "file_rename",
+      "category": "파일명 정규화",
+      "old": "H:\\내 드라이브\\민사\\민법\\개념\\해제의_효과_(제565조_제2항).md",
+      "new": "H:\\내 드라이브\\민사\\민법\\개념\\해제의_효과_제565조_제2항.md"
+    }
+  ]
+}

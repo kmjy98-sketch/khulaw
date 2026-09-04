@@ -3,13 +3,15 @@ import sys
 import subprocess
 import re
 from pathlib import Path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 # Set console encoding to UTF-8
 os.environ["PYTHONIOENCODING"] = "utf-8"
 
-dir_path = Path("H:/내 드라이브/작업용")
-ocr_out_dir = Path("H:/내 드라이브/outputs/01_ocr")
-wiki_out_dir = Path("H:/내 드라이브/outputs/02_wiki")
+dir_path = Path(vp("작업용"))
+ocr_out_dir = Path(vp("outputs", "01_ocr"))
+wiki_out_dir = Path(vp("outputs", "02_wiki"))
 
 os.makedirs(ocr_out_dir, exist_ok=True)
 os.makedirs(wiki_out_dir, exist_ok=True)
@@ -114,7 +116,7 @@ for t in remaining_targets:
     
     # 1. Split PDF
     print(f"[STEP 1/3] Splitting {t['pdf']} into 100-page chunks...")
-    split_script = "H:/내 드라이브/pdf_split_100p.py"
+    split_script = vp("pdf_split_100p.py")
     try:
         subprocess.run(
             [sys.executable, split_script, str(pdf_path)],
@@ -127,7 +129,7 @@ for t in remaining_targets:
         
     # 2. Extract Text (Corrected file name to code_pdf_extract_2026-04-30.py)
     print(f"[STEP 2/3] Extracting text to {ocr_out_dir}...")
-    extract_script = "H:/내 드라이브/.agent/scripts/code_pdf_extract_2026-04-30.py"
+    extract_script = vp(".agent", "scripts", "code_pdf_extract_2026-04-30.py")
     try:
         cmd = [
             sys.executable, extract_script,
@@ -152,7 +154,7 @@ for t in remaining_targets:
         generated_chunks = [f for f in os.listdir(ocr_out_dir) if f.startswith(t["prefix"]) and f.endswith(".md")]
         print(f"  Found {len(generated_chunks)} chunk files to convert.")
         
-        sys.path.append("H:/내 드라이브/.agent/scripts")
+        sys.path.append(vp(".agent", "scripts"))
         import wiki_transformer
         
         count = 0

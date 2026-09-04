@@ -17,18 +17,22 @@
 """
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import sys
 from datetime import date
 from pathlib import Path
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
-WORKSPACE_ROOT = Path(r"H:\내 드라이브")
-DEFAULT_ROOT = Path(r"H:\내 드라이브\sync\_교재원문")
+WORKSPACE_ROOT = Path(VAULT_ROOT)
+DEFAULT_ROOT = Path(vp("sync", "_교재원문"))
 
 # ── 공통 패턴 ──────────────────────────────────────────────────
 _SENT_END = re.compile(r'[.!?）\]】」』다함음됨임없있]\s*$')

@@ -2,10 +2,13 @@
 기본 DRY-RUN, --apply 시 실제 이동. 이동만(삭제 없음).
 """
 import sys, shutil
+import os
 from pathlib import Path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
-R = Path(r"H:\내 드라이브")
+R = Path(VAULT_ROOT)
 W = R / "작업용"
 TRASH = R / "_trash/2026-06-14"
 APPLY = "--apply" in sys.argv

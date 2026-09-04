@@ -9,6 +9,7 @@ anchor_verify_batch.py — v4 카드 사건번호 일괄 검증 (국가법령정
 - API 예의: 0.15s 간격, 3회 재시도. usage: python anchor_verify_batch.py [--limit N]
 """
 import json
+import os
 import re
 import sys
 import time
@@ -17,19 +18,27 @@ from pathlib import Path
 
 import requests
 
-STATE = Path("H:/내 드라이브/.agent/state")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+STATE = Path(vp(".agent", "state"))
 TARGETS = STATE / "anchor_verify_targets.json"
 RESULTS = STATE / "anchor_verify_results.jsonl"
 SUMMARY = STATE / "anchor_verify_summary.md"
-ENV = Path("H:/내 드라이브/.agent/skills/korean-law-mcp/.env")
+ENV_PATHS = [Path(vp(".agent", "lib", ".env")),
+             Path(vp(".agent", "skills", "korean-law-mcp", ".env"))]  # #49 lib 우선·구 클론 폴백
 BASE = "https://www.law.go.kr/DRF/lawSearch.do"
 HUN = re.compile(r"헌[가나다라마바사아]")
 
 
 def api_key():
-    for line in ENV.read_text(encoding="utf-8").splitlines():
-        if line.startswith("LAW_API_KEY="):
-            return line.split("=", 1)[1].strip()
+    for _ep in ENV_PATHS:
+        try:
+            for line in _ep.read_text(encoding="utf-8").splitlines():
+                if line.startswith("LAW_API_KEY="):
+                    return line.split("=", 1)[1].strip()
+        except OSError:
+            continue
     raise SystemExit("LAW_API_KEY 없음")
 
 

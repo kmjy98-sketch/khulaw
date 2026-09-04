@@ -15,7 +15,7 @@ from datetime import datetime
 
 # 설정
 SCRIPT_DIR = Path(__file__).parent
-CONCEPT_DIR = Path(r"h:\내 드라이브\민사\민법\개념")
+CONCEPT_DIR = Path(r"E:\법학볼트\1.민사\92.개념")
 ARCHIVE_DIR = CONCEPT_DIR / "_archive"
 INDEX_PATH = SCRIPT_DIR.parent.parent.parent / "state" / "tag_index.json"
 

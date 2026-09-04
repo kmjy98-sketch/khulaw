@@ -4,13 +4,19 @@ import argparse
 import json
 from datetime import datetime
 
+_p = os.path.abspath(__file__)  # noqa: E402
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:  # noqa: E402
+    _p = os.path.dirname(_p)  # noqa: E402
+sys.path.insert(0, os.path.join(_p, 'scripts'))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 # study-notes/scripts/generate.py
 # 수집된 컨텍스트와 템플릿을 기반으로 LLM이 참고할 프롬프팅 구조를 만들거나 빈 템플릿을 복사함.
 # 에이전트(LLM)가 직접 노트를 채우게 함.
 
-STATE_DIR = r"H:\내 드라이브\.agent\state"
+STATE_DIR = vp(".agent", "state")
 CONTEXT_FILE = os.path.join(STATE_DIR, "study-notes-context.json")
-TEMPLATE_DIR = r"H:\내 드라이브\.agent\skills\study-notes\templates"
+TEMPLATE_DIR = vp(".agent", "skills", "study-notes", "templates")
 
 def main():
     parser = argparse.ArgumentParser(description="노트 생성기 (프롬프트 준비)")

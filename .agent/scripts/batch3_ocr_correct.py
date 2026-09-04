@@ -3,8 +3,10 @@
 batch3 OCR 교정 스크립트 (score 0.0~0.1 구간)
 """
 import os, json, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-BASE = 'H:/내 드라이브'
+BASE = VAULT_ROOT
 
 
 def load_chunk_list():

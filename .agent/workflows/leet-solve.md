@@ -5,7 +5,7 @@ description: LEET(언어이해/추리논증) 특화 문제 풀이 워크플로�
 # LEET 문제 풀이 워크플로우
 
 > 언어이해/추리논증 기출 및 모의고사 분석 특화
-> 참조: [AGENTS.md](../../AGENTS.md) (Global Rules 준수)
+> 참조: [CLAUDE.md](../../CLAUDE.md) (Global Rules 준수)
 
 ---
 

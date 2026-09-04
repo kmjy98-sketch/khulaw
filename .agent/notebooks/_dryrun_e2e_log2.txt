@@ -1,0 +1,69 @@
+[1] rasterize 2025_«Âπ˝_∫ØªÁ±‚.pdf page 1 at dpi=120 ...
+    image: (1214, 860, 3)
+[2] DRIVE_ROOT redirected to C:\Users\Public\Documents\ESTsoft\CreatorTemp\e2e_09yyw0v6
+    PADDLE_PDX_CACHE_HOME pinned to existing cache
+[3] exec notebook source ...
+skip install
+DRIVE_ROOT: C:\Users\Public\Documents\ESTsoft\CreatorTemp\e2e_09yyw0v6
+PADDLE_PDX_CACHE_HOME: C:\Users\111\.paddlex
+PaddleX: 3.5.1
+PaddleOCR import OK
+Progress loaded: 0 books
+SYNC_ROOT: C:\Users\Public\Documents\ESTsoft\CreatorTemp\e2e_09yyw0v6\sync\_±≥¿Áø¯πÆ
+CORRECTIONS_DIR: C:\Users\Public\Documents\ESTsoft\CreatorTemp\e2e_09yyw0v6\.auto-memory\corrections
+Setup OK!
+µÓ∑œ: 0±« / πÃ√≥∏Æ: 0±«
+[32mCreating model: ('PP-LCNet_x1_0_doc_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_doc_ori`.[0m
+¡§∫∏: ¡¶∞¯µ» ∆–≈œø° «ÿ¥Áµ«¥¬ ∆ƒ¿œ¿ª √£¡ˆ ∏¯«ﬂΩ¿¥œ¥Ÿ.
+C:\pdocr\Lib\site-packages\paddle\utils\cpp_extension\extension_utils.py:711: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+[32mCreating model: ('UVDoc', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\UVDoc`.[0m
+[32mCreating model: ('PP-DocLayout-S', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-DocLayout-S`.[0m
+[32mCreating model: ('PP-DocLayout-S', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-DocLayout-S`.[0m
+[32mCreating model: ('PP-LCNet_x1_0_textline_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_textline_ori`.[0m
+[32mCreating model: ('PP-OCRv5_mobile_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-OCRv5_mobile_det`.[0m
+[32mCreating model: ('PP-OCRv5_mobile_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-OCRv5_mobile_rec`.[0m
+[32mCreating model: ('PP-LCNet_x1_0_table_cls', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_table_cls`.[0m
+[32mCreating model: ('SLANeXt_wired', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\SLANeXt_wired`.[0m
+[32mCreating model: ('SLANet_plus', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\SLANet_plus`.[0m
+[32mCreating model: ('RT-DETR-L_wired_table_cell_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\RT-DETR-L_wired_table_cell_det`.[0m
+[32mCreating model: ('RT-DETR-L_wireless_table_cell_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\RT-DETR-L_wireless_table_cell_det`.[0m
+[32mCreating model: ('PP-FormulaNet_plus-S', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-FormulaNet_plus-S`.[0m
+PP-StructureV3 ∆ƒ¿Ã«¡∂Û¿Œ ∑ŒµÂ øœ∑·
+√≥∏Æ ¥ÎªÛ: 0±«
+=== «• ±≥√º + ∂Û¿Œ diff ∞·∞˙ ===
+  «• √§≈√: 0 / √Êµπ: 0 / ¿œƒ°: 0
+[4] pipeline ready (mobile config patched into notebook source)
+[5] _paddlex_predict on page image ...
+[32mCreating model: ('PP-LCNet_x1_0_doc_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_doc_ori`.[0m
+[32mCreating model: ('PP-LCNet_x1_0_textline_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_textline_ori`.[0m
+[32mCreating model: ('PP-OCRv5_mobile_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-OCRv5_mobile_det`.[0m
+[32mCreating model: ('PP-OCRv5_mobile_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-OCRv5_mobile_rec`.[0m
+    -> 1 blocks
+      text     label=text                      bbox=[610, 602, 740, 631] content=''
+[6] process_page (full pipeline path) ...
+  [∞Ê∞Ì] PP-StructureV3 øπ√¯ ø¿∑˘: RuntimeError: Unknown exception
+    -> 1 blocks; ids: ['p1-b00']
+[7] blocks_to_markdown produced 60 chars
+    saved -> H:\≥ª µÂ∂Û¿Ã∫Í\.agent\notebooks\_dryrun_e2e_page1.md
+[8] _parse_blocks_from_md round-trips 1 blocks (expect 1)
+    OK
+
+E2E DRYRUN OK

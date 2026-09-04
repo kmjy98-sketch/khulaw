@@ -5,8 +5,7 @@ description: 문제 인덱스 관리. 진도 기반 문제 조회, 인덱스 보
 
 # problem-index Skill
 
-<!-- @rule: AGENTS.md#2 Not-in-Source -->
-<!-- @rule: GEMINI.md#2 Not-in-Source -->
+<!-- @rule: CLAUDE.md#2 Not-in-Source -->
 
 ## Quick Start
 

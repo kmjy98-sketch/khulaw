@@ -10,12 +10,20 @@ suggest_backlinks.py — 과목 내 노트 간 백링크 제안 생성
   5. 출력: .agent/state/backlink_suggestions.json
 """
 
+import os
+import sys
 import json
 import re
 from pathlib import Path
 from collections import defaultdict
 
-BASE = Path("H:/내 드라이브")
+_p = os.path.abspath(__file__)
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:
+    _p = os.path.dirname(_p)
+sys.path.insert(0, os.path.join(_p, 'scripts'))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+BASE = Path(VAULT_ROOT)
 VAULTS = [
     BASE / "_4과목_도표추가본_통합본_모음",
     BASE / "_기말_도표추가본_통합본_모음",

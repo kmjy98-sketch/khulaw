@@ -1,0 +1,46 @@
+/* ═══════════════════════════════════════
+   법학 교재 커스텀 콜아웃
+   Obsidian 설정 > 테마 > CSS 스니펫에서 활성화
+   ═══════════════════════════════════════ */
+
+/* 조문 — 보라 (기존 [!example]과 동일 색상) */
+.callout[data-callout="조문"] {
+  --callout-color: 120, 82, 165;
+  --callout-icon: book-open;
+}
+
+/* 판례 — 갈색/금색 (법원 느낌) */
+.callout[data-callout="판례"] {
+  --callout-color: 160, 110, 40;
+  --callout-icon: scale;
+}
+
+/* 판례변경 — 빨강 (판례 변경/폐기) */
+.callout[data-callout="판례변경"] {
+  --callout-color: 200, 60, 60;
+  --callout-icon: alert-triangle;
+}
+
+/* 답안 — 청록 (시험 답안 문구) */
+.callout[data-callout="답안"] {
+  --callout-color: 50, 150, 130;
+  --callout-icon: pen-tool;
+}
+
+/* 학설 — 파랑 (학설 대립) */
+.callout[data-callout="학설"] {
+  --callout-color: 60, 120, 190;
+  --callout-icon: users;
+}
+
+/* 함정 — 주황 (시험 함정/주의) */
+.callout[data-callout="함정"] {
+  --callout-color: 210, 140, 30;
+  --callout-icon: alert-circle;
+}
+
+/* 사실관계 — 회녹색 (사례 사실관계) */
+.callout[data-callout="사실관계"] {
+  --callout-color: 90, 140, 110;
+  --callout-icon: file-text;
+}

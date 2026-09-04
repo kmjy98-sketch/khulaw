@@ -127,7 +127,7 @@ def main():
     mpath = os.path.join(MANIFEST_DIR, f"D1_1-1학기_통째이동_매니페스트_{DATE}.json")
     with open(mpath, "w", encoding="utf-8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=2)
-    log(f"\n매니페스트 저장: sync/_meta/D1_1-1학기_통째이동_매니페스트_{DATE}.json")
+    log(f"\n매니페스트 저장: 9.작업중/클로드/D1_1-1학기_통째이동_매니페스트_{DATE}.json")
 
     log("\n=== 결과 ===")
     log("ALL MATCH 100%" if all_ok else "검증 실패 — 매니페스트 확인 필요")

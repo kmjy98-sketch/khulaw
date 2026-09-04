@@ -5,13 +5,17 @@
 """
 
 import os
+import sys
 import re
 import json
 from pathlib import Path
 from datetime import datetime
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 # 설정
-ROOT = Path(r"H:\내 드라이브")
+ROOT = Path(VAULT_ROOT)
 DRY_RUN = False  # True면 미리보기만, False면 실제 실행
 
 # 대상 폴더
@@ -169,7 +173,7 @@ def get_target_folder(parsed: dict, current_dir: Path) -> Path:
     
     # 과목별 기본 폴더 결정
     subject = parsed["subject"]
-    if subject in ["민법", "민소법", "민사소송법"]:
+    if subject in ["민법", "민사소송법", "민사소송법"]:
         base = ROOT / "민사" / "진행중"
     elif subject in ["형법", "형소법", "형사소송법"]:
         base = ROOT / "형사" / "진행중"

@@ -5,10 +5,14 @@
 대상: H:\내 드라이브\.agent\data\ocr_chunks_reviewed\민법\윤동환_민법의맥\
 """
 
+import os
+import sys
 import re
 from pathlib import Path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-OUT_ROOT = Path(r"H:\내 드라이브\.agent\data\ocr_chunks_reviewed\민법\윤동환_민법의맥")
+OUT_ROOT = Path(vp(".agent", "data", "ocr_chunks_reviewed", "민법", "윤동환_민법의맥"))
 
 def is_protected_line(line: str) -> bool:
     stripped = line.strip()

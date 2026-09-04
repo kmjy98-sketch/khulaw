@@ -5,10 +5,9 @@ description: PDF → 마크다운 청크 추출. 네이티브(pypdf/pdfplumber)�
 
 # PDF Ingest Skill
 
-<!-- @rule: AGENTS.md#9 PDF Handling -->
-<!-- @rule: GEMINI.md#9 PDF Handling -->
+<!-- @rule: CLAUDE.md#9 PDF Handling -->
 
-PDF → 마크다운 청크 추출 전용. 인덱싱은 `sync/_교재원문/` 하위에 파일 배치 후 `qmd update && qmd embed`가 자동 처리한다.
+PDF → 마크다운 청크 추출 전용. 인덱싱은 `outputs/01_ocr_llamaparse/` 하위에 파일 배치 후 `qmd update && qmd embed`가 자동 처리한다(#46 정본. 구 경로 `sync/_교재원문/`은 이관됨).
 
 ---
 
@@ -27,7 +26,7 @@ python .agent/skills/pdf-ingest/scripts/ingest.py --pdf-dir <폴더> --out <출�
 ### 후속 단계 (인덱싱)
 
 ```powershell
-# 1) 추출된 청크를 sync/_교재원문/{과목}/{교재}/ 하위로 배치
+# 1) 추출된 청크를 outputs/01_ocr_llamaparse/{과목}/{교재}/ 하위로 배치 (#46 정본, 구 경로 sync/_교재원문/는 이관됨)
 # 2) qmd 재인덱싱
 qmd update
 qmd embed
@@ -131,7 +130,7 @@ pip install pymupdf easyocr
 - 청크 인덱스: `{out_dir}/chunks_index.json`
 - **표 블록**: 표 구조가 탐지되면 청크 내부에 `| 헤더 | 헤더 |` 마크다운 표로 삽입
 - **페이지 병합**: 이전 페이지가 종결기호 없이 끝나고 다음 페이지가 조사로 시작하면 `--- Page N ---` 마커 제거 후 본문 이어 붙임 → 페이지 마커 개수가 원본 페이지 수와 다를 수 있음
-- **인덱싱 대상**: `sync/_교재원문/` 하위 배치 후 qmd law-notes 컬렉션이 자동 처리
+- **인덱싱 대상**: `outputs/01_ocr_llamaparse/` 하위 배치 후 qmd law-notes 컬렉션이 자동 처리(#46 정본, 구 경로 `sync/_교재원문/`는 이관됨)
 
 ---
 
@@ -176,7 +175,7 @@ pdf-ingest (← 본 스킬)
   ↓
 textbook-reflow (OCR 후처리·구조 정리)
   ↓
-sync/_교재원문/{과목}/{교재}/  (Obsidian 볼트 배치)
+outputs/01_ocr_llamaparse/{과목}/{교재}/  (#46 정본, 구 경로 sync/_교재원문/는 이관됨)
   ↓
 qmd update && qmd embed  (자동 인덱싱)
   ↓
@@ -189,6 +188,6 @@ socratic-core / law-note-supplement / case-answer-review (RAG 검색)
 
 - 교재 페이지 인용 시 사용
 - 전사문 교정 시 원본 대조용
-- qmd RAG 검색 대상 추가 (sync/_교재원문/ 배치)
+- qmd RAG 검색 대상 추가 (outputs/01_ocr_llamaparse/ 배치, #46 정본)
 - OCR 산출물의 Obsidian 최적화 → `textbook-reflow` 스킬 연계
 

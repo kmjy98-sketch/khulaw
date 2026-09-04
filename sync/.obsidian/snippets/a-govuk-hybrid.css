@@ -1,0 +1,81 @@
+/* 
+ * A + GOV.UK Hybrid Theme for Obsidian 
+ * Theme: Plaid Navy + GOV.UK Green & Blue + Mercury Indigo 
+ * Fonts: RIDIBatang (Korean), Inter (English)
+ */
+
+.theme-dark, .theme-light {
+    /* 폰트 적용 (본문 전체 리디바탕 강제 적용) */
+    --font-text: 'RIDIBatang', 'KoPub Batang', serif;
+    --font-editor: 'RIDIBatang', 'KoPub Batang', serif;
+    --font-interface: 'RIDIBatang', 'KoPub Batang', serif;
+    --font-monospace: 'D2Coding', 'Fira Code', 'SF Mono', monospace;
+    
+    /* 제목 폰트 가중치 (볼드하게) */
+    --h1-font: 'RIDIBatang', serif;
+    --h1-weight: 700;
+    --h2-font: 'RIDIBatang', serif;
+    --h2-weight: 700;
+    --h3-font: 'RIDIBatang', serif;
+    --h3-weight: 700;
+}
+
+.theme-dark {
+    /* Plaid Navy 배경 */
+    --background-primary: #02294b;
+    --background-primary-alt: #011d36;
+    --background-secondary: #03325c;
+    --background-secondary-alt: #022442;
+    
+    /* 텍스트 컬러 (Navy 배경에서의 대비) */
+    --text-normal: #ffffff;
+    --text-muted: #94a3b8;
+    --text-faint: #64748b;
+    
+    /* 액센트 컬러 (Mercury Indigo & GOV.UK Green) */
+    --text-accent: #5266eb;
+    --text-accent-hover: #7b8bff;
+    --interactive-accent: #5266eb;
+    --interactive-accent-hover: #4052c2;
+    
+    /* 링크 & 인용구 컬러 (GOV.UK Blue 스타일 차용) */
+    --text-a: #5266eb;
+    --text-a-hover: #7b8bff;
+    --blockquote-border: #1d70b8;
+    
+    /* 상태 컬러 (GOV.UK 기준) */
+    --color-red: #d4351c; /* GOV.UK Red */
+    --color-green: #26b07e; /* GOV.UK Green (다크모드용 밝기 보정) */
+    --color-blue: #1d70b8; /* GOV.UK Blue */
+    --color-orange: #f47738; 
+}
+
+/* Callouts - A+GOV.UK 스타일 */
+.callout[data-callout="info"] {
+    --callout-color: 29, 112, 184; /* GOV.UK Blue */
+    --callout-icon: lucide-info;
+}
+.callout[data-callout="success"] {
+    --callout-color: 15, 122, 82; /* GOV.UK Green */
+    --callout-icon: lucide-check-circle;
+}
+.callout[data-callout="danger"] {
+    --callout-color: 212, 53, 28; /* GOV.UK Red */
+}
+.callout[data-callout="abstract"] {
+    --callout-color: 82, 102, 235; /* Mercury Indigo */
+}
+
+/* Mermaid 배경 투명화 및 폰트 적용 */
+.mermaid {
+    background-color: transparent !important;
+    font-family: 'RIDIBatang', sans-serif !important;
+}
+
+/* Mermaid 기본 텍스트 색상 및 박스 라인 조정 */
+.mermaid .node rect, 
+.mermaid .node circle, 
+.mermaid .node ellipse, 
+.mermaid .node polygon {
+    stroke-width: 2px;
+}

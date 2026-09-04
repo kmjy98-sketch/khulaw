@@ -11,11 +11,15 @@ OCR 추출 과정에서 문장 중간에 삽입된 줄바꿈(+ 빈 줄)을 원�
 
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import sys
 from pathlib import Path
 from datetime import date
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 # 다음 줄이 이 패턴으로 시작하면 이어붙임
 # 조사·어미·연결어 단독 등장
@@ -191,7 +195,7 @@ def fix_file(path: Path) -> tuple[int, int]:
 
     if new_content != original:
         # 백업 위치: 5.기타/교재원문_백업/{date}/linebreak_fix/{상대경로} (sync 외부)
-        workspace_root = Path(r"H:\내 드라이브")
+        workspace_root = Path(VAULT_ROOT)
         try:
             rel = path.relative_to(workspace_root)
             backup = workspace_root / "5.기타" / "교재원문_백업" / date.today().isoformat() / "linebreak_fix" / rel
@@ -209,7 +213,7 @@ def main(argv: list[str]) -> None:
     """인자 없으면 송영곤_쟁점노트 기본 처리.
        인자 1개(디렉터리)면 해당 디렉터리의 *.md 처리.
        인자 2개 이상(디렉터리 + 파일명들)이면 특정 파일만 처리."""
-    default_dir = Path(r"H:\내 드라이브\sync\_교재원문\민법\송영곤_쟁점노트")
+    default_dir = Path(vp("sync", "_교재원문", "민법", "송영곤_쟁점노트"))
     total_joins = 0
 
     if not argv:

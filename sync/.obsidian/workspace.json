@@ -1,0 +1,404 @@
+{
+  "main": {
+    "id": "b0fc09f9c8dafc17",
+    "type": "split",
+    "children": [
+      {
+        "id": "529d6c43eda44e50",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b052673b8bc0dc27",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_meta/폴더_정리_계획_2026-06-14.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "폴더_정리_계획_2026-06-14"
+            }
+          },
+          {
+            "id": "8e86d2c6c9be71f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "발제/침묵이 담합이 되는 시대.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "침묵이 담합이 되는 시대"
+            }
+          },
+          {
+            "id": "8e0659fb7a435e07",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_meta/위키화_작업계획서_2026-06-15.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "위키화_작업계획서_2026-06-15"
+            }
+          },
+          {
+            "id": "4b63cc24595c3e5f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CODEX_BOOTSTRAP_REPORT.md.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "CODEX_BOOTSTRAP_REPORT.md"
+            }
+          },
+          {
+            "id": "b516f19ffe59b94e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "대회/모의공정위/모의공정거래_시나리오_DC카드_이중협공봉쇄_2026-07-02.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "모의공정거래_시나리오_DC카드_이중협공봉쇄_2026-07-02"
+            }
+          },
+          {
+            "id": "cd07b95e0d2d6ae8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "위키/민법/공동불법행위.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "공동불법행위"
+            }
+          },
+          {
+            "id": "2db109cd34570037",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "자소서/로스쿨 자소서 양식.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "로스쿨 자소서 양식"
+            }
+          }
+        ],
+        "currentTab": 6
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1e95ce56b01be755",
+    "type": "split",
+    "children": [
+      {
+        "id": "70ea71a8f858e024",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a584c21ea1765028",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
+            }
+          },
+          {
+            "id": "4ce6515e63bdaed1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "base",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "검색"
+            }
+          },
+          {
+            "id": "fcc52b601fb24910",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "북마크"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "1ab4722ba71ccfbc",
+    "type": "split",
+    "children": [
+      {
+        "id": "b5d1f09473721bb6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5402abb27ebc8c21",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "1-1_기말/민3 기말 1.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "민3 기말 1 의 백링크"
+            }
+          },
+          {
+            "id": "02ad758779ddbf8b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "1-1_기말/민3 기말 1.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "민3 기말 1 의 나가는 링크"
+            }
+          },
+          {
+            "id": "f0216774d74e687e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "태그"
+            }
+          },
+          {
+            "id": "28547516ba407a4e",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "모든 속성"
+            }
+          },
+          {
+            "id": "a705d1bd6e359a6a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "형법1_서보학_중간_정리노트.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "형법1_서보학_중간_정리노트 의 개요"
+            }
+          },
+          {
+            "id": "3b3763cd3e4c410b",
+            "type": "leaf",
+            "state": {
+              "type": "footnotes",
+              "state": {
+                "file": "헌법.md"
+              },
+              "icon": "lucide-file-signature",
+              "title": "각주"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "bases:새 베이스 생성하기": false,
+      "markdown-importer:마크다운 형식 불러오기 열기": false
+    }
+  },
+  "active": "a584c21ea1765028",
+  "lastOpenFiles": [
+    "위키/진도대시보드.md",
+    "자소서/로스쿨 자소서 양식.md",
+    "위키/민법/공동불법행위.md",
+    "수신함/_README.md",
+    "위키/사례/민법/공동저당_물상보증인_이시배당.md.tmp.17272.89fd6cb50265",
+    "위키/사례/민사소송법/기판력_주관적범위⑥_기판력차단효_변론종결후승계인.md.tmp.17272.bd8ea2beac28",
+    "위키/사례/민사소송법/기일해태①_공시송달요건흠결_쌍방불출석_민소268조.md.tmp.17272.df28982cd633",
+    "위키/사례/민사소송법/기일해태①_공시송달요건흠결_쌍방불출석_민소268조.md.tmp.17272.14b41d09bff6",
+    "위키/사례/민사소송법/관할이송_구속력_이송후심리범위.md.tmp.17272.43fe291d0ff0",
+    "위키/사례/민법/분묘기지권_시효취득_지료지급_제사주재자결정.md.tmp.17272.03a8373dbc21",
+    "선택법/법조윤리_정리본_2026.md",
+    "위키/민법/_민법_목차.md",
+    "위키/민법/태아의 권리능력.md",
+    "위키/행정법/_행정법_목차.md",
+    "위키/사례/민법/공유②_공동상속인1인무단관리_부당이득_2017변시.md.tmp.17272.665a26cf4870",
+    "위키/사례/민사소송법/문서진정성립자백_처분문서실질적증거력_2022모의.md.tmp.17272.3d8e1cfac718",
+    "위키/사례/민사소송법/무변론판결①_가압류기재소장_무변론판결형태.md.tmp.17272.469048ac4805",
+    "위키/사례/민사소송법/무변론판결①_가압류기재소장_무변론판결형태.md.tmp.17272.c1f1716001ae",
+    "대회/모의공정위/모의공정위_가상사건_재설계_종합_2026-06-21.md",
+    "작업중_클로드/논문설계_3부작_뼈대구조_2026-07-03.md",
+    "대회/모의공정위/모의공정거래_의결서초안_자사우대.md",
+    "a.md",
+    "대회/모의공정위/모의공정거래_심결서초안_스마트폰생태계_2026-06-25.md",
+    "대회/모의공정위/모의공정거래_심결서초안_마켓플레이스_2026-06-25.md",
+    "대회/모의공정위/모의공정거래_실제사건보강_A_B_D_E_I.md",
+    "무제.md",
+    "위키/_포섭사전/_조각_민법_14.md",
+    "위키/_포섭사전/_조각_민법_13.md",
+    "위키/_포섭사전/_조각_민법_12.md",
+    "위키/_포섭사전/_조각_민법_11.md",
+    "작업중_클로드/markdown/법해석기준의 서열론에 대한 비판적 연구.md",
+    "작업중_클로드/markdown/법의 해석적 수렴 이론.md",
+    "작업중_클로드/markdown/기호화된 소외, 소수자.md",
+    "작업중_클로드/markdown/공적 이성과 헌법 논증 ― 공적 이성의 구성적 측면을 중심으로.md",
+    "작업중_클로드/markdown/KCI_FI003274235.md",
+    "작업중_클로드/markdown/KCI_FI002921411.md",
+    "Pasted image 20260614170638.png",
+    "_백업/교재원문_문서_백업_2026-05-22/2.형사/20.서보학_형법1/기타/ocr_review/seobohak_bookp245.png",
+    "_백업/교재원문_문서_백업_2026-05-22/2.형사/20.서보학_형법1/기타/ocr_review/seobohak_bookp241.png",
+    "_백업/교재원문_문서_백업_2026-05-22/2.형사/20.서보학_형법1/기타/ocr_review/seobohak_bookp233.png",
+    "_백업/교재원문_문서_백업_2026-05-22/2.형사/20.서보학_형법1/기타/ocr_review/seobohak_bookp228.png",
+    "_백업/교재원문_문서_백업_2026-05-22/2.형사/20.서보학_형법1/기타/ocr_review/seobohak_bookp232.png",
+    "_백업/교재원문_문서_백업_2026-05-22/2.형사/20.서보학_형법1/기타/ocr_review/seobohak_bookp227.png",
+    "_백업/교재원문_문서_백업_2026-05-22/2.형사/20.서보학_형법1/기타/ocr_review/seobohak_bookp224.png",
+    "_백업/교재원문_문서_백업_2026-05-22/2.형사/20.서보학_형법1/기타/ocr_review/seobohak_bookp221.png",
+    "_백업/교재원문_문서_백업_2026-05-22/2.형사/20.서보학_형법1/기타/ocr_review/seobohak_bookp222.png",
+    "무제.canvas"
+  ]
+}

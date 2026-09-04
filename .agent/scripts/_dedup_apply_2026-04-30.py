@@ -9,8 +9,8 @@ from datetime import datetime
 ROOT = Path(r"H:\내 드라이브")
 SRC = ROOT / "sync/_교재원문/민법/송영곤_논점민법_보충"
 DUP_DIR = SRC / "_중복_2026-04-30"
-MANIFEST_MD = ROOT / "sync/_meta/중복정리_이동매니페스트_2026-04-30.md"
-MANIFEST_JSON = ROOT / "sync/_meta/중복정리_이동매니페스트_2026-04-30.json"
+MANIFEST_MD = ROOT / "9.작업중/클로드/중복정리_이동매니페스트_2026-04-30.md"
+MANIFEST_JSON = ROOT / "9.작업중/클로드/중복정리_이동매니페스트_2026-04-30.json"
 
 
 def parse_front_matter(text: str):

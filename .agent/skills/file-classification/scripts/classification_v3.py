@@ -18,12 +18,19 @@ import argparse
 import datetime as dt
 import getpass
 import json
+import os
 import re
 import shutil
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Tuple
+
+_p = os.path.abspath(__file__)
+while os.path.basename(_p) != ".agent" and os.path.dirname(_p) != _p:
+    _p = os.path.dirname(_p)
+sys.path.insert(0, os.path.join(_p, "scripts"))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 
 LEGAL_ROOTS = ["1.민사", "2.형사", "3.공법", "4.선택법"]
@@ -35,7 +42,7 @@ INBOX_ROOT = Path("5.기타") / "_inbox"
 RAG_DATA_ROOT = Path("5.기타") / "_RAG_데이터"
 TRASH_ROOT = Path("5.기타") / "_trash"
 TEXTBOOK_ONLY_DIR = "교재"
-ROOT_EXAM_DIR = "90.기출"
+ROOT_EXAM_DIR = "기출"
 ROOT_ARCHIVE_DIR = "91.보관"
 ROOT_CONCEPT_DIR = "92.개념"
 ROOT_REFERENCE_DIR = "93.참고"
@@ -153,11 +160,11 @@ EXTRACT_MD_RE = re.compile(r"_p\d{3}-\d{3}(?:_\d{2})?\.md$", re.IGNORECASE)
 TEXTBOOK_ROUTE_RULES = [
     {
         "tokens": ("논점민법강의_",),
-        "target": Path("1.민사") / "30.송영곤_기본민법",
+        "target": Path("1.민사") / "송영곤_기본민법",
     },
     {
         "tokens": ("basic민법_daily_test_",),
-        "target": Path("1.민사") / "30.송영곤_기본민법",
+        "target": Path("1.민사") / "송영곤_기본민법",
     },
     {
         "tokens": ("민사법쟁점노트_",),
@@ -454,7 +461,7 @@ def compute_legal_override_destination(filename: str, root_name: str, policy: Po
     lower = filename.lower()
 
     if root_name == "2.형사" and any(t in lower for t in KIMGIYONG_ONGOING_TOKENS):
-        return (policy.root / root_name / "10.김기용_형법교안" / filename).resolve()
+        return (policy.root / root_name / "김기용_형법교안" / filename).resolve()
 
     # 서보학 자료는 형법1/형법2를 분리 관리.
     # 형법1은 루트 진행 강의, 형법2는 보관으로 라우팅.
@@ -477,7 +484,7 @@ def compute_legal_override_destination(filename: str, root_name: str, policy: Po
 
     # 강성민 교수님 행정법 자료는 루트 진행 강의 폴더로 분류.
     if root_name == "3.공법" and any(t in lower for t in KANGSEONGMIN_ONGOING_TOKENS):
-        return (policy.root / root_name / "20.강성민_행정법" / filename).resolve()
+        return (policy.root / root_name / "강성민_헌법" / filename).resolve()
 
     # 이진 교수님 헌법원리 1 자료는 루트 진행 강의 폴더로 분류.
     if root_name == "3.공법" and any(t in lower for t in IJIN_ONGOING_TOKENS):
@@ -728,7 +735,7 @@ def plan_classification(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="file-classification v3")
-    parser.add_argument("--root", default=r"H:\내 드라이브", help="workspace root")
+    parser.add_argument("--root", default=VAULT_ROOT, help="workspace root")
     parser.add_argument("--domain", choices=["legal", "admission"], default="legal")
     parser.add_argument("--execute", action="store_true", help="apply changes")
     parser.add_argument("--dry-run", action="store_true", help="explicit dry-run")

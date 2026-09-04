@@ -1,0 +1,483 @@
+{
+  "updated_at": "2026-06-16T12:39:11",
+  "entries": [
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-12_184200_folder_cleanup.md",
+      "log_name": "2026-06-12_184200_folder_cleanup.md",
+      "checked_at": "2026-06-16T12:39:11",
+      "severity": "red",
+      "violations": [
+        {
+          "rule": "rule_silent_drop",
+          "severity": "red",
+          "message": "silent_drop: 주장된 파일이 존재하지 않음 → ['.pdf_p001-007.md']"
+        }
+      ],
+      "spec_source": "\"[[수정안_규칙_폴더_검토_2026-06-11.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-12_185300_root_cleanup.md",
+      "log_name": "2026-06-12_185300_root_cleanup.md",
+      "checked_at": "2026-06-16T12:39:11",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[수정안_규칙_폴더_검토_2026-06-11.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-12_185500_root_cleanup_feedback.md",
+      "log_name": "2026-06-12_185500_root_cleanup_feedback.md",
+      "checked_at": "2026-06-16T12:39:11",
+      "severity": "red",
+      "violations": [
+        {
+          "rule": "rule_silent_drop",
+          "severity": "red",
+          "message": "silent_drop: 주장된 파일이 존재하지 않음 → ['3.공법/10.이진_헌법원리1/정리/헌법1_기말_객관식문제_통치구조.md', '3.공법/10.이진_헌법원리1/정리/헌법1_기말_PPT보충_결정례문제.md', '3.공법/10.이진_헌법원리1/정리/헌법1_기말_함정포인트_반복정리.md']"
+        }
+      ],
+      "spec_source": "\"[[수정안_규칙_폴더_검토_2026-06-11.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-12_185900_compliance_fix.md",
+      "log_name": "2026-06-12_185900_compliance_fix.md",
+      "checked_at": "2026-06-16T12:39:11",
+      "severity": "red",
+      "violations": [
+        {
+          "rule": "rule_silent_drop",
+          "severity": "red",
+          "message": "silent_drop: 주장된 파일이 존재하지 않음 → ['1.민사/10.강혜림_민법1/정리/민법1_강혜림_기말_정리노트.md', '1.민사/20.전경운_민법3/정리/민법3_전경운_기말_정리노트.md', '2.형사/20.서보학_형법1/정리/형법1_서보학_기말_정리노트.md']"
+        },
+        {
+          "rule": "rule_excessive_modification",
+          "severity": "yellow",
+          "message": "excessive_modification: 변경 파일 수 26 > 10"
+        }
+      ],
+      "spec_source": "\"[[수정안_규칙_폴더_검토_2026-06-11.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_155200_ethics_summary_reflow_complete.md",
+      "log_name": "2026-06-07_155200_ethics_summary_reflow_complete.md",
+      "checked_at": "2026-06-16T12:39:10",
+      "severity": "red",
+      "violations": [
+        {
+          "rule": "rule_silent_drop",
+          "severity": "red",
+          "message": "silent_drop: 주장된 파일이 존재하지 않음 → ['4.선택법/10.법조윤리/정리/법조윤리_요약정리_전범위.md']"
+        },
+        {
+          "rule": "rule_path_fabrication",
+          "severity": "red",
+          "message": "path_fabrication: 존재하지 않는 경로 인용 → ['scratch/improve_readability.py']"
+        }
+      ],
+      "spec_source": "\"[[summary_notes_full.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-01_204500_wiki_pipeline.md",
+      "log_name": "2026-06-01_204500_wiki_pipeline.md",
+      "checked_at": "2026-06-16T12:39:10",
+      "severity": "red",
+      "violations": [
+        {
+          "rule": "rule_path_fabrication",
+          "severity": "red",
+          "message": "path_fabrication: 존재하지 않는 경로 인용 → ['H:\\\\내 드라이브\\\\pdf_split_100p.py']"
+        }
+      ],
+      "spec_source": "\"[[안티그래비티_통합_프롬프트]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-12_174300_file_cleanup.md",
+      "log_name": "2026-06-12_174300_file_cleanup.md",
+      "checked_at": "2026-06-16T12:39:10",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[sync/_meta/수정안_규칙_폴더_검토_2026-06-11.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_162600_ethics_compress.md",
+      "log_name": "2026-06-07_162600_ethics_compress.md",
+      "checked_at": "2026-06-09T14:33:46",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[GEMINI.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_164300_ethics_brackets.md",
+      "log_name": "2026-06-07_164300_ethics_brackets.md",
+      "checked_at": "2026-06-09T14:33:46",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[GEMINI.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_164700_ethics_headers.md",
+      "log_name": "2026-06-07_164700_ethics_headers.md",
+      "checked_at": "2026-06-09T14:33:46",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[GEMINI.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_165400_ethics_bold.md",
+      "log_name": "2026-06-07_165400_ethics_bold.md",
+      "checked_at": "2026-06-09T14:33:46",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"chat_request\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_161700_ethics_reorg.md",
+      "log_name": "2026-06-07_161700_ethics_reorg.md",
+      "checked_at": "2026-06-09T14:33:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[GEMINI.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_161522_ethics_summary_polish.md",
+      "log_name": "2026-06-07_161522_ethics_summary_polish.md",
+      "checked_at": "2026-06-09T14:32:47",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[AGENTS.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_151700_ethics_summary_final_file.md",
+      "log_name": "2026-06-07_151700_ethics_summary_final_file.md",
+      "checked_at": "2026-06-09T14:32:46",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_152100_ethics_summary_full_syllabus.md",
+      "log_name": "2026-06-07_152100_ethics_summary_full_syllabus.md",
+      "checked_at": "2026-06-09T14:32:46",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_153200_ethics_summary_complete.md",
+      "log_name": "2026-06-07_153200_ethics_summary_complete.md",
+      "checked_at": "2026-06-09T14:32:46",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_153500_ethics_summary_full_textbook.md",
+      "log_name": "2026-06-07_153500_ethics_summary_full_textbook.md",
+      "checked_at": "2026-06-09T14:32:46",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_160622_ethics_summary_complete.md",
+      "log_name": "2026-06-07_160622_ethics_summary_complete.md",
+      "checked_at": "2026-06-09T14:32:46",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[AGENTS.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-27_132500_add_money_period_table.md",
+      "log_name": "2026-05-27_132500_add_money_period_table.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[implementation_plan.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-27_133200_cleanup_note_structure.md",
+      "log_name": "2026-05-27_133200_cleanup_note_structure.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[implementation_plan.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-29_105600_constitution_exam_extract.md",
+      "log_name": "2026-05-29_105600_constitution_exam_extract.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[헌법기출문제_정리_요구]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-29_112200_constitution_exam_cleansing.md",
+      "log_name": "2026-05-29_112200_constitution_exam_cleansing.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[선지_마크다운_정제_및_오답교정_요구]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-29_112311_sanitize_pipeline.md",
+      "log_name": "2026-05-29_112311_sanitize_pipeline.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[implementation_plan.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-31_132720_prompt_adaptive_thinking.md",
+      "log_name": "2026-05-31_132720_prompt_adaptive_thinking.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[prompt_update_plan.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-01_205619_obsidian_mcp_fix.md",
+      "log_name": "2026-06-01_205619_obsidian_mcp_fix.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"N/A\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-01_211500_remaining_wiki_pipeline.md",
+      "log_name": "2026-06-01_211500_remaining_wiki_pipeline.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[안티그래비티_통합_프롬프트]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-05_142001_remove_obsidian_mcp.md",
+      "log_name": "2026-06-05_142001_remove_obsidian_mcp.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-05_142525_remove_obsidian_mcp_cache.md",
+      "log_name": "2026-06-05_142525_remove_obsidian_mcp_cache.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_150000_ethics_summary.md",
+      "log_name": "2026-06-07_150000_ethics_summary.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-06-07_151600_ethics_summary_expansion.md",
+      "log_name": "2026-06-07_151600_ethics_summary_expansion.md",
+      "checked_at": "2026-06-09T14:32:45",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-27_130500_korean_translation.md",
+      "log_name": "2026-05-27_130500_korean_translation.md",
+      "checked_at": "2026-06-09T14:32:44",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[none]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-27_130910_rebuild_constitution.md",
+      "log_name": "2026-05-27_130910_rebuild_constitution.md",
+      "checked_at": "2026-06-09T14:32:44",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[latest_plan.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-26_160200_constitution_readability.md",
+      "log_name": "2026-05-26_160200_constitution_readability.md",
+      "checked_at": "2026-06-09T14:32:43",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[1-1_기말/백업/통합본완료_2026-05-26/헌법_안티그래비티.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-26_182500_gi-chul_split.md",
+      "log_name": "2026-05-26_182500_gi-chul_split.md",
+      "checked_at": "2026-06-09T14:32:43",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[헌법정리_유니온_변시기출.md]] [[헌법정리_해커스_사례형.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-27_004820_constitution_patch.md",
+      "log_name": "2026-05-27_004820_constitution_patch.md",
+      "checked_at": "2026-06-09T14:32:43",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[헌법_안티그래비티]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-27_125500_constitution_integration.md",
+      "log_name": "2026-05-27_125500_constitution_integration.md",
+      "checked_at": "2026-06-09T14:32:43",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[none]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-25_163200_bar_exam_constitution.md",
+      "log_name": "2026-05-25_163200_bar_exam_constitution.md",
+      "checked_at": "2026-06-09T14:32:42",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[헌법_안티그래비티]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-25_172000_restructure_constitution_v2.md",
+      "log_name": "2026-05-25_172000_restructure_constitution_v2.md",
+      "checked_at": "2026-06-09T14:32:42",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[헌법_안티그래비티]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-25_112100_constitutional_law_guide.md",
+      "log_name": "2026-05-25_112100_constitutional_law_guide.md",
+      "checked_at": "2026-05-25T11:21:35",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[이진헌법1_기말_노트_계획서.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-25_103000_constitutional_final_copy.md",
+      "log_name": "2026-05-25_103000_constitutional_final_copy.md",
+      "checked_at": "2026-05-25T10:30:20",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[이진헌법1_기말_노트_계획서.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-25_102800_constitutional_final_prep.md",
+      "log_name": "2026-05-25_102800_constitutional_final_prep.md",
+      "checked_at": "2026-05-25T10:28:56",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[이진헌법1_기말_노트_계획서.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-25_011500_constitutional_split_final.md",
+      "log_name": "2026-05-25_011500_constitutional_split_final.md",
+      "checked_at": "2026-05-25T01:12:08",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-25_005800_byunsi_questions_exact.md",
+      "log_name": "2026-05-25_005800_byunsi_questions_exact.md",
+      "checked_at": "2026-05-25T00:56:23",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-25_004000_constitutional_final_integrated.md",
+      "log_name": "2026-05-25_004000_constitutional_final_integrated.md",
+      "checked_at": "2026-05-25T00:39:39",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[USER_REQUEST]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-24_202610_exam_prep_package_completed.md",
+      "log_name": "2026-05-24_202610_exam_prep_package_completed.md",
+      "checked_at": "2026-05-25T00:26:23",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[walkthrough.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-24_202450_implementation_plan_final.md",
+      "log_name": "2026-05-24_202450_implementation_plan_final.md",
+      "checked_at": "2026-05-25T00:24:50",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[implementation_plan.md]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-24_202025_verify_union_completeness.md",
+      "log_name": "2026-05-24_202025_verify_union_completeness.md",
+      "checked_at": "2026-05-24T20:20:17",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[verify_scanned_v2.py]]\"",
+      "verify_status": "pending"
+    },
+    {
+      "log_path": ".auto-memory/gemini_ops/logs/2026-05-24_201835_union_final_exam.md",
+      "log_name": "2026-05-24_201835_union_final_exam.md",
+      "checked_at": "2026-05-24T20:18:37",
+      "severity": "green",
+      "violations": [],
+      "spec_source": "\"[[강의계획서.pdf]]\"",
+      "verify_status": "pending"
+    }
+  ],
+  "summary": {
+    "red": 5,
+    "yellow": 0,
+    "green": 43,
+    "total": 48
+  }
+}

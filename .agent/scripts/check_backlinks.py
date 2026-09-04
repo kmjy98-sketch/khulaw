@@ -1,9 +1,11 @@
 import os
 import re
 import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 def main():
-    sync_dir = r"H:\내 드라이브\sync"
+    sync_dir = vp("sync")
     
     # 1. 수집: 모든 존재하는 마크다운 파일명(확장자 제외)
     existing_notes = set()

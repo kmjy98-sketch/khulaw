@@ -2,8 +2,11 @@ import os
 import hashlib
 import json
 import re
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-sync_dir = r"H:\내 드라이브\sync"
+sync_dir = vp("sync")
 output_report = r"C:\Users\111\.gemini\antigravity\scratch\sync_analysis.json"
 
 def get_sha256(filepath):

@@ -1,6 +1,6 @@
 ---
 name: legal-compliance
-description: 계약서, 정책서, DPA, NDA를 플레이북 기준의 컴플라이언스 점검표로 정리할 때 사용하는 법무 스킬. `legal-review` 결과나 원문 문서를 받아 privacy, data retention, governing law, dispute resolution 중심의 체크리스트와 필수 조치를 만든다. "컴플라이언스 체크", "데이터보호 점검", "법무 체크리스트", "legal compliance" 요청 시 사용.
+description: [직무전용·미사용 — #48 자동발동 제외, 명시 요청 시에만] 계약서, 정책서, DPA, NDA를 플레이북 기준의 컴플라이언스 점검표로 정리할 때 사용하는 법무 스킬. `legal-review` 결과나 원문 문서를 받아 privacy, data retention, governing law, dispute resolution 중심의 체크리스트와 필수 조치를 만든다. "컴플라이언스 체크", "데이터보호 점검", "법무 체크리스트", "legal compliance" 요청 시 사용.
 ---
 
 # Legal Compliance
@@ -12,13 +12,13 @@ description: 계약서, 정책서, DPA, NDA를 플레이북 기준의 컴플라�
 원문 문서를 바로 점검할 때:
 
 ```powershell
-python .agent/skills/legal-compliance/scripts/render_compliance_review.py "C:\path\contract.pdf" --owner "법무" --system "SaaS 계약" --output "H:\내 드라이브\tmp\legal_compliance.md"
+python .agent/skills/legal-compliance/scripts/render_compliance_review.py "C:\path\contract.pdf" --owner "법무" --system "SaaS 계약" --output "E:\법학볼트\tmp\legal_compliance.md"
 ```
 
 기존 `legal-review` 보고서에서 이어갈 때:
 
 ```powershell
-python .agent/skills/legal-compliance/scripts/render_compliance_review.py --review-path "H:\내 드라이브\tmp\contract_review.md" --output "H:\내 드라이브\tmp\legal_compliance.md"
+python .agent/skills/legal-compliance/scripts/render_compliance_review.py --review-path "E:\법학볼트\tmp\contract_review.md" --output "E:\법학볼트\tmp\legal_compliance.md"
 ```
 
 ## Inputs

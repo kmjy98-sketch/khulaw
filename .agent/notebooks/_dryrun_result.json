@@ -1,0 +1,304 @@
+{
+  "res": {
+    "input_path": null,
+    "page_index": null,
+    "page_count": null,
+    "width": 860,
+    "height": 1214,
+    "model_settings": {
+      "use_doc_preprocessor": true,
+      "use_seal_recognition": false,
+      "use_table_recognition": true,
+      "use_formula_recognition": false,
+      "use_chart_recognition": false,
+      "use_region_detection": true,
+      "format_block_content": false,
+      "markdown_ignore_labels": [
+        "number",
+        "footnote",
+        "header",
+        "header_image",
+        "footer",
+        "footer_image",
+        "aside_text"
+      ]
+    },
+    "parsing_res_list": [
+      {
+        "block_label": "text",
+        "block_content": "",
+        "block_bbox": [
+          610,
+          602,
+          740,
+          631
+        ],
+        "block_id": 0,
+        "block_order": 1
+      }
+    ],
+    "doc_preprocessor_res": {
+      "input_path": null,
+      "page_index": null,
+      "model_settings": {
+        "use_doc_orientation_classify": true,
+        "use_doc_unwarping": true
+      },
+      "angle": 0
+    },
+    "layout_det_res": {
+      "input_path": null,
+      "page_index": null,
+      "boxes": [
+        {
+          "cls_id": 2,
+          "label": "text",
+          "score": 0.5522844791412354,
+          "coordinate": [
+            610.85595703125,
+            602.7562255859375,
+            740.8193359375,
+            631.5777587890625
+          ]
+        }
+      ]
+    },
+    "overall_ocr_res": {
+      "input_path": null,
+      "page_index": null,
+      "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_textline_orientation": true
+      },
+      "dt_polys": [
+        [
+          [
+            87,
+            148
+          ],
+          [
+            401,
+            125
+          ],
+          [
+            407,
+            210
+          ],
+          [
+            93,
+            233
+          ]
+        ],
+        [
+          [
+            218,
+            342
+          ],
+          [
+            748,
+            377
+          ],
+          [
+            740,
+            495
+          ],
+          [
+            211,
+            461
+          ]
+        ],
+        [
+          [
+            192,
+            438
+          ],
+          [
+            773,
+            476
+          ],
+          [
+            765,
+            604
+          ],
+          [
+            184,
+            567
+          ]
+        ],
+        [
+          [
+            607,
+            594
+          ],
+          [
+            747,
+            605
+          ],
+          [
+            744,
+            643
+          ],
+          [
+            604,
+            632
+          ]
+        ]
+      ],
+      "text_det_params": {
+        "limit_side_len": 736,
+        "limit_type": "min",
+        "thresh": 0.3,
+        "max_side_limit": 4000,
+        "box_thresh": 0.6,
+        "unclip_ratio": 1.5
+      },
+      "text_type": "general",
+      "textline_orientation_angles": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "text_rec_score_thresh": 0.0,
+      "return_word_box": false,
+      "rec_texts": [
+        "人1209 CH",
+        "人.人从",
+        "",
+        "",
+        ""
+      ],
+      "rec_scores": [
+        0.6804141402244568,
+        0.500459611415863,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rec_polys": [
+        [
+          [
+            87,
+            148
+          ],
+          [
+            401,
+            125
+          ],
+          [
+            407,
+            210
+          ],
+          [
+            93,
+            233
+          ]
+        ],
+        [
+          [
+            218,
+            342
+          ],
+          [
+            748,
+            377
+          ],
+          [
+            740,
+            495
+          ],
+          [
+            211,
+            461
+          ]
+        ],
+        [
+          [
+            192,
+            438
+          ],
+          [
+            773,
+            476
+          ],
+          [
+            765,
+            604
+          ],
+          [
+            184,
+            567
+          ]
+        ],
+        [
+          [
+            607,
+            594
+          ],
+          [
+            747,
+            605
+          ],
+          [
+            744,
+            643
+          ],
+          [
+            604,
+            632
+          ]
+        ],
+        [
+          [
+            610,
+            602
+          ],
+          [
+            740,
+            602
+          ],
+          [
+            740,
+            631
+          ],
+          [
+            610,
+            631
+          ]
+        ]
+      ],
+      "rec_boxes": [
+        [
+          87.0,
+          125.0,
+          407.0,
+          233.0
+        ],
+        [
+          211.0,
+          342.0,
+          748.0,
+          495.0
+        ],
+        [
+          184.0,
+          438.0,
+          773.0,
+          604.0
+        ],
+        [
+          604.0,
+          594.0,
+          747.0,
+          643.0
+        ],
+        [
+          610.85595703125,
+          602.7562255859375,
+          740.8193359375,
+          631.5777587890625
+        ]
+      ]
+    }
+  }
+}

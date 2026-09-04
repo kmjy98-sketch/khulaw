@@ -21,10 +21,9 @@
 - 김성돈: 경로 미확인 — 사용 전 파일 검색으로 위치 확인
 - 이인규 변사기: 경로 미확인 — 사용 전 파일 검색으로 위치 확인
 
-## OCR 교정 (marker-pdf 파이프라인)
-- 추출 (Colab): `.agent/notebooks/ocr_extract_v2.ipynb` → `sync/_ocr_extracted/`
-- 비교 (Colab): `.agent/notebooks/ocr_compare_v2.ipynb` → `.auto-memory/ocr_state/corrections/{교재}.jsonl`
+## OCR 교정 (LlamaParse 로컬 — Colab 폐기 2026-06-21, 루트 CLAUDE.md #13 준수)
+- 추출 (LlamaParse 로컬): → `outputs/01_ocr_llamaparse/`  (구 Colab 노트북 ocr_extract_v2·ocr_compare_v2.ipynb은 레거시·연동끊김 — 신규작업 미사용)
 - 교정 (Claude Code): `python .agent/scripts/haiku_ocr_correct.py`
 - 검증 (Claude Code): `python .agent/scripts/sonnet_review.py`
 - 적용 (Claude Code): `python .agent/scripts/apply_corrections.py`
-- 조문/판례 검증: `.auto-memory/ocr_state/verification_targets.json` → korean-law-mcp
+- 조문/판례 검증: `.auto-memory/ocr_state/verification_targets.json` → `python .agent/lib/law_api.py verify-text`(직접 API, MCP 은퇴)

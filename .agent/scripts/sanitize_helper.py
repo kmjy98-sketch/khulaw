@@ -17,6 +17,8 @@ import shutil
 import argparse
 from datetime import date
 from pathlib import Path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 # 당사자 및 오인식 한자 규칙 (fix_ocr_hanja.py 참고 및 법률 범용 한자 딕셔너리 확장)
 HANJA_MAP = {
@@ -226,7 +228,7 @@ def process_file(file_path: Path, dry_run: bool = False) -> int:
         return fixes
         
     # 백업 수행 (5.기타/교재원문_백업/...)
-    workspace_root = Path(r"H:\내 드라이브")
+    workspace_root = Path(VAULT_ROOT)
     try:
         rel = file_path.relative_to(workspace_root)
         backup_path = workspace_root / "5.기타" / "교재원문_백업" / date.today().isoformat() / "sanitize" / rel
@@ -248,7 +250,7 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="수정 예정 사항 미리보기")
     args = parser.parse_args()
     
-    wiki_dir = os.environ.get("WIKI_DIR", r"H:\내 드라이브\sync\wiki")
+    wiki_dir = os.environ.get("WIKI_DIR", vp("sync", "wiki"))
     target_path = Path(args.path) if args.path else Path(wiki_dir)
     
     if target_path.is_file():

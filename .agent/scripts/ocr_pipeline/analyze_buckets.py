@@ -1,8 +1,15 @@
 """batch2 bucket별 과목/교재 분포 분석."""
 import json
+import os
+import sys
 from pathlib import Path
+_p = os.path.abspath(__file__)  # noqa: E402
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:  # noqa: E402
+    _p = os.path.dirname(_p)  # noqa: E402
+sys.path.insert(0, os.path.join(_p, 'scripts'))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-WORKSPACE = Path(r"H:\내 드라이브")
+WORKSPACE = Path(VAULT_ROOT)
 rev_root = WORKSPACE / ".agent/data/ocr_chunks_reviewed"
 
 buckets = ["g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g9", "g10"]

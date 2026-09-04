@@ -10,9 +10,9 @@ try:
 except Exception:
     pass
 
-PLAN = json.loads(Path(r"H:\내 드라이브\sync\_meta\_ocr_extracted_통합_매니페스트_2026-04-30.json").read_text(encoding="utf-8"))
-MOVES = json.loads(Path(r"H:\내 드라이브\sync\_meta\_ocr_extracted_통합_매니페스트_2026-04-30_moves.json").read_text(encoding="utf-8"))
-SHA = json.loads(Path(r"H:\내 드라이브\sync\_meta\_ocr_extracted_sha256_검증_2026-04-30.json").read_text(encoding="utf-8"))
+PLAN = json.loads(Path(r"H:\내 드라이브\9.작업중/클로드\_ocr_extracted_통합_매니페스트_2026-04-30.json").read_text(encoding="utf-8"))
+MOVES = json.loads(Path(r"H:\내 드라이브\9.작업중/클로드\_ocr_extracted_통합_매니페스트_2026-04-30_moves.json").read_text(encoding="utf-8"))
+SHA = json.loads(Path(r"H:\내 드라이브\9.작업중/클로드\_ocr_extracted_sha256_검증_2026-04-30.json").read_text(encoding="utf-8"))
 
 # raw_path → moves rec
 moves_by_src = {m["src"]: m for m in MOVES}
@@ -81,7 +81,7 @@ lines.append(f"- B/B-partial/C 분류 (yaml만 새로 작성, body 0% 변경): 4
 lines.append(f"  - body fingerprint sha256 일치: **41/41** ✓")
 lines.append(f"  - mismatch: 0건")
 lines.append(f"  - missing: 0건")
-lines.append(f"- 검증 보고: `sync/_meta/_ocr_extracted_sha256_검증_2026-04-30.json`")
+lines.append(f"- 검증 보고: `9.작업중/클로드/_ocr_extracted_sha256_검증_2026-04-30.json`")
 lines.append("")
 
 lines.append("## 2. 분류별 처리 결과")
@@ -168,10 +168,10 @@ lines.append("## 7. 산출 파일")
 lines.append("")
 lines.append("| 파일 | 내용 |")
 lines.append("|---|---|")
-lines.append("| `sync/_meta/_ocr_extracted_통합_매니페스트_2026-04-30.md` | (본 문서) MD 형식 매니페스트 |")
-lines.append("| `sync/_meta/_ocr_extracted_통합_매니페스트_2026-04-30.json` | 분류 plan (모든 파일별 fingerprint·매칭) |")
-lines.append("| `sync/_meta/_ocr_extracted_통합_매니페스트_2026-04-30_moves.json` | 실제 이동 로그 (src→dst, status_tag) |")
-lines.append("| `sync/_meta/_ocr_extracted_sha256_검증_2026-04-30.json` | 본문 sha256 무결성 검증 결과 (49/49 OK) |")
+lines.append("| `9.작업중/클로드/_ocr_extracted_통합_매니페스트_2026-04-30.md` | (본 문서) MD 형식 매니페스트 |")
+lines.append("| `9.작업중/클로드/_ocr_extracted_통합_매니페스트_2026-04-30.json` | 분류 plan (모든 파일별 fingerprint·매칭) |")
+lines.append("| `9.작업중/클로드/_ocr_extracted_통합_매니페스트_2026-04-30_moves.json` | 실제 이동 로그 (src→dst, status_tag) |")
+lines.append("| `9.작업중/클로드/_ocr_extracted_sha256_검증_2026-04-30.json` | 본문 sha256 무결성 검증 결과 (49/49 OK) |")
 lines.append("| `.agent/scripts/_ocr_extracted_dedup_2026-04-30.py` | 분류·이동 스크립트 |")
 lines.append("| `.agent/scripts/_fix_songyk_case_placement.py` | 송영곤 신규 폴더 정렬 보정 스크립트 |")
 lines.append("| `.agent/scripts/_verify_dedup_integrity.py` | sha256 검증 스크립트 |")
@@ -186,7 +186,7 @@ lines.append("- [x] feedback_자료_인용_순환_금지: 기존 보고서·큐 
 lines.append("- [x] feedback_no_hanja: 본문 0% 변경 원칙으로 한자 변환 보류 ([확인필요] 라벨 표시)")
 lines.append("- [ ] backlinks (#35): 본문 0% 변경 원칙으로 백링크 신규 추가 보류")
 
-out_path = Path(r"H:\내 드라이브\sync\_meta\_ocr_extracted_통합_매니페스트_2026-04-30.md")
+out_path = Path(r"H:\내 드라이브\9.작업중/클로드\_ocr_extracted_통합_매니페스트_2026-04-30.md")
 out_path.write_text("\n".join(lines), encoding="utf-8")
 print(f"MD 매니페스트 작성: {out_path}")
 print(f"총 {len(lines)}줄")

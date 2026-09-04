@@ -7,6 +7,10 @@ import markdown
 from xhtml2pdf import pisa
 from pathlib import Path
 import io
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 CSS_STYLE = """
 @page { margin: 20mm 15mm 18mm 15mm; }
@@ -60,10 +64,10 @@ blockquote {
 """
 
 SOURCES = [
-    r"H:\내 드라이브\sync\1-1_중간\형법1_서보학_중간_정리노트.md",
-    r"H:\내 드라이브\sync\1-1_중간\형법1_중간_압축본.md",
+    vp("sync", "1-1_중간", "형법1_서보학_중간_정리노트.md"),
+    vp("sync", "1-1_중간", "형법1_중간_압축본.md"),
 ]
-OUT_DIR = Path(r"H:\내 드라이브\5.기타\정리노트PDF")
+OUT_DIR = Path(vp("5.기타", "정리노트PDF"))
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 md = markdown.Markdown(extensions=["tables", "fenced_code", "toc", "nl2br"])

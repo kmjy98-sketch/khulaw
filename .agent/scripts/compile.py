@@ -2,6 +2,9 @@
 """
 compile.py — daily log들을 주제별 wiki 아티클로 컴파일.
 
+[FROZEN 2026-04-24] 동결 — 1회 가동 후 미사용. 위키 정본은 wiki_원문분할.py→sync/위키/원문
+계통으로 대체됨. 부활은 CLAUDE.md #41 결정 후. 진입점은 memory-maintenance 스킬.
+
 Karpathy LLM Wiki 패턴의 "compile" 단계.
 여러 세션에 걸쳐 축적된 지식을 주제별로 통합.
 
@@ -20,14 +23,17 @@ import argparse
 from datetime import datetime
 from collections import defaultdict
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
-BASE = os.environ.get("MEMORY_BASE", r"H:\내 드라이브\.auto-memory")
+BASE = os.environ.get("MEMORY_BASE", vp(".auto-memory"))
 DAILY_DIR = os.path.join(BASE, "daily")
 SESSION_LOGS_DIR = os.path.join(BASE, "session_logs")
-WIKI_DIR = os.environ.get("WIKI_DIR", r"H:\내 드라이브\sync\wiki")
+WIKI_DIR = os.environ.get("WIKI_DIR", vp("sync", "wiki"))
 INDEX_FILE = os.path.join(WIKI_DIR, "_index.md")
 COMPILE_STATE = os.path.join(BASE, ".compile_state.json")
 

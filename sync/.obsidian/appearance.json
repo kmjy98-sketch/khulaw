@@ -1,0 +1,11 @@
+{
+  "theme": "moonstone",
+  "nativeMenus": true,
+  "textFontFamily": "HYSinMyeongJo,HYGungSo,HYGraphic",
+  "interfaceFontFamily": "HYSinMyeongJo",
+  "baseFontSize": 17,
+  "cssTheme": "a-govuk-hybrid",
+  "enabledCssSnippets": [
+    "a-govuk-hybrid"
+  ]
+}

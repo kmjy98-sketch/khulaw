@@ -13,7 +13,7 @@ from collections import Counter
 # 설정
 SCRIPT_DIR = Path(__file__).parent
 INDEX_PATH = SCRIPT_DIR.parent.parent.parent / "state" / "tag_index.json"
-CONCEPT_DIR = Path(r"h:\내 드라이브\민사\민법\개념")
+CONCEPT_DIR = Path(r"E:\법학볼트\1.민사\92.개념")
 
 
 def load_index(index_path: Path = INDEX_PATH) -> dict:

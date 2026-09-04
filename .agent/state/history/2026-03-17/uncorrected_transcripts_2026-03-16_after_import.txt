@@ -1,0 +1,92 @@
+UNCORRECTED_COUNT=13
+---
+transcript_path: H:\내 드라이브\1.민사\강혜림_민법1\전사문\민1_3-1\민1_3-1_transcript.txt
+split_dir: H:\내 드라이브\1.민사\강혜림_민법1\전사문\민1_3-1
+part_count: 10
+corrected_count: 0
+sample_parts: 민1_3-1_part01.md, 민1_3-1_part02.md, 민1_3-1_part03.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\강혜림_민법1\전사문\민1_3-2\민1_3-2_transcript.txt
+split_dir: H:\내 드라이브\1.민사\강혜림_민법1\전사문\민1_3-2
+part_count: 10
+corrected_count: 0
+sample_parts: 민1_3-2_part01.md, 민1_3-2_part02.md, 민1_3-2_part03.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\강혜림_민법1\전사문\민1_3-3\민1_3-3_transcript.txt
+split_dir: H:\내 드라이브\1.민사\강혜림_민법1\전사문\민1_3-3
+part_count: 10
+corrected_count: 0
+sample_parts: 민1_3-3_part01.md, 민1_3-3_part02.md, 민1_3-3_part03.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\강혜림_민법1\전사문\민_1_3-4\민_1_3-4_transcript.txt
+split_dir: H:\내 드라이브\1.민사\강혜림_민법1\전사문\민_1_3-4
+part_count: 10
+corrected_count: 0
+sample_parts: 민_1_3-4_part01.md, 민_1_3-4_part02.md, 민_1_3-4_part03.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_1-2.2\송영곤_기본민법_1-2.2_transcript.txt
+split_dir: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_1-2.2
+part_count: 11
+corrected_count: 0
+sample_parts: 송영곤_기본민법_1-2.2_part01.md, 송영곤_기본민법_1-2.2_part02.md, 송영곤_기본민법_1-2.2_part03.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_1-3.1\송영곤_기본민법_1-3.1_transcript.txt
+split_dir: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_1-3.1
+part_count: 2
+corrected_count: 0
+sample_parts: 송영곤_기본민법_1-3.1_part01.md, 송영곤_기본민법_1-3.1_part02.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_1-3.2\송영곤_기본민법_1-3.2_transcript.txt
+split_dir: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_1-3.2
+part_count: 3
+corrected_count: 0
+sample_parts: 송영곤_기본민법_1-3.2_part01.md, 송영곤_기본민법_1-3.2_part02.md, 송영곤_기본민법_1-3.2_part03.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_1-3.3\송영곤_기본민법_1-3.3_transcript.txt
+split_dir: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_1-3.3
+part_count: 6
+corrected_count: 0
+sample_parts: 송영곤_기본민법_1-3.3_part01.md, 송영곤_기본민법_1-3.3_part02.md, 송영곤_기본민법_1-3.3_part03.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_2-3.1\송영곤_기본민법_2-3.1_transcript.txt
+split_dir: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_2-3.1
+part_count: 4
+corrected_count: 0
+sample_parts: 송영곤_기본민법_2-3.1_part01.md, 송영곤_기본민법_2-3.1_part02.md, 송영곤_기본민법_2-3.1_part03.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_2-3.2\송영곤_기본민법_2-3.2_transcript.txt
+split_dir: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_2-3.2
+part_count: 2
+corrected_count: 0
+sample_parts: 송영곤_기본민법_2-3.2_part01.md, 송영곤_기본민법_2-3.2_part02.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_2-3.3\송영곤_기본민법_2-3.3_transcript.txt
+split_dir: H:\내 드라이브\1.민사\보관\민법\전사\송영곤_기본민법_2-3.3
+part_count: 1
+corrected_count: 0
+sample_parts: 송영곤_기본민법_2-3.3_part01.md
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\_inbox\녹음\processed\transcripts\2026-03-15\녹음_transcript.txt
+split_dir: H:\내 드라이브\_inbox\녹음\processed\transcripts\2026-03-15
+part_count: 0
+corrected_count: 0
+sample_parts: 
+sample_corrected: 
+---
+transcript_path: H:\내 드라이브\_inbox\녹음\unmatched_transcripts\녹음\녹음_transcript.txt
+split_dir: H:\내 드라이브\_inbox\녹음\unmatched_transcripts\녹음
+part_count: 10
+corrected_count: 0
+sample_parts: 녹음_part01.md, 녹음_part02.md, 녹음_part03.md
+sample_corrected: 

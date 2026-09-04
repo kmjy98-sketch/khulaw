@@ -1,0 +1,48 @@
+version: 1
+source: sync/_meta/CODEX_BOOTSTRAP_REPORT.md
+storage:
+  catalog_csv: .agent/data/category_catalog.csv
+  sqlite: .agent/state/progress.sqlite
+defaults:
+  weekly_export_limit: 80
+  daily_new_limit_hint: 25
+  status: active
+subject_groups:
+  공법:
+    subjects:
+      헌법:
+        - 헌법_기본권
+        - 헌법_통치구조
+        - 헌법소송
+      행정법:
+        - 행정법_행정작용
+        - 행정법_행정절차
+        - 행정법_행정쟁송
+        - 행정법_국가배상손실보상
+  민사:
+    subjects:
+      민법:
+        - 민법_민총
+        - 민법_물권
+        - 민법_채권총론
+        - 민법_채권각론
+        - 민법_가족법
+      민소법:
+        - 민소법_소송요건
+        - 민소법_심리증거
+        - 민소법_판결상소재심
+      상법:
+        - 상법_회사
+        - 상법_기타
+  형사:
+    subjects:
+      형법:
+        - 형법_총론
+        - 형법_개인적법익
+        - 형법_사회적법익
+        - 형법_국가적법익
+      형소법:
+        - 형소법_수사
+        - 형소법_공판
+        - 형소법_증거
+        - 형소법_상소재심

@@ -1,0 +1,23 @@
+﻿{
+    "reconvert_target_count":  7,
+    "csv_path":  "H:\\내 드라이브\\.agent\\state\\hwp_pdf_reconvert_targets_2026-03-20.csv",
+    "powershell_template_path":  "H:\\내 드라이브\\.agent\\state\\hwp_pdf_reconvert_template_2026-03-20.ps1",
+    "converter_found_in_path":  false,
+    "converter_contract":  "\u003cconverter\u003e \u003csource_hwp_path\u003e \u003ctarget_pdf_path\u003e",
+    "candidate_converter_executables":  [
+                                            "C:\\Program Files (x86)\\Hnc\\Office 2022\\HncUtils\\HancomPDF\\x64\\HNCE2PPRCONVP.exe",
+                                            "C:\\Program Files (x86)\\Hnc\\Office 2022\\HncUtils\\HancomPDF\\x86\\HNCE2PPRCONVP.exe"
+                                        ],
+    "hancom_start_menu_shortcuts":  [
+                                        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\한글 2022.lnk",
+                                        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\한글과컴퓨터\\한컴오피스 2022\\한PDF 2022.lnk",
+                                        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\한글과컴퓨터\\한컴오피스 2022\\한글 2022.lnk"
+                                    ],
+    "discovery_path":  "H:\\내 드라이브\\.agent\\state\\hwp_pdf_converter_discovery_2026-03-20.json",
+    "module_dll_path":  "H:\\내 드라이브\\.agent\\state\\hancom_security_module_2026-03-20\\FilePathCheckerModuleExample.dll",
+    "module_registered":  true,
+    "probe_conversion_success":  true,
+    "batch_reconvert_total":  7,
+    "batch_reconvert_ok":  7,
+    "batch_log_path":  "H:\\내 드라이브\\.agent\\state\\hwp_pdf_reconvert_run_2026-03-20.csv"
+}

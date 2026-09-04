@@ -1,0 +1,19 @@
+{
+  "showLineNumber": false,
+  "strictLineBreaks": true,
+  "readableLineLength": true,
+  "userIgnoreFilters": [
+    "_backup_phase1",
+    "_trash"
+  ],
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 71
+  },
+  "autoPairMarkdown": false,
+  "autoPairBrackets": false,
+  "spellcheck": false
+}

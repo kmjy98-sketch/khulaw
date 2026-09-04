@@ -2,7 +2,7 @@
 sync/_교재원문/ 및 sync/ 전체 .md 파일 표 손상 흔적 스캔
 - Phase 1 (read-only): 손상 패턴 검출
 - Phase 1.5: 백업본 vs 현재본 비교
-- 결과: sync/_meta/표_복구_2026-05-05.json (raw)
+- 결과: 9.작업중/클로드/표_복구_2026-05-05.json (raw)
 사용자 task: 표 복구 / 본문 외 영역 변경 절대 금지
 """
 import json

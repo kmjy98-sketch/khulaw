@@ -10,13 +10,17 @@ anki_deck_build_v4.py — outputs/02_cards/*.md → v4 덱별 Anki TSV 빌드
 """
 import hashlib
 import json
+import os
 import re
 import sys
 from pathlib import Path
 from collections import defaultdict
 
-SRC = Path("H:/내 드라이브/outputs/02_cards")
-OUT = Path("H:/내 드라이브/outputs/anki/v4")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+SRC = Path(vp("outputs", "02_cards"))
+OUT = Path(vp("outputs", "anki", "v4"))
 
 # v4.1: 파일 prefix → 회독 그룹 (과목은 카드 태그에서 — preset 상속을 위해 그룹이 상위 덱)
 GROUP_MAP = [
@@ -100,8 +104,8 @@ def colorize(s: str) -> str:
 
 
 # ── v4.2 키워드 형광 마킹: LLM 추출 캐시(.agent/state/anki_keyword_cache.jsonl) 적용 ──
-KW_CACHE = Path("H:/내 드라이브/.agent/state/anki_keyword_cache.jsonl")
-CZ_CACHE = Path("H:/내 드라이브/.agent/state/anki_cloze_kw_cache.jsonl")
+KW_CACHE = Path(vp(".agent", "state", "anki_keyword_cache.jsonl"))
+CZ_CACHE = Path(vp(".agent", "state", "anki_cloze_kw_cache.jsonl"))
 HL_OPEN = '<span style="background:#ffe066;color:#332600;border-radius:3px;">'
 MARKS = {}
 CLOZE_MARKS = {}

@@ -18,7 +18,7 @@ python .agent/skills/textbook-problem-intake/scripts/run_textbook_intake.py --su
 새 교재 PDF를 넣고 한 번에 처리할 때:
 
 ```powershell
-python .agent/skills/textbook-problem-intake/scripts/run_textbook_intake.py --subject 민법 --pdf-dir "H:\내 드라이브\민사\민법\교재"
+python .agent/skills/textbook-problem-intake/scripts/run_textbook_intake.py --subject 민법 --pdf-dir "E:\법학볼트\민사\민법\교재"
 ```
 
 실제 DB 반영까지 할 때:
@@ -86,7 +86,6 @@ python .agent/skills/textbook-problem-intake/scripts/run_textbook_intake.py --su
 
 - `../case-answer-review/SKILL.md`는 등록 전 후보 manifest를 직접 읽는다.
 - DB 반영 전에도 사례답안 채점 보고서에서 `교재 내 문제 후보`를 보여줄 수 있다.
-- 구조도와 연결 관계는 `../../workflows/skill-structure.md`를 기준으로 확인한다.
 - 새 교재를 넣을 때는 `pdf-ingest -> scan -> register dry-run`을 이 스킬 하나로 묶어 호출한다.
 
 ## Detailed Checks

@@ -5,9 +5,7 @@ description: 태그 인덱스 자동 업데이트. 조문/판례/키워드 추�
 
 # Auto-Index Skill
 
-<!-- @rule: AGENTS.md#18 State Check -->
-<!-- @rule: AGENTS.md#18 State Check -->
-<!-- @rule: GEMINI.md#18 State Check -->
+<!-- @rule: CLAUDE.md#15 State Check -->
 
 > 마크다운 파일에서 조문/판례/키워드를 자동 추출하여 `tag_index.json` 업데이트
 

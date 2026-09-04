@@ -2,12 +2,15 @@
 각 PDF: 페이지수 / 용량MB / outline(목차) 보유여부 / 최상위 목차 항목수
 _chunks 폴더: 기계 100p 분할 여부 표시
 """
+import os
 import sys
 from pathlib import Path
 from pypdf import PdfReader
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = Path(r"H:\내 드라이브\작업용")
+ROOT = Path(vp("작업용"))
 
 
 def top_outline_count(reader):

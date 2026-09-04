@@ -5,14 +5,18 @@ anki_keyword_slice.py — Basic 카드 고유 Back을 키워드 추출용 슬라
 anki_keyword_merge.py가 검증·병합해 anki_keyword_cache.jsonl을 만든다.
 """
 import json
+import os
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from anki_deck_build_v4 import collect, bk_key  # noqa: E402
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 SLICE = 300
-OUT_DIR = Path("H:/내 드라이브/.agent/state/kw_slices")
+OUT_DIR = Path(vp(".agent", "state", "kw_slices"))
 
 
 def main():

@@ -12,7 +12,7 @@ try:
 except Exception:
     pass
 
-MOVES = json.loads(Path(r"H:\내 드라이브\sync\_meta\_ocr_extracted_통합_매니페스트_2026-04-30_moves.json").read_text(encoding="utf-8"))
+MOVES = json.loads(Path(r"H:\내 드라이브\9.작업중/클로드\_ocr_extracted_통합_매니페스트_2026-04-30_moves.json").read_text(encoding="utf-8"))
 
 
 def strip_yaml(text):
@@ -95,7 +95,7 @@ report = {
     "missing": missing,
     "mismatches": mismatches,
 }
-Path(r"H:\내 드라이브\sync\_meta\_ocr_extracted_sha256_검증_2026-04-30.json").write_text(
+Path(r"H:\내 드라이브\9.작업중/클로드\_ocr_extracted_sha256_검증_2026-04-30.json").write_text(
     json.dumps(report, ensure_ascii=False, indent=2),
     encoding="utf-8",
 )

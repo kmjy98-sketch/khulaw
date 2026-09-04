@@ -15,14 +15,18 @@
 
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import sys
 from pathlib import Path
 from datetime import date
 
-DEFAULT_DIR = Path(r"H:\내 드라이브\sync\_교재원문\민법\송영곤_쟁점노트")
-WORKSPACE_ROOT = Path(r"H:\내 드라이브")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+DEFAULT_DIR = Path(vp("sync", "_교재원문", "민법", "송영곤_쟁점노트"))
+WORKSPACE_ROOT = Path(VAULT_ROOT)
 
 # 라인 전체가 페이지 푸터인 경우 매칭.
 # 페이지번호(1~3자리) + 구분자 + 교재 식별어 포함, 전체 40자 이내.

@@ -1,0 +1,12 @@
+# Anthropic API (01번 OCR·02-wiki·02-card·06a·06b 모두)
+# v3.6 Phase 1.1: Gemini 제거, 01번 OCR도 Claude로 통일
+anthropic>=0.40.0
+
+# PDF 처리
+pypdf>=4.0.0
+
+# 환경변수
+python-dotenv>=1.0.0
+
+# 진행 상황 표시
+tqdm>=4.66.0

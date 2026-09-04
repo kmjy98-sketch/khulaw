@@ -9,15 +9,19 @@ _consolidate_legacy_ops.py  (일회성)
 """
 import csv
 import json
+import os
 import sys
 from pathlib import Path
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
 except Exception:
     pass
 
-WS = Path(r"H:\내 드라이브")
+WS = Path(VAULT_ROOT)
 META = WS / "sync" / "_meta"
 OUT = WS / ".agent" / "file_ops_log" / "_legacy_consolidated.csv"
 
@@ -64,13 +68,13 @@ for m in d2:
 # ── 출처 3: D2-D13 일괄처리 매니페스트 (MD 표, 4건) ──────────────────
 d3 = [
     ("delete-to-trash", "content.txt (0바이트)",
-     r"H:\내 드라이브\_trash\2026-06-15\content.txt", "0바이트 빈 파일(#16 이동)"),
+     vp("_trash", "2026-06-15", "content.txt"), "0바이트 빈 파일(#16 이동)"),
     ("move", "기타서류\\ (행정서류 9)",
-     "H:\\내 드라이브\\5.기타\\문서\\기타서류\\", "행정서류 표준 위치(#42)"),
+     vp("5.기타", "문서", "기타서류") + "\\", "행정서류 표준 위치(#42)"),
     ("move", "리퀴드텍스트 백업\\ (zip 2)",
-     "H:\\내 드라이브\\5.기타\\_백업\\리퀴드텍스트 백업\\", "앱 백업, 5.기타 집결"),
+     vp("5.기타", "_백업", "리퀴드텍스트 백업") + "\\", "앱 백업, 5.기타 집결"),
     ("move", "_종합본\\ (책별 합본 PDF 9)",
-     "H:\\내 드라이브\\5.기타\\책 백업\\_종합본\\", "D7·D12 집결, 백업 성격"),
+     vp("5.기타", "책 백업", "_종합본") + "\\", "D7·D12 집결, 백업 성격"),
 ]
 for op, src, dst, reason in d3:
     rows.append({

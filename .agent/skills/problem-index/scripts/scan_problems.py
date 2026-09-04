@@ -62,14 +62,26 @@ def save_index(index: dict[str, Any], index_path: Path) -> None:
 
 def detect_subject(file_path: Path) -> str | None:
     path_text = str(file_path)
+    # 민사소송법 · 민사집행법: 민법·민사 이전에 선검사
+    if "민사소송" in path_text or "민소" in path_text:
+        return "민사소송법"
+    if "민사집행" in path_text or "민집" in path_text:
+        return "민사집행법"
     if "민법" in path_text or "민사" in path_text:
         return "민법"
+    # 형사소송법: 형법·형사 이전에 선검사
+    if "형사소송" in path_text or "형소" in path_text:
+        return "형사소송법"
+    if "형법총론" in path_text or "총론" in path_text:
+        return "형법총론"
+    if "형법각론" in path_text or "각론" in path_text:
+        return "형법각론"
     if "형법" in path_text or "형사" in path_text:
-        return "형법"
-    if "민소" in path_text:
-        return "민소법"
-    if "형소" in path_text:
-        return "형소법"
+        return "형법총론"
+    if "헌법" in path_text:
+        return "헌법"
+    if "행정법" in path_text:
+        return "행정법"
     return None
 
 

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진도 보드 v7</title>
+<style>
+  :root{--bg:#faf9f6;--card:#fff;--line:#e6e3da;--tx:#1a1a1a;--mut:#6b6a64;--accent:#1D9E75}
+  @media (prefers-color-scheme:dark){:root{--bg:#191919;--card:#242422;--line:#37362f;--tx:#ececec;--mut:#a3a39c}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;line-height:1.55;padding:20px;max-width:1120px;margin:0 auto;font-size:14px}
+  h1{font-size:20px;font-weight:600;margin:0 0 8px}
+  .help,.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:12px;font-size:13px}
+  .help-h{cursor:pointer;font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+  .help-b{margin-top:8px;color:var(--mut)} .help-b ul{margin:0;padding-left:18px} .help-b li{margin:3px 0}
+  .box table{border-collapse:collapse;width:100%;margin:4px 0} .box td{border:1px solid var(--line);padding:4px 8px;font-size:12px;vertical-align:top} .box td:first-child{color:var(--mut);white-space:nowrap;width:150px}
+  .warn{color:#A32D2D}
+  .bar1{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .tab{padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:13px}
+  .tab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .sep{width:1px;height:22px;background:var(--line);margin:0 6px;display:inline-block;vertical-align:middle}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 16px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .stat b{font-size:18px;color:var(--accent)}
+  .stat .gbar{flex:1;min-width:100px;max-width:240px;height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+  .stat .gf{height:100%;background:var(--accent);width:0;transition:width .15s}
+  #selCtrl{margin-bottom:10px;display:none} #selCtrl .b{padding:5px 11px}
+  .subj{font-size:16px;font-weight:600;margin:15px 0 2px;border-bottom:2px solid var(--accent);display:inline-block;padding-bottom:1px}
+  .mrow{display:flex;align-items:flex-start;gap:10px;padding:5px 0;border-bottom:1px solid var(--line)}
+  .axis{flex:0 0 168px;font-size:13px;font-weight:600;padding-top:5px}
+  .axis small{display:block;font-weight:400;color:var(--mut);font-size:11px}
+  .cells{display:flex;flex-wrap:wrap;gap:5px;flex:1}
+  .cell{cursor:pointer;border-radius:6px;padding:5px 8px;font-size:12px;border:1px solid var(--line);background:var(--card);user-select:none;max-width:260px}
+  .cell b{font-weight:600;margin-left:5px}
+  .legend{display:flex;align-items:center;gap:5px;margin:16px 0 6px;font-size:11px;color:var(--mut);flex-wrap:wrap}
+  .lg{width:16px;height:16px;border-radius:4px;display:inline-block;border:1px solid rgba(0,0,0,.08)}
+  .btns{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  button.b{font:inherit;font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--tx);cursor:pointer}
+  button.b:hover{border-color:var(--accent)} button.b:disabled{opacity:.4;cursor:default}
+  button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .bulk{font-size:11px;font-weight:400;color:var(--accent)}
+</style>
+</head>
+<body>
+<h1>진도 보드 v7</h1>
+
+<div class="help">
+  <div class="help-h" onclick="toggleHelp()"><span>사용법</span><span id="helpTog" style="font-weight:400;color:var(--mut)">접기 ▾</span></div>
+  <div id="helpBody" class="help-b">
+    <ul>
+      <li><b>기록 모드</b> — [회독][선택][사례][기록]. 셀 클릭 = 현재 모드 +1, Shift·우클릭 = −1. 셀에 <b>N회 선N 사N 기N</b>.</li>
+      <li><b>목표 탭</b> 전체/방학/내신/변시 = 같은 데이터를 거르는 렌즈(데이터 안 바뀜).</li>
+      <li><b>방학·내신 = 단원 단위 편집</b> — [단원 편집] 켜고 단원 클릭으로 담기. <b>큰 단위 담기</b>: 편집 중 <u>과목 헤더</u>/<u>중분류 라벨</u> 클릭 = 그 전체 일괄(예: 형법은 담되 특별형법만 빼기).</li>
+      <li><b>내신</b>은 학기(1-1~3-2)별로 따로 담아 누적, [누적]은 합산 보기(편집 불가).</li>
+      <li><b>저장·백업</b> — 자동 저장. [JSON 내보내기] → 6.진도관리/백업/. 상태 [저장 환경 보기].</li>
+    </ul>
+  </div>
+</div>
+
+<div class="bar1">
+  <div id="tabs" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+  <span class="sep"></span>
+  <span style="font-size:12px;color:var(--mut)">기록:</span>
+  <span id="modes" style="display:flex;gap:5px"></span>
+</div>
+
+<div id="selCtrl"></div>
+
+<div class="stat">
+  <span>대상 <b id="scope">0</b>단원</span>
+  <span>평균 <b id="avg">0.0</b>회독</span>
+  <span>완료율 <b id="pct">0%</b></span>
+  <span>선택 <b id="tsel">0</b></span>
+  <span>사례 <b id="tcas">0</b></span>
+  <span>기록 <b id="trec">0</b></span>
+  <div class="gbar"><div class="gf" id="gf"></div></div>
+  <span style="color:var(--mut);font-size:11px">최종 <span id="upd">—</span></span>
+</div>
+
+<div id="board"></div>
+
+<div class="legend"><span>회독</span><span id="legR"></span><span style="margin-left:10px">문제(선·사·기)</span><span id="legP"></span></div>
+<div class="btns">
+  <button class="b" onclick="exportXLSX()">엑셀 내보내기</button>
+  <button class="b" onclick="exportJSON()">JSON 내보내기</button>
+  <button class="b" onclick="document.getElementById('imp').click()">가져오기(JSON)</button>
+  <input type="file" id="imp" accept=".json" style="display:none" onchange="if(this.files[0])importFile(this.files[0])">
+  <button class="b" onclick="showStorage()">저장 환경 보기</button>
+  <button class="b" onclick="resetAll()">초기화</button>
+</div>
+<div id="storage" class="box" style="display:none"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+const BOARD={
+ "민법":{"민법총설":["법원·법률관계","신의칙"],"권리주체·대리":["자연인(능력·태아·제한능력자)","부재자·실종","법인","비법인사단·종중","대리·복대리","표현대리","무권대리"],"법률행위":["목적(반사회·불공정·이중매매)","법률행위 해석","의사표시(비진의·통정·착오·사기강박)","부관(조건·기한)","무효·취소","기간","소멸시효·제척기간"],"채권관계(1)":["채권 유형(특정물·종류·금전·이자·선택)","계약 일반론","매매","임대차","도급·위임 등 전형계약","사무관리","부당이득","불법행위"],"채권관계(2)":["변제·대물변제","상계·공탁·경개·면제혼동","채무불이행·손해배상","계약 해제·해지","채권자지체·제3자 채권침해","채권자대위권","채권자취소권","채권양도·채무인수","다수당사자·보증","물적담보(저당·근저당·유치권·질권·비전형)"],"물권관계":["물권총설·물권적청구권","물권변동·등기","점유권","소유권(취득시효·공유)","용익물권(지상·지역·전세)"]},
+ "민사소송법":{"소송주체":["법원·관할","당사자·당사자적격","채권자대위소송","소송능력·대리인"],"제1심절차":["소송개시·소송요건","소의 이익","소송물","변론·심리(처분권·변론주의)","송달·기일","증거(자백·자유심증·문서)"],"소송종료":["당사자 종료(취하·포기·인낙·화해)","종국판결·기판력"],"복합·다수":["병합청구(병합·변경·반소·중간확인)","다수당사자(공동소송·참가·승계)"],"상소·재심":["항소","상고","항고·재항고","재심"],"특별절차":["소액사건","독촉(지급명령)"]},
+ "민사집행법":{"집행 이론":["총설","부동산집행","유체동산집행","채권·기타재산권 집행","가압류·가처분","(가)압류·가처분 효력","절차 상호관계"],"집행 논점":["보전처분과 실체법(통정허위·시효중단)","상계 유형별","담보물권 물상대위","근저당확정·공동근저당 배당","유치권(민집 91조5항)","임대차와 집행","경매와 부당이득","추심소송 중복제소"]},
+ "상법":{"총칙":["상법의 법원","상인(당연·의제·소상인)","상업사용인(지배인·경업피지)","상호·명의대여자책임","상업등기","영업양도"],"상행위":["상행위 특칙(상사시효·유치권·유질)","상사매매","상호계산·익명조합·합자조합","대리상·중개·위탁매매","운송·운송주선","공중접객·창고업","새 상행위(리스·가맹·팩토링)"],"회사법":["회사 통칙(1인회사·능력·회사법상의소·합병)","주식회사 설립","주식과 주주","주주총회","이사·이사회·대표이사","감사·감사위원회","신주발행·자본감소","사채","회계(준비금·이익배당)","조직개편(분할·교환이전·매도청구)","기타회사(유한·합명·합자·유한책임)"],"어음·수표":["어음수표행위·위조변조","어음수표 항변","발행·백지·인수지급보증","배서·선의취득","지급·상환청구","시효·이득상환·보증·특수수표"],"보험":["보험계약 통칙(고지·약관설명)","손해보험(피보험이익·보험자대위·책임보험)","인보험(생명·상해)","타인을 위한·타인의 보험"]},
+ "형법":{"형법총론":["구성요건(인과·고의·과실·부작위)","위법성","책임","미수","공범","죄수·경합","형벌론"],"형법각론":["생명·신체","자유·사생활","명예·신용·업무","재산죄","사회적 법익(공공·문서·통화)","국가적 법익(공무·사법)"],"특별형법":["도로·교통범죄","성폭법·아청법","폭처법·특가법·특경법·뇌물알선","부수법·여전법·정통망법·통비법"]},
+ "형사소송법":{"서론":["기본이론","소송주체","소송행위·소송조건"],"수사·공소":["수사 일반","체포·구속","대물적 강제처분(압수·수색·검증)","수사상 증거보전","수사 종결","공소제기"],"공판":["공판심리 범위","공판절차","특수 공판절차","재판"],"증거":["증거법 기본","위법수집증거배제","전문법칙","증거동의·탄핵증거","증명력"],"상소·특별":["상소 통칙","상소 각칙","비상구제(재심·비상상고)","특별절차"]},
+ "헌법":{"헌법총론":["헌법과 헌법학","기본원리·적용범위"],"기본권":["기본권총론","인간존엄·평등","인신의 자유","사생활영역","정신생활영역","경제생활영역","정치적 기본권","청구권적 기본권","사회적 기본권"],"통치구조":["대의제·권력분립","정당·선거","국회","대통령·행정부","법원·지방자치"],"헌법재판":["위헌법률심판","헌법소원","권한쟁의·탄핵·정당해산"]},
+ "행정법":{"행정법통론":["행정·통치행위","행정법(법원·법치행정·법원칙)","행정상 법률관계·개인적공권","특별권력관계·사인의 공법행위"],"행정작용법":["행정입법(법규명령·행정규칙)","행정행위 개념·종류","기속·재량·판단여지","행정행위 부관","행정행위 효력(공정력·선결문제)","행정행위 하자·하자승계","취소·철회·실효","그 밖의 행위형식(확약·계획·계약·사실행위·지도)"],"절차·정보공개":["행정절차(통지·의견·이유제시)","절차하자·인허가의제","정보공개","개인정보보호"],"의무이행확보":["행정대집행","이행강제금·직접강제·강제징수","즉시강제·행정조사","행정벌·과징금 등"],"행정구제":["국가배상(2조·5조)","손실보상","행정심판","취소소송 소송요건(대상·원고적격·소익·피고·제소기간)","취소소송 심리·판결·기속력","무효등·부작위위법확인","당사자소송·객관소송"],"행정조직":["행정조직·권한위임대리","지방자치법","공무원법"],"특별행정작용":["경찰행정","공물·급부행정","공용부담·수용","건설(건축·국토계획·환지)","환경·조세"]},
+ "선택법":{"선택법":["선택법"]}
+};
+const ALL=Object.keys(BOARD);
+const SEMS=["1-1","1-2","2-1","2-2","3-1","3-2"];
+const KEY="jindo2_state", SEL="jindo5_sel", CAS="jindo5_cas", REC="jindo5_rec";
+const NSKEY="jindo6_naesin_sem", BHUKEY="jindo7_banghak_units";
+const VALID=new Set();for(const s in BOARD)for(const m in BOARD[s])BOARD[s][m].forEach(u=>VALID.add(s+"|"+m+"|"+u));
+function unitsOf(subj){let r=[];for(const m in BOARD[subj])BOARD[subj][m].forEach(u=>r.push(subj+"|"+m+"|"+u));return r;}
+let st=JSON.parse(localStorage.getItem(KEY)||"{}");
+let sel=JSON.parse(localStorage.getItem(SEL)||"{}");
+let cas=JSON.parse(localStorage.getItem(CAS)||localStorage.getItem("jindo4_problems")||"{}");
+let rec=JSON.parse(localStorage.getItem(REC)||"{}");
+const PROB={"선택":sel,"사례":cas,"기록":rec};
+const LKEY="jindo7_log";
+let log=JSON.parse(localStorage.getItem(LKEY)||"[]");
+// 내신: 학기별 단원
+let naesinSem=JSON.parse(localStorage.getItem(NSKEY)||"null");
+if(!naesinSem){naesinSem={};SEMS.forEach(s=>naesinSem[s]=[]);const old=JSON.parse(localStorage.getItem("jindo3_naesin_units")||"[]").filter(k=>VALID.has(k));if(old.length)naesinSem["1-1"]=old;}
+SEMS.forEach(s=>{naesinSem[s]=(naesinSem[s]||[]).filter(k=>VALID.has(k));});
+// 방학: 단원 set (구 과목선택 → 단원으로 확장 이관)
+let banghakU=JSON.parse(localStorage.getItem(BHUKEY)||"null");
+if(!banghakU){banghakU=[];const os=JSON.parse(localStorage.getItem("jindo5_banghak")||'["민법","민사소송법","형법","행정법"]').filter(s=>ALL.includes(s));os.forEach(s=>unitsOf(s).forEach(k=>banghakU.push(k)));}
+banghakU=banghakU.filter(k=>VALID.has(k));
+const TABS=["전체","방학","내신","변시"];
+const COL=["","#C0DD97","#97C459","#639922","#3B6D11","#173404"];
+const COL2=["","#FAC775","#EF9F27","#BA7517","#854F0B","#633806"];
+let upd=localStorage.getItem(KEY+"_upd")||"—";
+let view="전체", mode="회독", curSem="1-1", editing=false;
+
+function ptier(p){return p<=0?0:p<=2?1:p<=5?2:p<=10?3:p<=20?4:5;}
+function cumSet(){const u=new Set();SEMS.forEach(s=>naesinSem[s].forEach(k=>u.add(k)));return u;}
+// 현재 탭의 표시 집합(null=전체/변시는 전부)
+function viewSet(){if(view=="방학")return new Set(banghakU);if(view=="내신")return curSem=="누적"?cumSet():new Set(naesinSem[curSem]);return null;}
+// 편집 대상 배열(방학=banghakU, 내신=해당 학기). 누적/전체/변시는 편집 없음
+function editArr(){if(view=="방학")return banghakU;if(view=="내신"&&curSem!="누적")return naesinSem[curSem];return null;}
+function isEdit(){return editing&&editArr()!=null;}
+function inSel(k){const a=editArr();return a?a.includes(k):false;}
+function saveSets(){localStorage.setItem(NSKEY,JSON.stringify(naesinSem));localStorage.setItem(BHUKEY,JSON.stringify(banghakU));}
+function toggleSel(k){const a=editArr();if(!a)return;const i=a.indexOf(k);i>=0?a.splice(i,1):a.push(k);saveSets();}
+function bulkSel(keys){const a=editArr();if(!a)return;const set=new Set(a);const allIn=keys.every(k=>set.has(k));keys.forEach(k=>{const i=a.indexOf(k);if(allIn){if(i>=0)a.splice(i,1);}else if(i<0)a.push(k);});saveSets();}
+
+const legR=document.getElementById("legR"),legP=document.getElementById("legP");
+for(let l=0;l<=5;l++){let a=document.createElement("span");a.className="lg";a.style.background=l?COL[l]:"var(--card)";legR.appendChild(a);let b=document.createElement("span");b.className="lg";b.style.background=l?COL2[l]:"var(--card)";legP.appendChild(b);}
+const tabs=document.getElementById("tabs");
+TABS.forEach(g=>{const t=document.createElement("div");t.className="tab"+(g==view?" on":"");t.textContent=g=="전체"?"전체":g+" 목표";t.dataset.g=g;t.onclick=()=>{view=g;editing=false;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.g==g));render();};tabs.appendChild(t);});
+const modesEl=document.getElementById("modes");
+["회독","선택","사례","기록"].forEach(m=>{const b=document.createElement("button");b.className="b"+(m==mode?" on":"");b.id="m_"+m;b.textContent=m;b.onclick=()=>setMode(m);modesEl.appendChild(b);});
+
+function setMode(m){mode=m;["회독","선택","사례","기록"].forEach(x=>document.getElementById("m_"+x).className="b"+(x==m?" on":""));render();}
+function setSem(s){curSem=s;if(s=="누적")editing=false;render();}
+function toggleEditing(){if(editArr()==null)return;editing=!editing;render();}
+function buildCtrl(){
+ const c=document.getElementById("selCtrl");
+ if(view=="방학"){c.style.display="block";c.innerHTML=`<button class="b${editing?' on':''}" onclick="toggleEditing()">${editing?'편집 완료':'방학 단원 편집'}</button> <span style="font-size:12px;color:var(--mut)">방학 ${banghakU.length}단원${editing?' · 과목/중분류 헤더 클릭=일괄 담기':''}</span>`;}
+ else if(view=="내신"){c.style.display="block";const semBtns=SEMS.map(s=>`<button class="b${s==curSem?' on':''}" onclick="setSem('${s}')">${s}</button>`).join("")+`<button class="b${curSem=='누적'?' on':''}" onclick="setSem('누적')">누적</button>`;const cnt=curSem=="누적"?cumSet().size:naesinSem[curSem].length;c.innerHTML=`<span style="font-size:12px;color:var(--mut)">학기:</span> ${semBtns} <span class="sep"></span><button class="b${editing?' on':''}" onclick="toggleEditing()" ${curSem=='누적'?'disabled':''}>${editing?'편집 완료':'단원 편집'}</button> <span style="font-size:12px;color:var(--mut)">${curSem=='누적'?'누적':curSem} ${cnt}단원${editing?' · 과목/중분류 헤더 클릭=일괄':''}</span>`;}
+ else c.style.display="none";
+}
+function render(){
+ buildCtrl();
+ const vset=viewSet(), ed=isEdit();
+ const board=document.getElementById("board");board.innerHTML="";
+ let any=false;
+ ALL.forEach(subj=>{
+  const rows=[];
+  for(const mid in BOARD[subj]){
+   const units=BOARD[subj][mid].filter(u=>!vset||ed||vset.has(subj+"|"+mid+"|"+u));
+   if(!units.length)continue;
+   const row=document.createElement("div");row.className="mrow";
+   const ax=document.createElement("div");ax.className="axis";
+   if(ed){ax.style.cursor="pointer";ax.title="중분류 전체 담기/빼기";ax.innerHTML=`${mid} <span class="bulk">(전체)</span>`;ax.onclick=()=>{bulkSel(units.map(u=>subj+"|"+mid+"|"+u));render();};}
+   else{let done=0,rs=0,ss=0,cs=0,gs=0;units.forEach(u=>{const k=subj+"|"+mid+"|"+u;const r=st[k]||0;if(r>0)done++;rs+=r;ss+=sel[k]||0;cs+=cas[k]||0;gs+=rec[k]||0;});ax.innerHTML=`${mid}<small>${done}/${units.length} · ${(rs/units.length).toFixed(1)}회 · 선${ss}·사${cs}·기${gs}</small>`;}
+   row.appendChild(ax);
+   const cells=document.createElement("div");cells.className="cells";
+   units.forEach(u=>{const k=subj+"|"+mid+"|"+u;const c=document.createElement("div");c.className="cell";c.dataset.k=k;c.innerHTML=`${u}<b></b>`;
+    if(ed){paintMem(c,k);c.onclick=()=>{toggleSel(k);render();};}
+    else{paintCell(c,k);c.addEventListener("click",e=>bump(k,e.shiftKey?-1:1));c.addEventListener("contextmenu",e=>{e.preventDefault();bump(k,-1);});}
+    cells.appendChild(c);});
+   row.appendChild(cells);rows.push(row);any=true;
+  }
+  if(rows.length){const h=document.createElement("div");h.className="subj";
+   if(ed){h.style.cursor="pointer";h.title="과목 전체 담기/빼기";h.innerHTML=`${subj} <span class="bulk">(과목 전체)</span>`;h.onclick=()=>{bulkSel(unitsOf(subj));render();};}
+   else h.textContent=subj;
+   board.appendChild(h);rows.forEach(r=>board.appendChild(r));}
+ });
+ if(!any&&!ed){let msg="";if(view=="방학")msg="방학 단원 미지정 — [방학 단원 편집]으로 담으세요(과목/중분류 헤더 클릭=일괄).";else if(view=="내신")msg=curSem=="누적"?"담긴 단원 없음 — 각 학기에서 담으면 합쳐 보입니다.":curSem+" 단원 미지정 — [단원 편집]으로 이 학기 단원을 담으세요.";if(msg)board.innerHTML=`<p style="color:var(--mut)">${msg}</p>`;}
+ updStat(vset);
+}
+function paintCell(c,k){const r=st[k]||0;
+ if(mode=="회독"){c.style.background=r?COL[r]:"var(--card)";c.style.color=r>=3?"#fff":(r?"#173404":"var(--tx)");c.style.borderColor=r?COL[r]:"var(--line)";}
+ else{const v=PROB[mode][k]||0,t=ptier(v);c.style.background=t?COL2[t]:"var(--card)";c.style.color=t>=3?"#fff":(t?"#633806":"var(--tx)");c.style.borderColor=t?COL2[t]:"var(--line)";}
+ const ps=[];if(sel[k])ps.push("선"+sel[k]);if(cas[k])ps.push("사"+cas[k]);if(rec[k])ps.push("기"+rec[k]);
+ c.querySelector("b").innerHTML=(r?r+"회":"")+(ps.length?(r?" ":"")+'<span style="opacity:.8">'+ps.join(" ")+'</span>':"");}
+function paintMem(c,k){const on=inSel(k);c.style.background=on?"#E1F5EE":"var(--card)";c.style.color=on?"#0F6E56":"var(--tx)";c.style.borderColor=on?"#1D9E75":"var(--line)";c.querySelector("b").textContent=on?"✓":"+";}
+function saveAll(){localStorage.setItem(KEY,JSON.stringify(st));localStorage.setItem(SEL,JSON.stringify(sel));localStorage.setItem(CAS,JSON.stringify(cas));localStorage.setItem(REC,JSON.stringify(rec));localStorage.setItem(KEY+"_upd",upd);}
+function bump(k,d){if(mode=="회독"){st[k]=((st[k]||0)+d+6)%6;}else{const o=PROB[mode];o[k]=Math.max(0,(o[k]||0)+d);}upd=new Date().toLocaleString("ko-KR");const p=k.split("|");log.push([upd,p[0],p[1],p[2],mode,(mode=="회독"?st[k]:PROB[mode][k]),d]);if(log.length>3000)log=log.slice(-3000);localStorage.setItem(LKEY,JSON.stringify(log));saveAll();render();}
+function updStat(vset){let ks=[];if(vset){vset.forEach(k=>{if(VALID.has(k))ks.push(k);});}else{ALL.forEach(s=>unitsOf(s).forEach(k=>ks.push(k)));}
+ let touch=0,rs=0,ss=0,cs=0,gs=0;ks.forEach(k=>{const r=st[k]||0;if(r>0)touch++;rs+=r;ss+=sel[k]||0;cs+=cas[k]||0;gs+=rec[k]||0;});const tot=ks.length;
+ document.getElementById("scope").textContent=tot;
+ document.getElementById("avg").textContent=tot?(rs/tot).toFixed(1):"0.0";
+ document.getElementById("pct").textContent=tot?Math.round(touch/tot*100)+"%":"0%";
+ document.getElementById("tsel").textContent=ss;document.getElementById("tcas").textContent=cs;document.getElementById("trec").textContent=gs;
+ document.getElementById("gf").style.width=(tot?touch/tot*100:0)+"%";
+ document.getElementById("upd").textContent=upd;}
+function resetAll(){if(confirm("회독·선택·사례·기록 기록을 모두 지울까요? (방학·내신 단원 선택은 유지)")){st={};[sel,cas,rec].forEach(o=>Object.keys(o).forEach(k=>delete o[k]));saveAll();render();}}
+function exportJSON(){const b=new Blob([JSON.stringify({updated:upd,회독:st,선택:sel,사례:cas,기록:rec,내신_학기별:naesinSem,방학_단원:banghakU,기록로그:log},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="진도_board_export.json";a.click();}
+function stamp(){return new Date().toISOString().slice(0,10);}
+function curRows(){const rows=[["과목","중분류","소단원","회독","선택","사례","기록"]];ALL.forEach(s=>{for(const m in BOARD[s])BOARD[s][m].forEach(u=>{const k=s+"|"+m+"|"+u;rows.push([s,m,u,st[k]||0,sel[k]||0,cas[k]||0,rec[k]||0]);});});return rows;}
+function dlCSV(rows,name){const csv="﻿"+rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(",")).join("\r\n");const b=new Blob([csv],{type:"text/csv;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;a.click();}
+function exportXLSX(){const cur=curRows();const lg=[["시각","과목","중분류","소단원","종류","값","증감"]].concat(log);
+ if(window.XLSX){const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(cur),"진도현황");XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(lg),"기록로그");XLSX.writeFile(wb,"진도_export_"+stamp()+".xlsx");}
+ else{dlCSV(cur,"진도현황_"+stamp()+".csv");dlCSV(lg,"기록로그_"+stamp()+".csv");alert("엑셀 라이브러리 미로드(오프라인?) → CSV 2개로 내보냈습니다(엑셀에서 열림).");}}
+function loadInto(o,s){Object.keys(o).forEach(k=>delete o[k]);if(s)Object.assign(o,s);}
+function importFile(file){const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(o.회독)loadInto(st,o.회독);if(o.선택)loadInto(sel,o.선택);if(o.사례)loadInto(cas,o.사례);if(o.기록)loadInto(rec,o.기록);if(o.내신_학기별)SEMS.forEach(s=>naesinSem[s]=(o.내신_학기별[s]||[]).filter(k=>VALID.has(k)));if(o.방학_단원){banghakU.length=0;o.방학_단원.filter(k=>VALID.has(k)).forEach(k=>banghakU.push(k));}if(Array.isArray(o.기록로그)){log=o.기록로그;localStorage.setItem(LKEY,JSON.stringify(log));}saveAll();saveSets();render();alert("가져오기 완료");}catch(e){alert("JSON 파싱 실패: "+e.message);}};r.readAsText(file);}
+function toggleHelp(){const b=document.getElementById("helpBody");const open=b.style.display!="none";b.style.display=open?"none":"block";document.getElementById("helpTog").textContent=open?"펼치기 ▸":"접기 ▾";}
+function storageOK(){try{localStorage.setItem("__t","1");localStorage.removeItem("__t");return true;}catch(e){return false;}}
+function showStorage(){const p=document.getElementById("storage");if(p.style.display=="block"){p.style.display="none";return;}p.style.display="block";
+ const len=k=>{const v=localStorage.getItem(k)||"";return v.length>=1024?(v.length/1024).toFixed(1)+"KB":v.length+"B";};
+ const cnt=k=>{try{const o=JSON.parse(localStorage.getItem(k)||"{}");return Array.isArray(o)?o.length:Object.keys(o).length;}catch(e){return 0;}};
+ let total=0;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);total+=(k+(localStorage.getItem(k)||"")).length;}
+ p.innerHTML=`<div style="font-size:14px;font-weight:600;margin-bottom:6px">저장 환경</div><table>
+ <tr><td>저장 방식</td><td>브라우저 <b>localStorage</b> — 클릭 즉시 자동 저장</td></tr>
+ <tr><td>이 파일 경로</td><td>${decodeURIComponent(location.pathname)} <small>(${location.protocol})</small></td></tr>
+ <tr><td>localStorage 가용</td><td>${storageOK()?"예":"<span class=warn>아니오</span>"}</td></tr>
+ <tr><td>회독 / 선택 / 사례 / 기록</td><td>${cnt(KEY)} / ${cnt(SEL)} / ${cnt(CAS)} / ${cnt(REC)} 단원</td></tr>
+ <tr><td>내신(학기별)</td><td>${SEMS.map(s=>s+":"+naesinSem[s].length).join(" / ")}</td></tr>
+ <tr><td>방학 단원</td><td>${banghakU.length}단원</td></tr>
+ <tr><td>최종 저장</td><td>${localStorage.getItem(KEY+"_upd")||"—"}</td></tr>
+ <tr><td>도메인 합계</td><td>${(total/1024).toFixed(1)}KB</td></tr></table>
+ <p class="warn" style="margin:6px 0 0">주의: 기록은 이 경로·이 브라우저에만 저장됩니다 → [JSON 내보내기]로 6.진도관리/백업/에 주기 백업.</p>`;}
+render();
+</script>
+</body>
+</html>

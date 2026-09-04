@@ -7,15 +7,19 @@
 - 한 책 실패해도 다음 책 계속. 중간 종료/재시작해도 이어서 진행.
 - 진행 로그는 stdout(배치 출력 파일)로 흐름.
 """
+import os
 import subprocess
 import sys
 import time
 from pathlib import Path
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 PY = sys.executable
-SCRIPT = "H:/내 드라이브/.agent/scripts/local_easyocr_extract.py"
-WORK = Path("H:/내 드라이브/작업용")
-OUT = "H:/내 드라이브/outputs/01_ocr"
+SCRIPT = vp(".agent", "scripts", "local_easyocr_extract.py")
+WORK = Path(vp("작업용"))
+OUT = vp("outputs", "01_ocr")
 
 # (pdf 파일명, prefix, 책명, 저자, 과목)  — 우선순위 순(작고 핵심부터)
 BOOKS = [

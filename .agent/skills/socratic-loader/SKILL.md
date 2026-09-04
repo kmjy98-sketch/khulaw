@@ -3,9 +3,7 @@ name: socratic-loader
 description: 소크라틱 세션 자동 로더. 전사문 분석, 교재 페이지 추출, 문제 검색. "소크라틱", "문답해줘", "공부하자" 요청 시 자동 실행.
 ---
 
-<!-- @rule: AGENTS.md#17 Verify-Before-Act -->
-<!-- @rule: AGENTS.md#17 Verify-Before-Act -->
-<!-- @rule: GEMINI.md#17 Verify-Before-Act -->
+<!-- @rule: CLAUDE.md#15 Verify-Before-Act -->
 
 # 소크라틱 세션 로더 Skill
 
@@ -58,9 +56,9 @@ python .agent/skills/socratic-loader/scripts/socratic_loader.py <전사문> --te
 2. 교재 PDF → 해당 페이지 텍스트 추출 → `교재_추출/` 캐싱
 3. `problem_index.json` → 관련 문제 검색
 
-### Step 0-3-1: korean-law-mcp 가용 확인
+### Step 0-3-1: 법령 API 가용 확인 (law_api.py)
 
-korean-law-mcp MCP 도구가 현재 세션에서 사용 가능한지 확인한다.
+`.agent/lib/law_api.py`(법제처 직접 API)가 동작하는지 확인한다(`search-law "민법"` 1건).
 - 사용 가능 → 세션 배너에 `법령 API: 사용 가능` 표시. socratic-core가 정답 공개 시 조문 원문 자동 조회 가능.
 - 미설정/불가 → `법령 API: 미설정` 표시. qmd 검색 청크 근거만 사용.
 
@@ -263,7 +261,7 @@ python scripts/socratic_loader.py "전사문_part01.md" --json
 ### 2. 교재 PDF 텍스트 추출 + 캐싱
 
 ```powershell
-python scripts/socratic_loader.py "전사문.md" --textbook "교재.pdf" --cache "30.송영곤_기본민법/교재_추출"
+python scripts/socratic_loader.py "전사문.md" --textbook "교재.pdf" --cache "송영곤_기본민법/교재_추출"
 ```
 
 - 추출된 텍스트: `교재_추출/{교재명}_p{start}-{end}.md`
@@ -311,7 +309,7 @@ python scripts/socratic_loader.py "전사문.md" --rag --json
 ### 전체 교재 청킹
 
 ```powershell
-python scripts/batch_extract.py "1.민사/30.송영곤_기본민법/교재" "1.민사/30.송영곤_기본민법/교재_추출" --chunk-size 30
+python scripts/batch_extract.py "1.민사/송영곤_기본민법/교재" "1.민사/송영곤_기본민법/교재_추출" --chunk-size 30
 ```
 
 **기능:**

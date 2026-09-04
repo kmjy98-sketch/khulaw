@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 import json
 import re
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
 def extract_keywords(text):
     """
@@ -70,8 +74,8 @@ def extract_keywords(text):
     return result
 
 # 파일 읽기 및 처리
-input_path = r"H:\내 드라이브\.agent\state\kw_slices_cloze\slice_c37.jsonl"
-output_path = r"H:\내 드라이브\.agent\state\kw_out_cloze\slice_c37_out.jsonl"
+input_path = vp(".agent", "state", "kw_slices_cloze", "slice_c37.jsonl")
+output_path = vp(".agent", "state", "kw_out_cloze", "slice_c37_out.jsonl")
 
 count = 0
 with open(input_path, 'r', encoding='utf-8') as f_in, \

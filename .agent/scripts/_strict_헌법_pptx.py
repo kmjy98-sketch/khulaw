@@ -4,7 +4,7 @@
 import json, re
 from pathlib import Path
 
-RAW = Path(r"H:\내 드라이브\sync\_meta\_헌법_PPT_추출_raw.json")
+RAW = Path(r"H:\내 드라이브\9.작업중/클로드\_헌법_PPT_추출_raw.json")
 
 # 진짜 사례형 강한 신호
 HARD_PATTERNS = [

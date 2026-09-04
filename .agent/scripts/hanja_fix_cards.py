@@ -9,13 +9,16 @@ hanja_fix_cards.py — 02_cards 카드 행의 잔존 한자 한글화 (#37, feed
 - anchor(사건번호·조문번호)는 숫자·한글이라 영향 없음 (#34)
 """
 import json
+import os
 import re
 import sys
 from pathlib import Path
 from collections import Counter
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
 
-SRC = Path("H:/내 드라이브/outputs/02_cards")
-BAK_DIR = Path("H:/내 드라이브/5.기타/카드백업_한자치환_2026-06-11")
+SRC = Path(vp("outputs", "02_cards"))
+BAK_DIR = Path(vp("5.기타", "카드백업_한자치환_2026-06-11"))
 
 HANJA = re.compile(r"[一-鿿]")
 # 한글(한자병기) — 괄호 안이 한자(·포함)뿐일 때 괄호째 제거

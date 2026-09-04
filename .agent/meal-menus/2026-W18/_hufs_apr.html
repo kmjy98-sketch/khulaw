@@ -1,0 +1,701 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+$(function() {
+	$('[id^="date_"]').each(function(){
+		var dateValue = $(this).attr('id').split("_")[1];
+		var idValue = $(this).attr('id');
+		$("#"+idValue).html($("#"+idValue).html() + " " + getInputDayLabel(dateValue));
+	});
+});
+function getInputDayLabel(date) {
+    var week = new Array('(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)');
+    var today = new Date(date).getDay();
+    var todayLabel = week[today];
+    return todayLabel;
+}
+</script>
+
+<table>
+	<caption>메뉴 상세 - 요일/메뉴, 월,화,수,목,금,토</caption>
+	<colgroup>
+		<col style="width: 100%">
+		
+			<col style="width: 100%">
+		
+			<col style="width: 100%">
+		
+			<col style="width: 100%">
+		
+			<col style="width: 100%">
+		
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col">요일/메뉴</th>
+			
+				
+				
+				
+				
+				
+				
+				<th scope="col"><span class="date" id="date_2026-04-27">04/27</span></th>
+			
+				
+				
+				
+				
+				
+				
+				<th scope="col"><span class="date" id="date_2026-04-28">04/28</span></th>
+			
+				
+				
+				
+				
+				
+				
+				<th scope="col"><span class="date" id="date_2026-04-29">04/29</span></th>
+			
+				
+				
+				
+				
+				
+				
+				<th scope="col"><span class="date" id="date_2026-04-30">04/30</span></th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		
+			
+			<tr>
+				<th>조식<br>(08:00<br> ~ <br>10:00)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">콩나물국밥</strong></li>
+											<li>콘튜나샐러드</li>
+											<li>청경채무침</li>
+											<li>김치</li>
+											<li>치즈머핀</li>
+											<li></li>
+											<li>우육:호주산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">710Kcal</p>
+										<p class="pay">4000(학생1000)</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">돈육불고기</strong></li>
+											<li>얼갈이배추국</li>
+											<li>햄감자채볶음</li>
+											<li>김치</li>
+											<li>요플레</li>
+											<li></li>
+											<li>돈육:국내산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">695Kcal</p>
+										<p class="pay">4000(학생1000)</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">참치김치찌개</strong></li>
+											<li>계란찜</li>
+											<li>깻잎볶음</li>
+											<li>총각김치</li>
+											<li>초코칩쿠키</li>
+											<li></li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">703Kcal</p>
+										<p class="pay">4000(학생1000)</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">소고기국밥</strong></li>
+											<li>새우튀김</li>
+											<li>미역줄기볶음</li>
+											<li>김치</li>
+											<li>야쿠르트</li>
+											<li></li>
+											<li>우육:호주산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">680Kcal</p>
+										<p class="pay">4000(학생1000)</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+			</tr>
+		
+			
+			<tr>
+				<th>중식(1)<br>(11:00<br> ~ <br>14:30)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">오무라이스</strong></li>
+											<li>두부장국</li>
+											<li>새우마늘쫑볶음</li>
+											<li>김치</li>
+											<li>과일 </li>
+											<li></li>
+											<li>햄:국내산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">745Kcal</p>
+										<p class="pay">4,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">통가슴살치킨가스</strong></li>
+											<li>크림스프</li>
+											<li>스파게티</li>
+											<li>샐러드</li>
+											<li>김치</li>
+											<li></li>
+											<li>닭:국내산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">750Kcal</p>
+										<p class="pay">4,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">갈비탕</strong></li>
+											<li>맛살냉채</li>
+											<li>건파래자반</li>
+											<li>깍두기</li>
+											<li> </li>
+											<li></li>
+											<li>갈비:미국,우:호주</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">619Kcal</p>
+										<p class="pay">4,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">뚝배기불고기</strong></li>
+											<li>숙주미나리무침</li>
+											<li>어묵볶음</li>
+											<li>김치</li>
+											<li> </li>
+											<li> </li>
+											<li>우육:호주산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">705Kcal</p>
+										<p class="pay">4,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+			</tr>
+		
+			
+			<tr>
+				<th>중식(2)<br>(11:00<br> ~ <br>14:30)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">스끼야끼덮밥</strong></li>
+											<li>두부장국</li>
+											<li>새우마늘쫑볶음</li>
+											<li>김치</li>
+											<li> </li>
+											<li></li>
+											<li>우육:호주산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">738Kcal</p>
+										<p class="pay">4,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">상추불고기비빔밥</strong></li>
+											<li>무어무국</li>
+											<li>콩나물무침</li>
+											<li>김치</li>
+											<li></li>
+											<li></li>
+											<li>돈육:국내산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">620Kcal</p>
+										<p class="pay">3,500원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">제육볶음덮밥</strong></li>
+											<li>계란국</li>
+											<li>맛살냉채</li>
+											<li>김치</li>
+											<li></li>
+											<li></li>
+											<li>돈육:국내산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">642Kcal</p>
+										<p class="pay">3,500원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">참치회덮밥</strong></li>
+											<li>소고기무국</li>
+											<li>어묵볶음</li>
+											<li> </li>
+											<li> </li>
+											<li></li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">572Kcal</p>
+										<p class="pay">3,500원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+			</tr>
+		
+			
+			<tr>
+				<th>중식(면)<br>(11:00<br> ~ <br>14:00)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">냉면</strong></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">520Kcal</p>
+										<p class="pay">3,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">짬뽕</strong></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">540Kcal</p>
+										<p class="pay">3,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">김치냉국수</strong></li>
+											<li> </li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li> </li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">500Kcal</p>
+										<p class="pay">3,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">중화제육면</strong></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li>돈육:국내산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">580Kcal</p>
+										<p class="pay">3,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+			</tr>
+		
+			
+			<tr>
+				<th>석식<br>(16:40<br> ~ <br>18:40)</th>
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">짜장정식</strong></li>
+											<li>근대국</li>
+											<li>탕수육</li>
+											<li>양배추샐러드</li>
+											<li> </li>
+											<li> </li>
+											<li>돈육:국내산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">665Kcal</p>
+										<p class="pay">3,500원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">김치볶음밥</strong></li>
+											<li>소고기미역국</li>
+											<li>메시드포테이토</li>
+											<li>계란후라이</li>
+											<li> </li>
+											<li></li>
+											<li>우육:호주산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">650Kcal</p>
+										<p class="pay">3,500원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">육개장</strong></li>
+											<li>감자조림</li>
+											<li>김치</li>
+											<li> </li>
+											<li> </li>
+											<li></li>
+											<li>우육:호주산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">564Kcal</p>
+										<p class="pay">3,500원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+					
+					
+						
+							
+								
+									<td class="menu">
+										<ul>
+											<li><strong class="point">고구마돈가스</strong></li>
+											<li>크림스프</li>
+											<li>곁들임야채</li>
+											<li>샐러드</li>
+											<li>김치</li>
+											<li></li>
+											<li>돈육:국내산</li>
+											<li></li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+										<p class="calorie">778Kcal</p>
+										<p class="pay">4,000원</p>
+									</td>
+								
+								
+							
+						
+						
+					
+				
+			</tr>
+		
+	</tbody>
+</table>

@@ -6,10 +6,13 @@ OCR 교정 스크립트 — batch2 그룹 1 (132개 청크)
 """
 import sys, os, json, re
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 sys.stdout.reconfigure(encoding='utf-8')
 sys.stderr.reconfigure(encoding='utf-8')
 
-BASE_DIR = "H:/내 드라이브"
+BASE_DIR = VAULT_ROOT
 os.chdir(BASE_DIR)
 
 with open('.agent/state/batch2_g1.json', encoding='utf-8') as f:

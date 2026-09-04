@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "489e7f9f0336f4d6",
+    "type": "split",
+    "children": [
+      {
+        "id": "64ee4e5966a485c3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5c1c237b8c578d57",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "sync/wiki/쟁점재산_wiki_p211-240.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "쟁점재산_wiki_p211-240"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ff1872c0a004d93f",
+    "type": "split",
+    "children": [
+      {
+        "id": "ec10a9dc9d741833",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "eb274cc49e0e46ce",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
+            }
+          },
+          {
+            "id": "ffd262eadabbe31c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "검색"
+            }
+          },
+          {
+            "id": "11edb6237fd45b35",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "북마크"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "ee97606f6d7d2fb2",
+    "type": "split",
+    "children": [
+      {
+        "id": "0bcf3615c9499889",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "25b221974a57514a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "sync/wiki/쟁점재산_wiki_p211-240.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "쟁점재산_wiki_p211-240 의 백링크"
+            }
+          },
+          {
+            "id": "840984f8fc59b980",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "sync/wiki/쟁점재산_wiki_p211-240.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "쟁점재산_wiki_p211-240 의 나가는 링크"
+            }
+          },
+          {
+            "id": "f2c00be080db9bd8",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "태그"
+            }
+          },
+          {
+            "id": "4c3a5679e22cec32",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "모든 속성"
+            }
+          },
+          {
+            "id": "041bd20bfdb2fb25",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "sync/wiki/쟁점재산_wiki_p211-240.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "쟁점재산_wiki_p211-240 의 개요"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "bases:새 베이스 생성하기": false
+    }
+  },
+  "active": "5c1c237b8c578d57",
+  "lastOpenFiles": [
+    "_trash/2026-06-26/GEMINI.md",
+    "10.도서관/민사례1_원본_26.pdf",
+    "10.도서관/반반형법_원본_25.pdf",
+    "10.도서관/형법요론_각론.pdf",
+    "2.형사/_원본보관/형법요론_각론/형법요론_각론_99_색인.pdf",
+    "2.형사/_원본보관/형법요론_각론/형법요론_각론_02_사회적국가적법익.pdf",
+    "2.형사/_원본보관/형법요론_각론/형법요론_각론_01_개인적법익.pdf",
+    "2.형사/_원본보관/형법요론_각론/형법요론_각론_00_목차.pdf",
+    "2.형사/_원본보관/형법요론_각론/신호진형각_99_색인.pdf",
+    "2.형사/_원본보관/형법요론_각론/신호진형각_02_사회적국가적법익.pdf",
+    "2.형사/_원본보관/형법요론_각론/신호진형각_01_개인적법익.pdf",
+    "AGENTS.md",
+    "알고리즘담합_공정거래법_발제문.md",
+    "sync/자소서/_정본화검토_2026-06-25/자소서_프로세스__작성법소스.md",
+    "sync/자소서/_정본화검토_2026-06-25/자소서_프로세스__스킬변환전.md",
+    "sync/자소서/_정본화검토_2026-06-25/자소서_프로세스__어법점검전.md",
+    "sync/자소서/_정본화검토_2026-06-25/자소서_프로세스__표현통일전.md",
+    "sync/_meta/적응형학습_실연동_글루스펙_2026-06-25.md",
+    "sync/_meta/디지털전환_AI로봇화_시장경제법_연구보고서_2026-06-25.md",
+    "sync/_meta/민사법대회_논문주제_리서치_2026-06-25.md",
+    "sync/_meta/민사법대회_논문_핸드오프_2026-06-25.md",
+    "sync/_meta/모의공정거래_심결서초안_클라우드이그레스_2026-06-25.md",
+    "sync/_meta/모의공정거래_심결서초안_직불네트워크배타조건_2026-06-25.md",
+    "sync/_meta/모의공정거래_심결서초안_애드테크끼워팔기_2026-06-25.md",
+    "sync/_meta/모의공정거래_심결서초안_스마트폰생태계_2026-06-25.md",
+    "sync/_meta/모의공정거래_심결서초안_망사용료ISP_2026-06-25.md",
+    "sync/_meta/모의공정거래_심결서초안_마켓플레이스_2026-06-25.md",
+    "sync/_meta/모의공정거래_심결서초안_AI검색콘텐츠_2026-06-25.md",
+    "sync/_meta/모의공정거래_심결서주제_딥리서치_2026-06-25.md"
+  ]
+}

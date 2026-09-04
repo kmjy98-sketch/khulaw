@@ -9,13 +9,18 @@
 """
 
 import json
+import os
 import re
+import sys
 from pathlib import Path
 
-REOCR_TARGETS = Path(r"H:\내 드라이브\.agent\state\reocr_targets.json")
-OUT = Path(r"H:\내 드라이브\.agent\state\mba_reocr_mapping.json")
-NOTES_DIR = Path(r"H:\내 드라이브\sync\_교재원문\민법\윤동환_민법의맥")
-EXTRACTS_DIR = Path(r"H:\내 드라이브\.agent\data\exam_extracts")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+REOCR_TARGETS = Path(vp(".agent", "state", "reocr_targets.json"))
+OUT = Path(vp(".agent", "state", "mba_reocr_mapping.json"))
+NOTES_DIR = Path(vp("sync", "_교재원문", "민법", "윤동환_민법의맥"))
+EXTRACTS_DIR = Path(vp(".agent", "data", "exam_extracts"))
 
 # 서브책자별 원본 파일 prefix 매핑 (관찰된 패턴)
 SUBBOOK_PREFIX = {

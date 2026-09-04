@@ -2,6 +2,9 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # noqa: E402
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 sys.stdout.reconfigure(encoding='utf-8')
 
 def reflow_kimjunho(filepath):
@@ -79,5 +82,5 @@ def reflow_kimjunho(filepath):
         return False
 
 if __name__ == "__main__":
-    target = r"H:\내 드라이브\sync\_교재원문\민법\강혜림_민법1\물권법총론_물권의의의_김준호_민법강의.md"
+    target = vp("sync", "_교재원문", "민법", "강혜림_민법1", "물권법총론_물권의의의_김준호_민법강의.md")
     reflow_kimjunho(target)

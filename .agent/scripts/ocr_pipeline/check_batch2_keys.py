@@ -1,9 +1,17 @@
 """batch2 교재 키 확인."""
+import os
+import sys
 import json
 from pathlib import Path
 from collections import Counter
 
-WS = Path(r"H:\내 드라이브")
+_p = os.path.abspath(__file__)
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:
+    _p = os.path.dirname(_p)
+sys.path.insert(0, os.path.join(_p, 'scripts'))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+WS = Path(VAULT_ROOT)
 chunks = json.loads((WS / ".agent/state/batch2_chunks.json").read_text(encoding="utf-8"))
 
 by_tb = Counter()

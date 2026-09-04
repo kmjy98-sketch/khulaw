@@ -10,9 +10,13 @@ import json
 import os
 import re
 import shutil
+import sys
 from pathlib import Path
 
-BASE = Path(r"H:\내 드라이브")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
+BASE = Path(VAULT_ROOT)
 INPUT_JSON = BASE / ".agent" / "state" / "batch2_g3.json"
 OCR_ROOT = BASE / ".agent" / "data" / "ocr_chunks"
 OUT_ROOT = BASE / ".agent" / "data" / "ocr_chunks_reviewed"

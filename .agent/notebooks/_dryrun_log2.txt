@@ -1,0 +1,50 @@
+[1] PDF: H:\³» µå¶óÀÌºê\sync\_±³Àç¿ø¹®\Çå¹ý\º¯»ç±â_Çå¹ý\2025_Çå¹ý_º¯»ç±â.pdf  exists=True
+[2] paddlex import ...
+    paddlex 3.5.1
+[3] create_pipeline('PP-StructureV3') ...
+[32mCreating model: ('PP-LCNet_x1_0_doc_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_doc_ori`.[0m
+Á¤º¸: Á¦°øµÈ ÆÐÅÏ¿¡ ÇØ´çµÇ´Â ÆÄÀÏÀ» Ã£Áö ¸øÇß½À´Ï´Ù.
+C:\pdocr\Lib\site-packages\paddle\utils\cpp_extension\extension_utils.py:711: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+[32mCreating model: ('UVDoc', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\UVDoc`.[0m
+[32mCreating model: ('PP-DocBlockLayout', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-DocBlockLayout`.[0m
+[32mCreating model: ('PP-DocLayout_plus-L', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-DocLayout_plus-L`.[0m
+[32mCreating model: ('PP-LCNet_x1_0_textline_ori', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_textline_ori`.[0m
+[32mCreating model: ('PP-OCRv5_server_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-OCRv5_server_det`.[0m
+[32mCreating model: ('PP-OCRv5_server_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-OCRv5_server_rec`.[0m
+[32mCreating model: ('PP-LCNet_x1_0_table_cls', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-LCNet_x1_0_table_cls`.[0m
+[32mCreating model: ('SLANeXt_wired', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\SLANeXt_wired`.[0m
+[32mCreating model: ('SLANet_plus', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\SLANet_plus`.[0m
+[32mCreating model: ('RT-DETR-L_wired_table_cell_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\RT-DETR-L_wired_table_cell_det`.[0m
+[32mCreating model: ('RT-DETR-L_wireless_table_cell_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\RT-DETR-L_wireless_table_cell_det`.[0m
+[32mCreating model: ('PP-FormulaNet_plus-L', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `C:\Users\111\.paddlex\official_models\PP-FormulaNet_plus-L`.[0m
+    pipeline OK
+[4] rasterize page 1 ...
+Traceback (most recent call last):
+  File "H:\³» µå¶óÀÌºê\.agent\notebooks\_dryrun_cell2.py", line 40, in <module>
+    img = pdf_page_to_image(PDF_PATH, PAGE_NUM, dpi=200)
+  File "H:\³» µå¶óÀÌºê\.agent\notebooks\_dryrun_cell2.py", line 24, in pdf_page_to_image
+    pix = doc[page_num].get_pixmap(matrix=fitz.Matrix(dpi / 72, dpi / 72))
+  File "C:\pdocr\Lib\site-packages\pymupdf\__init__.py", line 11876, in get_pixmap
+    pix = dl.get_pixmap(matrix=matrix, colorspace=colorspace, alpha=alpha, clip=clip)
+  File "C:\pdocr\Lib\site-packages\pymupdf\__init__.py", line 2794, in get_pixmap
+    val = JM_pixmap_from_display_list(self.this, matrix, colorspace, alpha, clip, None)
+  File "C:\pdocr\Lib\site-packages\pymupdf\__init__.py", line 21114, in JM_pixmap_from_display_list
+    pix = mupdf.fz_new_pixmap_with_bbox(cs, irect, seps, alpha)
+  File "C:\pdocr\Lib\site-packages\pymupdf\mupdf.py", line 50233, in fz_new_pixmap_with_bbox
+    return _mupdf.fz_new_pixmap_with_bbox(colorspace, bbox, seps, alpha)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pymupdf.mupdf.FzErrorSystem: code=2: malloc (8701176 bytes) failed

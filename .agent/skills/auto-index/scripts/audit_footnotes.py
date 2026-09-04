@@ -11,11 +11,18 @@ audit_footnotes.py — 옵시디언 볼트 각주 무결성 감사
 
 import json
 import re
+import os
 import sys
 from pathlib import Path
 
+_p = os.path.abspath(__file__)
+while os.path.basename(_p) != '.agent' and os.path.dirname(_p) != _p:
+    _p = os.path.dirname(_p)
+sys.path.insert(0, os.path.join(_p, 'scripts'))
+from _vault import VAULT_ROOT, vp  # noqa: E402
+
 # 볼트 경로
-BASE = Path("H:/내 드라이브")
+BASE = Path(VAULT_ROOT)
 VAULTS = [
     BASE / "_4과목_도표추가본_통합본_모음",
     BASE / "_기말_도표추가본_통합본_모음",
